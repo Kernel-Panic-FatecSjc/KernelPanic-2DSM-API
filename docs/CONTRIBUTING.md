@@ -121,7 +121,7 @@ refactor(db): normalizar relação Pedidos-Itens
 
 ### Regras de PR
 
-  - `feature/*`, `task/*`, `db/*` devem ser direcionados para a branch `develop`.
+  - `feature/*`, `task/*`, `db/*` devem ser direcionados para a branch `desenvolvimento`.
 
 ### Título do PR
 
