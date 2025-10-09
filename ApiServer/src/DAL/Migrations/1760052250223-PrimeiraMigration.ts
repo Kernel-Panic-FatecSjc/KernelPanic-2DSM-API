@@ -1,12 +1,10 @@
 import { MigrationInterface, QueryRunner } from "typeorm";
 
-export class PrimeiraMigration1758846746356 implements MigrationInterface {
-    name = 'PrimeiraMigration1758846746356'
+export class PrimeiraMigration1760052250223 implements MigrationInterface {
+    name = 'PrimeiraMigration1760052250223'
 
     public async up(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.query(`CREATE TABLE \`Interacao_cliente\` (\`interacao_ID\` int NOT NULL AUTO_INCREMENT, \`data_interacao\` date NOT NULL, \`tipo_interacao\` varchar(20) NOT NULL, \`relatorio_interacao\` varchar(255) NOT NULL, \`funcionario_ID\` int NULL, \`cliente_ID\` int NULL, \`agendamento_interacao_ID\` int NULL, PRIMARY KEY (\`interacao_ID\`)) ENGINE=InnoDB`);
-        await queryRunner.query(`CREATE TABLE \`Agendamento_interacao\` (\`agendamento_interacao_ID\` int NOT NULL AUTO_INCREMENT, \`data_marcada\` datetime NOT NULL, \`tipo_interacao\` varchar(20) NOT NULL, \`status\` varchar(20) NOT NULL, \`notas\` varchar(255) NULL, \`cliente_ID\` int NULL, \`funcionario_ID\` int NULL, PRIMARY KEY (\`agendamento_interacao_ID\`)) ENGINE=InnoDB`);
-        await queryRunner.query(`CREATE TABLE \`Vendas\` (\`venda_ID\` int NOT NULL AUTO_INCREMENT, \`data_venda\` timestamp NOT NULL, \`valor_total\` decimal(10,2) NOT NULL, \`status\` varchar(20) NOT NULL, \`cliente_ID\` int NULL, \`funcionario_ID\` int NULL, PRIMARY KEY (\`venda_ID\`)) ENGINE=InnoDB`);
+        await queryRunner.query(`CREATE TABLE \`Interacao_cliente\` (\`interacao_ID\` int NOT NULL AUTO_INCREMENT, \`data_interacao\` date NOT NULL, \`tipo_interacao\` varchar(20) NOT NULL, \`relatorio_interacao\` varchar(255) NOT NULL, \`funcionario_ID\` int NULL, \`cliente_ID\` int NULL, PRIMARY KEY (\`interacao_ID\`)) ENGINE=InnoDB`);
         await queryRunner.query(`CREATE TABLE \`Notificacao\` (\`notificacao_ID\` int NOT NULL AUTO_INCREMENT, \`titulo_notificacao\` varchar(100) NOT NULL, \`corpo_notificacao\` longtext NULL, \`evento_ID\` int NULL, PRIMARY KEY (\`notificacao_ID\`)) ENGINE=InnoDB`);
         await queryRunner.query(`CREATE TABLE \`Notificacao_convidados\` (\`funcionario_ID\` int NOT NULL, \`evento_ID\` int NOT NULL, \`notificacao_ID\` int NOT NULL, \`status_leitura\` tinyint NOT NULL, \`data_leitura\` timestamp NULL, \`prioridade\` varchar(20) NOT NULL, PRIMARY KEY (\`funcionario_ID\`, \`evento_ID\`, \`notificacao_ID\`)) ENGINE=InnoDB`);
         await queryRunner.query(`CREATE TABLE \`Presenca\` (\`presenca_ID\` int NOT NULL AUTO_INCREMENT, \`presente\` tinyint NOT NULL, \`razao_recusa\` longtext NULL, \`data_termino\` timestamp NULL, \`link_feedback\` longtext NULL, \`funcionario_ID\` int NULL, \`evento_ID\` int NULL, PRIMARY KEY (\`presenca_ID\`)) ENGINE=InnoDB`);
@@ -17,14 +15,12 @@ export class PrimeiraMigration1758846746356 implements MigrationInterface {
         await queryRunner.query(`CREATE TABLE \`Funil_vendas\` (\`funil_ID\` int NOT NULL AUTO_INCREMENT, \`estagio_nome\` varchar(20) NOT NULL, PRIMARY KEY (\`funil_ID\`)) ENGINE=InnoDB`);
         await queryRunner.query(`CREATE TABLE \`Contato_cliente\` (\`contato_cliente_ID\` int NOT NULL AUTO_INCREMENT, \`tipo_contato\` varchar(20) NOT NULL, \`valor_contato\` varchar(255) NOT NULL, \`cliente_ID\` int NULL, PRIMARY KEY (\`contato_cliente_ID\`)) ENGINE=InnoDB`);
         await queryRunner.query(`CREATE TABLE \`Cliente\` (\`cliente_ID\` int NOT NULL AUTO_INCREMENT, \`nome\` varchar(100) NOT NULL, \`endereco\` varchar(255) NOT NULL, \`segmento_atuacao\` varchar(40) NOT NULL, \`funcionario_ID\` int NULL, \`funil_ID\` int NULL, PRIMARY KEY (\`cliente_ID\`)) ENGINE=InnoDB`);
-        await queryRunner.query(`CREATE TABLE \`eventos\` (\`id\` int NOT NULL AUTO_INCREMENT, \`email\` varchar(255) NOT NULL, \`titulo\` varchar(255) NOT NULL, \`dataHora\` datetime NOT NULL, \`categoria\` varchar(30) NOT NULL, PRIMARY KEY (\`id\`)) ENGINE=InnoDB`);
+        await queryRunner.query(`CREATE TABLE \`Vendas\` (\`venda_ID\` int NOT NULL AUTO_INCREMENT, \`data_venda\` timestamp NOT NULL, \`valor_total\` decimal(10,2) NOT NULL, \`status\` varchar(20) NOT NULL, \`cliente_ID\` int NULL, \`funcionario_ID\` int NULL, PRIMARY KEY (\`venda_ID\`)) ENGINE=InnoDB`);
+        await queryRunner.query(`CREATE TABLE \`Lembrete\` (\`lembrete_ID\` int NOT NULL AUTO_INCREMENT, \`email\` varchar(255) NOT NULL, \`titulo\` varchar(255) NOT NULL, \`dataHora\` datetime NOT NULL, \`categoria\` varchar(30) NOT NULL, PRIMARY KEY (\`lembrete_ID\`)) ENGINE=InnoDB`);
+        await queryRunner.query(`CREATE TABLE \`ChecklistFuncionario\` (\`check_func_ID\` int NOT NULL AUTO_INCREMENT, \`tipo\` varchar(30) NOT NULL, \`respostas\` json NOT NULL, \`path_img\` varchar(255) NULL, PRIMARY KEY (\`check_func_ID\`)) ENGINE=InnoDB`);
+        await queryRunner.query(`CREATE TABLE \`ChecklistAgregado\` (\`check_agre_ID\` int NOT NULL AUTO_INCREMENT, \`tipo\` varchar(30) NOT NULL, \`respostas\` json NOT NULL, \`path_img\` varchar(255) NULL, PRIMARY KEY (\`check_agre_ID\`)) ENGINE=InnoDB`);
         await queryRunner.query(`ALTER TABLE \`Interacao_cliente\` ADD CONSTRAINT \`FK_cb34e5d245ba3c99e3a541d7ef9\` FOREIGN KEY (\`funcionario_ID\`) REFERENCES \`Funcionario\`(\`funcionario_ID\`) ON DELETE NO ACTION ON UPDATE NO ACTION`);
         await queryRunner.query(`ALTER TABLE \`Interacao_cliente\` ADD CONSTRAINT \`FK_67a8108793b88002a2bd16ac853\` FOREIGN KEY (\`cliente_ID\`) REFERENCES \`Cliente\`(\`cliente_ID\`) ON DELETE NO ACTION ON UPDATE NO ACTION`);
-        await queryRunner.query(`ALTER TABLE \`Interacao_cliente\` ADD CONSTRAINT \`FK_7e08f88cf18db9ae3d76baf1bb1\` FOREIGN KEY (\`agendamento_interacao_ID\`) REFERENCES \`Agendamento_interacao\`(\`agendamento_interacao_ID\`) ON DELETE NO ACTION ON UPDATE NO ACTION`);
-        await queryRunner.query(`ALTER TABLE \`Agendamento_interacao\` ADD CONSTRAINT \`FK_4724e48aa6e4090f9fb842f13b8\` FOREIGN KEY (\`cliente_ID\`) REFERENCES \`Cliente\`(\`cliente_ID\`) ON DELETE NO ACTION ON UPDATE NO ACTION`);
-        await queryRunner.query(`ALTER TABLE \`Agendamento_interacao\` ADD CONSTRAINT \`FK_5efdc335b48e64f382d8deb2d84\` FOREIGN KEY (\`funcionario_ID\`) REFERENCES \`Funcionario\`(\`funcionario_ID\`) ON DELETE NO ACTION ON UPDATE NO ACTION`);
-        await queryRunner.query(`ALTER TABLE \`Vendas\` ADD CONSTRAINT \`FK_acdcb804cd337af00d52ff4b4bd\` FOREIGN KEY (\`cliente_ID\`) REFERENCES \`Cliente\`(\`cliente_ID\`) ON DELETE NO ACTION ON UPDATE NO ACTION`);
-        await queryRunner.query(`ALTER TABLE \`Vendas\` ADD CONSTRAINT \`FK_c3a06704616da020d157ed7ce8d\` FOREIGN KEY (\`funcionario_ID\`) REFERENCES \`Funcionario\`(\`funcionario_ID\`) ON DELETE NO ACTION ON UPDATE NO ACTION`);
         await queryRunner.query(`ALTER TABLE \`Notificacao\` ADD CONSTRAINT \`FK_13bf01535d8fd63e3838b6b238d\` FOREIGN KEY (\`evento_ID\`) REFERENCES \`Evento_treinamento\`(\`evento_ID\`) ON DELETE NO ACTION ON UPDATE NO ACTION`);
         await queryRunner.query(`ALTER TABLE \`Notificacao_convidados\` ADD CONSTRAINT \`FK_bf5c5fca40a401d990ae8a2a3e8\` FOREIGN KEY (\`notificacao_ID\`) REFERENCES \`Notificacao\`(\`notificacao_ID\`) ON DELETE NO ACTION ON UPDATE NO ACTION`);
         await queryRunner.query(`ALTER TABLE \`Notificacao_convidados\` ADD CONSTRAINT \`FK_2db1f5eae0532a74fe60d60dae8\` FOREIGN KEY (\`funcionario_ID\`, \`evento_ID\`) REFERENCES \`Funcionarios_convidados\`(\`funcionario_id\`,\`evento_id\`) ON DELETE NO ACTION ON UPDATE NO ACTION`);
@@ -38,9 +34,13 @@ export class PrimeiraMigration1758846746356 implements MigrationInterface {
         await queryRunner.query(`ALTER TABLE \`Contato_cliente\` ADD CONSTRAINT \`FK_50cb9aaeca047b8fe653c9fad02\` FOREIGN KEY (\`cliente_ID\`) REFERENCES \`Cliente\`(\`cliente_ID\`) ON DELETE NO ACTION ON UPDATE NO ACTION`);
         await queryRunner.query(`ALTER TABLE \`Cliente\` ADD CONSTRAINT \`FK_70e132bf1f92bb6d009bb3bb810\` FOREIGN KEY (\`funcionario_ID\`) REFERENCES \`Funcionario\`(\`funcionario_ID\`) ON DELETE NO ACTION ON UPDATE NO ACTION`);
         await queryRunner.query(`ALTER TABLE \`Cliente\` ADD CONSTRAINT \`FK_b5873b13256f9258b1e3f8a8cc6\` FOREIGN KEY (\`funil_ID\`) REFERENCES \`Funil_vendas\`(\`funil_ID\`) ON DELETE NO ACTION ON UPDATE NO ACTION`);
+        await queryRunner.query(`ALTER TABLE \`Vendas\` ADD CONSTRAINT \`FK_acdcb804cd337af00d52ff4b4bd\` FOREIGN KEY (\`cliente_ID\`) REFERENCES \`Cliente\`(\`cliente_ID\`) ON DELETE NO ACTION ON UPDATE NO ACTION`);
+        await queryRunner.query(`ALTER TABLE \`Vendas\` ADD CONSTRAINT \`FK_c3a06704616da020d157ed7ce8d\` FOREIGN KEY (\`funcionario_ID\`) REFERENCES \`Funcionario\`(\`funcionario_ID\`) ON DELETE NO ACTION ON UPDATE NO ACTION`);
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
+        await queryRunner.query(`ALTER TABLE \`Vendas\` DROP FOREIGN KEY \`FK_c3a06704616da020d157ed7ce8d\``);
+        await queryRunner.query(`ALTER TABLE \`Vendas\` DROP FOREIGN KEY \`FK_acdcb804cd337af00d52ff4b4bd\``);
         await queryRunner.query(`ALTER TABLE \`Cliente\` DROP FOREIGN KEY \`FK_b5873b13256f9258b1e3f8a8cc6\``);
         await queryRunner.query(`ALTER TABLE \`Cliente\` DROP FOREIGN KEY \`FK_70e132bf1f92bb6d009bb3bb810\``);
         await queryRunner.query(`ALTER TABLE \`Contato_cliente\` DROP FOREIGN KEY \`FK_50cb9aaeca047b8fe653c9fad02\``);
@@ -54,14 +54,12 @@ export class PrimeiraMigration1758846746356 implements MigrationInterface {
         await queryRunner.query(`ALTER TABLE \`Notificacao_convidados\` DROP FOREIGN KEY \`FK_2db1f5eae0532a74fe60d60dae8\``);
         await queryRunner.query(`ALTER TABLE \`Notificacao_convidados\` DROP FOREIGN KEY \`FK_bf5c5fca40a401d990ae8a2a3e8\``);
         await queryRunner.query(`ALTER TABLE \`Notificacao\` DROP FOREIGN KEY \`FK_13bf01535d8fd63e3838b6b238d\``);
-        await queryRunner.query(`ALTER TABLE \`Vendas\` DROP FOREIGN KEY \`FK_c3a06704616da020d157ed7ce8d\``);
-        await queryRunner.query(`ALTER TABLE \`Vendas\` DROP FOREIGN KEY \`FK_acdcb804cd337af00d52ff4b4bd\``);
-        await queryRunner.query(`ALTER TABLE \`Agendamento_interacao\` DROP FOREIGN KEY \`FK_5efdc335b48e64f382d8deb2d84\``);
-        await queryRunner.query(`ALTER TABLE \`Agendamento_interacao\` DROP FOREIGN KEY \`FK_4724e48aa6e4090f9fb842f13b8\``);
-        await queryRunner.query(`ALTER TABLE \`Interacao_cliente\` DROP FOREIGN KEY \`FK_7e08f88cf18db9ae3d76baf1bb1\``);
         await queryRunner.query(`ALTER TABLE \`Interacao_cliente\` DROP FOREIGN KEY \`FK_67a8108793b88002a2bd16ac853\``);
         await queryRunner.query(`ALTER TABLE \`Interacao_cliente\` DROP FOREIGN KEY \`FK_cb34e5d245ba3c99e3a541d7ef9\``);
-        await queryRunner.query(`DROP TABLE \`eventos\``);
+        await queryRunner.query(`DROP TABLE \`ChecklistAgregado\``);
+        await queryRunner.query(`DROP TABLE \`ChecklistFuncionario\``);
+        await queryRunner.query(`DROP TABLE \`Lembrete\``);
+        await queryRunner.query(`DROP TABLE \`Vendas\``);
         await queryRunner.query(`DROP TABLE \`Cliente\``);
         await queryRunner.query(`DROP TABLE \`Contato_cliente\``);
         await queryRunner.query(`DROP TABLE \`Funil_vendas\``);
@@ -73,8 +71,6 @@ export class PrimeiraMigration1758846746356 implements MigrationInterface {
         await queryRunner.query(`DROP TABLE \`Presenca\``);
         await queryRunner.query(`DROP TABLE \`Notificacao_convidados\``);
         await queryRunner.query(`DROP TABLE \`Notificacao\``);
-        await queryRunner.query(`DROP TABLE \`Vendas\``);
-        await queryRunner.query(`DROP TABLE \`Agendamento_interacao\``);
         await queryRunner.query(`DROP TABLE \`Interacao_cliente\``);
     }
 

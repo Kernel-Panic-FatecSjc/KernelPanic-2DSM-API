@@ -10,7 +10,6 @@ import {
 
 // ===== Importações de tipos (TS only) =====
 import type { Cliente } from "./Cliente.js";
-import type { AgendamentoInteracao } from "./AgendamentoInteracao.js";
 import type { InteracaoCliente } from "./InteracaoCliente.js";
 import type { Vendas } from "./Vendas.js";
 import type { EventoTreinamento } from "./EventoTreinamento.js";
@@ -19,7 +18,6 @@ import type { Funcionario as FuncionarioType } from "./Funcionario.js"; // Recur
 
 // ===== Importações reais para decorators =====
 import { Cliente as ClienteEntity } from "./Cliente.js";
-import { AgendamentoInteracao as AgendamentoEntity } from "./AgendamentoInteracao.js";
 import { InteracaoCliente as InteracaoEntity } from "./InteracaoCliente.js";
 import { Vendas as VendasEntity } from "./Vendas.js";
 import { EventoTreinamento as EventoEntity } from "./EventoTreinamento.js";
@@ -71,10 +69,6 @@ export class Funcionario {
   // ===== Relação OneToMany: clientes atendidos =====
   @OneToMany(() => ClienteEntity, (cliente: Cliente) => cliente.funcionario)
   clientes?: Cliente[];
-
-  // ===== Relação OneToMany: agendamentos =====
-  @OneToMany(() => AgendamentoEntity, (agendamento: AgendamentoInteracao) => agendamento.funcionario)
-  agendamentos?: AgendamentoInteracao[];
 
   // ===== Relação OneToMany: interações =====
   @OneToMany(() => InteracaoEntity, (interacao: InteracaoCliente) => interacao.funcionario)
