@@ -46,6 +46,8 @@ O sistema tem como objetivo principal centralizar todos os processos e dados da 
 | 19 | 🟡 Baixa | 1 | Eu como comercial, quero gerenciar o histórico completo das interações com clientes e relatórios detalhados das interações, para possibilitar futura auditoria | 5 | Visualização do histórico completo de interações com o cliente | ✅ |
 
 
+
+
 ## ⏳ Status do projeto: 1/3 Sprint
 
 ---
@@ -55,7 +57,7 @@ O sistema tem como objetivo principal centralizar todos os processos e dados da 
 | Sprint          |    Período    | Documentação                                     |
 | --------------- | :-----------: | ------------------------------------------------ |
 | **SPRINT 1** | 08/09 - 28/09 | [Sprint 1 Docs](docs/sprintUm.md) |
-| **SPRINT 2** | 06/10 - 26/10 | [Sprint 2 Docs](./docs/sprint-2.md) |
+| **SPRINT 2** | 06/10 - 26/10 | [Sprint 2 Docs](docs/sprintDois.md) |
 | **SPRINT 3** | 03/11 - 23/11 | [Sprint 3 Docs](./docs/sprint-3.md) |
 
 
@@ -84,24 +86,21 @@ O sistema tem como objetivo principal centralizar todos os processos e dados da 
 </details>
 
 ---
-
-## 🟠 Sprint 2 - Setor Operacional 
+## 🟡 Sprint 2 - Setor Comercial
 <details>
   <summary><b>Clique aqui</b></summary>
 
-| Rank | Prioridade | Sprint | User Story | Estimativa | Requisitos do Parceiro |
+| Rank | Prioridade |  User Story | Estimativa | Sprint |  Requisitos do Parceiro |
 | :--: | :--------: | :------------------------------------------------------------------------------------------------------------------------------------: | :--------: | :----: | :------------------------------------------------------------------------------------------------------------------ |
-| 1 | 🔴 Alta | Eu como cliente, quero unificar todos os checklists e cadastros atualmente utilizados em ferramentas distintas em uma única plataforma | ? | 2 | Centralização e unificação de checklists e cadastros |
-| 2 | 🔴 Alta | Eu como cliente, quero uma plataforma centralizada para visualização, padronização e simplificação do acesso para todos os envolvidos | ? | 2 | Plataforma única de acesso, visualização e padronização que abranja o setor comercial, operacional e administrativo |
-| 3 | 🔴 Alta | Eu como cliente, quero gerenciar checklists padronizados, para maior controle e organização das operações | ? | 2 | Checklists padronizados para empresa, agregados, frota e manutenção predial |
-| 4 | 🟠 Média | Eu como cliente, quero cadastrar agregados com devolutiva automática após a conclusão do processo de cadastro | ? | 2 | Cadastro de agregados com feedback automático |
-| 5 | 🟠 Média | 2 | Eu como cliente, quero poder calcular a cotação de um frete de forma automática | ? | Cotação com cálculo automático de custos, valores e adicionais | ❌ |
-| 6 | 🟡 Baixa | Eu como cliente, quero que as informações dos fretes concluídos sejam automaticamente repassadas ao RH | ? | 2 | Integração de dados de fretes concluídos com o setor de RH |
+| 1 | 🔴 Alta | Eu como gestor, quero unificar e padronizar todos os checklists e cadastros atualmente utilizados em ferramentas distintas em uma única plataforma | 5 | 2 | Centralização, padronização e unificação de checklists e cadastros |
+| 2 | 🔴 Alta | Eu como gestor, quero eleger as permissões customizáveis que cada liderado terá dentro do sistema, para controlar o nível de acesso conforme a função de cada colaborador | 8 | 2 | Controle de permissões customizáveis por usuário |
+| 3 | 🟠 Média | Eu como cliente, quero acessar informações da parte comercial e operacional em um só ambiente para amplo acesso aos dados e com esses dados ter insights | 6 | 2 | Integração de dados comerciais e operacionais na mesma plataforma |
+| 4 | 🟠 Média | Eu como cliente, quero cadastrar agregados com devolutiva automática após a conclusão do processo de cadastro para facilitar o controle e acompanhamento dos cadastros| 6 | 2 | Cadastro de agregados com feedback automático |
+| 5 | 🟠 Média | Eu como cliente, quero poder calcular a cotação de um frete de forma automática para agilizar a criação de cotações e eliminar cálculos manuais | 4 | 2 | Cotação com cálculo automático de custos, valores e adicionais | 
+
 </details>
 
----
-
-## 🟡 Sprint 3 - Setor Administrativo
+## 🔴 Sprint 3 - Setor Administrativo
 <details>
   <summary><b>Clique aqui</b></summary>
 
@@ -113,6 +112,7 @@ O sistema tem como objetivo principal centralizar todos os processos e dados da 
 | 4 | 🟠 Média | Eu como gestor, quero eleger as permissões que cada liderado terá dentro do sistema, para controlar o nível de acesso conforme a função de cada colaborador | ? | 3 | Controle de permissões customizáveis por usuário |
 | 5 | 🟡 Baixa | Eu como cliente, quero visualizar a quantidade de funcionários e agregados, além dos veículos cadastrados para realizar uma análise de perfil | ? | 3 | Cadastro de funcionários, agregados e veículos com perfis atualizados |
 | 6 | 🟡 Baixa | Eu como usuário, quero que a plataforma seja responsiva para mobile, para que eu consiga acessar e utilizar todas as funcionalidades pelo celular ou tablet | ? | 3 | Responsividade da plataforma para dispositivos móveis |
+
 </details>
 
 ---
