@@ -1,0 +1,54 @@
+.principal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10%;
+    gap: 30px;
+}
+
+.link{
+    color: #736B66;
+}
+
+.btn_cadastro,
+.btn_checklist {
+  color: #736B66;
+  position: relative;       
+  width: 500px;
+  height: 80px;
+  background-color: #cee4fe;
+  border-radius: 80px;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;    
+  justify-content: center;   
+  gap: 15px;
+  font-size: 20px;
+  margin: 20px;
+  padding: 50px;
+}
+
+
+.iconWrapper {
+  position: absolute;      
+  left: 20px;                
+  width: 60px;
+  height: 60px;
+  background-color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon {
+  width: 60%;
+  height: 60%;
+  object-fit: contain;
+}
+
+.btnText {
+  z-index: 1;              
+}
+

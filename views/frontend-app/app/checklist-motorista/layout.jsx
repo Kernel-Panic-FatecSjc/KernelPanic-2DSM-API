@@ -1,5 +1,5 @@
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+import Login from "../../components/layout/Login/login";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -18,12 +18,14 @@ export const metadata = {
     icon: "/favicon.ico", 
   },
 };
-
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        {children}
+        <div className="layout">
+          <Login />
+          <main className="conteudo">{children}</main>
+        </div>
       </body>
     </html>
   );

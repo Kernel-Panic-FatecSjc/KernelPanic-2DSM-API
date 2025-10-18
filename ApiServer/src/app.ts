@@ -14,7 +14,6 @@ const gestaoRoute = require("./API/Routes/gestaoRoutes")
 const historicoRoute = require("./API/Routes/historicoRoutes")
 const vendedorRoute = require("./API/Routes/VendedorRoutes")
 
-
 const app = express(); 
 
 app.use(cors()); 
