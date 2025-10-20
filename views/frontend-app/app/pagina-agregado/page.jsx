@@ -1,15 +1,17 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import styles from "./App.module.css";
 
 export default function Page() {
+    const router = useRouter();
     return (
         <div className={styles.conteudo}>
             <a className={styles.link} href=""><strong>← Voltar</strong></a>
             <div className={styles.principal}>
                 <h1>Área do motorista</h1>
 
-                <button className={styles.btn_checklist}>
+                <button className={styles.btn_checklist} onClick={() => router.push("/checklist-veiculo")}>
                 <div className={styles.iconWrapper}>
                     <img src="/images/caminhao.png" alt="Caminhão" className={styles.icon} />
                 </div>

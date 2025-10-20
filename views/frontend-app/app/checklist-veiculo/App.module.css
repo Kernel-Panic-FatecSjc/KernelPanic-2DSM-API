@@ -1,0 +1,10 @@
+.conteudo{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.formulario{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
