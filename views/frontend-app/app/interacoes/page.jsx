@@ -15,6 +15,15 @@ function App() {
         { value: "oldest", label: "Mais antigas" },
     ];
 
+    const formatarData = (dataString) => {
+        const data = new Date(dataString);
+        return data.toLocaleDateString("pt-BR", {
+            day: "2-digit",
+            month: "2-digit",
+            year: "numeric",
+        });
+    };
+
     const [sortKey, setSortKey] = useState(sortOptions[0]);
 
     const fetchClientes = async () => {
@@ -119,7 +128,11 @@ function App() {
                                             <td>{client.segmento}</td>
                                             <td>{client.cliente}</td>
                                             <td>{client.status}</td>
-                                            <td>{client.ultimaInteracao}</td>
+                                            <td>
+                                                {formatarData(
+                                                    client.ultimaInteracao
+                                                )}
+                                            </td>
                                             <td>
                                                 <button
                                                     className={styles.botao}
@@ -136,36 +149,54 @@ function App() {
                             </table>
                         </div>
 
-                        <div className={styles["detalhes-container"]}>
-                            {clienteSelecionado ? (
-                                <div>
-                                    <h3>
-                                        Detalhes de {clienteSelecionado.cliente}
-                                    </h3>
-                                    <p>
-                                        <strong>Funcionário:</strong>{" "}
-                                        {clienteSelecionado.funcionario}
-                                    </p>
-                                    <p>
-                                        <strong>Estado:</strong>{" "}
-                                        {clienteSelecionado.status}
-                                    </p>
-                                    <p>
-                                        <strong>Última Interação:</strong>{" "}
-                                        {clienteSelecionado.ultimaInteracao}
-                                    </p>
-                                    <p>
-                                        <strong>Relatório:</strong>{" "}
-                                        {clienteSelecionado.relatorio_interacao}
-                                    </p>
+                        {clienteSelecionado && (
+                            <div
+                                className={styles.modalOverlay}
+                                onClick={() => setClienteSelecionado(null)}
+                            >
+                                <div
+                                    className={styles.modalContent}
+                                    onClick={(e) => e.stopPropagation()}
+                                >
+                                    <div
+                                        className={styles["detalhes-container"]}
+                                    >
+                                        <h3>
+                                            Detalhes de{" "}
+                                            {clienteSelecionado.cliente}
+                                        </h3>
+                                        <p>
+                                            <strong>Funcionário:</strong>{" "}
+                                            {clienteSelecionado.funcionario}
+                                        </p>
+                                        <p>
+                                            <strong>Estado:</strong>{" "}
+                                            {clienteSelecionado.status}
+                                        </p>
+                                        <p>
+                                            <strong>Última Interação:</strong>{" "}
+                                            {formatarData(
+                                                clienteSelecionado.ultimaInteracao
+                                            )}
+                                        </p>
+                                        <p>
+                                            <strong>Relatório:</strong>{" "}
+                                            {
+                                                clienteSelecionado.relatorio_interacao
+                                            }
+                                        </p>
+                                        <button
+                                            onClick={() =>
+                                                setClienteSelecionado(null)
+                                            }
+                                            className={styles.closeButton}
+                                        >
+                                            Fechar
+                                        </button>
+                                    </div>
                                 </div>
-                            ) : (
-                                <p>
-                                    Selecione um cliente na tabela para ver os
-                                    detalhes.
-                                </p>
-                            )}
-                        </div>
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>
