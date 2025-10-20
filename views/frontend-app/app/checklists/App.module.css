@@ -69,18 +69,32 @@
     font-weight: 400;
 }
 
-.card a {
-  display: inline-block;
-  margin-top: 12px;
+.card button {
+  margin-top: 15px;
   background-color: #0056ff;
-  color: white;
-  font-weight: 500;
-  padding: 8px 18px;
+  color: #ffffff;
+  font-weight: 600;
+  padding: 10px 22px;
   border-radius: 8px;
-  text-decoration: none;
-  transition: background-color 0.2s ease;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: 'Poppins', sans-serif;
+  font-size: 15px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
 }
 
-.card a:hover {
-  background-color: #003ecc;
+.card button:hover {
+  background-color: #0042cc;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
+}
+
+.card button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.card button:focus {
+  outline: none;
 }

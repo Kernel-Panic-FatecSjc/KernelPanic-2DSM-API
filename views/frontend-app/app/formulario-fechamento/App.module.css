@@ -30,6 +30,11 @@
   margin-bottom: 40px;
 }
 
+.container ::selection {
+  background-color: #1f4af4;
+  color: #fff;
+}
+
 .inputtitle {
   display: block;
   width: 100%;

@@ -1,6 +1,4 @@
 'use client';
-import { useState, useEffect } from 'react';
-import axios from 'axios';
 import React from 'react'
 import styles from './App.module.css';
 
@@ -28,9 +26,9 @@ function page() {
         <label className={styles.inputtitle}>Quem está preenchendo?</label>
         <input
           className={styles.input1}
-          type="text"
-          id="quem"
-          name="quem"
+          type="date"
+          id="quemAbertura"
+          name="quemAbertura"
         />
       </div>
 
@@ -39,8 +37,8 @@ function page() {
         <input
           className={styles.input2}
           type="text"
-          id="data"
-          name="data"
+          id="dataAbertura"
+          name="dataAbertura"
         />
       </div>
 
@@ -107,6 +105,7 @@ function page() {
           <label htmlFor="sim8">Sim</label>
         </div>
       </div>
+      <button type="submit" className={styles.buttonenviar}>Enviar</button>
     </div>
   );
 }

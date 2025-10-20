@@ -1,6 +1,4 @@
 'use client';
-import { useState, useEffect } from 'react';
-import axios from 'axios';
 import React from 'react'
 import styles from './App.module.css';
 
@@ -30,8 +28,8 @@ function page() {
         <input
           className={styles.input1}
           type="text"
-          id="quem"
-          name="quem"
+          id="quemFechamento"
+          name="quemFechamento"
         />
       </div>
 
@@ -39,9 +37,9 @@ function page() {
         <label className={styles.inputtitle}>Data de fechamento da empresa?</label>
         <input
           className={styles.input2}
-          type="text"
-          id="data"
-          name="data"
+          type="date"
+          id="dataFechamento"
+          name="dataFechamento"
         />
       </div>
 
@@ -111,85 +109,85 @@ function page() {
       <div className={styles.checkboxGroup}>
         <label className={styles.inputtitle}>Trancou a porta do banheiro?</label>
         <div className={styles.checkboxOption}>
-          <input className={styles.inputcheckbox} type="checkbox" id="sim8" name="sim8" />
+          <input className={styles.inputcheckbox} type="checkbox" id="sim9" name="sim9" />
           <label htmlFor="sim9">Sim</label>
         </div>
       </div>
       <div className={styles.checkboxGroup}>
         <label className={styles.inputtitle}>Desligou da tomada e colocou o plástico do bebedouro?</label>
         <div className={styles.checkboxOption}>
-          <input className={styles.inputcheckbox} type="checkbox" id="sim8" name="sim8" />
-          <label htmlFor="sim9">Sim</label>
+          <input className={styles.inputcheckbox} type="checkbox" id="sim10" name="sim10" />
+          <label htmlFor="sim10">Sim</label>
         </div>
       </div>
       <div className={styles.checkboxGroup}>
         <label className={styles.inputtitle}>Deixou as chaves internas no chaveiro do operacional?</label>
         <div className={styles.checkboxOption}>
-          <input className={styles.inputcheckbox} type="checkbox" id="sim8" name="sim8" />
-          <label htmlFor="sim9">Sim</label>
+          <input className={styles.inputcheckbox} type="checkbox" id="sim11" name="sim11" />
+          <label htmlFor="sim11">Sim</label>
         </div>
       </div>
       <div className={styles.checkboxGroup}>
         <label className={styles.inputtitle}>Desligou a TV das CAMERAS?</label>
         <div className={styles.checkboxOption}>
-          <input className={styles.inputcheckbox} type="checkbox" id="sim8" name="sim8" />
-          <label htmlFor="sim9">Sim</label>
+          <input className={styles.inputcheckbox} type="checkbox" id="sim12" name="sim12" />
+          <label htmlFor="sim12">Sim</label>
         </div>
       </div>
       <div className={styles.checkboxGroup}>
         <label className={styles.inputtitle}>Desligou a TV do DASHBOARD?</label>
         <div className={styles.checkboxOption}>
-          <input className={styles.inputcheckbox} type="checkbox" id="sim8" name="sim8" />
-          <label htmlFor="sim9">Sim</label>
+          <input className={styles.inputcheckbox} type="checkbox" id="sim13" name="sim13" />
+          <label htmlFor="sim13">Sim</label>
         </div>
       </div>
       <div className={styles.checkboxGroup}>
         <label className={styles.inputtitle}>Desligou o Ar condicionado?</label>
         <div className={styles.checkboxOption}>
-          <input className={styles.inputcheckbox} type="checkbox" id="sim8" name="sim8" />
-          <label htmlFor="sim9">Sim</label>
+          <input className={styles.inputcheckbox} type="checkbox" id="sim14" name="sim14" />
+          <label htmlFor="sim14">Sim</label>
         </div>
       </div>
       <div className={styles.checkboxGroup}>
         <label className={styles.inputtitle}>Desligou as luzes do escritório?(OPERACIONAL)</label>
         <div className={styles.checkboxOption}>
-          <input className={styles.inputcheckbox} type="checkbox" id="sim8" name="sim8" />
-          <label htmlFor="sim9">Sim</label>
+          <input className={styles.inputcheckbox} type="checkbox" id="sim15" name="sim15" />
+          <label htmlFor="sim15">Sim</label>
         </div>
       </div>
       <div className={styles.checkboxGroup}>
         <label className={styles.inputtitle}>Acendeu as luzes do ARMAZÉM?</label>
         <div className={styles.checkboxOption}>
-          <input className={styles.inputcheckbox} type="checkbox" id="sim8" name="sim8" />
-          <label htmlFor="sim9">Sim</label>
+          <input className={styles.inputcheckbox} type="checkbox" id="sim16" name="sim16" />
+          <label htmlFor="sim16">Sim</label>
         </div>
       </div>
       <div className={styles.checkboxGroup}>
         <label className={styles.inputtitle}>Retirou o cone do estacionamento PCD? </label>
         <div className={styles.checkboxOption}>
-          <input className={styles.inputcheckbox} type="checkbox" id="sim8" name="sim8" />
-          <label htmlFor="sim9">Sim</label>
+          <input className={styles.inputcheckbox} type="checkbox" id="sim17" name="sim17" />
+          <label htmlFor="sim17">Sim</label>
         </div>
       </div>
       <div className={styles.checkboxGroup}>
         <label className={styles.inputtitle}>Acionou o ALARME?</label>
         <div className={styles.checkboxOption}>
-          <input className={styles.inputcheckbox} type="checkbox" id="sim8" name="sim8" />
-          <label htmlFor="sim9">Sim</label>
+          <input className={styles.inputcheckbox} type="checkbox" id="sim18" name="sim18" />
+          <label htmlFor="sim18">Sim</label>
         </div>
       </div>
       <div className={styles.checkboxGroup}>
         <label className={styles.inputtitle}>Fechou a porta de entrada do ARMAZÉM</label>
         <div className={styles.checkboxOption}>
-          <input className={styles.inputcheckbox} type="checkbox" id="sim8" name="sim8" />
-          <label htmlFor="sim9">Sim</label>
+          <input className={styles.inputcheckbox} type="checkbox" id="sim19" name="sim19" />
+          <label htmlFor="sim19">Sim</label>
         </div>
       </div>
       <div className={styles.checkboxGroup}>
         <label className={styles.inputtitle}>Trancou o cadeado das correntes?</label>
         <div className={styles.checkboxOption}>
-          <input className={styles.inputcheckbox} type="checkbox" id="sim8" name="sim8" />
-          <label htmlFor="sim9">Sim</label>
+          <input className={styles.inputcheckbox} type="checkbox" id="sim20" name="sim20" />
+          <label htmlFor="sim20">Sim</label>
         </div>
       </div>
       <div className={styles.textgroup}>
@@ -213,11 +211,11 @@ function page() {
         <input
           className={styles.input2}
           type="text"
-          id="portoes"
-          name="portoes"
+          id="situacao"
+          name="situacao"
         />
       </div>
-      <button className={styles.buttonenviar}>Enviar</button>
+      <button type="submit" className={styles.buttonenviar}>Enviar</button>
     </div>
   );
 }

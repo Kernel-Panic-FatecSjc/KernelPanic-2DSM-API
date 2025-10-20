@@ -16,28 +16,36 @@ function page() {
               <img src='/images/companhia-1.svg' className='card-image' alt='Imagem card'></img>
             </div>
             <h2>Abertura da Empresa</h2>
-            <a href="#">Preencher</a>
+            <button onClick={() => handleNavigate("/formulario-abertura")}>
+              Preencher
+            </button>
           </div>
           <div className={styles.card}>
             <div className={styles.iconcontainer}>
               <img src='/images/companhia-1.svg' className='card-image' alt='Imagem card'></img>
             </div>
             <h2>Fechamento da Empresa</h2>
-            <a href="#">Preencher</a>
+            <button onClick={() => handleNavigate("/formulario-fechamento")}>
+              Preencher
+            </button>
           </div>
           <div className={styles.card}>
             <div className={styles.iconcontainer}>
               <img src='/images/construcao-2.svg' className='card-image' alt='Imagem card'></img>
             </div>
             <h2>Manutenção Predial</h2>
-            <a href="#">Preencher</a>
+            <button onClick={() => handleNavigate("/formulario-manutencao")}>
+              Preencher
+            </button>
           </div>
           <div className={styles.card}>
             <div className={styles.iconcontainer}>
               <img src='/images/protecao-2.svg' className='card-image' alt='Imagem card'></img>
             </div>
             <h2>Checklist Diário</h2>
-            <a href="#">Preencher</a>
+            <button onClick={() => handleNavigate("/formulario-diario")}>
+              Preencher
+            </button>
           </div>
         </div>
       </div>
