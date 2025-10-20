@@ -6,7 +6,7 @@ import styles from './App.module.css';
 function page() {
   return (
     <div className={styles.container}>
-      <h2>Formulário de abertura</h2>
+      <h2>Formulário de fechamento</h2>
       <p>
         Esse CHECK LIST tem a finalidade de registrar os procedimentos de FECHAMENTO da
         empresa NEWE para garantir a perfeita execução e evitar custos desnecessários com

@@ -6,7 +6,7 @@ import styles from './App.module.css';
 function page() {
   return (
     <div className={styles.container}>
-      <h2>Formulário de abertura</h2>
+      <h2>Formulário de manutenção predial</h2>
       <p>
         Esse formulário tem o objetivo de verificar as condições do local afim de manter
         segurança, funcionalidade e conservação do ambiente de trabalho.

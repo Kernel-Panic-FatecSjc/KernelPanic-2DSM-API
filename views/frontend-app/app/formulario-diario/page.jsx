@@ -6,7 +6,7 @@ import styles from './App.module.css';
 function page() {
   return (
     <div className={styles.container}>
-      <h2>Formulário de abertura</h2>
+      <h2>Formulário diário</h2>
       <p>
         Quando você enviar este formulário, o proprietário verá seu nome e
         endereço de email.
