@@ -12,18 +12,30 @@ function page() {
         <h1 className={styles.title}>Checklist e Cadastro</h1>
         <div className={styles.cardsContainer}>
           <div className={styles.card}>
+            <div className={styles.iconcontainer}>
+              <img src='/images/companhia-1.svg' className='card-image' alt='Imagem card'></img>
+            </div>
             <h2>Abertura da Empresa</h2>
             <a href="#">Preencher</a>
           </div>
           <div className={styles.card}>
+            <div className={styles.iconcontainer}>
+              <img src='/images/companhia-1.svg' className='card-image' alt='Imagem card'></img>
+            </div>
             <h2>Fechamento da Empresa</h2>
             <a href="#">Preencher</a>
           </div>
           <div className={styles.card}>
+            <div className={styles.iconcontainer}>
+              <img src='/images/construcao-2.svg' className='card-image' alt='Imagem card'></img>
+            </div>
             <h2>Manutenção Predial</h2>
             <a href="#">Preencher</a>
           </div>
           <div className={styles.card}>
+            <div className={styles.iconcontainer}>
+              <img src='/images/protecao-2.svg' className='card-image' alt='Imagem card'></img>
+            </div>
             <h2>Checklist Diário</h2>
             <a href="#">Preencher</a>
           </div>
