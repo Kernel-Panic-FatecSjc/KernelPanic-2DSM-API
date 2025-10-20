@@ -6,35 +6,53 @@ import { useRouter } from "next/navigation";
 export default function Page() {
     const router = useRouter();
     return (
-        <div className={styles.conteudo}>
+        
+        <div className={styles.container}>
             <a className={styles.link} onClick={() => router.push("/pagina-agregado")}><strong>← Voltar</strong></a>
             <h1>CHECKLIST de Veículos Agregados</h1>
             <div className={styles.formulario}>
-                <label>Nome completo do motorista: </label>
-                <input type="text" id="nome" name="nome"></input>
-                <label>CPF: </label>
-                <input type="text" id="CPF" name="CPF"></input>
-                <label>Placa do veículo: </label>
+                <label className={styles.label}>Nome completo do motorista: </label>
+                <input className={styles.input} type="text" id="nome" name="nome"></input>
+                <label className={styles.label}>CPF: </label>
+                <input className={styles.input} type="text" id="CPF" name="CPF"></input>
+                <label className={styles.label}>Placa do veículo: </label>
                 <p>Somente LETRAS e  NÚMEROS (sem traço)</p>
-                <input type="text" id="placa" name="placa"></input>
-                <label>Tipo de Veículo: </label>
-                <input type="radio" id="FIORINO" name="FIORINO" value="FIORINO"/>FIORINO
-                <input type="radio" id="VAN" name="VAN" value="VAN"/>VAN
-                <input type="radio" id="VUC" name="VUC" value="VUC"/>VUC
-                <input type="radio" id="3/4" name="3/4" value="3/4"/>3/4
-                <input type="radio" id="TOCO" name="TOCO" value="TOCO"/>TOCO
-                <input type="radio" id="TRUCK" name="TRUCK" value="TRUCK"/>TRUCK
-                <input type="radio" id="CARRETA" name="CARRETA" value="CARRETA"/>CARRETA
+                <input className={styles.input} type="text" id="placa" name="placa"></input>
+                <label className={styles.label}>Tipo de Veículo:</label>
+                <div className={styles.radioGroup}>
+                    <input type="radio" id="FIORINO" name="tipo_veiculo" value="FIORINO" />
+                    <label htmlFor="FIORINO">FIORINO</label>
+
+                    <input type="radio" id="VAN" name="tipo_veiculo" value="VAN" />
+                    <label htmlFor="VAN">VAN</label>
+
+                    <input type="radio" id="VUC" name="tipo_veiculo" value="VUC" />
+                    <label htmlFor="VUC">VUC</label>
+
+                    <input type="radio" id="3/4" name="tipo_veiculo" value="3/4" />
+                    <label htmlFor="3/4">3/4</label>
+
+                    <input type="radio" id="TOCO" name="tipo_veiculo" value="TOCO" />
+                    <label htmlFor="TOCO">TOCO</label>
+
+                    <input type="radio" id="TRUCK" name="tipo_veiculo" value="TRUCK" />
+                    <label htmlFor="TRUCK">TRUCK</label>
+
+                    <input type="radio" id="CARRETA" name="tipo_veiculo" value="CARRETA" />
+                    <label htmlFor="CARRETA">CARRETA</label>
+                </div>
+
                 <h2><strong>MOTOR</strong></h2>
-                <p>Verificação do vazamentos e nível de óleo e água no motor do veículo.
-                </p>
-                <label>VISTORIA</label>
+                <p>Verificação do vazamentos e nível de óleo e água no motor do veículo.</p>
+
+                <label className={styles.label}>VISTORIA</label>
                 <p>
                     1 - Verifique o nível do óleo usando a vareta. <br></br>
-                    2 - Verifique se tem possas ou gotas de óleo no motor ou no chão. <br></br>
-                    3 - Verifique visualmente se água reservatório está no nível.
+                    2 - Verifique se tem poças ou gotas de óleo no motor ou no chão. <br></br>
+                    3 - Verifique visualmente se a água do reservatório está no nível.
                 </p>
-                <table className={styles.tabela}>
+
+                <table className={styles.radioTable}>
                 <thead>
                     <tr>
                     <th></th>
@@ -57,24 +75,25 @@ export default function Page() {
                     <td><input type="radio" name="vazamento_oleo" value="NA" /></td>
                     </tr>
                     <tr>
-                    <td>Nível de ÁGUA reservatório está bom?</td>
+                    <td>Nível de ÁGUA do reservatório está bom?</td>
                     <td><input type="radio" name="nivel_agua" value="SIM" /></td>
                     <td><input type="radio" name="nivel_agua" value="NAO" /></td>
                     <td><input type="radio" name="nivel_agua" value="NA" /></td>
                     </tr>
                 </tbody>
-                </table> 
-                <label>Foto do motor do veículo</label>
-                <input type="file" accept="image/*" />
-                <label>Foto etiqueta da última troca de óleo</label>
-                <input type="file" accept="image/*" />
-                <h2>PNEUS</h2>
+                </table>
+                <label className={styles.label}>Foto do motor do veículo</label>
+                <input className={styles.inputImage} type="file" accept="image/*" />
+
+                <label className={styles.label}>Foto etiqueta da última troca de óleo</label>
+                <input className={styles.inputImage} type="file" accept="image/*" />
+
+                <h2><strong>PNEUS</strong></h2>
                 <p>Verificação do estado de conservação dos PNEUS do veículo.</p>
-                <label>Pneus estão LISOS?</label>
-                <table className={styles.tabela}>
+                <table className={styles.radioTable}>
                 <thead>
                     <tr>
-                    <th></th>
+                    <th>Pneus estão LISOS?</th>
                     <th>SIM</th>
                     <th>NÃO</th>
                     </tr>
@@ -102,20 +121,19 @@ export default function Page() {
                     </tr>
                 </tbody>
                 </table> 
-                <label>FOTOS GERAIS - Comprobatórias</label>
+                <label className={styles.label}>FOTOS GERAIS - Comprobatórias</label>
                 <p>
                     1 - PNE - Pneu Dianteiro Esquerdo <br></br>
                     2 - PTE - Pneu Traseiro Esquerdo <br></br>
                     3 - PTD - Pneu Traseiro Direito <br></br>
                     4 - PDD - Pneu Dianteiro Direito
                 </p>
-                <input type="file" accept="image/*" />
-                <h2>CONSERVAÇÃO | APARÊNCIA | SEGURANÇA</h2>
-                <label>Limpeza e Aparência externa do veículo</label>
-                <table className={styles.tabela}>
+                <input className={styles.inputImage} type="file" accept="image/*" />
+                <h2><strong>CONSERVAÇÃO | APARÊNCIA | SEGURANÇA</strong></h2>
+                <table className={styles.radioTable}>
                 <thead>
                     <tr>
-                    <th></th>
+                    <th>Limpeza e Aparência externa do veículo</th>
                     <th>SIM</th>
                     <th>NÃO</th>
                     <th>NA</th>
@@ -166,11 +184,10 @@ export default function Page() {
                     </tr>
                 </tbody>
                 </table> 
-                <label>Sistema elétrico</label>
-                <table className={styles.tabela}>
+                <table className={styles.radioTable}>
                 <thead>
                     <tr>
-                    <th></th>
+                    <th>Sistema Elétrico</th>
                     <th>SIM</th>
                     <th>NÃO</th>
                     <th>NA</th>
@@ -249,11 +266,10 @@ export default function Page() {
                     </tr>
                 </tbody>
                 </table>
-                <label>Itens obrigatórios e Segurança Individual</label>
-                <table className={styles.tabela}>
+                <table className={styles.radioTable}>
                 <thead>
                     <tr>
-                    <th></th>
+                    <th>Itens obrigatórios e Segurança Individual</th>
                     <th>SIM</th>
                     <th>NÃO</th>
                     <th>NA</th>
@@ -318,7 +334,7 @@ export default function Page() {
                     </tr>
                 </tbody>
                 </table>
-                <label>FOTOS GERAIS</label>
+                <label className={styles.label}>FOTOS GERAIS</label>
                 <p>
                     (Adicione 4 fotos do veículo) <br></br>
                     1 - Frente do veículo <br></br>
@@ -327,20 +343,59 @@ export default function Page() {
                     4 - Traseira com a porta ABERTA
                 </p>
                 <input type="file" accept="image/*" />
-                <label>OBSERVAÇÕES SOBRE O VEÍCULO</label>
-                <input type="text" id="observacao" name="observacao"></input>
-                <label>Responsável pela Vistoria</label>
-                <input type="radio" id="DiegoSavio" name="DiegoSavio" value="Diego Savio"/>Diego Sávio
-                <input type="radio" id="VAN" name="VAN" value="VAN"/>Gabriel Andrade
-                <input type="radio" id="VUC" name="VUC" value="VUC"/>Igor Carvalho
-                <input type="radio" id="3/4" name="3/4" value="3/4"/>Junior Pereira
-                <input type="radio" id="TOCO" name="TOCO" value="TOCO"/>Luis Oliveira
-                <input type="radio" id="TRUCK" name="TRUCK" value="TRUCK"/>Ruan Hofacher
-                <input type="radio" id="CARRETA" name="CARRETA" value="CARRETA"/>Samuel Lucas
-                <input type="radio" id="CARRETA" name="CARRETA" value="CARRETA"/>Tatiane Dias
-                <label>Outro</label>
-                <input type="text" id="outro" name="outro"></input>
-                <button type="submit">Enviar</button>
+                <label className={styles.label}>OBSERVAÇÕES SOBRE O VEÍCULO</label>
+                <input className={styles.input} type="text" id="observacao" name="observacao"></input>
+                <label className={styles.label}>Responsável pela Vistoria</label>
+                <div className={styles.radioGroupCircles}>
+                    <div className={styles.radioItem}>
+                        <input type="radio" id="DiegoSavio" name="responsavel" value="Diego Sávio" />
+                        <span>Diego Sávio</span>
+                    </div>
+
+                    <div className={styles.radioItem}>
+                        <input type="radio" id="GabrielAndrade" name="responsavel" value="Gabriel Andrade" />
+                        <span>Gabriel Andrade</span>
+                    </div>
+
+                    <div className={styles.radioItem}>
+                        <input type="radio" id="IgorCarvalho" name="responsavel" value="Igor Carvalho" />
+                        <span>Igor Carvalho</span>
+                    </div>
+
+                    <div className={styles.radioItem}>
+                        <input type="radio" id="JuniorPereira" name="responsavel" value="Junior Pereira" />
+                        <span>Junior Pereira</span>
+                    </div>
+
+                    <div className={styles.radioItem}>
+                        <input type="radio" id="LuisOliveira" name="responsavel" value="Luis Oliveira" />
+                        <span>Luis Oliveira</span>
+                    </div>
+
+                    <div className={styles.radioItem}>
+                        <input type="radio" id="RuanHofacher" name="responsavel" value="Ruan Hofacher" />
+                        <span>Ruan Hofacher</span>
+                    </div>
+
+                    <div className={styles.radioItem}>
+                        <input type="radio" id="SamuelLucas" name="responsavel" value="Samuel Lucas" />
+                        <span>Samuel Lucas</span>
+                    </div>
+
+                    <div className={styles.radioItem}>
+                        <input type="radio" id="TatianeDias" name="responsavel" value="Tatiane Dias" />
+                        <span>Tatiane Dias</span>
+                    </div>
+
+                    <div className={styles.radioItem}>
+                        <input type="radio" id="Outro" name="responsavel" value="Outro" />
+                        <span>Outro:</span>
+                        <input className={styles.input} type="text" id="outro" name="outro" />
+                    </div>
+                </div>
+
+
+                <button className={styles.btn_enviar} type="submit">Enviar</button>
             </div>
         </div>
     )

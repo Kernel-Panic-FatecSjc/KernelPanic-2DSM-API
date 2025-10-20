@@ -8,6 +8,9 @@
 
 .link{
     color: #736B66;
+    margin-top: 40px; 
+    margin-left: 20px;
+    display: inline-block;
 }
 
 .btn_cadastro,
@@ -29,6 +32,12 @@
   padding: 50px;
 }
 
+.btn_cadastro:hover,
+.btn_checklist:hover {
+  background-color: #b5d6fc; 
+  transform: scale(1.03);
+  transition: all 0.25s ease;
+}
 
 .iconWrapper {
   position: absolute;      
