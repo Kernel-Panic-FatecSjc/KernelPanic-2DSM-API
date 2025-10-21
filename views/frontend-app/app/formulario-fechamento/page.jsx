@@ -1,11 +1,19 @@
 'use client';
 import React from 'react'
 import styles from './App.module.css';
+import { useRouter } from 'next/navigation';
 
 
 function page() {
+  const router = useRouter();
   return (
     <div className={styles.container}>
+      <button
+        className={styles.buttonvoltar}
+        onClick={() => router.back()}
+      >
+        ← Voltar
+      </button>
       <h2>Formulário de fechamento</h2>
       <p>
         Esse CHECK LIST tem a finalidade de registrar os procedimentos de FECHAMENTO da

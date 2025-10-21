@@ -3,9 +3,16 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Select from 'react-select';
 import styles from './App.module.css';
+import { useRouter } from 'next/navigation';  
 
 
 function page() {
+  const router = useRouter();
+
+  const handleNavigate = (path) => {
+    router.push(path);
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.content}>

@@ -1,11 +1,19 @@
 'use client';
 import React from 'react'
 import styles from './App.module.css';
+import { useRouter } from 'next/navigation';
 
 
 function page() {
+  const router = useRouter();
   return (
     <div className={styles.container}>
+      <button
+        className={styles.buttonvoltar}
+        onClick={() => router.back()}
+      >
+        ← Voltar
+      </button>
       <h2>Formulário de manutenção predial</h2>
       <p>
         Esse formulário tem o objetivo de verificar as condições do local afim de manter

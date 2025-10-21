@@ -18,8 +18,9 @@
 .container h2 {
   font-size: 32px;
   font-weight: 700;
-  margin-bottom: 15px;
+  margin-bottom: 45px;
   text-align: center;
+  color: #1f4af4;
 }
 
 .container p {
@@ -150,6 +151,28 @@
 
 .buttonenviar:hover {
   background-color: #173ed3;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.buttonvoltar {
+  align-self: flex-start;
+  background-color: transparent;
+  border: 2px solid #1f4af4;
+  color: #1f4af4;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 25px;
+  padding: 8px 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 25px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+.buttonvoltar:hover {
+  background-color: #1f4af4;
+  color: white;
   transform: translateY(-2px);
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 }
