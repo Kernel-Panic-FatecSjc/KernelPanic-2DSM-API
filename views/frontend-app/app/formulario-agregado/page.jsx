@@ -2,24 +2,19 @@
 import React from 'react';
 import Image from 'next/image';
 import styles from './App.module.css';
+import Login from '../../components/layout/Login/login';
 
 function Page() {
   return (
     <div className={styles.layout}>
       <div className={styles.lateral}>
-        <Image
-          className={styles.logo}
-          src="/images/logoneweglobal.jpg"
-          width={400}
-          height={200}
-          alt="Logo da Newe"
-        />
+        <Login />
       </div>
 
       <div className={styles.right}>
         <div className={styles.formWrapper}>
           <main className={styles.container}>
-            <h2>Formulário de abertura</h2>
+            <h2>Formulário de agregado</h2>
             <p>
               Esse CHECK LIST tem a finalidade de registrar os procedimentos de ABERTURA da
               empresa NEWE LOG para garantir a perfeita execução.
@@ -35,22 +30,27 @@ function Page() {
               endereço de email.
             </p>
 
-            <div className={styles.textgroup}>
-              <label className={styles.inputtitle}>Quem está preenchendo?</label>
-              <input className={styles.input1} type="date" id="quemAbertura" name="quemAbertura" />
-            </div>
-
-            <div className={styles.textgroup}>
-              <label className={styles.inputtitle}>Data de abertura da empresa?</label>
-              <input className={styles.input2} type="text" id="dataAbertura" name="dataAbertura" />
-            </div>
-
             <div className={styles.checkboxGroup}>
-              <label className={styles.inputtitle}>Abriu cadeado das correntes? (FRENTE DA EMPRESA)</label>
+              <label className={styles.inputtitle}>Enviar por e-mail</label>
               <div className={styles.checkboxOption}>
-                <input className={styles.inputcheckbox} type="checkbox" id="sim1" name="sim1" />
-                <label htmlFor="sim1">Sim</label>
+                <input className={styles.inputcheckbox} type="checkbox" id="email" name="email" />
+                <label htmlFor="enviar">Registrar (email) como o e-mail a ser incluído na minha resposta</label>
               </div>
+            </div>
+
+            <div className={styles.textgroup}>
+              <label className={styles.inputtitle}>Nome completo do motorista</label>
+              <input className={styles.input2} type="text" id="NomeMotorista" name="NomeMotorista" />
+            </div>
+
+            <div className={styles.textgroup}>
+              <label className={styles.inputtitle}>CPF</label>
+              <input  placeholder='12345678909' className={styles.input2} type="text" id="CPFMotorista" name="CPFMotorista" />
+            </div>
+
+            <div className={styles.textgroup}>
+              <label className={styles.inputtitle}>Placa do veículo </label>
+              <input  placeholder='ABC1D23' className={styles.input2} type="text" id="PlacaVeículo" name="PlacaVeículo" />
             </div>
 
             <button type="submit" className={styles.buttonenviar}>Enviar</button>

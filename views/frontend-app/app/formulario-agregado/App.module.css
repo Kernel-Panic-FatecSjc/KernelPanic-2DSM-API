@@ -1,5 +1,7 @@
 :global(main.conteudo) {
   padding: 0 !important;
+  position: relative !important;
+  z-index: 1 !important;
 }
 
 .layout {
@@ -28,32 +30,35 @@
 .right {
   flex: 1;
   background-color: #fff;
-  display: grid;
-  place-items: center;
-  padding: 48px 64px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
   overflow-y: auto;
+  padding: 48px 64px;
   border-left: none;
-  margin-left: 20vh;
 }
 
 .formWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   max-width: 900px;
   margin: 0 auto;
-  display: block;
 }
 
 .container {
   background-color: white;
-  min-height: 100vh;
+  height: auto;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
   width: 80%;
   margin: 0 auto;
-  padding: 40px 20px;
   box-sizing: border-box;
+  padding: 40px 0;
 }
 
 .container h2 {
@@ -85,6 +90,17 @@
   margin-bottom: 6px;
   margin-top: 20px;
   font-size: 17px;
+  color: #222;
+}
+
+.inputSubtitle {
+  display: block;
+  width: 100%;
+  max-width: 500px;
+  font-weight: 500;
+  margin-bottom: 6px;
+  margin-top: 10px;
+  font-size: 14px;
   color: #222;
 }
 

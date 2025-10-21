@@ -1,22 +1,68 @@
-.principal {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 10%;
-    gap: 30px;
+:global(main.conteudo) {
+  padding: 0 !important;
+  position: relative !important;
+  z-index: 1 !important;
 }
 
-.link{
-    color: #736B66;
-    margin-top: 40px; 
-    margin-left: 20px;
-    display: inline-block;
+.layout {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+}
+
+.lateral {
+  background-color: #1f4af4;
+  width: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: none;
+  margin: 0;
+}
+
+.right {
+  flex: 1;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  padding: 0 60px;
+  overflow: visible;
+  padding-left: calc(60px + 170px);
+}
+
+
+.link {
+  color: #736b66;
+  position: absolute;
+  top: 40px;
+  left: 40px;
+  text-decoration: none;
+}
+
+.principal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 600px;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.principal h1 {
+  font-size: 32px;
+  color: #1f4af4;
+  margin-bottom: 20px;
 }
 
 .btn_cadastro,
 .btn_checklist {
-  color: #736B66;
-  position: relative;       
+  color: #736b66;
+  position: relative;
   width: 500px;
   height: 80px;
   background-color: #cee4fe;
@@ -24,24 +70,24 @@
   border: none;
   cursor: pointer;
   display: flex;
-  align-items: center;    
-  justify-content: center;   
+  align-items: center;
+  justify-content: center;
   gap: 15px;
   font-size: 20px;
   margin: 20px;
   padding: 50px;
+  transition: all 0.25s ease;
 }
 
 .btn_cadastro:hover,
 .btn_checklist:hover {
-  background-color: #b5d6fc; 
+  background-color: #b5d6fc;
   transform: scale(1.03);
-  transition: all 0.25s ease;
 }
 
 .iconWrapper {
-  position: absolute;      
-  left: 20px;                
+  position: absolute;
+  left: 20px;
   width: 60px;
   height: 60px;
   background-color: white;
@@ -58,6 +104,5 @@
 }
 
 .btnText {
-  z-index: 1;              
+  z-index: 1;
 }
-
