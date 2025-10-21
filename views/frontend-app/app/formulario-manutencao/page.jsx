@@ -249,6 +249,135 @@ function page() {
           name="riscos"
         />
     </div>
+
+    <div className={styles.checkboxGroup}>
+        <label className={styles.inputtitle}>Verificação das câmeras de segurança, as 11 estão fucionando corretamente e bem posicionadas ? (se não - informar imediatamente o gestor)</label>
+        <div className={styles.checkboxOption}>
+          <input className={styles.inputcheckbox} type="checkbox" id="sim14" name="sim14" />
+          <label htmlFor="sim14">Sim</label>
+        </div>
+    </div>
+
+    <div className={styles.textgroup}>
+        <label className={styles.inputtitle}>Quais as condições da balança de piso?</label>
+        <input
+          className={styles.input2}
+          type="text"
+          id="pisoBalança"
+          name="pisoBalança"
+        />
+    </div>
+
+    <div className={styles.textgroup}>
+        <label className={styles.inputtitle}>Favor informar data da última aferição da balança</label>
+        <input
+          className={styles.input2}
+          type="date"
+          id="dataBalança"
+          name="dataBalança"
+        />
+    </div>
+
+    <div className={styles.textgroup}>
+        <label className={styles.inputtitle}>Condições dos mictórios e lavatórios?</label>
+        <input
+          className={styles.input2}
+          type="text"
+          id="condiçãoLavatorio"
+          name="condiçãoLavatorio"
+        />
+    </div>
+
+    <div className={styles.textgroup}>
+        <label className={styles.inputtitle}>Bebedouro -Informar data da última limpeza e troca de filtro (validade de 6 em 6 meses)</label>
+        <input
+          className={styles.input2}
+          type="date"
+          id="dataBalança"
+          name="dataBalança"
+        />
+    </div>
+
+    <div className={styles.textgroup}>
+        <label className={styles.inputtitle}>Data da próxima dedetização *</label>
+        <input
+          className={styles.input2}
+          type="date"
+          id="dataDedetização"
+          name="dataDedetização"
+        />
+    </div>
+
+    <div className={styles.textgroup}>
+        <label className={styles.inputtitle}>EXTINTORES - Informar data da última recarga dos extintores</label>
+        <input
+          className={styles.input2}
+          type="date"
+          id="dataExtintor"
+          name="dataExtintor"
+        />
+    </div>
+
+    <div className={styles.textgroup}>
+        <label className={styles.inputtitle}>Data da próxima recarga dos extintores</label>
+        <input
+          className={styles.input2}
+          type="date"
+          id="dataExtintorRecarga"
+          name="dataExtintorRecarga"
+        />
+    </div>
+
+    <div className={styles.textgroup}>
+        <label className={styles.inputtitle}>Caixa D'água- Informar data da última limpeza (validade de 6 em 6 meses)</label>
+        <input
+          className={styles.input2}
+          type="date"
+          id="dataCaixaDAgua"
+          name="dataCaixaDAgua"
+        />
+    </div>
+
+    
+    <div className={styles.textgroup}>
+        <label className={styles.inputtitle}>Data da próxima limpeza</label>
+        <input
+          className={styles.input2}
+          type="date"
+          id="dataLimpeza"
+          name="dataLimpeza"
+        />
+    </div>
+
+    <div className={styles.checkboxGroup}>
+        <label className={styles.inputtitle}>Alguma cadeira está em má condição para uso?</label>
+        <div className={styles.checkboxOption}>
+          <input className={styles.inputcheckbox} type="checkbox" id="sim15" name="sim15" />
+          <label htmlFor="sim15">Sim</label>
+        </div>
+    </div>
+
+    <div className={styles.textgroup}>
+        <label className={styles.inputtitle}>Se a resposta da pergunta acima for 'sim' descreva de qual setor é a
+        cadeira, e qual posição ela se encontra</label>
+        <input
+          className={styles.input2}
+          type="text"
+          id="cadeiraDesc"
+          name="cadeiraDesc"
+        />
+    </div>
+
+    <div className={styles.textgroup}>
+        <label className={styles.inputtitle}>Algum detalhe adicional? descreva abaixo.</label>
+        <input
+          className={styles.input2}
+          type="text"
+          id="adicional"
+          name="adicional"
+        />
+    </div>
+
     <button type="submit" className={styles.buttonenviar}>Enviar</button>
     </div>
   );

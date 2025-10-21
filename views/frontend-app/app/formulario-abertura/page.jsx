@@ -26,7 +26,7 @@ function page() {
         <label className={styles.inputtitle}>Quem está preenchendo?</label>
         <input
           className={styles.input1}
-          type="date"
+          type="text"
           id="quemAbertura"
           name="quemAbertura"
         />
@@ -36,7 +36,7 @@ function page() {
         <label className={styles.inputtitle}>Data de abertura da empresa?</label>
         <input
           className={styles.input2}
-          type="text"
+          type="date"
           id="dataAbertura"
           name="dataAbertura"
         />
@@ -99,12 +99,88 @@ function page() {
       </div>
 
       <div className={styles.checkboxGroup}>
-        <label className={styles.inputtitle}>Ligou o ar condicionado?</label>
+        <label className={styles.inputtitle}>Ligou TV (CAMERAS)?</label>
         <div className={styles.checkboxOption}>
           <input className={styles.inputcheckbox} type="checkbox" id="sim8" name="sim8" />
           <label htmlFor="sim8">Sim</label>
         </div>
       </div>
+      
+      <div className={styles.checkboxGroup}>
+        <label className={styles.inputtitle}>Ligou TV (DASHBORD)?</label>
+        <div className={styles.checkboxOption}>
+          <input className={styles.inputcheckbox} type="checkbox" id="sim9" name="sim9" />
+          <label htmlFor="sim9">Sim</label>
+        </div>
+      </div>
+
+      <div className={styles.checkboxGroup}>
+        <label className={styles.inputtitle}>Coletou chaves internas no chaveiro?</label>
+        <div className={styles.checkboxOption}>
+          <input className={styles.inputcheckbox} type="checkbox" id="sim16" name="sim16" />
+          <label htmlFor="sim16">Sim</label>
+        </div>
+      </div>
+      
+      <div className={styles.checkboxGroup}>
+        <label className={styles.inputtitle}>Removeu cadeado portão 1?</label>
+        <div className={styles.checkboxOption}>
+          <input className={styles.inputcheckbox} type="checkbox" id="sim10" name="sim10" />
+          <label htmlFor="sim10">Sim</label>
+        </div>
+      </div>
+
+      <div className={styles.checkboxGroup}>
+        <label className={styles.inputtitle}>Removeu cadeado portão 2?</label>
+        <div className={styles.checkboxOption}>
+          <input className={styles.inputcheckbox} type="checkbox" id="sim11" name="sim11" />
+          <label htmlFor="sim11">Sim</label>
+        </div>
+      </div>
+
+      <div className={styles.checkboxGroup}>
+        <label className={styles.inputtitle}>Posicionou cone no estacionamento PCD?</label>
+        <div className={styles.checkboxOption}>
+          <input className={styles.inputcheckbox} type="checkbox" id="sim12" name="sim12" />
+          <label htmlFor="sim12">Sim</label>
+        </div>
+      </div>
+
+      <div className={styles.checkboxGroup}>
+        <label className={styles.inputtitle}>Ligou tomada e retirou plástico do bebedouro?</label>
+        <div className={styles.checkboxOption}>
+          <input className={styles.inputcheckbox} type="checkbox" id="sim13" name="sim13" />
+          <label htmlFor="sim13">Sim</label>
+        </div>
+      </div>
+
+      <div className={styles.checkboxGroup}>
+        <label className={styles.inputtitle}>Colocou tapetes nos devidos lugares ? (Atividade às segundas-feiras)</label>
+        <div className={styles.checkboxOption}>
+          <input className={styles.inputcheckbox} type="checkbox" id="sim14" name="sim14" />
+          <label htmlFor="sim14">Sim</label>
+        </div>
+      </div>
+
+      <div className={styles.checkboxGroup}>
+        <label className={styles.inputtitle}>Fez café do dia?</label>
+        <div className={styles.checkboxOption}>
+          <input className={styles.inputcheckbox} type="checkbox" id="sim15" name="sim15" />
+          <label htmlFor="sim15">Sim</label>
+        </div>
+      </div>
+
+      <div className={styles.textgroup}>
+        <label className={styles.inputtitle}>Houve alguma situação atípica que exigiu atenção ou ação fora do previsto
+        no checklist?</label>
+        <input
+          className={styles.input1}
+          type="text"
+          id="observacao"
+          name="observacao"
+        />
+      </div>
+
       <button type="submit" className={styles.buttonenviar}>Enviar</button>
     </div>
   );

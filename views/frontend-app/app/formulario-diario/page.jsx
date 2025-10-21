@@ -16,7 +16,7 @@ function page() {
         <label className={styles.inputtitle}>Nome e sobrenome do Motorista</label>
         <input
           className={styles.input2}
-          type="date"
+          type="text"
           id="nome"
           name="nome"
         />
