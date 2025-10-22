@@ -130,6 +130,68 @@ O sistema tem como objetivo principal centralizar todos os processos e dados da 
 <img src="https://img.shields.io/badge/TypeORM-E55230?style=for-the-badge&logo=typeorm&logoColor=white&color=043873">
 </div>
 
+## Estrutura do Projeto 
+
+<details>
+
+```
+├── 📁 ApiServer
+│   ├── 📁 src
+│   │   ├── 📁 API
+│   │   │   ├── 📁 Configuration
+│   │   │   ├── 📁 Controllers
+│   │   │   ├── 📁 Jobs
+│   │   │   ├── 📁 Properpeties
+│   │   │   └── 📁 Routes
+│   │   ├── 📁 Business
+│   │   │   ├── 📁 Interfaces
+│   │   │   └── 📁 Services
+│   │   ├── 📁 DAL
+│   │   │   ├── 📁 DTOs
+│   │   │   ├── 📁 Enums
+│   │   │   ├── 📁 Migrations
+│   │   │   ├── 📁 Models
+│   │   │   ├── 📁 Repository
+│   │   │   ├── 📁 Scripts
+├── 📁 docs
+│   ├── 📁 modeloBanco
+├── 📁 views
+│   ├── 📁 frontend-app
+│   │   ├── 📁 app
+│   │   │   ├── 📁 agendamento
+│   │   │   ├── 📁 checklists
+│   │   │   ├── 📁 cliente
+│   │   │   ├── 📁 formulario-abertura
+│   │   │   ├── 📁 formulario-diario
+│   │   │   ├── 📁 formulario-fechamento
+│   │   │   ├── 📁 formulario-manutencaox
+│   │   │   ├── 📁 funil-vendas
+│   │   │   ├── 📁 gerenciar-permissao
+│   │   │   ├── 📁 gestao
+│   │   │   ├── 📁 grafico
+│   │   │   ├── 📁 interacoes
+│   │   │   ├── 📁 login-funcionario
+│   │   │   ├── 📁 login-gestor
+│   │   │   ├── 📁 login-master
+│   │   │   ├── 📁 vendas
+│   │   ├── 📁 components
+│   │   │   └── 📁 layout
+│   │   │       ├── 📁 CalculadoraCotacao
+│   │   │       ├── 📁 Calendar
+│   │   │       ├── 📁 FunilVendas
+│   │   │       ├── 📁 Grafico
+│   │   │       ├── 📁 Kanban
+│   │   │       ├── 📁 LateralBar
+│   │   │       ├── 📁 Login
+│   │   ├── 📁 public
+│   │   │   ├── 📁 images
+│   └── 📁 styles
+├── ⚙️ .gitignore
+└── 📝 README.md
+```
+
+</details>
+
 ## ✅ DoR - Definition of Ready <a id="dor"></a>
 
 | Critério | Descrição |
@@ -163,7 +225,7 @@ O sistema tem como objetivo principal centralizar todos os processos e dados da 
 | <img src="https://avatars.githubusercontent.com/u/119637682?v=4" width="75px"> | Product Owner | Heloisa Cardillo | [Linkedin](https://www.linkedin.com/in/heloisa-cardillo-lima/) | [GitHub](https://github.com/heloisa-cardillo) |
 | <img src="https://avatars.githubusercontent.com/u/162122368?v=4" width="75px"> | Dev Team      | Daniel Porto Renó Sás Piloto | [Linkedin](https://www.linkedin.com/in/daniel-piloto-98b717226/)  | [GitHub](https://github.com/danprsp) |
 | <img src="https://avatars.githubusercontent.com/u/140865436?v=4" width="75px"> | Dev Team      | Henry Vilela Silva Tito |  [Linkedin](https://www.linkedin.com/in/henry-tito-989b4b354/)  | [GitHub](https://github.com/HenryTito)  |
-| <img src="https://avatars.githubusercontent.com/u/143196325?v=4" width="75px"> | Dev Team      | João Victor Dos Reis Santos | [Linkedin](https://www.linkedin.com/in/jo%C3%A3o-victor-dos-reis-santos-1823532b4/) | [GitHub](https://github.com/Templasan) |
+| <img src="https://avatars.githubusercontent.com/u/163298566?v=4" width="75px"> | Dev Team      | João Victor Dos Reis Santos | [Linkedin](https://www.linkedin.com/in/joão-victor-dos-reis-santos-1823532b4) | [GitHub](https://github.com/Templasan) |
 | <img src="https://avatars.githubusercontent.com/u/144951743?v=4" width="75px"> | Dev Team      | Miguel Tomio Toledo Nonaka |  [Linkedin](https://www.linkedin.com/in/miguel-nonaka)  | [GitHub](https://github.com/miguelnonaka)    |
 | <img src="https://avatars.githubusercontent.com/u/102493225?v=4" width="75px"> | Dev Team      | Paula Emy Tamay |  [Linkedin](https://www.linkedin.com/in/paula-tamay-7a168228a/)  | [GitHub](https://github.com/PaulaEmy)    |
 | <img src="https://avatars.githubusercontent.com/u/163305926?v=4" width="75px"> | Dev Team      | Vinícius da Silva Leite |  [Linkedin](https://www.linkedin.com/in/vinícius-leite-4792b02ba/)  | [GitHub](https://github.com/vinislvleite)    |
