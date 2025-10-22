@@ -19,7 +19,9 @@ function App() {
 
     const fetchClientes = async () => {
         try {
-            const response = await axios.get("http://localhost:5000/historico");
+            const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+
+            const response = await axios.get(`${apiUrl}/historico`);
             const vendas = response.data;
 
             const mapaClientes = vendas.map((venda) => {
