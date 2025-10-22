@@ -4,21 +4,30 @@ import { ChecklistService } from "../../Business/Services/checklistService";
 export const ChecklistController = {
   async create(req: Request, res: Response) {
     try {
-      const { tipo, respostas, path_img } = req.body;
-      const finalPathImg = path_img ?? null;
-      const result = await ChecklistService.createChecklist(tipo, respostas, finalPathImg);
-      res.status(201).json({ message: "Checklist salvo!", result });
+      const file = (req as Request & { file?: { path: string } }).file;
+      const filePath = file ? file.path : null;
+
+      const { tipo, respostas } = req.body;
+
+      const result = await ChecklistService.createChecklist(tipo, respostas, filePath);
+
+      return res.status(201).json({
+        message: "Checklist salvo com sucesso!",
+        result,
+      });
     } catch (error: any) {
-      res.status(400).json({ error: error.message });
+      console.error("Erro ao criar checklist:", error);
+      return res.status(400).json({ error: error.message });
     }
   },
 
   async getAll(req: Request, res: Response) {
     try {
       const result = await ChecklistService.getChecklists();
-      res.status(200).json(result);
+      return res.status(200).json(result);
     } catch (error: any) {
-      res.status(500).json({ error: error.message });
+      console.error("Erro ao buscar checklists:", error);
+      return res.status(500).json({ error: error.message });
     }
   },
 
@@ -27,12 +36,15 @@ export const ChecklistController = {
       const { tipo } = req.params;
 
       if (!tipo) {
-        return res.status(400).json({ error: "O parâmetro 'tipo' é obrigatório." });
+        return res
+          .status(400)
+          .json({ error: "O parâmetro 'tipo' é obrigatório." });
       }
 
       const result = await ChecklistService.getChecklistsByTipo(tipo);
       return res.status(200).json(result);
     } catch (error: any) {
+      console.error("Erro ao buscar checklist por tipo:", error);
       return res.status(500).json({ error: error.message });
     }
   },

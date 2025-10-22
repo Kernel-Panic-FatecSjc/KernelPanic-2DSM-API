@@ -7,28 +7,27 @@ const pool = mysql.createPool({
   database: "newe_logistica",
 });
 
-export const ChecklistRepository = {
-  async create(tipo: string, respostas: any, path_img?: string) {
+export const checklistRepository = {
+  async create(data: { tipo: string; respostas: string; path_img: string | null }) {
     const query = `
-      INSERT INTO ChecklistFuncionario (tipo, respostas, path_img)
+      INSERT INTO checklist (tipo, respostas, path_img)
       VALUES (?, ?, ?)
     `;
-    const values = [tipo, JSON.stringify(respostas), path_img || null];
-
-    const [result]: any = await pool.query(query, values);
-    return { id: result.insertId, tipo, respostas, path_img };
+    const [result]: any = await pool.query(query, [
+      data.tipo,
+      data.respostas,
+      data.path_img,
+    ]);
+    return { id: result.insertId, ...data };
   },
 
-  async getAll() {
-    const [rows] = await pool.query("SELECT * FROM ChecklistFuncionario");
+  async findAll() {
+    const [rows] = await pool.query("SELECT * FROM checklist");
     return rows;
   },
 
-  async getByTipo(tipo: string) {
-    const [rows] = await pool.query(
-      "SELECT * FROM ChecklistFuncionario WHERE tipo = ?",
-      [tipo]
-    );
+  async findByTipo(tipo: string) {
+    const [rows] = await pool.query("SELECT * FROM checklist WHERE tipo = ?", [tipo]);
     return rows;
   },
 };

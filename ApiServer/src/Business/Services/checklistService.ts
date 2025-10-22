@@ -1,18 +1,23 @@
-import { ChecklistRepository } from "../../DAL/Repository/checklistRepository";
+import { checklistRepository } from "../../DAL/Repository/checklistRepository";
 
 export const ChecklistService = {
-  async createChecklist(tipo: string, respostas: any, path_img?: string) {
-    if (!tipo) throw new Error("O campo 'tipo' é obrigatório.");
-    if (!respostas) throw new Error("As respostas são obrigatórias.");
+  async createChecklist(tipo: string, respostas: any, path_img: string | null) {
+    if (!tipo || !respostas) throw new Error("Tipo e respostas são obrigatórios.");
 
-    return await ChecklistRepository.create(tipo, respostas, path_img);
+    const data = {
+      tipo,
+      respostas: JSON.stringify(respostas),
+      path_img,
+    };
+
+    return await checklistRepository.create(data);
   },
 
   async getChecklists() {
-    return await ChecklistRepository.getAll();
+    return await checklistRepository.findAll();
   },
 
   async getChecklistsByTipo(tipo: string) {
-    return await ChecklistRepository.getByTipo(tipo);
+    return await checklistRepository.findByTipo(tipo);
   },
 };
