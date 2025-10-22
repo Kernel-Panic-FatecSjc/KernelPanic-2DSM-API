@@ -13,7 +13,7 @@ const clientesRoute = require("./API/Routes/clientesRoutes");
 const gestaoRoute = require("./API/Routes/gestaoRoutes")
 const historicoRoute = require("./API/Routes/historicoRoutes")
 const vendedorRoute = require("./API/Routes/VendedorRoutes")
-
+const formulariosRoute = require("./API/Routes/formulariosRoutes")
 
 const app = express(); 
 
@@ -42,7 +42,7 @@ app.use("/eventos", eventoRoute);
 iniciarCron();
 app.use("/funilVendas", funilVendasRoute); 
 app.use("/calendario", calendarioRoute); 
-app.use("/formularios", )
+app.use("/formularios", formulariosRoute)
 
 app.get("/", (req, res) => {
   res.send("API funcionando");
