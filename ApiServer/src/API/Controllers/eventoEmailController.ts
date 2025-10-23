@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
-import { criarEvento, listarEventos } from "../../Business/Services/eventoEmailService";
+import { criarLembrete, listarLembretes } from "../../Business/Services/eventoEmailService";
 
-export async function postEvento(req: Request, res: Response) {
+export async function postLembrete(req: Request, res: Response) {
   // ===== Extrai dados do corpo da requisição =====
   const { email, titulo, dataHora, categoria } = req.body;
 
@@ -12,10 +12,10 @@ export async function postEvento(req: Request, res: Response) {
 
   try {
     // ===== Cria o evento chamando o serviço =====
-    const evento = await criarEvento(email, titulo, new Date(dataHora), categoria);
+    const evento = await criarLembrete(email, titulo, new Date(dataHora), categoria);
 
     // ===== Retorna sucesso com o ID do evento criado =====
-    return res.json({ sucesso: true, id: evento.id });
+    return res.json({ sucesso: true, id: evento.lembrete_ID });
   } catch (err) {
     // ===== Log do erro e retorno de erro interno =====
     console.error(err);
@@ -23,9 +23,9 @@ export async function postEvento(req: Request, res: Response) {
   }
 }
 
-export async function getEventos(req: Request, res: Response){
+export async function getLembrete(req: Request, res: Response){
   try{
-    const evento = await listarEventos()
+    const evento = await listarLembretes()
     return res.json({ sucesso: true, evento: evento})
   }
   catch (err) {

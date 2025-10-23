@@ -1,6 +1,6 @@
 import cron from "node-cron";
 import { AppDataSource } from "../../DAL/ormconfig";
-import { Evento } from "../../DAL/Models/EventoEmail";
+import { Lembrete } from "../../DAL/Models/Lembrete";
 import { enviarEmail } from "../../Business/Services/eventoEmailService";
 
 export function iniciarCron() {
@@ -13,7 +13,7 @@ export function iniciarCron() {
     const fim = new Date(agora.getTime() + 30000);
 
     // ===== Busca eventos cuja dataHora está dentro dessa janela =====
-    const eventos = await AppDataSource.getRepository(Evento)
+    const eventos = await AppDataSource.getRepository(Lembrete)
       .createQueryBuilder("evento")
       .where("evento.dataHora BETWEEN :inicio AND :fim", { inicio, fim })
       .getMany();
