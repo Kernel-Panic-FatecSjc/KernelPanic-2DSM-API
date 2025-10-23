@@ -13,5 +13,6 @@ export default function ConditionalLateralBar() {
   if(pathname ==='/login-master') return null;
   if(pathname ==='/login-inicial') return null;
   if(pathname === '/login-motorista') return null
+  if(pathname === '/login-localizacao') return null
   return <LateralBar />;
 }
