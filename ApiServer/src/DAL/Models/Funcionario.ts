@@ -18,10 +18,10 @@ import type { InteracaoCliente } from "./InteracaoCliente.js";
 import type { Vendas } from "./Vendas.js";
 import type { EventoTreinamento } from "./EventoTreinamento.js";
 import type { FuncionariosConvidados } from "./FuncionariosConvidados.js";
+
 import type { Funcionario as FuncionarioType } from "./Funcionario.js"; // Recursivo
 import type { Perfil } from "./Perfil.js";
 
-// ===== Importações reais para decorators =====
 import { Cliente as ClienteEntity } from "./Cliente.js";
 import { InteracaoCliente as InteracaoEntity } from "./InteracaoCliente.js";
 import { Vendas as VendasEntity } from "./Vendas.js";
@@ -30,22 +30,22 @@ import { FuncionariosConvidados as ConvidadosEntity } from "./FuncionariosConvid
 import { Funcionario as FuncionarioEntity } from "./Funcionario.js";
 import { Perfil as PerfilEntity } from "./Perfil.js";
 
-@Entity("Funcionario") // ===== Nome da tabela =====
-@Unique(["email"]) // ===== Email único =====
+@Entity("Funcionario") 
+@Unique(["email"]) 
 export class Funcionario {
-  @PrimaryGeneratedColumn({ name: "funcionario_ID" }) // ===== PK =====
+  @PrimaryGeneratedColumn({ name: "funcionario_ID" })
   funcionario_ID!: number;
 
-  @Column({ name: "nome", type: "varchar", length: 100 }) // ===== Nome completo =====
+  @Column({ name: "nome", type: "varchar", length: 100 })
   nome!: string;
 
-  @Column({ name: "genero", type: "varchar", length: 10 }) // ===== Gênero =====
+  @Column({ name: "genero", type: "varchar", length: 10 }) 
   genero!: string;
 
-  @Column({ name: "endereco", type: "varchar", length: 255 }) // ===== Endereço =====
+  @Column({ name: "endereco", type: "varchar", length: 255 }) 
   endereco!: string;
 
-  @Column({ name: "numero_telefone", type: "varchar", length: 20 }) // ===== Telefone =====
+  @Column({ name: "numero_telefone", type: "varchar", length: 20 })
   numero_telefone!: string;
 
   @Column({ name: "cargo", type: "varchar", length: 50 }) // ===== Cargo =====
