@@ -150,7 +150,7 @@ const tab_data = [
   {
     title: "gestao",
     id: "gestaoRespostas",
-    route: "/GestaoFormularios",
+    route: "/gestaoFormularios",
     content: (active) => (
       <>
         <Image

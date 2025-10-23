@@ -51,8 +51,9 @@ export default function CicloDeVendas() {
 
     const fetchGetClientes = async () => {
         try {
+            const apiUrl = process.env.NEXT_PUBLIC_API_URL;
             const response = await axios.get(
-                "http://localhost:5000/funilVendas"
+                `${apiUrl}/funilVendas` 
             );
             const clientes = response.data.message;
 
