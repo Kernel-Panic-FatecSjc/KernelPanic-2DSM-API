@@ -1,13 +1,13 @@
+
 'use client';
 
 import React, { useState, useEffect } from 'react';
 import FullCalendar from '@fullcalendar/react';
 import timeGridPlugin from '@fullcalendar/timegrid';
+import listPlugin from '@fullcalendar/list';
 import interactionPlugin from '@fullcalendar/interaction';
 import styles from './Calendar.module.css';
 import axios from 'axios';
-
-
 
 const CalendarComponent = () => {
   const [showModal, setShowModal] = useState(false);
@@ -76,15 +76,16 @@ const CalendarComponent = () => {
   return (
     <div className={styles.container}>
       <FullCalendar
-        plugins={[timeGridPlugin, interactionPlugin]}
+        plugins={[timeGridPlugin, interactionPlugin, listPlugin]}
         initialView='timeGridWeek'
         slotMinTime='08:00:00'
         slotMaxTime='19:00:00'
-        height={600}
+        height={800}
         headerToolbar={{
           left: '',
           center: 'title',
-          right: 'prev,next today timeGridWeek,timeGridDay'
+          right: 'prev,next today timeGridWeek,timeGridDay,listWeek'
+
         }}
         locale='pt-br'
         events={arrayLembretes}
@@ -170,13 +171,7 @@ const CalendarComponent = () => {
             </div>
           </div>
         </div>
-      )}
-    </div>
-
-    
-  );
-
-  
+    );
 };
 
 export default CalendarComponent;

@@ -147,6 +147,46 @@ const tab_data = [
       </>
     ),
   },
+  {
+    title: "gestao",
+    id: "gestaoRespostas",
+    route: "/GestaoFormularios",
+    content: (active) => (
+      <>
+        <Image
+          src={
+            active ? "/images/iconfunilbranco.svg" : "/images/iconfunil.svg"
+          }
+          width={24}
+          height={25}
+          alt="Gestão de Formularios"
+          className={styles.icone}
+        />
+        <h3>Gestão dos Formulários</h3>
+      </>
+    ),
+  },
+   {
+    title: "dashboardsFormularios",
+    id: "dashboardsFormularios",
+    route: "/dashboardsFormularios",
+    content: (active) => (
+      <>
+        <Image
+          src={
+            active
+              ? "/images/iconclientebranco.svg"
+              : "/images/iconcliente.svg"
+          }
+          width={24}
+          height={25}
+          alt="Ícone de Cliente"
+          className={styles.icone}
+        />
+        <h3>Dashboards Formularios</h3>
+      </>
+    ),
+  },
 ];
 
 function LateralBar() {

@@ -2,7 +2,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  /* height: 90vh; */
   min-height: 100%;
   flex-direction: column;
   gap: 20px;

@@ -26,8 +26,9 @@ export default function Page() {
     useEffect(() => {
         const fetchClientes = async () => {
             try {
+                const apiUrl = process.env.NEXT_PUBLIC_API_URL;
                 const response = await axios.get(
-                    "http://localhost:5000/clientes/getClientes"
+                    `${apiUrl}/clientes/getClientes`
                 );
                 const clientesData = response.data.message || response.data;
                 setClientes(clientesData);
@@ -57,20 +58,15 @@ export default function Page() {
         console.log("Enviando os seguintes dados:", formData);
 
         try {
-            const response = await fetch("http://localhost:5000/clientes", {
-                method: "POST",
+            const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+
+            const response = await axios.post(`${apiUrl}/clientes`, formData, {
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify(formData),
             });
 
-            if (!response.ok) {
-                throw new Error(`Erro na requisição: ${response.statusText}`);
-            }
-
-            const result = await response.json();
-            console.log("Resposta do servidor:", result);
+            console.log("Resposta do servidor:", response.data);
             setMessage("Cadastro realizado com sucesso!");
 
             setNome("");
@@ -103,24 +99,20 @@ export default function Page() {
         console.log("Enviando os seeguintes dados:", formDataAdd);
 
         try {
-            const response = await fetch(
-                "http://localhost:5000/clientes/contato",
+            const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+
+            const response = await axios.post(
+                `${apiUrl}/clientes/contato`,
+                formDataAdd,
                 {
-                    method: "POST",
                     headers: {
                         "Content-Type": "application/json",
                     },
-                    body: JSON.stringify(formDataAdd),
                 }
             );
 
-            if (!response.ok) {
-                throw new Error(`Erro na requisição: ${response.statusText}`);
-            }
-
-            const result = await response.json();
-            console.log("Resposta do servidor:", result);
-            setMessage("Adição realizado com sucesso!");
+            console.log("Resposta do servidor:", response.data);
+            setMessage("Adição realizada com sucesso!");
 
             setTipoContato("email");
             setValorContato("");
