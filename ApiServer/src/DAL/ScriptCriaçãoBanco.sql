@@ -223,4 +223,3 @@ ALTER TABLE Vendas ADD CONSTRAINT Vendas_Funcionario FOREIGN KEY Vendas_Funciona
     REFERENCES Funcionario (funcionario_ID);
 
 -- End of file.
-

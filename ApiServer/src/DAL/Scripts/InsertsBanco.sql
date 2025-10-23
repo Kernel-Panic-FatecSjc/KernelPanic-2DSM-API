@@ -1,4 +1,4 @@
-USE newe_database;
+USE api2dsm;
 
 -- ======================
 -- SEED DE DADOS INICIAIS
