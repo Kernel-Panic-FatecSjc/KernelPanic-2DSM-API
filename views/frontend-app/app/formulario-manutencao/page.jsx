@@ -1,10 +1,12 @@
 'use client';
 import React from 'react'
 import styles from './App.module.css';
+import ProtectRoute from '../../components/ProtectRoute';
 
 
 function page() {
   return (
+    <ProtectRoute>
     <div className={styles.container}>
       <h2>Formulário de manutenção predial</h2>
       <p>
@@ -251,6 +253,7 @@ function page() {
     </div>
     <button type="submit" className={styles.buttonenviar}>Enviar</button>
     </div>
+    </ProtectRoute>
   );
 }
 

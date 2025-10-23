@@ -3,10 +3,12 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Select from 'react-select';
 import styles from './App.module.css';
+import ProtectRoute from '../../components/ProtectRoute';
 
 
 function page() {
   return (
+    <ProtectRoute>
     <div className={styles.container}>
       <div className={styles.content}>
         <h1 className={styles.title}>Checklist e Cadastro</h1>
@@ -50,6 +52,7 @@ function page() {
         </div>
       </div>
     </div>
+    </ProtectRoute>
   );
 }
 

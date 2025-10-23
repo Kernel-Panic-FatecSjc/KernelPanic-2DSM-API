@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./App.module.css";
 import axios from "axios";
+import ProtectRoute from "../../components/ProtectRoute";
 
 export default function Page() {
     const [nome, setNome] = useState("");
@@ -136,6 +137,7 @@ export default function Page() {
     };
 
     return (
+        <ProtectRoute>
         <div className={styles.conteudo}>
             <div className={styles.container}>
                 <h1>Cadastro de Clientes</h1>
@@ -386,5 +388,6 @@ export default function Page() {
                 </form>
             </div>
         </div>
+        </ProtectRoute>
     );
 }
