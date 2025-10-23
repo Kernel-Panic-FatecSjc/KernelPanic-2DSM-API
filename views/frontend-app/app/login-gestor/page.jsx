@@ -5,12 +5,18 @@ import { useRouter } from "next/navigation";
 import Login from "../../components/layout/Login/login";
 import { useState } from "react";
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 736e26e (feat(KER-72): Salvamento de Token, Comunicação com o BackEnd e proteção das Rotas do Front)
 import { useAuth } from "../../context/AuthContext"; // 1. IMPORTE O USEAUTH
 
 export default function Page() {
   const router = useRouter();
   const { login } = useAuth(); // 2. PEGUE A FUNÇÃO LOGIN DO CONTEXTO
+<<<<<<< HEAD
+>>>>>>> 736e26e (feat(KER-72): Salvamento de Token, Comunicação com o BackEnd e proteção das Rotas do Front)
+=======
 >>>>>>> 736e26e (feat(KER-72): Salvamento de Token, Comunicação com o BackEnd e proteção das Rotas do Front)
 
   // Seus estados estão perfeitos
@@ -19,6 +25,7 @@ export default function Page() {
   const [erro, setErro] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 export default function page(){
       const [mostrarSenha, setMostrarSenha] = useState(false);
@@ -36,6 +43,10 @@ export default function page(){
   console.log("Bem Vindo Gestor");
 >>>>>>> 736e26e (feat(KER-72): Salvamento de Token, Comunicação com o BackEnd e proteção das Rotas do Front)
 
+=======
+  console.log("Bem Vindo Gestor");
+
+>>>>>>> 736e26e (feat(KER-72): Salvamento de Token, Comunicação com o BackEnd e proteção das Rotas do Front)
   const handleSubmit = async (event) => {
     event.preventDefault();
     setIsLoading(true);
@@ -151,6 +162,7 @@ export default function page(){
         </form>
       </div>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
               <form className={styles.form}>
@@ -200,6 +212,11 @@ export default function page(){
 
 
 }
+=======
+    </div>
+  );
+}
+>>>>>>> 736e26e (feat(KER-72): Salvamento de Token, Comunicação com o BackEnd e proteção das Rotas do Front)
 =======
     </div>
   );
