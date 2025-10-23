@@ -1,12 +1,12 @@
 
 ## 🔴 Sprint 3 - Setor Administrativo
 
-| Rank | Prioridade | User Story | Estimativa | Sprint | Requisitos do Parceiro |
-| :--: | :--------: | :--- | :---: | :----: | :--- |
-| 1 | 🔴 Alta | 3 | Eu como administrativo, quero notificações automáticas de eventos com link, confirmação ou recusa justificada, conclusão após participação, formulário de avaliação e documento padrão de registro para gerenciar todos os eventos de forma rápida e confiável | 8 | Sistema de eventos com notificações, formulários e geração automática de relatórios | ❌ |
-| 2 | 🔴 Alta | 3 | Eu como gestor, quero gerar relatórios específicos da minha área (comercial, operacional ou administrativa) para acompanhar indicadores e otimizar processos internos | 8 | Integração de dados comerciais e operacionais na mesma plataforma | ❌ |
-| 3 | 🟠 Média | 3 | Eu como cliente, quero visualizar a quantidade de funcionários e agregados, além dos veículos cadastrados para realizar uma análise de perfil | 5 | Cadastro de funcionários, agregados e veículos com perfis atualizados | ❌ |
-| 4 | 🟡 Baixa | 3 | Eu como usuário, quero que a plataforma seja responsiva para mobile, para que eu consiga acessar e utilizar todas as funcionalidades pelo celular ou tablet | 4 | Responsividade da plataforma para dispositivos móveis | ❌ |
+| Rank | Prioridade | Sprint | User Story | Estimativa | Requisitos do Parceiro |
+| :--: | :--------: | :----: | :-------- | :--------: | :---------------------- |
+| 1 | 🔴 Alta | 3 | Eu como administrativo, quero receber notificações automáticas de eventos com link, confirmação ou recusa justificada, conclusão após participação, formulário de avaliação e documento padrão de registro, para gerenciar todos os eventos de forma rápida e confiável | 8 | Sistema de eventos com notificações, formulários e geração automática de relatórios |
+| 2 | 🔴 Alta | 3 | Eu como gestor, quero gerar relatórios específicos da minha área (comercial, operacional ou administrativa), para acompanhar indicadores e otimizar processos internos | 8 | Integração de dados comerciais e operacionais na mesma plataforma |
+| 3 | 🟠 Média | 3 | Eu como cliente, quero visualizar a quantidade de funcionários e agregados, além dos veículos cadastrados, para realizar uma análise de perfil | 5 | Cadastro de funcionários, agregados e veículos com perfis atualizados |
+| 4 | 🟡 Baixa | 3 | Eu como usuário, quero que a plataforma seja responsiva para mobile, para conseguir acessar e utilizar todas as funcionalidades pelo celular ou tablet | 4 | Responsividade da plataforma para dispositivos móveis |
 
 ---
 

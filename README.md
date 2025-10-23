@@ -25,38 +25,38 @@ O sistema tem como objetivo principal centralizar todos os processos e dados da 
 ## 📋 Backlog do Produto
 | Rank | Prioridade | Sprint | User Story | Estimativa | Requisitos do Parceiro | Status |
 | :--: | :--------: | :----: | :-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :--------: | :-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :--: |
-| 1 | 🔴 Alta | 1 | Eu como comercial, quero realizar o cadastro completo de clientes e departamento responsável, para incluí-los no sistema | 4 | Sistema de cadastro de clientes com campos completos | ✅ |
-| 2 | 🔴 Alta | 1 | Eu como comercial quero poder gerenciar os clientes cadastrados, para ver, atualizar e deletar clientes | 6 | Sistema de cadastro de clientes com campos completos | ✅ |
-| 3 | 🔴 Alta | 2 | Eu como gestor, quero unificar e padronizar todos os checklists e cadastros atualmente utilizados em ferramentas distintas em uma única plataforma para centralização das informações | 5 | Centralização, padronização e unificação de checklists e cadastros | ✅ |
+| 1 | 🔴 Alta | 1 | Eu como comercial, quero realizar o cadastro completo de clientes e do departamento responsável, para incluí-los no sistema | 4 | Sistema de cadastro de clientes com campos completos | ✅ |
+| 2 | 🔴 Alta | 1 | Eu como comercial, quero gerenciar os clientes cadastrados, para visualizar, atualizar e deletar clientes | 6 | Sistema de cadastro de clientes com campos completos | ✅ |
+| 3 | 🔴 Alta | 2 | Eu como gestor, quero unificar e padronizar todos os checklists e cadastros atualmente utilizados em ferramentas distintas, para centralizar as informações | 5 | Centralização, padronização e unificação de checklists e cadastros | ✅ |
 | 4 | 🔴 Alta | 2 | Eu como gestor, quero eleger as permissões customizáveis que cada liderado terá dentro do sistema, para controlar o nível de acesso conforme a função de cada colaborador | 8 | Controle de permissões customizáveis por usuário | ✅ |
-| 5 | 🔴 Alta | 3 |Eu como administrativo, quero notificações automáticas de eventos com link, confirmação ou recusa justificada, conclusão após participação, formulário de avaliação e documento padrão de registro para gerenciar todos os eventos de forma rápida e confiável| 8 | Sistema de eventos com notificações, formulários e geração automática de relatórios | ❌ |
-| 6 | 🔴 Alta | 3 | Eu como gestor, quero gerar relatórios específicos da minha área (comercial, operacional ou administrativa) para acompanhar indicadores e otimizar processos internos | 8 | Integração de dados comerciais e operacionais na mesma plataforma | ❌ |
-| 7 | 🟠 Média | 1 | Eu como comercial, quero ver e classificar meus clientes em um funil de vendas com classificação: Prospects, Inicial, Potencial, Manutenção, Em Negociação, Follow Up, Vendas e não vendas para visualizar insights sobre o ciclo de vendas do cliente | 8 | Funil de vendas com etapas definidas e classificações de clientes | ✅ |
-| 8 | 🟠 Média | 2 | Eu como cliente, quero acessar informações da parte comercial e operacional em um só ambiente para amplo acesso aos dados e com esses dados ter insights | 6 | Integração de dados comerciais e operacionais na mesma plataforma | ✅ |
-| 9 | 🟠 Média | 2 | Eu como cliente, quero cadastrar agregados com devolutiva automática após a conclusão do processo de cadastro para facilitar o controle e acompanhamento dos cadastros | 6 | Cadastro de agregados com feedback automático | ✅ |
-| 10 | 🟠 Média | 2 | Eu como cliente, quero poder calcular a cotação de um frete de forma automática para agilizar a criação de cotações e eliminar cálculos manuais | 4 | Cotação com cálculo automático de custos, valores e adicionais | ✅ |
-| 11 | 🟠 Média | 3 | Eu como cliente, quero visualizar a quantidade de funcionários e agregados, além dos veículos cadastrados para realizar uma análise de perfil | 5 | Cadastro de funcionários, agregados e veículos com perfis atualizados | ❌ |
-| 12 | 🟡 Baixa | 1 | Eu como gestor comercial, quero poder visualizar relatórios e gráficos quantitativos de interações, vendas efetuadas, clientes cadastrados, clientes por cidade e segmento, com filtros por dia, mês ou ano, para medir o desempenho de meus vendedores | 7 | Relatórios e dashboards com filtros e agrupamentos customizáveis | ✅ |
+| 5 | 🔴 Alta | 3 | Eu como administrativo, quero receber notificações automáticas de eventos com link, confirmação ou recusa justificada, conclusão após participação, formulário de avaliação e documento padrão de registro, para gerenciar todos os eventos de forma rápida e confiável | 8 | Sistema de eventos com notificações, formulários e geração automática de relatórios | ❌ |
+| 6 | 🔴 Alta | 3 | Eu como gestor, quero gerar relatórios específicos da minha área (comercial, operacional ou administrativa), para acompanhar indicadores e otimizar processos internos | 8 | Integração de dados comerciais e operacionais na mesma plataforma | ❌ |
+| 7 | 🟠 Média | 1 | Eu como comercial, quero ver e classificar meus clientes em um funil de vendas com as etapas: Prospects, Inicial, Potencial, Manutenção, Em Negociação, Follow Up, Vendas e Não Vendas, para visualizar insights sobre o ciclo de vendas do cliente | 8 | Funil de vendas com etapas definidas e classificações de clientes | ✅ |
+| 8 | 🟠 Média | 2 | Eu como operacional e comercial, quero acessar informações da parte comercial e operacional em um só ambiente, para obter insights a partir desses dados | 6 | Integração de dados comerciais e operacionais na mesma plataforma | ✅ |
+| 9 | 🟠 Média | 2 | Eu como operacional, quero cadastrar agregados com devolutiva automática após a conclusão do processo de cadastro, para facilitar o controle e acompanhamento dos cadastros | 6 | Cadastro de agregados com feedback automático | ✅ |
+| 10 | 🟠 Média | 2 | Eu como operacional e comercial, quero calcular a cotação de um frete de forma automática, para agilizar a criação de cotações e eliminar cálculos manuais | 4 | Cotação com cálculo automático de custos, valores e adicionais | ✅ |
+| 11 | 🟠 Média | 3 | Eu como administrativo, quero visualizar a quantidade de funcionários e agregados, além dos veículos cadastrados, para realizar uma análise de perfil | 5 | Cadastro de funcionários, agregados e veículos com perfis atualizados | ❌ |
+| 12 | 🟡 Baixa | 1 | Eu como gestor, quero visualizar relatórios e gráficos quantitativos de interações, vendas efetuadas, clientes cadastrados, clientes por cidade e segmento, com filtros por dia, mês ou ano, para medir o desempenho de meus vendedores | 7 | Relatórios e dashboards com filtros e agrupamentos customizáveis | ✅ |
 | 13 | 🟡 Baixa | 1 | Eu como comercial, quero agendar tarefas e configurar lembretes, para acompanhar os próximos contatos com clientes | 6 | Sistema de agendamento e lembretes integrado ao cadastro e histórico de clientes | ✅ |
-| 14 | 🟡 Baixa | 1 | Eu como comercial, quero medir o rendimento e a taxa de conversão das visitas em vendas do setor comercial, para medir o desempenho dos vendedores | 6 | Relatórios de desempenho do setor comercial com indicadores de conversão e faturamento | ✅ |
+| 14 | 🟡 Baixa | 1 | Eu como comercial, quero medir o rendimento e a taxa de conversão das visitas em vendas do setor comercial, para avaliar o desempenho dos vendedores | 6 | Relatórios de desempenho do setor comercial com indicadores de conversão e faturamento | ✅ |
 | 15 | 🟡 Baixa | 1 | Eu como comercial, quero gerenciar o histórico completo das interações com clientes e relatórios detalhados das interações, para possibilitar futura auditoria | 5 | Visualização do histórico completo de interações com o cliente | ✅ |
-| 16 | 🟡 Baixa | 3 | Eu como usuário, quero que a plataforma seja responsiva para mobile, para que eu consiga acessar e utilizar todas as funcionalidades pelo celular ou tablet | 4 | Responsividade da plataforma para dispositivos móveis | ❌ |
+| 16 | 🟡 Baixa | 3 | Eu como usuário, quero que a plataforma seja responsiva para mobile, para conseguir acessar e utilizar todas as funcionalidades pelo celular ou tablet | 4 | Responsividade da plataforma para dispositivos móveis | ❌ |
 
-
-## ⏳ Status do projeto: 2/3 Sprint
-
----
 
 ## 📅 Cronograma de Sprints <a id="sprint"></a>
 
 | Sprint          |    Período    | Documentação                                     |
 | --------------- | :-----------: | ------------------------------------------------ |
-| **SPRINT 1** | 08/09 - 28/09 | [Sprint 1 Docs](docs/sprintUm.md) |
-| **SPRINT 2** | 06/10 - 26/10 | [Sprint 2 Docs](docs/sprintDois.md) |
-| **SPRINT 3** | 03/11 - 23/11 | [Sprint 3 Docs](docs\sprintTres.md) |
-
+| **SPRINT 1** | 08/09 - 28/09 | [Sprint 1 Docs](docs/Sprints/sprintUm.md) |
+| **SPRINT 2** | 06/10 - 26/10 | [Sprint 2 Docs](docs/Sprints/sprintDois.md) |
+| **SPRINT 3** | 03/11 - 23/11 | [Sprint 3 Docs](docs/Sprints/sprintTres.md) |
 
 ---
+
+## ⏳ Status do projeto: 2/3 Sprint
+
+---
+
 
 ## 🟢 Sprint 1 - Setor Comercial
 <details>
@@ -69,14 +69,14 @@ O sistema tem como objetivo principal centralizar todos os processos e dados da 
 [Assistir no YouTube](https://youtu.be/ywFObLK5jC4)
 
 | Rank | Prioridade | Sprint | User Story | Estimativa | Requisitos do Parceiro |
-| :--: | :--------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :--------: | :----: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| 1 | 🔴 Alta | 1 | Eu como comercial, quero realizar o cadastro completo de clientes e departamento responsável, para inclui-los no sistema | 4 | Sistema de cadastro de clientes com campos completos | ✅ |
-| 2 | 🔴 Alta | 1 | Eu como comercial quero poder gerenciar os clientes cadastrados, para ver, atualizar e deletar clientes | 6 | Sistema de cadastro de clientes com campos completos | ✅ |
-| 3 | 🟠 Média | 1 | Eu como comercial, quero ver e classificar meus clientes em um funil de vendas com classificação: Prospects, Inicial, Potencial, Manutenção, Em Negociação, Follow Up, Vendas e não vendas para visualizar insights sobre o ciclo de vendas do cliente | 8 | Funil de vendas com etapas definidas e classificações de clientes | ✅ |
-| 4 | 🟠 Média | 1 | Eu como gestor comercial, quero poder visualizar relatórios e gráficos quantitativos de interações, vendas efetuadas, clientes cadastrados, clientes por cidade e segmento, com filtros por dia, mês ou ano, afim de medir o desempenho de meus vendedores | 7 | Relatórios e dashboards com filtros e agrupamentos customizáveis | ✅ |
-| 5 | 🟡 Baixa | 1 | Eu como comercial, quero agendar tarefas e configurar lembretes, afim de acompanhar próximos contatos com clientes | 6 | Sistema de agendamento e lembretes integrado ao cadastro e histórico de clientes | ✅ |
-| 6 | 🟡 Baixa | 1 | Eu como comercial, quero medir o rendimento e a taxa de conversão das visitas em vendas do setor comercial, para medir o desempenho dos vendedores | 6 | Relatórios de desempenho do setor comercial com indicadores de conversão e faturamento | ✅ |
-| 7 | 🟡 Baixa | 1 | Eu como comercial, quero gerenciar o histórico completo das interações com clientes e relatórios detalhados das interações, para possibilitar futura auditoria | 5 | Visualização do histórico completo de interações com o cliente | ✅ |
+| :--: | :--------: | :----: | :-------- | :--------: | :---------------------- |
+| 1 | 🔴 Alta | 1 | Eu como comercial, quero realizar o cadastro completo de clientes e do departamento responsável, para incluí-los no sistema | 4 | Sistema de cadastro de clientes com campos completos |
+| 2 | 🔴 Alta | 1 | Eu como comercial, quero gerenciar os clientes cadastrados, para visualizar, atualizar e deletar informações dos clientes | 6 | Sistema de cadastro de clientes com campos completos |
+| 3 | 🟠 Média | 1 | Eu como comercial, quero classificar meus clientes em um funil de vendas com as etapas: Prospects, Inicial, Potencial, Manutenção, Em Negociação, Follow Up, Vendas e Não Vendas, para visualizar insights sobre o ciclo de vendas do cliente | 8 | Funil de vendas com etapas definidas e classificações de clientes |
+| 4 | 🟠 Média | 1 | Eu como gestor comercial, quero visualizar relatórios e gráficos quantitativos de interações, vendas efetuadas, clientes cadastrados, clientes por cidade e segmento, com filtros por dia, mês ou ano, para medir o desempenho dos meus vendedores | 7 | Relatórios e dashboards com filtros e agrupamentos customizáveis |
+| 5 | 🟡 Baixa | 1 | Eu como comercial, quero agendar tarefas e configurar lembretes, para acompanhar os próximos contatos com clientes | 6 | Sistema de agendamento e lembretes integrado ao cadastro e histórico de clientes |
+| 6 | 🟡 Baixa | 1 | Eu como comercial, quero medir o rendimento e a taxa de conversão das visitas em vendas do setor comercial, para avaliar o desempenho dos vendedores | 6 | Relatórios de desempenho do setor comercial com indicadores de conversão e faturamento |
+| 7 | 🟡 Baixa | 1 | Eu como comercial, quero gerenciar o histórico completo das interações com clientes e relatórios detalhados das interações, para possibilitar futura auditoria | 5 | Visualização do histórico completo de interações com o cliente |
 
 </details>
 
@@ -85,26 +85,27 @@ O sistema tem como objetivo principal centralizar todos os processos e dados da 
 <details>
   <summary><b>Clique aqui</b></summary>
 
-| Rank | Prioridade |  User Story | Estimativa | Sprint |  Requisitos do Parceiro |
-| :--: | :--------: | :------------------------------------------------------------------------------------------------------------------------------------: | :--------: | :----: | :------------------------------------------------------------------------------------------------------------------ |
-| 1 | 🔴 Alta | Eu como gestor, quero unificar e padronizar todos os checklists e cadastros atualmente utilizados em ferramentas distintas em uma única plataforma | 5 | 2 | Centralização, padronização e unificação de checklists e cadastros |
-| 2 | 🔴 Alta | Eu como gestor, quero eleger as permissões customizáveis que cada liderado terá dentro do sistema, para controlar o nível de acesso conforme a função de cada colaborador | 8 | 2 | Controle de permissões customizáveis por usuário |
-| 3 | 🟠 Média | Eu como cliente, quero acessar informações da parte comercial e operacional em um só ambiente para amplo acesso aos dados e com esses dados ter insights | 6 | 2 | Integração de dados comerciais e operacionais na mesma plataforma |
-| 4 | 🟠 Média | Eu como cliente, quero cadastrar agregados com devolutiva automática após a conclusão do processo de cadastro para facilitar o controle e acompanhamento dos cadastros| 6 | 2 | Cadastro de agregados com feedback automático |
-| 5 | 🟠 Média | Eu como cliente, quero poder calcular a cotação de um frete de forma automática para agilizar a criação de cotações e eliminar cálculos manuais | 4 | 2 | Cotação com cálculo automático de custos, valores e adicionais | 
+| Rank | Prioridade | Sprint | User Story | Estimativa | Requisitos do Parceiro |
+| :--: | :--------: | :----: | :-------- | :--------: | :---------------------- |
+| 1 | 🔴 Alta | 2 | Eu como gestor, quero unificar e padronizar todos os checklists e cadastros atualmente utilizados em ferramentas distintas, para centralizá-los em uma única plataforma | 5 | Centralização, padronização e unificação de checklists e cadastros |
+| 2 | 🔴 Alta | 2 | Eu como gestor, quero eleger as permissões customizáveis que cada liderado terá dentro do sistema, para controlar o nível de acesso conforme a função de cada colaborador | 8 | Controle de permissões customizáveis por usuário |
+| 3 | 🟠 Média | 2 | Eu como cliente, quero acessar informações da parte comercial e operacional em um só ambiente, para obter insights a partir desses dados | 6 | Integração de dados comerciais e operacionais na mesma plataforma |
+| 4 | 🟠 Média | 2 | Eu como cliente, quero cadastrar agregados com devolutiva automática após a conclusão do processo de cadastro, para facilitar o controle e acompanhamento dos cadastros | 6 | Cadastro de agregados com feedback automático |
+| 5 | 🟠 Média | 2 | Eu como cliente, quero calcular a cotação de um frete de forma automática, para agilizar a criação de cotações e eliminar cálculos manuais | 4 | Cotação com cálculo automático de custos, valores e adicionais |
 
 </details>
 
+---
 ## 🔴 Sprint 3 - Setor Administrativo
 <details>
   <summary><b>Clique aqui</b></summary>
 
 | Rank | Prioridade | Sprint | User Story | Estimativa | Requisitos do Parceiro |
-| :--: | :--------: | :-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :--------: | :----: | :---------------------------------------------------------------------------------: |
-| 1 | 🔴 Alta | Eu como administrativo, quero notificações automáticas de eventos com link, confirmação ou recusa justificada, conclusão após participação, formulário de avaliação e documento padrão de registro para gerenciar todos os eventos de forma rápida e confiável | 8 | 3 | Sistema de eventos com notificações, formulários e geração automática de relatórios |
-| 2 | 🔴 Alta |Eu como gestor, quero gerar relatórios específicos da minha área (comercial, operacional ou administrativa) para acompanhar indicadores e otimizar processos internos | 8 | 3 | Integração de dados comerciais e operacionais na mesma plataforma |
-| 3 | 🟠 Média  | Eu como cliente, quero visualizar a quantidade de funcionários e agregados, além dos veículos cadastrados para realizar uma análise de perfil | 5 | 3 | Cadastro de funcionários, agregados e veículos com perfis atualizados |
-| 4 | 🟡 Baixa | Eu como usuário, quero que a plataforma seja responsiva para mobile, para que eu consiga acessar e utilizar todas as funcionalidades pelo celular ou tablet | 4 | 3 | Responsividade da plataforma para dispositivos móveis |
+| :--: | :--------: | :----: | :-------- | :--------: | :---------------------- |
+| 1 | 🔴 Alta | 3 | Eu como administrativo, quero receber notificações automáticas de eventos com link, confirmação ou recusa justificada, conclusão após participação, formulário de avaliação e documento padrão de registro, para gerenciar todos os eventos de forma rápida e confiável | 8 | Sistema de eventos com notificações, formulários e geração automática de relatórios |
+| 2 | 🔴 Alta | 3 | Eu como gestor, quero gerar relatórios específicos da minha área (comercial, operacional ou administrativa), para acompanhar indicadores e otimizar processos internos | 8 | Integração de dados comerciais e operacionais na mesma plataforma |
+| 3 | 🟠 Média | 3 | Eu como cliente, quero visualizar a quantidade de funcionários e agregados, além dos veículos cadastrados, para realizar uma análise de perfil | 5 | Cadastro de funcionários, agregados e veículos com perfis atualizados |
+| 4 | 🟡 Baixa | 3 | Eu como usuário, quero que a plataforma seja responsiva para mobile, para conseguir acessar e utilizar todas as funcionalidades pelo celular ou tablet | 4 | Responsividade da plataforma para dispositivos móveis |
 
 </details>
 
@@ -147,7 +148,10 @@ O sistema tem como objetivo principal centralizar todos os processos e dados da 
 │   │   │   ├── 📁 Repository
 │   │   │   ├── 📁 Scripts
 ├── 📁 docs
-│   ├── 📁 modeloBanco
+│   ├── 📁 Contribution Rules
+│   ├── 📁 Data Base Model
+│   ├── 📁 Sprints
+│   ├── 📁 Value Proposition Canvas
 ├── 📁 views
 │   ├── 📁 frontend-app
 │   │   ├── 📁 app
@@ -222,4 +226,4 @@ O sistema tem como objetivo principal centralizar todos os processos e dados da 
 | <img src="https://avatars.githubusercontent.com/u/144951743?v=4" width="75px"> | Dev Team      | Miguel Tomio Toledo Nonaka |  [Linkedin](https://www.linkedin.com/in/miguel-nonaka)  | [GitHub](https://github.com/miguelnonaka)    |
 | <img src="https://avatars.githubusercontent.com/u/102493225?v=4" width="75px"> | Dev Team      | Paula Emy Tamay |  [Linkedin](https://www.linkedin.com/in/paula-tamay-7a168228a/)  | [GitHub](https://github.com/PaulaEmy)    |
 | <img src="https://avatars.githubusercontent.com/u/163305926?v=4" width="75px"> | Dev Team      | Vinícius da Silva Leite |  [Linkedin](https://www.linkedin.com/in/vinícius-leite-4792b02ba/)  | [GitHub](https://github.com/vinislvleite)    |
-| <img src="https://avatars.githubusercontent.com/u/180225838?v=4" width="75px"> | Dev Team      | Vinícius Kinoshi |  [Linkedin](https://www.linkedin.com/in/vinícius-gregório-406640232/)  | [GitHub](https://github.com/Vinicius-Konishi)    |
+|

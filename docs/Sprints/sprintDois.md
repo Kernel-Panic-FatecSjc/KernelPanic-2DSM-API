@@ -1,13 +1,13 @@
 
 # Backlog da Segunda Sprint 
 
-| Rank | Prioridade | User Story | Estimativa | Sprint | Requisitos do Parceiro |
-| :--: | :--------: | :--- | :---: | :----: | :--- |
-| 1 | 🔴 Alta | Eu como gestor, quero unificar e padronizar todos os checklists e cadastros atualmente utilizados em ferramentas distintas em uma única plataforma | 5 | 2 | Centralização, padronização e unificação de checklists e cadastros |
-| 2 | 🔴 Alta | Eu como gestor, quero eleger as permissões customizáveis que cada liderado terá dentro do sistema, para controlar o nível de acesso conforme a função de cada colaborador | 8 | 2 | Controle de permissões customizáveis por usuário |
-| 3 | 🟠 Média | Eu como cliente, quero acessar informações da parte comercial e operacional em um só ambiente para amplo acesso aos dados e com esses dados ter insights | 6 | 2 | Integração de dados comerciais e operacionais na mesma plataforma |
-| 4 | 🟠 Média | Eu como cliente, quero cadastrar agregados com devolutiva automática após a conclusão do processo de cadastro para facilitar o controle e acompanhamento dos cadastros | 6 | 2 | Cadastro de agregados com feedback automático |
-| 5 | 🟠 Média | Eu como cliente, quero poder calcular a cotação de um frete de forma automática para agilizar a criação de cotações e eliminar cálculos manuais | 4 | 2 | Cotação com cálculo automático de custos, valores e adicionais | 
+| Rank | Prioridade | Sprint | User Story | Estimativa | Requisitos do Parceiro |
+| :--: | :--------: | :----: | :-------- | :--------: | :---------------------- |
+| 1 | 🔴 Alta | 2 | Eu como gestor, quero unificar e padronizar todos os checklists e cadastros atualmente utilizados em ferramentas distintas, para centralizá-los em uma única plataforma | 5 | Centralização, padronização e unificação de checklists e cadastros |
+| 2 | 🔴 Alta | 2 | Eu como gestor, quero eleger as permissões customizáveis que cada liderado terá dentro do sistema, para controlar o nível de acesso conforme a função de cada colaborador | 8 | Controle de permissões customizáveis por usuário |
+| 3 | 🟠 Média | 2 | Eu como cliente, quero acessar informações da parte comercial e operacional em um só ambiente, para obter insights a partir desses dados | 6 | Integração de dados comerciais e operacionais na mesma plataforma |
+| 4 | 🟠 Média | 2 | Eu como cliente, quero cadastrar agregados com devolutiva automática após a conclusão do processo de cadastro, para facilitar o controle e acompanhamento dos cadastros | 6 | Cadastro de agregados com feedback automático |
+| 5 | 🟠 Média | 2 | Eu como cliente, quero calcular a cotação de um frete de forma automática, para agilizar a criação de cotações e eliminar cálculos manuais | 4 | Cotação com cálculo automático de custos, valores e adicionais |
 
 ---
 
