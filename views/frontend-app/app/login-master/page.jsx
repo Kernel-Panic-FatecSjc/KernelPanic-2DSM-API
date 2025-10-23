@@ -5,6 +5,10 @@ import { useRouter } from "next/navigation";
 import Login from "../../components/layout/Login/login";
 import { useState } from "react";
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+import { useAuth } from "../../context/AuthContext"; // 1. IMPORTE O USEAUTH
+>>>>>>> 736e26e (feat(KER-72): Salvamento de Token, Comunicação com o BackEnd e proteção das Rotas do Front)
 =======
 import { useAuth } from "../../context/AuthContext"; // 1. IMPORTE O USEAUTH
 >>>>>>> 736e26e (feat(KER-72): Salvamento de Token, Comunicação com o BackEnd e proteção das Rotas do Front)
@@ -19,6 +23,7 @@ export default function Page() {
   const [erro, setErro] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 export default function page(){
       const router = useRouter();
@@ -36,6 +41,10 @@ export default function page(){
   console.log("Bem Vindo Master");
 >>>>>>> 736e26e (feat(KER-72): Salvamento de Token, Comunicação com o BackEnd e proteção das Rotas do Front)
 
+=======
+  console.log("Bem Vindo Master");
+
+>>>>>>> 736e26e (feat(KER-72): Salvamento de Token, Comunicação com o BackEnd e proteção das Rotas do Front)
   // Função para lidar com o envio do formulário
   const handleSubmit = async (event) => {
     event.preventDefault(); // Impede o recarregamento padrão da página
@@ -161,6 +170,7 @@ export default function page(){
         </form>
       </div>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
               <form className={styles.form}>
@@ -209,6 +219,10 @@ export default function page(){
 
 
 
+=======
+    </div>
+  );
+>>>>>>> 736e26e (feat(KER-72): Salvamento de Token, Comunicação com o BackEnd e proteção das Rotas do Front)
 =======
     </div>
   );
