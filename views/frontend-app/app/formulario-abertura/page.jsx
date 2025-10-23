@@ -6,7 +6,6 @@ import { useRouter } from 'next/navigation';
 function Page() {
   const router = useRouter();
 
-  // CONST CORRIGIDO - com o campo "acendeuLuzesArmazem" adicionado
   const [form, setForm] = useState({
     qmPreenchendo: '',
     dataAberturaEmpresa: '',
@@ -15,7 +14,7 @@ function Page() {
     abriuPortaRolante: false,
     desbloqueouAlarme: false,
     apagouLuzesArmazem: false,
-    acendeuLuzesArmazem: false, // CAMPO ADICIONADO
+    acendeuLuzesArmazem: false,
     acendeuLuzesOperacional: false,
     ligouArCondicionado: false,
     ligouTVCameras: false,
@@ -39,28 +38,57 @@ function Page() {
     }));
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await fetch('http://localhost:3000/checklist/abertura', {
+    const handleSubmit = async (event) => {
+      event.preventDefault();
+
+      const dadosParaEnviar = {
+      tipo: "abertura",
+      respostas: { ...form },
+      path_img: null,
+      };
+
+      try {
+      const response = await fetch('http://localhost:5000/checklist/abertura', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(dadosParaEnviar),
       });
 
       const data = await response.json();
+      console.log('✅ Resposta do servidor:', data);
 
-      if (response.ok) {
-        alert('Checklist de abertura enviado com sucesso!');
-        router.push('/');
-      } else {
-        alert(`Erro ao enviar: ${data.error}`);
-      }
-    } catch (error) {
-      console.error('Erro ao enviar formulário:', error);
-      alert('Falha ao conectar com o servidor');
-    }
-  };
+      alert("Checklist enviado com sucesso!");
+      setForm({
+        qmPreenchendo: '',
+        dataAberturaEmpresa: '',
+        abriuEmpresa: false,
+        abriuPortaoSocial: false,
+        abriuPortaRolante: false,
+        desbloqueouAlarme: false,
+        apagouLuzesArmazem: false,
+        acendeuLuzesArmazem: false,
+        acendeuLuzesOperacional: false,
+        ligouArCondicionado: false,
+        ligouTVCameras: false,
+        ligouTVDashBoard: false,
+        coletouChavesChaveiro: false,
+        abriuPortaBanheiro: false,
+        removeuCadeadoPortao1: false,
+        removeuCadeadoPortao2: false,
+        colocouConeEstacionamentoPCD: false,
+        ligouTomadaTirouPlasticoBebedouro: false,
+        colocouTapetesDevidosLugares: false,
+        fezCafe: false,
+        observacao: '',
+      });
+
+      } catch (error) {
+        console.error('❌ Erro ao enviar checklist:', error);
+        alert("Erro ao enviar, tente novamente");
+        }
+      };
 
   return (
     <div className={styles.container}>
