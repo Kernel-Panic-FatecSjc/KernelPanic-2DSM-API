@@ -1,0 +1,258 @@
+.conteudo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f5f5f5;
+    padding: 20px;
+}
+
+.containerCentral {
+    width: 95%;
+    max-width: 1200px;
+    background-color: white;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+    margin-bottom: 50px;
+}
+
+.titulo {
+    font-size: 32px;
+    font-weight: 600;
+    color: #1F4AF4;
+    margin: 0 0 8px 0;
+}
+
+.subtitulo {
+    font-size: 14px;
+    color: #999;
+    margin: 0;
+}
+
+.cardsRow {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.toolCard {
+    background-color: #E8F0FF;
+    border-radius: 16px;
+    padding: 40px 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid #E8F0FF;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.toolCard:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(89, 50, 234, 0.15);
+    border-color: #5932EA;
+}
+
+.cardIcon {
+    width: 70px;
+    height: 70px;
+    background-color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.cardContent {
+    flex: 1;
+}
+
+.cardTitle {
+    font-size: 20px;
+    font-weight: 600;
+    color: #000;
+    margin: 0 0 8px 0;
+}
+
+.cardDescription {
+    font-size: 14px;
+    color: #666;
+    margin: 0;
+    line-height: 1.5;
+}
+
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.modalContent {
+    background-color: #fff;
+    padding: 40px 50px;
+    border-radius: 16px;
+    width: 600px;
+    max-width: 90%;
+    max-height: 85vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.25);
+    animation: slideUp 0.3s ease-out;
+}
+
+.modalContent::-webkit-scrollbar {
+    width: 8px;
+}
+
+.modalContent::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+}
+
+.closeButton {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    border: none;
+    background: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #666;
+    font-weight: bold;
+    transition: all 0.2s ease;
+}
+
+.closeButton:hover {
+    color: #ff3b3b;
+    transform: scale(1.1);
+}
+
+.modalTitle {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #000;
+    text-align: center;
+}
+
+.modalSubtitle {
+    text-align: center;
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 30px;
+}
+
+.formGroup {
+    margin-bottom: 20px;
+}
+
+.formLabel {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+    font-size: 16px;
+    color: #333;
+}
+
+.formInput,
+.formSelect,
+.formTextarea {
+    width: 100%;
+    padding: 12px 15px;
+    border-radius: 8px;
+    border: 1px solid #9197b3;
+    font-size: 15px;
+    outline: none;
+    transition: all 0.3s ease;
+    background-color: white;
+    color: #000;
+}
+
+.formInput:focus,
+.formSelect:focus,
+.formTextarea:focus {
+    border-color: #5932EA;
+    box-shadow: 0 0 0 3px rgba(89, 50, 234, 0.15);
+}
+
+.formTextarea {
+    resize: vertical;
+    font-family: inherit;
+}
+
+.buttonGroup {
+    display: flex;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.btnCancel {
+    flex: 1;
+    padding: 14px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 16px;
+    color: #666;
+    background-color: white;
+    transition: all 0.3s ease;
+}
+
+.btnCancel:hover {
+    background-color: #f5f5f5;
+    border-color: #999;
+}
+
+.btnSubmit {
+    flex: 1;
+    padding: 14px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 16px;
+    color: white;
+    background-color: #5932EA;
+    transition: background-color 0.3s ease;
+}
+
+.btnSubmit:hover {
+    background-color: #4527c7;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(40px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
