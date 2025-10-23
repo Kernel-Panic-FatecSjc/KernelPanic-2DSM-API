@@ -1,3 +1,4 @@
+
 'use client';
 
 import React, { useState, useEffect } from 'react';
@@ -7,8 +8,6 @@ import listPlugin from '@fullcalendar/list';
 import interactionPlugin from '@fullcalendar/interaction';
 import styles from './Calendar.module.css';
 import axios from 'axios';
-
-
 
 const CalendarComponent = () => {
   const [showModal, setShowModal] = useState(false);
@@ -172,13 +171,7 @@ const CalendarComponent = () => {
             </div>
           </div>
         </div>
-      )}
-    </div>
-
-    
-  );
-
-  
+    );
 };
 
 export default CalendarComponent;

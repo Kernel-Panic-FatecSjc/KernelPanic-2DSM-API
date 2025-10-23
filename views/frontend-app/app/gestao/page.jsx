@@ -1,7 +1,7 @@
-'use client';
-import { useState, useEffect } from 'react';
-import axios from 'axios';
-import styles from './App.module.css';
+"use client";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import styles from "./App.module.css";
 
 function App() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -586,9 +586,7 @@ function App() {
             </form>
           </div>
         </div>
-      )}
-    </div>
-  );
+    );
 }
 
 export default App;
