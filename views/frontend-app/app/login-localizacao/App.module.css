@@ -1,0 +1,137 @@
+:global(main.conteudo) {
+  padding: 0 !important;
+}
+
+
+.container {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  background-color: #fff;
+  font-family: "Poppins", sans-serif;
+  overflow: hidden;
+}
+
+
+.lateral {
+  background-color: #1f4af4;
+  width: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.linkVoltar {
+  position: absolute;
+  top: 40px;
+  left: 40px;
+  font-size: 1rem;
+  color: #7a7a7a;
+  text-decoration: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: color 0.2s;
+  font-family: "Poppins", sans-serif;
+  z-index: 10;
+}
+
+.linkVoltar:hover {
+  opacity: 0.8;
+}
+
+.loginRight {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding-left: 600px; 
+  padding-right: 500px;
+}
+
+.formSection {
+  width: 150%;
+  max-width: 700px; 
+}
+
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  margin-top: 1.2rem;
+}
+
+
+.radioWrapper {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 1rem 1.4rem;
+  border: 1px solid #d0d0d0;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 1rem;
+  background-color: #fff;
+  width: 100%; 
+  box-sizing: border-box;
+}
+
+.radioWrapper:hover {
+  border-color: #1e50ff;
+}
+
+
+.icon {
+  width: 22px;
+  height: 22px;
+}
+
+.radioWrapper input[type="radio"] {
+  appearance: none;
+  width: 15px;     
+  height: 15px;
+  border: 2px solid #1e50ff;
+  border-radius: 50%;
+  position: relative;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0; 
+}
+
+.radioWrapper input[type="radio"]:checked::after {
+  content: "";
+  position: absolute;
+   
+  
+  width: 12.8px;  
+  height: 12.8px;
+  background-color: #1e50ff;
+  border-radius: 50%;
+}
+
+.loginButton {
+  width: 100%;
+  background-color: #1e50ff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0.9rem;
+  font-weight: 600;
+  margin-top: 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.95rem;
+}
+
+.loginButton:hover {
+  background-color: #0039d6;
+  transform: scale(1.02);
+}

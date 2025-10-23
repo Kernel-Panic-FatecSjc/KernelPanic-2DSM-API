@@ -14,6 +14,8 @@ const clientesRoute = require("./API/Routes/clientesRoutes");
 const gestaoRoute = require("./API/Routes/gestaoRoutes")
 const historicoRoute = require("./API/Routes/historicoRoutes")
 const vendedorRoute = require("./API/Routes/VendedorRoutes")
+const funcionarioPerfilRoutes = require("./API/Routes/FuncionarioPerfilRoutes")
+const funcionarioRoutes = require("./API/Routes/FuncionarioRoutes")
 
 
 const app = express(); 
@@ -44,6 +46,8 @@ app.use("/eventos", eventoRoute);
 iniciarCron();
 app.use("/funilVendas", funilVendasRoute); 
 app.use("/calendario", calendarioRoute); 
+app.use("/api/funcionarios", funcionarioPerfilRoutes);
+app.use("/funcionario", funcionarioRoutes)
 
 app.get("/", (req, res) => {
   res.send("API funcionando");
@@ -54,7 +58,6 @@ app.get("/", (req, res) => {
 
 import * as bcrypt from 'bcryptjs';
 
-// ... (todo o seu código existente: imports, app.use(...), etc.)
 
 
 // ==========================================================
