@@ -2,8 +2,8 @@ import { MigrationInterface, QueryRunner } from "typeorm";
 
 export class CreateClienteTrigger1978901234567 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.query(`
-      CREATE TRIGGER trg_after_cliente_update
+    await queryRunner.query(
+      `CREATE TRIGGER trg_after_cliente_update
       AFTER UPDATE ON Cliente
       FOR EACH ROW
       BEGIN
@@ -11,8 +11,8 @@ export class CreateClienteTrigger1978901234567 implements MigrationInterface {
           INSERT INTO Historico_funil (cliente_ID, funil_ID, data_movimentacao)
           VALUES (NEW.cliente_ID, NEW.funil_ID, NOW());
         END IF;
-      END
-    `);
+      END`
+    );
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {

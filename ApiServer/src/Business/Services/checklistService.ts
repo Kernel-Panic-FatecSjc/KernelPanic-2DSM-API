@@ -1,7 +1,7 @@
 import { checklistRepository } from "../../DAL/Repository/checklistRepository";
 
 export const ChecklistService = {
-  async createChecklist(tipo: string, respostas: any, path_img: string | null) {
+  async createChecklist(tipo: string , respostas: any, path_img: string | null) {
     if (!tipo || !respostas) throw new Error("Tipo e respostas são obrigatórios.");
 
     const data = {
