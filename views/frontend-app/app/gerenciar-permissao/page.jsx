@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import styles from "./App.module.css";
+import ProtectRoute from "../../components/ProtectRoute";
 
 function Gerenciamento() {
   const [modalOpen, setModalOpen] = useState(false);
@@ -33,6 +34,7 @@ function Gerenciamento() {
   };
 
   return (
+    <ProtectRoute>
     <div className={styles.container}>
       <h1 className={styles.titulo}>Gerenciamento</h1>
 
@@ -108,6 +110,7 @@ function Gerenciamento() {
         </div>
       )}
     </div>
+    </ProtectRoute>
   );
 }
 

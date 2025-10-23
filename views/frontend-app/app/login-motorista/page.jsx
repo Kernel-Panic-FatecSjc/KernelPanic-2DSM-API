@@ -6,6 +6,7 @@ import Login from "../../components/layout/Login/login";
 
 export default function Page() {
   const router = useRouter();
+    console.log("Bem Vindo Motorista")
 
   return (
     <div className={styles.container}>
