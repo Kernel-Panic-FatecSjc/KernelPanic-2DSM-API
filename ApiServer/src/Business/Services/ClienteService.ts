@@ -22,7 +22,6 @@ export class ClienteService {
         "funil",
         "contatos",
         "historico",
-        "agendamentos",
         "interacoes",
         "vendas",
       ],
@@ -48,7 +47,7 @@ export class ClienteService {
   async criarCliente(data: {
   nome: string;
   endereco: string;
-  segmento: string; // <- trocado de "area" para "segmento"
+  segmento: string; 
   funcionario_ID: number;
   funil_ID: number;
   tipo_contato: string;

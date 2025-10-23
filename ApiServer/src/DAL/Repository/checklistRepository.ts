@@ -10,7 +10,7 @@ const pool = mysql.createPool({
 export const checklistRepository = {
   async create(data: { tipo: string; respostas: string; path_img: string | null }) {
     const query = `
-      INSERT INTO ChecklistAgregado (tipo, respostas, path_img)
+      INSERT INTO ChecklistFuncionario (tipo, respostas, path_img)
       VALUES (?, ?, ?)
     `;
     const [result]: any = await pool.query(query, [
@@ -22,12 +22,12 @@ export const checklistRepository = {
   },
 
   async findAll() {
-    const [rows] = await pool.query("SELECT * FROM ChecklistAgregado");
+    const [rows] = await pool.query("SELECT * FROM ChecklistFuncionario");
     return rows;
   },
 
   async findByTipo(tipo: string) {
-    const [rows] = await pool.query("SELECT * FROM ChecklistAgregado WHERE tipo = ?", [tipo]);
+    const [rows] = await pool.query("SELECT * FROM ChecklistFuncionario WHERE tipo = ?", [tipo]);
     return rows;
   },
 };
