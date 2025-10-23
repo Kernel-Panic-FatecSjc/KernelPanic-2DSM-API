@@ -8,9 +8,11 @@ import {
 
 import type { Funcionario } from "./Funcionario.js";
 import type { Cliente } from "./Cliente.js";
+import type { AgendamentoInteracao } from "./AgendamentoInteracao.js";
 
 import { Funcionario as FuncionarioEntity } from "./Funcionario.js";
 import { Cliente as ClienteEntity } from "./Cliente.js";
+import { AgendamentoInteracao as AgendamentoEntity } from "./AgendamentoInteracao.js";
 
 @Entity("Interacao_cliente")
 export class InteracaoCliente {
@@ -41,4 +43,13 @@ export class InteracaoCliente {
   )
   @JoinColumn({ name: "cliente_ID" })
   cliente!: Cliente;
+
+  // Relação opcional com AgendamentoInteracao (pode ser null)
+  @ManyToOne(
+    () => AgendamentoEntity,
+    (agendamento: AgendamentoInteracao) => agendamento.interacoes,
+    { nullable: true }
+  )
+  @JoinColumn({ name: "agendamento_interacao_ID" })
+  agendamento?: AgendamentoInteracao;
 }

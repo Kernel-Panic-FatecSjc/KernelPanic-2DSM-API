@@ -1,10 +1,10 @@
 import { Entity, PrimaryGeneratedColumn, Column, Check } from "typeorm";
 
-@Entity("Lembrete") // ===== Nome da tabela =====
+@Entity("eventos") // ===== Nome da tabela =====
 @Check(`"categoria" IN ('categoria1', 'categoria2', 'categoria3', 'categoria4')`) // ===== Restrição de valores para categoria =====
-export class Lembrete {
-  @PrimaryGeneratedColumn({ name: "lembrete_ID" }) // ===== Chave primária =====
-  lembrete_ID!: number;
+export class Evento {
+  @PrimaryGeneratedColumn({ name: "id" }) // ===== Chave primária =====
+  id!: number;
 
   @Column({ name: "email", type: "varchar", length: 255 }) // ===== Email associado ao evento =====
   email!: string;

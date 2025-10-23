@@ -29,10 +29,8 @@ export default function CicloDeVendas() {
 
     const fetchHistorico = async () => {
         try {
-            const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-
             const response = await axios.get(
-                `${apiUrl}/historico/movimentacoes`
+                "http://localhost:5000/historico/movimentacoes"
             );
             setHistoricoFunil(response.data.message || response.data);
         } catch (error) {
@@ -41,13 +39,13 @@ export default function CicloDeVendas() {
     };
 
     useEffect(() => {
-        if (mostrarHistorico) {
-            const fetchData = async () => {
-                await fetchHistorico();
-            };
-            fetchData();
-        }
-    }, [mostrarHistorico]);
+    if (mostrarHistorico) {
+        const fetchData = async () => {
+            await fetchHistorico();
+        };
+        fetchData();
+    }
+}, [mostrarHistorico]);
 
     const fetchGetClientes = async () => {
         try {

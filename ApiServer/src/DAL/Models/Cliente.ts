@@ -11,6 +11,7 @@ import type { Funcionario } from "./Funcionario.js";
 import type { FunilVendas } from "./FunilVendas.js";
 import type { ContatoCliente } from "./ContatoCliente.js";
 import type { HistoricoFunil } from "./HistoricoFunil.js";
+import type { AgendamentoInteracao } from "./AgendamentoInteracao.js";
 import type { InteracaoCliente } from "./InteracaoCliente.js";
 import type { Vendas } from "./Vendas.js";
 
@@ -18,6 +19,7 @@ import { Funcionario as FuncionarioEntity } from "./Funcionario.js";
 import { FunilVendas as FunilVendasEntity } from "./FunilVendas.js";
 import { ContatoCliente as ContatoClienteEntity } from "./ContatoCliente.js";
 import { HistoricoFunil as HistoricoFunilEntity } from "./HistoricoFunil.js";
+import { AgendamentoInteracao as AgendamentoInteracaoEntity } from "./AgendamentoInteracao.js";
 import { InteracaoCliente as InteracaoClienteEntity } from "./InteracaoCliente.js";
 import { Vendas as VendasEntity } from "./Vendas.js";
 
@@ -49,6 +51,9 @@ export class Cliente {
 
   @OneToMany(() => HistoricoFunilEntity, (historico: HistoricoFunil) => historico.cliente)
   historico?: HistoricoFunil[];
+
+  @OneToMany(() => AgendamentoInteracaoEntity, (agendamento: AgendamentoInteracao) => agendamento.cliente)
+  agendamentos?: AgendamentoInteracao[];
 
   @OneToMany(() => InteracaoClienteEntity, (interacao: InteracaoCliente) => interacao.cliente)
   interacoes?: InteracaoCliente[];

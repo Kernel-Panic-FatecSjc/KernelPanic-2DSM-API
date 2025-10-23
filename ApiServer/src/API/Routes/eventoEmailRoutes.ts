@@ -1,10 +1,10 @@
 import { Router } from "express";
-import { postLembrete , getLembrete} from "../Controllers/eventoEmailController";
+import { postEvento , getEventos} from "../Controllers/eventoEmailController";
 
 const router = Router();
 
-router.post("/lembrete", postLembrete);
+router.post("/lembrete", postEvento);
 
-router.get("/", getLembrete)
+router.get("/", getEventos)
 
 module.exports = router;

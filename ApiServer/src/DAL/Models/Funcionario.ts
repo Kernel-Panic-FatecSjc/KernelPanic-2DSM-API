@@ -1,5 +1,3 @@
-// Arquivo: Funcionario.ts (Versão Completa e Atualizada)
-
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -7,28 +5,26 @@ import {
   ManyToOne,
   OneToMany,
   Unique,
-  JoinColumn,
-  ManyToMany,
-  JoinTable,
+  JoinColumn, // Para definir nomes das FKs
 } from "typeorm";
 
 // ===== Importações de tipos (TS only) =====
 import type { Cliente } from "./Cliente.js";
+import type { AgendamentoInteracao } from "./AgendamentoInteracao.js";
 import type { InteracaoCliente } from "./InteracaoCliente.js";
 import type { Vendas } from "./Vendas.js";
 import type { EventoTreinamento } from "./EventoTreinamento.js";
 import type { FuncionariosConvidados } from "./FuncionariosConvidados.js";
 import type { Funcionario as FuncionarioType } from "./Funcionario.js"; // Recursivo
-import type { Perfil } from "./Perfil.js";
 
 // ===== Importações reais para decorators =====
 import { Cliente as ClienteEntity } from "./Cliente.js";
+import { AgendamentoInteracao as AgendamentoEntity } from "./AgendamentoInteracao.js";
 import { InteracaoCliente as InteracaoEntity } from "./InteracaoCliente.js";
 import { Vendas as VendasEntity } from "./Vendas.js";
 import { EventoTreinamento as EventoEntity } from "./EventoTreinamento.js";
 import { FuncionariosConvidados as ConvidadosEntity } from "./FuncionariosConvidados.js";
 import { Funcionario as FuncionarioEntity } from "./Funcionario.js";
-import { Perfil as PerfilEntity } from "./Perfil.js";
 
 @Entity("Funcionario") // ===== Nome da tabela =====
 @Unique(["email"]) // ===== Email único =====
@@ -57,23 +53,11 @@ export class Funcionario {
   @Column({ name: "senha_hash", type: "varchar", length: 255 }) // ===== Hash da senha =====
   senha_hash!: string;
 
+  @Column({ name: "nivel_acesso", type: "varchar", length: 255 }) // ===== Nível de acesso =====
+  nivel_acesso!: string;
+
   @Column({ name: "localizacao_funcionario", type: "varchar", length: 100 }) // ===== Localização =====
   localizacao_funcionario!: string;
-
-  // ===== Relação ManyToMany: perfis de acesso =====
-  @ManyToMany(() => PerfilEntity, (perfil) => perfil.funcionarios)
-  @JoinTable({
-    name: "funcionario_perfis",
-    joinColumn: {
-      name: "funcionario_ID",
-      referencedColumnName: "funcionario_ID",
-    },
-    inverseJoinColumn: {
-      name: "perfil_ID",
-      referencedColumnName: "perfil_ID", // Chave primária da entidade Perfil
-    },
-  })
-  perfis!: Perfil[];
 
   // ===== Relação recursiva ManyToOne: gerente =====
   @ManyToOne(() => FuncionarioEntity, (gerente: FuncionarioType) => gerente.subordinados, { nullable: true })
@@ -87,6 +71,10 @@ export class Funcionario {
   // ===== Relação OneToMany: clientes atendidos =====
   @OneToMany(() => ClienteEntity, (cliente: Cliente) => cliente.funcionario)
   clientes?: Cliente[];
+
+  // ===== Relação OneToMany: agendamentos =====
+  @OneToMany(() => AgendamentoEntity, (agendamento: AgendamentoInteracao) => agendamento.funcionario)
+  agendamentos?: AgendamentoInteracao[];
 
   // ===== Relação OneToMany: interações =====
   @OneToMany(() => InteracaoEntity, (interacao: InteracaoCliente) => interacao.funcionario)
