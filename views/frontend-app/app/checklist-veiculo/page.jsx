@@ -65,9 +65,6 @@ export default function Page() {
   };
 
   const handleSubmit = async (e) => {
-
-
-    
     e.preventDefault();
 
     // validação simplificada
@@ -117,7 +114,7 @@ export default function Page() {
         }
       });
 
-      const response = await fetch("http://localhost:5000/agregado/veiculo", {
+      const response = await fetch("http://localhost:5000/agregado", {
         method: "POST",
         body: formData,
       });

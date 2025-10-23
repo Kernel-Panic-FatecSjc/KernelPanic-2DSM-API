@@ -1,7 +1,7 @@
 import express from "express";
 import multer from "multer";
 import path from "path";
-import { ChecklistController } from "../Controllers/checklistAgregadoController";
+import { ChecklistAgregadoController } from "../Controllers/checklistAgregadoController";
 
 const router = express.Router();
 
@@ -17,16 +17,21 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-router.post("/:tipo",
+// Criar instância do controller
+const checklistAgregadoController = new ChecklistAgregadoController();
+
+router.post("/",
   upload.fields([
     { name: "foto_motor", maxCount: 1 },
     { name: "foto_troca_oleo", maxCount: 1 },
     { name: "fotos_pneus", maxCount: 4 },
     { name: "fotos_gerais", maxCount: 4 },
   ]),
-  ChecklistController.create
+  checklistAgregadoController.create.bind(checklistAgregadoController)
 );
-router.get("/", ChecklistController.getAll);
-router.get("/:tipo", ChecklistController.getByTipo);
+
+router.get("/", checklistAgregadoController.getAll.bind(checklistAgregadoController));
+router.get("/:tipo", checklistAgregadoController.getByTipo.bind(checklistAgregadoController));
+router.get("/download/:id", checklistAgregadoController.downloadZip.bind(checklistAgregadoController));
 
 module.exports = router;
