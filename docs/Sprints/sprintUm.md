@@ -127,11 +127,13 @@
 
 | Critério | Descrição |
 | :--- | :--- |
-| **User Story Bem Definida** | A história de usuário está clara e compreensível, descrevendo quem é o usuário, o que ele quer fazer e por quê, de acordo com o backlog. |
-| **Estimativa Definida** | A história de usuário foi avaliada em Story Points. |
-| **Cenários de Teste Especificados** | A história possui cenários de teste detalhados (`Dado, Quando, Então`) para validar os requisitos, conforme os exemplos fornecidos. |
-| **Regras de Negócio Claras** | As regras de negócio e validações, como as permissões de acesso e a imutabilidade do histórico de interações, estão documentadas. |
-| **Compreensão Compartilhada** | A equipe, o gestor e o parceiro compreendem o propósito da história e seus objetivos. |
+| **User Story Bem Definida** | Cada User Story está clara e compreensível, descrevendo quem é o usuário, o que ele quer fazer e por quê, de acordo com o backlog. |
+| **Estimativa Definida** | A história de usuário foi avaliada e estimada em Story Points pela Dev Team. |
+| **Cenários de Teste Especificados** | A história possui cenários de teste detalhados (`Dado, Quando, Então`) para validar os requisitos. |
+| **Regras de Negócio Claras** | As regras de negócio e validações estão documentadas e compreendidas pela equipe. |
+| **Mockup Validado com o Cliente** | O mockup da sprint foi apresentado e validado com o cliente antes do início das atividades da Dev Team. |
+| **DoD Definido** | Cada User Story possui critérios claros de Definition of Done específicos para sua conclusão. |
+| **Compreensão Compartilhada** | O Scrum Master, a Product Owner e a Dev Team compreendem o propósito da história e seus objetivos. |
 
 ---
 
@@ -140,12 +142,11 @@
 | Critério | Descrição |
 | :--- | :--- |
 | **Critérios de Aceitação Atendidos** | Todos os cenários de teste foram executados e aprovados com sucesso. |
-| **Funcionalidade Implementada** | A funcionalidade do backlog foi totalmente desenvolvida, seguindo o que foi acordado. |
-| **Código Revisado** | O código foi revisado por pelo menos um membro da equipe e está em conformidade com os padrões. |
-| **Testes Automatizados Aprovados** | Testes de unidade e/ou integração para a funcionalidade foram criados e executados com sucesso. |
-| **Dados Persistidos e Acessíveis** | Os dados da funcionalidade (por exemplo, clientes cadastrados, histórico de interações) estão corretamente salvos e recuperáveis. |
-| **Relatórios e Gráficos Gerados** | A extração e visualização dos dados para os relatórios e gráficos funcionam como esperado. |
-| **Validação do Gestor** | O gestor ou o parceiro validou a entrega e confirmou que ela atende aos requisitos. |
+| **Funcionalidade Implementada** | Cadastro e gerenciamento CRUD de clientes, funil de vendas com 8 etapas, relatórios e gráficos com filtros, agendamento de tarefas, métricas de conversão e histórico de interações foram desenvolvidos conforme acordado. |
+| **Código Revisado** | O código foi revisado por pelo menos um membro da equipe e está em conformidade com os padrões do projeto. |
+| **Dados Persistidos e Acessíveis** | Dados de clientes, funil de vendas, histórico, tarefas e métricas estão salvos e recuperáveis. |
+| **Relatórios e Gráficos Gerados** | Relatórios de interações, vendas, clientes por cidade/segmento e indicadores de conversão estão funcionando e exibindo dados corretamente. |
+| **Validação do Master e da PO** | O master e a product owner da equipe validaram a entrega das funcionalidades e realizaram os testes necessários. |
 
 ---
 
