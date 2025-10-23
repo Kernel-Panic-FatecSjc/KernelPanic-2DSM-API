@@ -17,8 +17,8 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-router.post("/", upload.single("zipFile"), ChecklistController.create);
+router.post("/:tipo", upload.single("zipFile"), ChecklistController.create);
 router.get("/", ChecklistController.getAll);
 router.get("/:tipo", ChecklistController.getByTipo);
 
-export default router;
+module.exports = router;

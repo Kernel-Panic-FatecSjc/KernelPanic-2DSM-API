@@ -6,7 +6,7 @@ export const ChecklistService = {
 
     const data = {
       tipo,
-      respostas: JSON.stringify(respostas),
+      respostas ,
       path_img,
     };
 

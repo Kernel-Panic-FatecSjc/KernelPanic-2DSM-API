@@ -13,7 +13,7 @@ const clientesRoute = require("./API/Routes/clientesRoutes");
 const gestaoRoute = require("./API/Routes/gestaoRoutes")
 const historicoRoute = require("./API/Routes/historicoRoutes")
 const vendedorRoute = require("./API/Routes/VendedorRoutes")
-
+const checklistRoute = require("./API/Routes/checklistRoutes")
 
 const app = express(); 
 
@@ -37,6 +37,7 @@ app.use("/clientes", clientesRoute)
 app.use("/vendedor", vendedorRoute)
 app.use("/historico",historicoRoute)
 app.use("/gestao",gestaoRoute)
+app.use("/checklist", checklistRoute)
 
 app.use("/eventos", eventoRoute);
 iniciarCron();
