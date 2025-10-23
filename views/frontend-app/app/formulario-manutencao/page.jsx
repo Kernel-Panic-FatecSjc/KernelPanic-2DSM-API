@@ -1,6 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 import styles from './App.module.css';
+import ProtectRoute from '../../components/ProtectRoute';
 import { useRouter } from 'next/navigation';
 
 function Page() {
@@ -129,6 +130,7 @@ function Page() {
   };
 
   return (
+    <ProtectRoute>
     <div className={styles.container}>
       <button className={styles.buttonvoltar} onClick={() => router.back()}>
         ← Voltar
@@ -659,6 +661,7 @@ function Page() {
         <button type="submit" className={styles.buttonenviar}>Enviar</button>
       </form>
     </div>
+    </ProtectRoute>
   );
 }
 

@@ -1,7 +1,9 @@
 import CalendarComponent from "../../components/layout/Calendar/Calendar"
+import ProtectRoute from '../../components/ProtectRoute'
 
 export default function page() {
   return (
+    <ProtectRoute>
     <div style={{ paddingTop: "15px" }}>
       <h1 style={{
         fontSize: "50px",
@@ -14,5 +16,6 @@ export default function page() {
       }}>Agendamento comercial</h1>
       <CalendarComponent></CalendarComponent>
     </div>
+    </ProtectRoute>
   )
 }
