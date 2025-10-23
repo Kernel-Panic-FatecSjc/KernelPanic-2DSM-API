@@ -48,7 +48,7 @@ function Page() {
       };
 
       try {
-      const response = await fetch('http://localhost:5000/checklist/abertura', {
+      const response = await fetch('http://localhost:5000/checklist/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
