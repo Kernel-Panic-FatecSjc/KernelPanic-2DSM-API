@@ -329,7 +329,7 @@
     padding: 1rem;
 }
 
-/* Modal Container */
+/* MODAL Container */
 .modalContent {
     display: flex;
     flex-direction: column;
@@ -345,7 +345,7 @@
     line-height: 1.6; /* melhora leitura */
 }
 
-/* Modal Header */
+/* MODAL Header */
 .modalHeader {
     display: flex;
     justify-content: space-between;
