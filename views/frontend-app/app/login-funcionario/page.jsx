@@ -16,16 +16,6 @@ export default function Page() {
   const [erro, setErro] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-export default function page(){
-      const [mostrarSenha, setMostrarSenha] = useState(false);
-      const router = useRouter();
-      const handleLogin = (e) => {
-        e.preventDefault(); 
-      router.push("/login-localizacao"); 
-  };
-  const toggleMostrarSenha = () => {
-    setMostrarSenha((prev) => !prev);
-  };
   console.log("Bem Vindo Funcionario");
 
   // NOVO: Função para lidar com o envio do formulário
@@ -149,55 +139,6 @@ export default function page(){
           </button>
         </form>
       </div>
-
-
-              <form className={styles.form}>
-        <label>Email:</label>
-        <div className={styles.inputWrapper}>
-          
-          <img
-            src="/images/iconeemail.svg"
-            alt="Ícone de email"
-            className={styles.iconeInput}
-          />
-          <input type="email" placeholder="usuario123@gmail.com" />
-        </div>
-
-        <label className={styles.labeltexto}>Senha:</label>
-        <div className={styles.inputWrapper}>
-          
-          <img
-            src="/images/cadeadosenha.svg"
-            alt="Ícone de senha"
-            className={styles.iconeInput}
-          />
-          <input type={mostrarSenha ? "text" : "password"} placeholder="Digite sua senha..." />
-          
-          <img
-            src="/images/olhinhosenha.svg"
-            alt="Mostrar senha"
-            className={styles.mostrarSenha}
-            onClick={toggleMostrarSenha}
-          />
-        </div>
-
-        <button type="submit" className={styles.botaoLogar} onClick={handleLogin}>
-          Logar →
-        </button>
-      </form>
-        </div>
-</div>
-    
-
-
-
-    )
-
-
-
-
-
-}
     </div>
   );
 }

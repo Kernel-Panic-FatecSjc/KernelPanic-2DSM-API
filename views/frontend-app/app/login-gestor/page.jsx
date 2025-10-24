@@ -221,4 +221,3 @@ export default function page(){
     </div>
   );
 }
->>>>>>> 736e26e (feat(KER-72): Salvamento de Token, Comunicação com o BackEnd e proteção das Rotas do Front)
