@@ -1,5 +1,10 @@
+
 :global(main.conteudo) {
   padding: 0 !important;
+}
+
+.empty-lateral {
+  width: 0; 
 }
 
 .layout {
@@ -34,16 +39,15 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center; 
-   height: calc(100vh - 100px);
+  justify-content: center;
+  height: 100vh;
   font-family: "Poppins", sans-serif;
   color: #000;
   padding: 0 80px;
   background-color: #fff;
   position: relative;
   text-align: center; 
-  margin-left: 400px;
-  margin-bottom: 250px;
+  margin: 0 auto;
 }
 
 
