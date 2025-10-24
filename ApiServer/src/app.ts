@@ -15,6 +15,7 @@ const historicoRoute = require("./API/Routes/historicoRoutes")
 const vendedorRoute = require("./API/Routes/VendedorRoutes")
 const agregadoRoute = require("./API/Routes/checklistAgregadoRoutes")
 const checklistRoute = require("./API/Routes/checklistRoutes")
+const cadastroAgregado = require("./API/Routes/cadastroAgregadoRoutes")
 
 const app = express(); 
 
@@ -41,6 +42,7 @@ app.use("/gestao",gestaoRoute)
 app.use("/checklist", checklistRoute)
 app.use("/eventos", eventoRoute);
 app.use("/agregado", agregadoRoute)
+app.use("/cadastro_agregado", cadastroAgregado)
 iniciarCron();
 
 app.get("/", (req, res) => {
