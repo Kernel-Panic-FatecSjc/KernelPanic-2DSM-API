@@ -4,10 +4,7 @@ import styles from "./App.module.css";
 import { useRouter } from "next/navigation";
 import Login from "../../components/layout/Login/login";
 import { useState } from "react";
-<<<<<<< HEAD
-=======
 import { useAuth } from "../../context/AuthContext"; // 1. IMPORTE O USEAUTH
->>>>>>> 736e26e (feat(KER-72): Salvamento de Token, Comunicação com o BackEnd e proteção das Rotas do Front)
 
 export default function Page() {
   const router = useRouter();
@@ -19,22 +16,7 @@ export default function Page() {
   const [erro, setErro] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-<<<<<<< HEAD
-export default function page(){
-      const router = useRouter();
-      const [mostrarSenha, setMostrarSenha] = useState(false);
-      const handleLogin = (e) => {
-        e.preventDefault(); 
-      router.push("/login-localizacao"); 
-       
-
-  };
-   const toggleMostrarSenha = () => {
-    setMostrarSenha((prev) => !prev);
-  };
-=======
   console.log("Bem Vindo Master");
->>>>>>> 736e26e (feat(KER-72): Salvamento de Token, Comunicação com o BackEnd e proteção das Rotas do Front)
 
   // Função para lidar com o envio do formulário
   const handleSubmit = async (event) => {
@@ -160,57 +142,6 @@ export default function page(){
           </button>
         </form>
       </div>
-<<<<<<< HEAD
-
-
-              <form className={styles.form}>
-        <label>Email:</label>
-        <div className={styles.inputWrapper}>
-          
-          <img
-            src="/images/iconeemail.svg"
-            alt="Ícone de email"
-            className={styles.iconeInput}
-          />
-          <input type="email" placeholder="usuario123@gmail.com" />
-        </div>
-
-        <label className={styles.labeltexto}>Senha:</label>
-        <div className={styles.inputWrapper}>
-          
-          <img
-            src="/images/cadeadosenha.svg"
-            alt="Ícone de senha"
-            className={styles.iconeInput}
-          />
-          <input type={mostrarSenha ? "text" : "password"} placeholder="Digite sua senha..." />
-          
-          <img
-            src="/images/olhinhosenha.svg"
-            alt="Mostrar senha"
-            className={styles.mostrarSenha}
-             onClick={toggleMostrarSenha}
-          />
-        </div>
-
-        <button type="submit" className={styles.botaoLogar} onClick={handleLogin}>
-          Logar →
-        </button>
-      </form>
-        </div>
-</div>
-    
-
-
-
-    )
-
-
-
-
-
-=======
     </div>
   );
->>>>>>> 736e26e (feat(KER-72): Salvamento de Token, Comunicação com o BackEnd e proteção das Rotas do Front)
 }
