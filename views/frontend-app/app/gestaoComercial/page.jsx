@@ -2,12 +2,14 @@
 
 import React, { useState } from 'react';
 import styles from './App.module.css';
+import CalculadoraCotacao from '../../components/layout/CalculadoraCotacao/CalculadoraCotacao'; 
 
 export default function GestaoComercial() {
     const [modalAberto, setModalAberto] = useState(false);
+    const [calculadoraAberta, setCalculadoraAberta] = useState(false);
 
     const handleCalculadoraClick = () => {
-        //COLOCAR rota da calculadora
+        setCalculadoraAberta(true);
     };
 
     const handleFormularioClick = () => {
@@ -16,6 +18,7 @@ export default function GestaoComercial() {
 
     const fecharModal = () => {
         setModalAberto(false);
+        setCalculadoraAberta(false);
     };
 
     const handleSubmit = (e) => {
@@ -100,6 +103,35 @@ export default function GestaoComercial() {
                 </div>
             </div>
 
+            {/* Modal da Calculadora */}
+            {calculadoraAberta && (
+                <div
+                    className={styles.modalOverlay}
+                    onClick={fecharModal}
+                >
+                    <div
+                        className={styles.modalContent}
+                        onClick={(e) => e.stopPropagation()}
+                        style={{ maxWidth: '600px' }} // Ajuste o tamanho para a calculadora
+                    >
+                        <button
+                            className={styles.closeButton}
+                            onClick={fecharModal}
+                        >
+                            ×
+                        </button>
+
+                        <h2 className={styles.modalTitle}>Calculadora de Cotação</h2>
+                        <p className={styles.modalSubtitle}>
+                            Calcule o valor do frete para sua cotação
+                        </p>
+
+                        <CalculadoraCotacao />
+                    </div>
+                </div>
+            )}
+
+            {/* Modal do Formulário (mantido original) */}
             {modalAberto && (
                 <div
                     className={styles.modalOverlay}
@@ -122,8 +154,6 @@ export default function GestaoComercial() {
                         </p>
 
                         <form onSubmit={handleSubmit}>
-                            {/* ESPERANDO cliente */}
-
                             <div className={styles.formGroup}>
                                 <label className={styles.formLabel}>Cliente</label>
                                 <input
