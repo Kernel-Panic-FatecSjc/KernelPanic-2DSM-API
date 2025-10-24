@@ -4,13 +4,11 @@ import styles from "./App.module.css";
 import { useRouter } from "next/navigation";
 import Login from "../../components/layout/Login/login";
 import { useState } from "react";
-import { useAuth } from "../../context/AuthContext"; // 1. IMPORTE O USEAUTH
+import { useAuth } from "../../context/AuthContext";
 
 export default function Page() {
   const router = useRouter();
-  const { login } = useAuth(); // 2. PEGUE A FUNÇÃO LOGIN DO CONTEXTO
-
-  // Seus estados
+  const { login } = useAuth(); 
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [erro, setErro] = useState("");
@@ -18,15 +16,11 @@ export default function Page() {
 
   console.log("Bem Vindo Master");
 
-
-
-  // Função para lidar com o envio do formulário
   const handleSubmit = async (event) => {
-    event.preventDefault(); // Impede o recarregamento padrão da página
-    setIsLoading(true); // Ativa o estado de carregamento
-    setErro(""); // Limpa erros antigos
+    event.preventDefault(); 
+    setIsLoading(true); 
+    setErro(""); 
 
-    // 1. Validar se os campos não estão vazios
     if (!email || !senha) {
       setErro("Email e senha são obrigatórios.");
       setIsLoading(false);
@@ -34,35 +28,27 @@ export default function Page() {
     }
 
     try {
-      // 2. Enviar a requisição para o seu backend
       const response = await fetch("http://localhost:5000/login", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json", // Avisa o backend que estamos enviando JSON
+          "Content-Type": "application/json", 
         },
-        body: JSON.stringify({ email, senha }), // Envia os dados do estado como JSON
+        body: JSON.stringify({ email, senha }), 
       });
 
-      const data = await response.json(); // Lê a resposta do backend
+      const data = await response.json(); 
       console.log(data);
-      // 3. Lidar com a resposta
       if (!response.ok) {
-        // Se o backend retornou um erro (ex: 401 Senha inválida)
         throw new Error(data.message || "E-mail ou senha inválidos.");
       }
 
-      // 4. SUCESSO!
       console.log("Login bem-sucedido:", data);
 
-      // 5. TROQUE O LOCALSTORAGE PELA FUNÇÃO DO CONTEXTO
-      // localStorage.setItem("token", data.accessToken); // <-- Linha antiga
-      login(data.accessToken); // <-- NOVA LINHA
+      login(data.accessToken);
 
-      // 6. Redirecione para a página principal do Master
       router.push("/"); // Main Page
 
     } catch (error) {
-      // Captura erros da requisição (ex: backend offline) ou do 'throw' acima
       setErro(error.message);
     } finally {
       setIsLoading(false); // Desativa o estado de carregamento
@@ -90,7 +76,6 @@ export default function Page() {
           <span>Acesso Master</span>
         </div>
 
-        {/* Ligar o formulário à função handleSubmit */}
         <form className={styles.form} onSubmit={handleSubmit}>
           <label>Email:</label>
           <div className={styles.inputWrapper}>
@@ -99,7 +84,6 @@ export default function Page() {
               alt="Ícone de email"
               className={styles.iconeInput}
             />
-            {/* Ligar o input ao estado 'email' */}
             <input
               type="email"
               placeholder="usuario123@gmail.com"
@@ -115,7 +99,6 @@ export default function Page() {
               alt="Ícone de senha"
               className={styles.iconeInput}
             />
-            {/* Ligar o input ao estado 'senha' */}
             <input
               type="password"
               placeholder="Digite sua senha..."
@@ -130,16 +113,13 @@ export default function Page() {
             />
           </div>
 
-          {/* Exibir mensagem de erro, se houver */}
           {erro && <p className={styles.mensagemErro}>{erro}</p>} 
-          {/* (Você precisa criar esse estilo .mensagemErro no seu CSS) */}
 
           <button
             type="submit"
             className={styles.botaoLogar}
-            disabled={isLoading} /* Desabilitar o botão durante o loading */
+            disabled={isLoading} 
           >
-            {/* Mudar o texto do botão durante o loading */}
             {isLoading ? "Logando..." : "Logar →"}
           </button>
         </form>
