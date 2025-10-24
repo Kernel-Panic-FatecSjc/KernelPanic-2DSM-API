@@ -49,13 +49,13 @@
   align-items: center;
   justify-content: center;
   position: relative;
-  padding-left: 600px; 
-  padding-right: 500px;
+  padding: 0 40px;
+  box-sizing: border-box;
 }
 
 .formSection {
-  width: 150%;
-  max-width: 700px; 
+  width: 100%;
+  max-width: 500px;
 }
 
 
@@ -78,7 +78,7 @@
   transition: all 0.2s ease;
   font-size: 1rem;
   background-color: #fff;
-  width: 100%; 
+  width: 100%;
   box-sizing: border-box;
 }
 
@@ -94,7 +94,7 @@
 
 .radioWrapper input[type="radio"] {
   appearance: none;
-  width: 15px;     
+  width: 15px;
   height: 15px;
   border: 2px solid #1e50ff;
   border-radius: 50%;
@@ -103,15 +103,15 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0; 
+  flex-shrink: 0;
 }
 
 .radioWrapper input[type="radio"]:checked::after {
   content: "";
   position: absolute;
-   
-  
-  width: 12.8px;  
+
+
+  width: 12.8px;
   height: 12.8px;
   background-color: #1e50ff;
   border-radius: 50%;

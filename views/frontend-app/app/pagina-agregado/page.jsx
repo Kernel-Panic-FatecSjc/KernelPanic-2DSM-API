@@ -34,7 +34,10 @@ export default function Page() {
             <span className={styles.btnText}>Checklist do Veículo</span>
           </button>
 
-          <button className={styles.btn_cadastro}>
+          <button
+            className={styles.btn_cadastro}
+            onClick={() => router.push("/formulario-agregado")}
+          >
             <div className={styles.iconWrapper}>
               <img
                 src="/images/motorista.png"
