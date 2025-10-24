@@ -6,8 +6,6 @@ router.post("/",criarCliente)
 
 router.post("/contato",atribuirContato)
 
-router.post("/", criarCliente);
-
 router.get("/getClientes", getClientes)
 
 module.exports = router;

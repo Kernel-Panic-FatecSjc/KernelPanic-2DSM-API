@@ -4,9 +4,6 @@ import { HistoricoFunilService } from "../../Business/Services/HistoricoFunilSer
 
 const Service = new HistoricoService();
 
-export const teste = (req: Request, res: Response) => {
-    res.send("funciona");
-};
 
 export const getInteracoes = async (req: Request, res: Response) => {
     try {
