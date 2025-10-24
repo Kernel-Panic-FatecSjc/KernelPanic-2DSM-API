@@ -13,9 +13,13 @@ export default function Page() {
         <Login />
       </div>
       <div className={styles.right}>
-        <a className={styles.link} href="#">
+        <button
+          className={styles.link}
+          onClick={() => router.push("/home-menu")}
+          style={{ border: 'none', background: 'none', cursor: 'pointer' }}
+        >
           <strong>← Voltar</strong>
-        </a>
+        </button>
 
         <div className={styles.principal}>
           <h1>Área do motorista</h1>
