@@ -16,12 +16,16 @@ export default function Page() {
   const [erro, setErro] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
+<<<<<<< HEAD
   console.log("Bem Vindo Master");
 
 =======
   console.log("Bem Vindo Master");
 
 >>>>>>> 736e26e (feat(KER-72): Salvamento de Token, Comunicação com o BackEnd e proteção das Rotas do Front)
+=======
+  console.log("Bem Vindo Master");
+>>>>>>> feat/telaDeLogin
 
   // Função para lidar com o envio do formulário
   const handleSubmit = async (event) => {
