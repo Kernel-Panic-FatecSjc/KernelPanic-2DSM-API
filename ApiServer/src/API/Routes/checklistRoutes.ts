@@ -12,7 +12,7 @@ router.get("/:tipo", checklistController.getByTipo.bind(checklistController));
 
 router.delete("/", checklistController.delete.bind(checklistController))
 
-router.put("/:id", checklistController.update.bind(checklistController));
+router.put("/", checklistController.update.bind(checklistController));
 
 
 module.exports = router;

@@ -99,17 +99,20 @@ export class ChecklistController {
 
     async update(req: Request, res: Response) {
         try {
-            const { id } = req.params;
-            const file = (req as Request & { file?: { path: string } }).file;
-            const filePath = file ? file.path : null;
-            const { tipo, respostas } = req.body;
+            // Pega o id do body
+            const { id, tipo, respostas } = req.body;
 
             if (!id) {
                 return res.status(400).json({
-                    error: "O parâmetro 'id' é obrigatório.",
+                    error: "O parâmetro 'id' é obrigatório no corpo da requisição.",
                 });
             }
 
+            // Pega arquivo se houver
+            const file = (req as Request & { file?: { path: string } }).file;
+            const filePath = file ? file.path : null;
+
+            // Processa respostas (string JSON ou objeto)
             let respostasParsed = respostas;
             if (typeof respostas === "string") {
                 try {
@@ -143,6 +146,7 @@ export class ChecklistController {
             return res.status(500).json({ error: error.message });
         }
     }
+
 }
 
 export const checklistController = new ChecklistController();
