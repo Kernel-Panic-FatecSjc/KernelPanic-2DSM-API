@@ -18,6 +18,8 @@ export default function Page() {
 
   console.log("Bem Vindo Master");
 
+
+
   // Função para lidar com o envio do formulário
   const handleSubmit = async (event) => {
     event.preventDefault(); // Impede o recarregamento padrão da página
@@ -81,8 +83,8 @@ export default function Page() {
 
         <div className={styles.painelAcesso}>
           <img
-            src="/images/gestor.svg" // (Você pode mudar este ícone se tiver um para 'master')
-            alt="Ícone de gestor"
+            src="/images/gestor.svg" 
+            alt="Ícone de Master"
             className={styles.iconePainel}
           />
           <span>Acesso Master</span>

@@ -8,9 +8,7 @@ import { useAuth } from "../../context/AuthContext"; // 1. IMPORTE O USEAUTH
 
 export default function Page() {
   const router = useRouter();
-  const { login } = useAuth(); // 2. PEGUE A FUNÇÃO LOGIN DO CONTEXTO
-
-  // Seus estados estão perfeitos
+  const { login } = useAuth(); 
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [erro, setErro] = useState("");
@@ -18,7 +16,6 @@ export default function Page() {
 
   console.log("Bem Vindo Funcionario");
 
-  // NOVO: Função para lidar com o envio do formulário
   const handleSubmit = async (event) => {
     event.preventDefault(); // Impede o recarregamento padrão da página
     setIsLoading(true); // Ativa o estado de carregamento
@@ -52,8 +49,6 @@ export default function Page() {
       // 4. SUCESSO!
       console.log("Login bem-sucedido:", data);
 
-      // 5. TROQUE O LOCALSTORAGE PELA FUNÇÃO DO CONTEXTO
-      // localStorage.setItem("token", data.accessToken); // <-- Linha antiga
       login(data.accessToken); // <-- NOVA LINHA
 
       // 6. Redirecione para a página principal do funcionário
