@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { VendedorService } from "../../Business/Services/vendedorService";
+import { VendedorService } from "../../Business/Services/VendedorService";
 
 const vendedorService = new VendedorService();
 

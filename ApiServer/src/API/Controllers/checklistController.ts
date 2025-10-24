@@ -19,7 +19,7 @@ export class ChecklistController {
             if (typeof respostas === "string") {
                 try {
                     respostasParsed = JSON.parse(respostas);
-                } catch (error) {
+                } catch {
                     return res.status(400).json({
                         error: "Formato das respostas é inválido.",
                     });
@@ -62,9 +62,7 @@ export class ChecklistController {
                     .json({ error: "O parâmetro 'tipo' é obrigatório." });
             }
 
-            const result = await this.checklistService.getChecklistsByTipo(
-                tipo
-            );
+            const result = await this.checklistService.getChecklistsByTipo(tipo);
             return res.status(200).json(result);
         } catch (error: any) {
             console.error("Erro ao buscar checklist por tipo:", error);
@@ -73,29 +71,78 @@ export class ChecklistController {
     }
 
     async delete(req: Request, res: Response) {
-    try {
-        const { formID } = req.body;
+        try {
+            const { formID } = req.body;
 
-        if (!formID) {
-            return res.status(400).json({
-                error: "O parâmetro 'checkFuncID' é obrigatório.",
-            });
+            if (!formID) {
+                return res.status(400).json({
+                    error: "O parâmetro 'formID' é obrigatório.",
+                });
+            }
+
+            const result = await this.checklistService.deleteChecklist(
+                Number(formID)
+            );
+
+            if (!result) {
+                return res.status(404).json({ error: "Checklist não encontrado." });
+            }
+
+            return res
+                .status(200)
+                .json({ message: "Checklist deletado com sucesso." });
+        } catch (error: any) {
+            console.error("Erro ao deletar checklist:", error);
+            return res.status(500).json({ error: error.message });
         }
-
-        const result = await this.checklistService.deleteChecklist(
-            Number(formID)
-        );
-
-        if (!result) {
-            return res.status(404).json({ error: "Checklist não encontrado." });
-        }
-
-        return res.status(200).json({ message: "Checklist deletado com sucesso." });
-    } catch (error: any) {
-        console.error("Erro ao deletar checklist:", error);
-        return res.status(500).json({ error: error.message });
     }
-}
+
+    async update(req: Request, res: Response) {
+        try {
+            const { id } = req.params;
+            const file = (req as Request & { file?: { path: string } }).file;
+            const filePath = file ? file.path : null;
+            const { tipo, respostas } = req.body;
+
+            if (!id) {
+                return res.status(400).json({
+                    error: "O parâmetro 'id' é obrigatório.",
+                });
+            }
+
+            let respostasParsed = respostas;
+            if (typeof respostas === "string") {
+                try {
+                    respostasParsed = JSON.parse(respostas);
+                } catch {
+                    return res.status(400).json({
+                        error: "Formato das respostas é inválido.",
+                    });
+                }
+            }
+
+            const result = await this.checklistService.updateChecklist(
+                Number(id),
+                tipo,
+                respostasParsed,
+                filePath
+            );
+
+            if (!result) {
+                return res
+                    .status(404)
+                    .json({ error: "Checklist não encontrado." });
+            }
+
+            return res.status(200).json({
+                message: "Checklist atualizado com sucesso!",
+                result,
+            });
+        } catch (error: any) {
+            console.error("Erro ao atualizar checklist:", error);
+            return res.status(500).json({ error: error.message });
+        }
+    }
 }
 
 export const checklistController = new ChecklistController();

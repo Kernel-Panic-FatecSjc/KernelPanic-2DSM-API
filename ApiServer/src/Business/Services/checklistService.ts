@@ -28,6 +28,26 @@ export class ChecklistService {
         return await this.checklistRepo.save(checklist);
     }
 
+    async updateChecklist(
+      checkFuncID: number,
+      tipo?: string,
+      respostas?: any,
+      path_img?: string | null
+    ) {
+      const checklist = await this.checklistRepo.findOneBy({ checkFuncID });
+      if (!checklist) {
+        throw new Error("Checklist não encontrado.");
+      }
+
+      // Atualiza apenas os campos enviados
+      if (tipo !== undefined) checklist.tipo = tipo;
+      if (respostas !== undefined) checklist.respostas = respostas;
+      if (path_img !== undefined) checklist.pathImg = path_img ?? "";
+
+      return await this.checklistRepo.save(checklist);
+    }
+
+
     async getChecklists() {
         return await this.checklistRepo.find({
             order: { checkFuncID: "DESC" },
