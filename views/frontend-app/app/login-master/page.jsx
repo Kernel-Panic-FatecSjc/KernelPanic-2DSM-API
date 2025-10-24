@@ -18,11 +18,6 @@ export default function Page() {
 
   console.log("Bem Vindo Master");
 
-=======
-  console.log("Bem Vindo Master");
-
->>>>>>> 736e26e (feat(KER-72): Salvamento de Token, Comunicação com o BackEnd e proteção das Rotas do Front)
-
   // Função para lidar com o envio do formulário
   const handleSubmit = async (event) => {
     event.preventDefault(); // Impede o recarregamento padrão da página
