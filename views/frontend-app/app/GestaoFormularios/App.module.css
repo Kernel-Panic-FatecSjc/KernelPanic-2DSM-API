@@ -310,6 +310,137 @@
 }
 
 .responseValue {
-    color: #6b7280;
+    color: #0555f7;
     font-size: 0.875rem;
+}
+
+
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    padding: 1rem;
+}
+
+/* Modal Container */
+.modalContent {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    padding: 2.5rem;
+    border-radius: 10px;
+    width: 95%;
+    max-width: 800px;
+    max-height: 85vh;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+    overflow-y: auto;
+    font-size: 1rem; /* aumentei a fonte */
+    line-height: 1.6; /* melhora leitura */
+}
+
+/* Modal Header */
+.modalHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #e5e7eb;
+}
+
+.modalHeader h3 {
+    margin: 0;
+    color: #1f4af4;
+    font-size: 1.75rem; /* título maior */
+    font-weight: 700;
+}
+
+.modalClose {
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    color: #6b7280;
+    padding: 0;
+    width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Arial, sans-serif;
+    transition: color 0.2s ease;
+}
+
+.modalClose:hover {
+    color: #1f2937;
+}
+
+.modalBody {
+    color: #374151;
+    font-size: 1rem;
+}
+
+.modalBody h4 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-top: 1rem;
+    margin-bottom: 0.75rem;
+}
+
+
+.responseLabel {
+    font-weight: 600;
+    color: #1f2937;
+    font-size: 0.95rem; 
+    min-width: 120px;
+}
+
+.responseValue {
+    color: #4b5563;
+    font-size: 1rem;
+    word-break: break-word;
+}
+
+.modalContent::-webkit-scrollbar {
+    width: 8px;
+}
+
+.modalContent::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.modalContent::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 10px;
+}
+
+.modalContent::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
+.responseDetails {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.responseField {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+    align-items: center;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #e5e7eb; 
+}
+
+.responseField:last-child {
+    border-bottom: none;
 }

@@ -8,14 +8,14 @@ export default function GestaoFormularios() {
     const apiUrl = process.env.REACT_APP_API_URL || process.env.VITE_API_URL || 'http://localhost:5000';
 
     const [formularios, setFormularios] = useState([
-        { id: 1, nome: 'Cotação', area: 'Comercial', destaque: true, icone: 'document', respostas: [] },
-        { id: 2, nome: 'Gestão da Coleta', area: 'Comercial', destaque: true, icone: 'cube', respostas: [] },
-        { id: 3, nome: 'Abertura da Empresa', area: 'Operacional', destaque: false, icone: 'building', respostas: [] },
-        { id: 4, nome: 'Fechamento da Empresa', area: 'Operacional', destaque: false, icone: 'logout', respostas: [] },
-        { id: 5, nome: 'Manutenção Predial', area: 'Operacional', destaque: false, icone: 'tool', respostas: [] },
-        { id: 6, nome: 'Checklist Diário', area: 'Operacional', destaque: false, icone: 'clipboard', respostas: [] },
-        { id: 7, nome: 'Checklist Veículo', area: 'Motorista', destaque: false, icone: 'truck', respostas: [] },
-        { id: 8, nome: 'Cadastro do Motorista', area: 'Motorista', destaque: false, icone: 'user', respostas: [] }
+        { id: 1, nome: 'Cotação', area: 'Comercial', destaque: true, icone: 'document', respostas: [], tipo: "cotacao" },
+        { id: 2, nome: 'Gestão da Coleta', area: 'Comercial', destaque: true, icone: 'cube', respostas: [], tipo: "gestao" },
+        { id: 3, nome: 'Abertura da Empresa', area: 'Operacional', destaque: false, icone: 'building', respostas: [], tipo: "abertura" },
+        { id: 4, nome: 'Fechamento da Empresa', area: 'Operacional', destaque: false, icone: 'logout', respostas: [], tipo: "fechamento" },
+        { id: 5, nome: 'Manutenção Predial', area: 'Operacional', destaque: false, icone: 'tool', respostas: [], tipo: "manutencao_predial" },
+        { id: 6, nome: 'Checklist Diário', area: 'Operacional', destaque: false, icone: 'clipboard', respostas: [], tipo: "diario" },
+        { id: 7, nome: 'Checklist Veículo', area: 'Motorista', destaque: false, icone: 'truck', respostas: [], tipo: "veiculo" },
+        { id: 8, nome: 'Cadastro do Motorista', area: 'Motorista', destaque: false, icone: 'user', respostas: [], tipo: "agregado" }
     ]);
 
     const [modalAberto, setModalAberto] = useState(false);
@@ -32,46 +32,67 @@ export default function GestaoFormularios() {
         user: <path strokeLinecap="round" strokeLinejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
     };
 
-    const fetchFormularios = async () => {
-        try {
-            const response = await axios.get(`${apiUrl}/formularios/verRespostas`);
-            setFormularios(response.data);
-        } catch (error) {
-            console.error("Erro ao buscar formulários:", error);
-        }
-    };
-
-    useEffect(() => {
-        fetchFormularios();
-    }, []);
 
     const handleVisualizar = async (formulario) => {
         try {
-            const response = await axios.get(`${apiUrl}/formularios/verRespostas/${formulario.id}`);
+            const response = await axios.get(`${apiUrl}/checklist/${formulario.tipo}`);
             setFormularioSelecionado({ ...formulario, respostas: response.data });
+            console.log(response)
         } catch (error) {
             console.error("Erro ao buscar respostas:", error);
             setFormularioSelecionado(formulario);
         }
         setModalAberto(true);
     };
+    const [respostaSelecionada, setRespostaSelecionada] = useState(null);
+    const [respostaEditavel, setRespostaEditavel] = useState(null);
 
     const handleVisualizarResposta = (resposta) => {
-        console.log("Visualizar resposta:", resposta);
+        setRespostaSelecionada(resposta);
+    };
+    const handleEditarResposta = (resposta) => {
+        setRespostaEditavel({ ...resposta });
     };
 
-    const handleAtualizarResposta = (respostaId) => {
-        console.log("Atualizar resposta:", respostaId);
+
+    const handlePutResposta = async (resposta) => {
+        try {
+            await axios.put(`${apiUrl}/checklist`, {
+                data: { formID: resposta.id, formNewJSON: resposta.data }
+
+            });
+
+            console.log("Resposta deletada com sucesso");
+
+        } catch (err) {
+            console.error("Erro ao editar resposta:", error);
+        }
+    }
+
+
+    const handleChangeCampo = (chave, valor) => {
+        setRespostaEditavel(prev => ({
+            ...prev,
+            respostas: {
+                ...prev.respostas,
+                [chave]: valor
+            }
+        }));
     };
 
-    const handleDeletarResposta = async (formId, respostaId) => {
+    const handleDeletarResposta = async (respostaId) => {
         if (window.confirm('Tem certeza que deseja deletar esta resposta?')) {
             try {
-                await axios.delete(`${apiUrl}/formularios/putRespostas`, { 
-                    data: { id: respostaId, formulario_id: formId } 
+                console.log(respostaId)
+                await axios.delete(`${apiUrl}/checklist`, {
+                    data: { formID: respostaId }
                 });
-                const respostasAtualizadas = formularioSelecionado.respostas.filter(r => r.id !== respostaId);
+
+                const respostasAtualizadas = formularioSelecionado.respostas.filter(
+                    r => r.id !== respostaId
+                );
                 setFormularioSelecionado({ ...formularioSelecionado, respostas: respostasAtualizadas });
+
                 console.log("Resposta deletada com sucesso");
             } catch (error) {
                 console.error("Erro ao deletar resposta:", error);
@@ -99,8 +120,8 @@ export default function GestaoFormularios() {
                                 <span className={`${styles.cardArea} ${form.destaque ? styles.areaDestaque : styles.areaNormal}`}>{form.area}</span>
                             </div>
                             <div className={styles.buttonGroup}>
-                                <button 
-                                    className={`${styles.btn} ${form.destaque ? styles.btnVisualizarDestaque : styles.btnVisualizarNormal}`} 
+                                <button
+                                    className={`${styles.btn} ${form.destaque ? styles.btnVisualizarDestaque : styles.btnVisualizarNormal}`}
                                     onClick={() => handleVisualizar(form)}
                                 >
                                     Visualizar
@@ -123,32 +144,43 @@ export default function GestaoFormularios() {
                                 <strong>Área:</strong> {formularioSelecionado?.area}<br />
                                 <strong>Total de respostas:</strong> {formularioSelecionado?.respostas?.length || 0}
                             </div>
-                            {formularioSelecionado?.respostas?.map((resposta) => (
-                                <div key={resposta.id} className={styles.responseItem}>
+
+                            {formularioSelecionado?.respostas?.map((resposta, index) => (
+                                <div key={resposta.checkFuncID || index} className={styles.responseItem}>
                                     <div className={styles.responseHeader}>
-                                        <span className={styles.responseTitle}>Resposta #{resposta.id}</span>
+                                        <span className={styles.responseTitle}>
+                                            Resposta #{resposta.checkFuncID || index + 1}
+                                        </span>
                                         <div className={styles.responseButtons}>
-                                            <button className={`${styles.btnSmall} ${styles.btnVisualizar}`} onClick={() => handleVisualizarResposta(resposta)}>
+                                            <button
+                                                className={`${styles.btnSmall} ${styles.btnVisualizar}`}
+                                                onClick={() => handleVisualizarResposta(resposta)}
+                                            >
                                                 Visualizar
                                             </button>
-                                            <button className={`${styles.btnSmall} ${styles.btnAtualizar}`} onClick={() => handleAtualizarResposta(resposta.id)}>
-                                                Atualizar
+                                            <button
+                                                className={`${styles.btnSmall} ${styles.btnAtualizar}`}
+                                                onClick={() => handleEditarResposta(resposta)}
+                                            >
+                                                Editar
                                             </button>
-                                            <button className={`${styles.btnSmall} ${styles.btnDeletar}`} onClick={() => handleDeletarResposta(formularioSelecionado.id, resposta.id)}>
+                                            <button
+                                                className={`${styles.btnSmall} ${styles.btnDeletar}`}
+                                                onClick={() => handleDeletarResposta(resposta.checkFuncID)}
+                                            >
                                                 Deletar
                                             </button>
                                         </div>
                                     </div>
                                     <div className={styles.responseData}>
-                                        {Object.entries(resposta).map(([chave, valor]) => {
-                                            if (chave === 'id') return null;
-                                            return (
-                                                <div key={chave} className={styles.responseField}>
-                                                    <div className={styles.responseLabel}>{chave.charAt(0).toUpperCase() + chave.slice(1).replace('_', ' ')}:</div>
-                                                    <div className={styles.responseValue}>{valor}</div>
-                                                </div>
-                                            );
-                                        })}
+                                        <div className={styles.responseField}>
+                                            <div className={styles.responseLabel}>ID:</div>
+                                            <div className={styles.responseValue}>{resposta.checkFuncID}</div>
+                                        </div>
+                                        <div className={styles.responseField}>
+                                            <div className={styles.responseLabel}>Tipo:</div>
+                                            <div className={styles.responseValue}>{resposta.tipo}</div>
+                                        </div>
                                     </div>
                                 </div>
                             ))}
@@ -156,6 +188,137 @@ export default function GestaoFormularios() {
                     </div>
                 </div>
             )}
+
+            {respostaSelecionada && (
+                <div className={styles.modalOverlay} onClick={() => setRespostaSelecionada(null)}>
+                    <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
+                        <div className={styles.modalHeader}>
+                            <h3>Detalhes da Resposta #{respostaSelecionada.checkFuncID}</h3>
+                            <button className={styles.modalClose} onClick={() => setRespostaSelecionada(null)}>×</button>
+                        </div>
+                        <div className={styles.modalBody}>
+                            <p><strong>Tipo:</strong> {respostaSelecionada.tipo}</p>
+                            <h4>Respostas:</h4>
+                            <div className={styles.responseDetails}>
+                                {Object.entries(respostaSelecionada.respostas).map(([chave, valor]) => {
+                                    if (typeof valor === "boolean") {
+                                        valor = valor ? "Sim" : "Não";
+                                    }
+
+                                    if (typeof valor === "string" && /^\d{4}-\d{2}-\d{2}$/.test(valor)) {
+                                        const [ano, mes, dia] = valor.split("-");
+                                        valor = `${dia}/${mes}/${ano}`;
+                                    }
+
+                                    return (
+                                        <div key={chave} className={styles.responseField}>
+                                            <div className={styles.responseLabel}>
+                                                {chave
+                                                    .replace(/([A-Z])/g, " $1")
+                                                    .replace(/_/g, " ")
+                                                    .replace(/^./, str => str.toUpperCase())
+                                                }:
+                                            </div>
+                                            <div className={styles.responseValue}>{String(valor)}</div>
+                                        </div>
+                                    );
+                                })}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {respostaEditavel && (
+                <div className={styles.modalOverlay} onClick={() => setRespostaEditavel(null)}>
+                    <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
+                        <div className={styles.modalHeader}>
+                            <h3>Editar Resposta #{respostaEditavel.checkFuncID}</h3>
+                            <button
+                                className={styles.modalClose}
+                                onClick={() => setRespostaEditavel(null)}
+                            >
+                                ×
+                            </button>
+                        </div>
+                        <div className={styles.modalBody}>
+                            <p>
+                                <strong>Tipo:</strong> {respostaEditavel.tipo}
+                            </p>
+                            <h4>Respostas:</h4>
+                            <div className={styles.responseDetails}>
+                                {Object.entries(respostaEditavel.respostas).map(([chave, valor]) => {
+                                    let isBoolean = false;
+                                    if (typeof valor === "boolean") {
+                                        isBoolean = true;
+                                        valor = valor ? "Sim" : "Não";
+                                    }
+
+                                    if (typeof valor === "string" && /^\d{4}-\d{2}-\d{2}$/.test(valor)) {
+                                        const [ano, mes, dia] = valor.split("-");
+                                        valor = `${dia}/${mes}/${ano}`;
+                                    }
+
+                                    if (valor === "Sim" || valor === "Não") {
+                                        isBoolean = true;
+                                    }
+
+                                    return (
+                                        <div key={chave} className={styles.responseField}>
+                                            <div className={styles.responseLabel}>
+                                                {chave
+                                                    .replace(/([A-Z])/g, " $1")
+                                                    .replace(/_/g, " ")
+                                                    .replace(/^./, (str) => str.toUpperCase())}
+                                                :
+                                            </div>
+                                            <div className={styles.responseValue}>
+                                                {isBoolean ? (
+                                                    <select
+                                                        value={valor}
+                                                        onChange={(e) =>
+                                                            handleChangeCampo(
+                                                                chave,
+                                                                e.target.value === "Sim" 
+                                                            )
+                                                        }
+                                                    >
+                                                        <option value="Sim">Sim</option>
+                                                        <option value="Não">Não</option>
+                                                    </select>
+                                                ) : (
+                                                    <input
+                                                        type="text"
+                                                        value={valor}
+                                                        onChange={(e) =>
+                                                            handleChangeCampo(chave, e.target.value)
+                                                        }
+                                                    />
+                                                )}
+                                            </div>
+                                        </div>
+                                    );
+                                })}
+                            </div>
+                            <button
+                                className={`${styles.btn} ${styles.btnAtualizar}`}
+                                onClick={() => {
+                                    console.log("Salvar resposta editada:", respostaEditavel);
+
+                                    //Quando a rota de PUT estiver pronta
+                                    // axios.put(`${apiUrl}/checklists`), {
+                                    //     data: { resposta: respostaEditavel }
+                                    // }
+                                    setRespostaEditavel(null);
+                                }}
+                            >
+                                Salvar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
+
         </div>
     );
 }
