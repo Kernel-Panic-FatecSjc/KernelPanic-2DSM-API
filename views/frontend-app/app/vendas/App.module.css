@@ -11,14 +11,6 @@
   margin-bottom: 24px;
 }
  
-.titulo {
-    font-size: 50px;
-    font-weight: 600;
-    color: #1F4AF4;
-    margin: 0 0 25px 0;
-    font-family: Arial, sans-serif;
-    text-align: left;
-}
  
 .filtro {
   display: flex;

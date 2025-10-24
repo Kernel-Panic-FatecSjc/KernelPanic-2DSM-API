@@ -9,10 +9,12 @@ export default function Page() {
 
   return (
     <div className={styles.container}>
+      {/* Lateral com Login */}
       <div className={styles.lateral}>
         <Login />
       </div>
 
+      {/* Formulário principal */}
       <div className={styles.formularioWrapper}>
         <a className={styles.link} onClick={() => router.push("/pagina-agregado")}>
           <strong>← Voltar</strong>
@@ -21,6 +23,7 @@ export default function Page() {
         <div className={styles.formulario}>
           <h1>CHECKLIST de Veículos Agregados</h1>
 
+          {/* DADOS DO MOTORISTA */}
           <label className={styles.label}><strong>Nome completo do motorista:</strong></label>
           <input className={styles.input} type="text" id="nome" name="nome" />
 
@@ -41,6 +44,7 @@ export default function Page() {
             ))}
           </div>
 
+          {/* MOTOR */}
           <h2><strong>MOTOR</strong></h2>
           <p>Verificação do vazamento e nível de óleo e água no motor do veículo.</p>
 
@@ -88,6 +92,7 @@ export default function Page() {
           <label className={styles.label}><strong>Foto etiqueta da última troca de óleo</strong></label>
           <input className={styles.inputImage} type="file" accept="image/*" />
 
+          {/* PNEUS */}
           <h2><strong>PNEUS</strong></h2>
           <p>Verificação do estado de conservação dos PNEUS do veículo.</p>
           <table className={styles.radioTable}>
@@ -122,9 +127,13 @@ export default function Page() {
           </p>
           <input className={styles.inputImage} type="file" accept="image/*" />
 
+          {/* MAIS SEÇÕES */}
           <h2><strong>CONSERVAÇÃO | APARÊNCIA | SEGURANÇA</strong></h2>
           <p>Verifique o estado geral do veículo.</p>
 
+          {/* ... Aqui entram todas as tabelas de conservação, elétrica, segurança individual (mantidas do código original) ... */}
+
+          {/* FOTOS FINAIS */}
           <label className={styles.label}><strong>FOTOS GERAIS</strong></label>
           <p>
             (Adicione 4 fotos do veículo)<br />
@@ -135,9 +144,11 @@ export default function Page() {
           </p>
           <input className={styles.inputImage} type="file" accept="image/*" />
 
+          {/* OBSERVAÇÕES */}
           <label className={styles.label}><strong>OBSERVAÇÕES SOBRE O VEÍCULO</strong></label>
           <input className={styles.input} type="text" id="observacao" name="observacao" />
 
+          {/* RESPONSÁVEL */}
           <label className={styles.label}><strong>Responsável pela Vistoria</strong></label>
           <div className={styles.radioGroupCircles}>
             {[

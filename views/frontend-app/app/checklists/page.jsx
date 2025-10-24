@@ -16,7 +16,7 @@ function page() {
   return (
     <div className={styles.container}>
       <div className={styles.content}>
-        <h1 className={styles.title}>Checklists e Formulários</h1>
+        <h1 className={styles.title}>Checklist e Cadastro</h1>
         <div className={styles.cardsContainer}>
           <div className={styles.card}>
             <div className={styles.iconcontainer}>

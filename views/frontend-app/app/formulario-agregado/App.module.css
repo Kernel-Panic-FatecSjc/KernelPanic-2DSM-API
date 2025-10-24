@@ -4,15 +4,6 @@
   z-index: 1 !important;
 }
 
-.link {
-  color: #736b66;
-  position: absolute;
-  top: 40px;
-  left: 60px;
-  text-decoration: none;
-  cursor: pointer;
-}
-
 .layout {
   display: flex;
   height: 100vh;
@@ -46,7 +37,6 @@
   padding: 20px;
   border-left: none;
   margin-left: calc((100vw - 100%) / 2);
-  position: relative;
 }
 
 .formWrapper {
