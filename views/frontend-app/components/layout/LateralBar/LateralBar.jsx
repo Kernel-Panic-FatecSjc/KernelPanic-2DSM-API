@@ -7,9 +7,10 @@ import { useRouter } from "next/navigation";
 
 const tab_data = [
   {
-    title: "interações",
-    id: "interações",
-    route: "/interacoes",
+
+    title: "login",
+    id: "login",
+    route: "/login-inicial",
     content: (active) => (
       <>
         <Image
