@@ -46,70 +46,81 @@ export default function Page() {
   };
   
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  if (!form.genero || !form.nomeMotorista || !form.placaVeiculo) {
-    alert("⚠️ Preencha todos os campos obrigatórios.");
-    return;
-  }
-
-  try {
-    const payload = {
-      tipo: "agregado",
-      respostas: form
-    };
-
-    const response = await fetch("http://localhost:5000/cadastro_agregado", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload)
-    });
-
-    if (!response.ok) {
-      const errorText = await response.text();
-      throw new Error(`Erro ao enviar checklist: ${errorText}`);
+    if (!form.genero || !form.nomeMotorista || !form.placaVeiculo) {
+      alert("⚠️ Preencha todos os campos obrigatórios.");
+      return;
     }
 
-    const data = await response.json();
-    console.log("✅ Resposta do servidor:", data);
-    alert("Checklist enviado com sucesso!");
+    try {
+      const payload = {
+        tipo: "agregado",
+        respostas: form
+      };
 
-    // Resetar formulário
-    setForm({
-      genero: "",
-      nomeMotorista: "",
-      CNPJMotorista: "",
-      CPFMotorista: "",
-      dataMotorista: "",
-      cidadeMotorista: "",
-      telefoneMotorista: "",
-      emailMotorista: "",
-      RGMotorista: "",
-      RGEmissaoMotorista: "",
-      orgaoMotorista: "",
-      nomePaiMotorista: "",
-      nomeMaeMotorista: "",
-      pisMotorista: "",
-      CEPMotorista: "",
-      enderecoMotorista: "",
-      nomeProprietarioVeiculo: "",
-      placaVeiculo: "",
-      marcaVeiculo: "",
-      modeloVeiculo: "",
-      corVeiculo: "",
-      anoVeiculo: "",
-      cilindradaVeiculo: "",
-      bau: "",
-      seguro: "",
-      valorMin: "",
-      valorMinKM: "",
-    });
-  } catch (error) {
-    console.error("❌ Erro:", error);
-    alert(error.message);
-  }
-};
+      console.log("📤 Enviando dados para cadastro...", payload);
+
+      const response = await fetch("http://localhost:5000/cadastro_agregado", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(`Erro ao enviar cadastro: ${errorText}`);
+      }
+
+      const data = await response.json();
+      console.log("✅ Resposta do servidor:", data);
+      
+      // Mensagem personalizada baseada no envio de email
+      if (data.emailEnviado && data.emailDestinatario) {
+        alert(`✅ Cadastro realizado com sucesso!\n📧 Um email com o comprovante foi enviado para: ${data.emailDestinatario}`);
+      } else if (data.emailEnviado === false) {
+        alert("✅ Cadastro realizado com sucesso!\nℹ️  Nenhum email foi enviado (campo de email não preenchido)");
+      } else {
+        alert("✅ Cadastro realizado com sucesso!");
+      }
+
+      // Resetar formulário
+      setForm({
+        genero: "",
+        nomeMotorista: "",
+        CNPJMotorista: "",
+        CPFMotorista: "",
+        dataMotorista: "",
+        cidadeMotorista: "",
+        telefoneMotorista: "",
+        emailMotorista: "",
+        RGMotorista: "",
+        RGEmissaoMotorista: "",
+        orgaoMotorista: "",
+        nomePaiMotorista: "",
+        nomeMaeMotorista: "",
+        pisMotorista: "",
+        CEPMotorista: "",
+        enderecoMotorista: "",
+        nomeProprietarioVeiculo: "",
+        placaVeiculo: "",
+        marcaVeiculo: "",
+        modeloVeiculo: "",
+        corVeiculo: "",
+        anoVeiculo: "",
+        cilindradaVeiculo: "",
+        bau: "",
+        seguro: "",
+        valorMin: "",
+        valorMinKM: "",
+      });
+
+    } catch (error) {
+      console.error("❌ Erro:", error);
+      alert(`❌ Erro no cadastro: ${error.message}`);
+    }
+  };
 
 
   return (

@@ -28,8 +28,13 @@ export class ChecklistController {
 
       const result = await this.checklistService.createChecklist(tipo, respostasParsed, filePath);
 
+      // Verificar se o email será enviado
+      const emailEnviado = !!(respostasParsed.emailMotorista && respostasParsed.emailMotorista.trim() !== '');
+
       return res.status(201).json({
         message: "Checklist salvo com sucesso!",
+        emailEnviado: emailEnviado,
+        emailDestinatario: respostasParsed.emailMotorista || null,
         result,
       });
     } catch (error: any) {

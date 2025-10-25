@@ -16,7 +16,7 @@ const vendedorRoute = require("./API/Routes/VendedorRoutes")
 const agregadoRoute = require("./API/Routes/checklistAgregadoRoutes")
 const checklistRoute = require("./API/Routes/checklistRoutes")
 const cadastroAgregado = require("./API/Routes/cadastroAgregadoRoutes")
-
+const emailCadastroRoutes = require("./API/routes/emailAgregadoRoute");
 const app = express(); 
 
 app.use(cors()); 
@@ -43,6 +43,7 @@ app.use("/checklist", checklistRoute)
 app.use("/eventos", eventoRoute);
 app.use("/agregado", agregadoRoute)
 app.use("/cadastro_agregado", cadastroAgregado)
+app.use("/api/email", emailCadastroRoutes);
 iniciarCron();
 
 app.get("/", (req, res) => {
