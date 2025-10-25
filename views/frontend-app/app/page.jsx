@@ -1,3 +1,8 @@
+"use client";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import Image from "next/image";
+import styles from "./page.module.css";
 
 export default function Home() {
 
@@ -5,8 +10,9 @@ export default function Home() {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      router.push("/login-master");
-    }, 2000);
+      router.push("/login-inicial");
+    }, 1000);
+
 
     return () => clearTimeout(timer);
   }, [router]);
@@ -21,6 +27,7 @@ export default function Home() {
           alt="Logo da Newe"
           className={styles.logo}
         />
+
         <h1 className={styles.title}>Bem-vindo ao Sistema</h1>
         <div className={styles.loading}>
           <div className={styles.spinner}></div>
@@ -29,4 +36,3 @@ export default function Home() {
     </div>
   );
 }
-  

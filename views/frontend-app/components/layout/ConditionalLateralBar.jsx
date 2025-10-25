@@ -5,9 +5,10 @@ import LateralBar from './LateralBar/LateralBar';
 export default function ConditionalLateralBar() {
   const pathname = usePathname();
   const hidePaths = [
-    '/formulario-agregado', 
-    '/pagina-agregado', 
-    '/checklist-veiculo', 
+    '/',
+    '/formulario-agregado',
+    '/pagina-agregado',
+    '/checklist-veiculo',
     '/login-funcionario',
     '/login-gestor',
     '/login-master',
@@ -17,7 +18,7 @@ export default function ConditionalLateralBar() {
   ];
 
   if (hidePaths.includes(pathname)) {
-    return <div className="empty-lateral" />; 
+    return <div className="empty-lateral" />;
   }
-    return <LateralBar />;
+  return <LateralBar />;
 }

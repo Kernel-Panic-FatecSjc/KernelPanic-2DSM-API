@@ -6,11 +6,14 @@
   color: #111;
 }
 
-.titulo {
-  font-size: 40px;
-  font-weight: 700;
-  margin-bottom: 40px;
+.pageTitle {
+  font-size: 50px;
+  font-weight: 600;
+  color: #1F4AF4;
+  margin-bottom: 25px;
+  font-family: Arial, sans-serif;
   text-align: left;
+  margin-top: 0;
 }
 
 .grid {
@@ -26,7 +29,7 @@
   height: 180px;
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
   text-align: left;
   display: flex;
   flex-direction: column;
@@ -36,7 +39,7 @@
 
 .card:hover {
   transform: translateY(-3px);
-  box-shadow: 0 5px 12px rgba(0,0,0,0.15);
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
 }
 
 .card p {
@@ -66,7 +69,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0,0,0,0.5);
+  background: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -79,14 +82,21 @@
   padding: 30px;
   width: 400px;
   max-width: 90%;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
   text-align: center;
   animation: aparecer 0.2s ease-in-out;
 }
 
 @keyframes aparecer {
-  from { transform: scale(0.95); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 .modal h2 {
@@ -122,7 +132,7 @@
 
 .modal input:focus {
   border-color: #1f4af4;
-  box-shadow: 0 0 0 2px rgba(31,74,244,0.1);
+  box-shadow: 0 0 0 2px rgba(31, 74, 244, 0.1);
 }
 
 .modalButtons {
@@ -150,12 +160,13 @@
   border-color: #1f4af4;
   box-shadow: 0 0 0 2px rgba(31, 74, 244, 0.1);
 }
+
 .modal select option {
-  color: #111; 
-  background-color: #fff;   
+  color: #111;
+  background-color: #fff;
 }
 
-.modal p{ 
+.modal p {
   margin-top: "5px";
   font-weight: "500";
 }
@@ -220,12 +231,12 @@
   transition: all 0.2s ease;
 }
 
-.inputcheckbox:checked + label::before {
+.inputcheckbox:checked+label::before {
   background-color: #1f4af4;
   border-color: #1f4af4;
 }
 
-.inputcheckbox:checked + label::after {
+.inputcheckbox:checked+label::after {
   content: "";
   position: absolute;
   left: 7px;

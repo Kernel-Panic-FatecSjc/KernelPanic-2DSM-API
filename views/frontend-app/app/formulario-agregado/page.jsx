@@ -3,11 +3,13 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import styles from './App.module.css';
 import Login from '../../components/layout/Login/login';
+import { useRouter } from 'next/navigation';
 
 export default function Page() {
   const [genero, setGenero] = useState('');
   const [bau, setBau] = useState('');
   const [seguro, setSeguro] = useState('');
+  const router = useRouter();
 
   return (
     <div className={styles.layout}>
@@ -16,8 +18,8 @@ export default function Page() {
       </div>
 
       <div className={styles.right}>
+        <a className={styles.link} onClick={() => router.push("/pagina-agregado")}>
 
-        <a className={styles.link} onClick={() => router.back()}>
           <strong>← Voltar</strong>
         </a>
         <div className={styles.formWrapper}>
