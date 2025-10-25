@@ -19,7 +19,6 @@
   align-self: flex-start;
   color: #000000;
 }
-
 .cardsContainer {
   display: grid;
   grid-template-columns: repeat(2, 500px);
