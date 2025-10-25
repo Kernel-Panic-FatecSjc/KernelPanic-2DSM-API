@@ -9,7 +9,7 @@ const tab_data = [
   {
     title: "login",
     id: "login",
-    route: "/login-master",
+    route: "/login-inicial",
     content: (active) => (
       <>
         <Image
