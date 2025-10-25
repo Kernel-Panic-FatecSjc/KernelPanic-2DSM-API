@@ -57,12 +57,13 @@ export default function GestaoFormularios() {
 
     const handlePutResposta = async (resposta) => {
         try {
-            await axios.put(`${apiUrl}/checklist`, {
-                data: { formID: resposta.id, formNewJSON: resposta.data }
+            await axios.put(`${apiUrl}/checklist`,{ 
+                    id: resposta.checkFuncID, 
+                    tipo: resposta.tipo, 
+                    resposta: resposta.resposta
+                });
 
-            });
-
-            console.log("Resposta deletada com sucesso");
+            console.log("Resposta editar com sucesso");
 
         } catch (err) {
             console.error("Erro ao editar resposta:", error);
@@ -279,7 +280,7 @@ export default function GestaoFormularios() {
                                                         onChange={(e) =>
                                                             handleChangeCampo(
                                                                 chave,
-                                                                e.target.value === "Sim" 
+                                                                e.target.value === "Sim"
                                                             )
                                                         }
                                                     >
@@ -305,10 +306,7 @@ export default function GestaoFormularios() {
                                 onClick={() => {
                                     console.log("Salvar resposta editada:", respostaEditavel);
 
-                                    //Quando a rota de PUT estiver pronta
-                                    // axios.put(`${apiUrl}/checklists`), {
-                                    //     data: { resposta: respostaEditavel }
-                                    // }
+                                    handlePutResposta(respostaEditavel)
                                     setRespostaEditavel(null);
                                 }}
                             >

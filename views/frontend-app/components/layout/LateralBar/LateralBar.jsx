@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 
 const tab_data = [
   {
+
     title: "login",
     id: "login",
     route: "/login-inicial",
