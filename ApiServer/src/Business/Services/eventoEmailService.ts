@@ -26,7 +26,7 @@ export async function enviarEmail(email: string, titulo: string) {
 
 
       const html = `
-  <html>
+    <html>
     <head>
       <meta charset="UTF-8" />
       <style>
@@ -51,23 +51,31 @@ export async function enviarEmail(email: string, titulo: string) {
         }
 
         .header img {
-          width: 160px;
+          width: 260px;
+          
         }
 
         .title {
           font-size: 18px;
-          font-weight: 600;
+          font-weight: 700;
           text-align: center;
+          background-color: #EEF0F2;
+          padding: 25px 20px;
           color: #333;
-          margin: 30px 20px 10px;
+          margin: 0;
+        }
+
+        .title strong {
+          color: #000;
         }
 
         .content {
           font-size: 14px;
           line-height: 1.6;
           color: #333;
-          padding: 0 40px 20px;
-          text-align: justify;
+          background-color: #EEF0F2;
+          padding: 5px 40px 50px;
+          text-align: center;
         }
 
         .btn {
@@ -86,14 +94,14 @@ export async function enviarEmail(email: string, titulo: string) {
         }
 
         .wave {
-          background-color: #1e56f0;
+          background-color: #1F4AF4;
           text-align: center;
           padding: 40px 20px;
-          margin-top: 40px;
+          margin: 0;
         }
 
         .wave img {
-          width: 130px;
+          width: 190px;
           margin-bottom: 15px;
         }
 
@@ -110,18 +118,20 @@ export async function enviarEmail(email: string, titulo: string) {
       <div class="email-container">
         <div class="header">
           <!-- LOGO SUPERIOR -->
-          <img src="https://seu-servidor.com/logo-superior.png" alt="Newe Logística Integrada" />
+          <img src="cid:logo1" alt="Newe Logística Integrada" />
         </div>
 
-        <div class="title">
-          Você tem um lembrete agendado para hoje!<br />
-          Evento: <strong>${titulo}</strong>
-        </div>
+
 
         <div class="content">
+            <div class="title">
+                Você tem um lembrete agendado para hoje!<br />
+                Evento: <strong>${titulo}</strong>
+            </div>
           <p>
-            Este é um lembrete automático do sistema Newe. 
-            Confira os detalhes do seu evento e garanta que tudo esteja pronto.
+            Este é um e-mail automático gerado pelo calendário de eventos da Newe.
+            Nosso sistema identificou que você possui um lembrete agendado para hoje.
+            Fique atento ao horário e certifique-se de que tudo está pronto para o seu evento.
           </p>
 
           <p>
@@ -135,7 +145,7 @@ export async function enviarEmail(email: string, titulo: string) {
 
         <div class="wave">
           <!-- LOGO INFERIOR -->
-          <img src="/images/logonewebranco.png alt="Newe Rodapé" />
+          <img src="cid:logo2" alt="Newe Rodapé" />
           <p>© 2025 Newe. Todos os direitos reservados.</p>
           <p>
             O uso não autorizado do conteúdo deste site pode violar leis civis e criminais
@@ -155,6 +165,10 @@ export async function enviarEmail(email: string, titulo: string) {
       to: email,
       subject: "Lembrete do evento",
       html: htmlInline,
+      attachments: [
+        { filename: "newelogo2.png", path: "../../../../views/frontend-app/public/images//newelogo2.png", cid: "logo1" },
+        { filename: "newelogo.png", path: "../../../../views/frontend-app/public/images//newelogo.png", cid: "logo2" }
+      ]
     });
 
     console.log(`Email enviado para ${email}`);
