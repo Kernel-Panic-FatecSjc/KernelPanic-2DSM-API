@@ -3,7 +3,7 @@
 }
 
 .empty-lateral {
-  width: 0;
+  width: 0; 
 }
 
 .layout {
@@ -45,7 +45,7 @@
   padding: 0 80px;
   background-color: #fff;
   position: relative;
-  text-align: center;
+  text-align: center; 
   margin: 0 auto;
 }
 
