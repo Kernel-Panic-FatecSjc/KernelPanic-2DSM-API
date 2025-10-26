@@ -18,6 +18,9 @@ const agregadoRoute = require("./API/Routes/checklistAgregadoRoutes")
 const checklistRoute = require("./API/Routes/checklistRoutes")
 const cadastroAgregado = require("./API/Routes/cadastroAgregadoRoutes")
 const emailCadastroRoutes = require("./API/Routes/emailAgregadoRoute");
+const funcionarioPerfilRoutes = require("./API/Routes/FuncionarioPerfilRoutes")
+const funcionarioRoutes = require("./API/Routes/FuncionarioRoutes")
+
 const app = express(); 
 
 app.use(cors()); 
@@ -47,7 +50,12 @@ app.use("/eventos", eventoRoute);
 app.use("/agregado", agregadoRoute)
 app.use("/cadastro_agregado", cadastroAgregado)
 app.use("/api/email", emailCadastroRoutes);
+app.use("/api/funcionarios", funcionarioPerfilRoutes);
+app.use("/funcionario", funcionarioRoutes)
+
 iniciarCron();
+
+
 
 app.get("/", (req, res) => {
   res.send("API funcionando");
