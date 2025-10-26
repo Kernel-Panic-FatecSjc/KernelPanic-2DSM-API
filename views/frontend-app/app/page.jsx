@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import styles from "./page.module.css";
+import ProtectRoute from "../components/ProtectRoute";
 
 export default function Home() {
 
@@ -33,6 +34,7 @@ export default function Home() {
           <div className={styles.spinner}></div>
         </div>
       </div>
+  
     </div>
   );
 }

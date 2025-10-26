@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import axios from "axios";
 import styles from "./App.module.css";
+import ProtectRoute from "../../components/ProtectRoute";
 const Select = dynamic(() => import("react-select"), { ssr: false });
 
 function App() {
@@ -79,6 +80,7 @@ function App() {
     });
 
     return (
+        <ProtectRoute>
         <div className={styles["conteudo"]}>
             <div className={styles["container-historico"]}>
                 <div className={styles.tableContainer}>
@@ -203,6 +205,7 @@ function App() {
                 </div>
             </div>
         </div>
+        </ProtectRoute>
     );
 }
 

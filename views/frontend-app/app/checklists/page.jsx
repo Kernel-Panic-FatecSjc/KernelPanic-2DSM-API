@@ -4,6 +4,7 @@ import axios from 'axios';
 import Select from 'react-select';
 import styles from './App.module.css';
 import { useRouter } from 'next/navigation';  
+import ProtectRoute from '../../components/ProtectRoute';
 
 
 function page() {
@@ -14,6 +15,7 @@ function page() {
   };
 
   return (
+    <ProtectRoute>
     <div className={styles.container}>
       <div className={styles.content}>
         <h1 className={styles.title}>Checklists e Formulários</h1>
@@ -57,6 +59,7 @@ function page() {
         </div>
       </div>
     </div>
+    </ProtectRoute>
   );
 }
 
