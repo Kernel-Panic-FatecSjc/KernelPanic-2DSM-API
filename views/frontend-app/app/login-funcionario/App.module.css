@@ -7,11 +7,11 @@
 }
 
 .layout {
-  display: flex !important;   
+  display: flex !important;
   flex-direction: row;
   min-width: 90%;
   min-height: 100vh;
-  overflow-x: hidden;         
+  overflow-x: hidden;
   background-color: #fff;
   box-sizing: border-box;
 }
@@ -51,7 +51,7 @@
 
 
 .linkVoltar {
-display: inline-flex; 
+  display: inline-flex;
   align-self: flex-start;
   font-size: 1rem;
   text-decoration: none;
@@ -89,12 +89,12 @@ display: inline-flex;
   gap: 10px;
   background: #e5edff;
   color: #0051ff;
-  padding: 10px 35px; 
+  padding: 10px 35px;
   border-radius: 20px;
   box-shadow: 0 4px 10px rgba(0, 81, 255, 0.3);
   font-weight: 500;
   margin-bottom: 45px;
-  width: fit-content; 
+  width: fit-content;
 }
 
 .iconePainel {
@@ -106,8 +106,8 @@ display: inline-flex;
 .form {
   display: flex;
   flex-direction: column;
-  align-items: center; 
-  width: 480px; 
+  align-items: center;
+  width: 480px;
   gap: 22px;
 }
 
@@ -180,7 +180,7 @@ display: inline-flex;
   margin-top: 25px;
   cursor: pointer;
   transition: all 0.2s;
-  width: 60%; 
+  width: 60%;
 }
 
 .botaoLogar:hover {

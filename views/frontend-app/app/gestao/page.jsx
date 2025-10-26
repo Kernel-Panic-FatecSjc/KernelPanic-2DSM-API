@@ -11,98 +11,40 @@ function App() {
     const [showModalUpdate, setShowModalUpdate] = useState(false);
     const [selectedClient, setSelectedClient] = useState(null);
 
+    const [vendedores, setVendedores] = useState([]);
+
     const [showModalAdd, setShowModalAdd] = useState(false);
     const [newClient, setNewClient] = useState({
-        cliente: "",
-        cep: "",
-        rua: "",
-        bairro: "",
-        cidade: "",
-        estado: "",
+        nome: "",
+        endereco: "",
         segmento: "",
-        status: "Pendente",
-        departamento: "",
-        tipoContato: "telefone",
-        contatoValor: "",
+        funcionario_ID: 0,
+        funil_ID: 0,
+        tipo_contato: "telefone",
+        valor_contato: "",
     });
 
-    // DADOS mockados para teste
-    const dadosMockados = [
-        {
-            id: 1,
-            cliente: "José",
-            endereco: "Engenheiro Jose Longo, 622, São José dos Campos - SP",
-            segmento: "O coelho gordo",
-            status: "Pendente",
-            contatos: "telefone: (12) 1111-1111 | telefone: (12) 1111-1110",
-            tipoContato: "telefone",
-            contatoValor: "(12) 1111-1111",
-            departamento: "Vendas",
-            departamentoId: 1,
-            ultimaInteracao: "2019-04-29",
-            vendas: 45200,
-        },
-        {
-            id: 2,
-            cliente: "Dani",
-            endereco: "Engenheiro Jose Longo, 622, São José dos Campos - SP",
-            segmento: "A coelha medrosa",
-            status: "Ativo",
-            contatos: "telefone: (12) 2222-2222 | telefone: (12) 2222-2220",
-            tipoContato: "telefone",
-            contatoValor: "(12) 2222-2222",
-            departamento: "Suporte",
-            departamentoId: 2,
-            ultimaInteracao: "2019-05-15",
-            vendas: 78900,
-        },
-        {
-            id: 3,
-            cliente: "Amy",
-            endereco: "Engenheiro Jose Longo, 622, São José dos Campos - SP",
-            segmento: "A coelha exploradora",
-            status: "Concluído",
-            contatos: "telefone: (12) 3333-3333 | telefone: (12) 3333-3330",
-            tipoContato: "telefone",
-            contatoValor: "(12) 3333-3333",
-            departamento: "Marketing",
-            departamentoId: 3,
-            ultimaInteracao: "2019-06-02",
-            vendas: 125500,
-        },
-        {
-            id: 4,
-            cliente: "Frida",
-            endereco: "Engenheiro Jose Longo, 622, São José dos Campos - SP",
-            segmento: "A coelha destemida",
-            status: "Ativo",
-            contatos: "telefone: (12) 4444-4444 | telefone: (12) 4444-4440",
-            tipoContato: "telefone",
-            contatoValor: "(12) 4444-4444",
-            departamento: "Consultoria",
-            departamentoId: 4,
-            ultimaInteracao: "2019-05-20",
-            vendas: 92300,
-        },
-        {
-            id: 5,
-            cliente: "Hanna",
-            endereco: "Engenheiro Jose Longo, 622, São José dos Campos - SP",
-            segmento: "O coelho curioso",
-            status: "Pendente",
-            contatos: "telefone: (12) 5555-5555 | telefone: (12) 5555-5550",
-            tipoContato: "telefone",
-            contatoValor: "(12) 5555-5555",
-            departamento: "Desenvolvimento",
-            departamentoId: 5,
-            ultimaInteracao: "2019-04-10",
-            vendas: 63800,
-        },
-    ];
+    const fetchVendedores = async () => {
+        try {
+            const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+            const response = await axios.get(
+                `${apiUrl}/vendedor/getVendedores`
+            );
+            setVendedores(response.data);
+        } catch (error) {
+            console.error("Erro ao buscar vendedores:", error);
+        }
+    };
+
+    useEffect(() => {
+        fetchVendedores();
+    }, []);
 
     const fetchClientes = async () => {
         try {
-            const response = await axios.get("http://localhost:5000/gestao");
+            const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+
+            const response = await axios.get(`${apiUrl}/gestao`);
             const clientes = response.data.message;
 
             const mapaClientes = clientes.map((cliente) => {
@@ -138,15 +80,22 @@ function App() {
             setClients(mapaClientes);
         } catch (error) {
             console.error("Erro ao buscar clientes:", error);
-            setClients(dadosMockados);
         }
     };
 
     useEffect(() => {
-        setClients(dadosMockados);
+        const carregarClientes = async () => {
+            try {
+                await fetchClientes();
+            } catch (error) {
+                console.warn("API offline, usando dados mockados...");
+                setClients(dadosMockados);
+            }
+        };
+
+        carregarClientes();
     }, []);
 
-    // NUMERO de clientes
     const totalClientes = clientes.length;
     const clientesPendentes = clientes.filter((c) =>
         c.status.toLowerCase().includes("pendente")
@@ -190,48 +139,44 @@ function App() {
 
     const handleAdd = async (e) => {
         e.preventDefault();
-        if (!newClient.cliente?.trim()) {
+
+        if (!newClient.nome?.trim()) {
             alert("O nome do cliente não pode ficar vazio!");
             return;
         }
 
-        const novoId =
-            clientes.length > 0
-                ? Math.max(...clientes.map((c) => c.id)) + 1
-                : 1;
-        const endereco = `${newClient.rua}, ${newClient.bairro}, ${newClient.cidade} - ${newClient.estado}, CEP: ${newClient.cep}`;
-
-        const novoCliente = {
-            id: novoId,
-            cliente: newClient.cliente,
-            endereco: endereco,
-            segmento: newClient.segmento,
-            status: newClient.status,
-            contatos: `${newClient.tipoContato}: ${newClient.contatoValor}`,
-            tipoContato: newClient.tipoContato,
-            contatoValor: newClient.contatoValor,
-            departamento: newClient.departamento,
-            departamentoId: null,
-            ultimaInteracao: new Date().toISOString(),
-            vendas: 0,
+        const formData = {
+            nome: newClient.nome,
+            endereco: newClient.endereco,
+            segmento: newClient.segmento || "Não informado",
+            funcionario_ID: newClient.funcionario_ID,
+            funil_ID: newClient.funil_ID,
+            tipo_contato: newClient.tipo_contato,
+            valor_contato: newClient.valor_contato,
         };
 
-        setClients([...clientes, novoCliente]);
-        setShowModalAdd(false);
-        setNewClient({
-            cliente: "",
-            cep: "",
-            rua: "",
-            bairro: "",
-            cidade: "",
-            estado: "",
-            segmento: "",
-            status: "Pendente",
-            departamento: "",
-            tipoContato: "telefone",
-            contatoValor: "",
-        });
-        alert("Cliente adicionado com sucesso!");
+        try {
+            const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+
+           await axios.post(`${apiUrl}/clientes`, formData);
+
+            alert("Cliente adicionado com sucesso!");
+
+            setNewClient({
+                nome: "",
+                endereco: "",
+                segmento: "",
+                funcionario_ID: "",
+                funil_ID: "",
+                tipo_contato: "telefone",
+                valor_contato: "",
+            });
+
+            setShowModalAdd(false);
+        } catch (error) {
+            console.error(error);
+            alert("Erro ao adicionar cliente. Tente novamente!");
+        }
     };
 
     const handleSave = async (e) => {
@@ -350,7 +295,7 @@ function App() {
                         </div>
                     </div>
                 </div>
-                {/* BARRAS */}
+
                 <div className={styles.searchContainer}>
                     <div className={styles.leftControls}>
                         <input
@@ -377,7 +322,6 @@ function App() {
                     </select>
                 </div>
 
-                {/* CARDS */}
                 <div className={styles.cardsContainer}>
                     {sortedClients.map((client) => (
                         <div key={client.id} className={styles.clientCard}>
@@ -550,14 +494,13 @@ function App() {
                 </div>
             )}
 
-            {/* MODAL de adicionar cliente */}
             {showModalAdd && (
                 <div className={styles.modalAddOverlay}>
                     <div className={styles.modalAddContent}>
                         <h2>Adicionar novo cliente</h2>
                         <p className={styles.subtitle}>
                             Preencha os dados abaixo para cadastrar um novo
-                            cliente no sistema
+                            cliente no sistema.
                         </p>
 
                         <form onSubmit={handleAdd}>
@@ -568,11 +511,11 @@ function App() {
                                 <input
                                     type="text"
                                     className={styles.formInput}
-                                    value={newClient.cliente}
+                                    value={newClient.nome}
                                     onChange={(e) =>
                                         setNewClient({
                                             ...newClient,
-                                            cliente: e.target.value,
+                                            nome: e.target.value,
                                         })
                                     }
                                     required
@@ -580,88 +523,20 @@ function App() {
                             </div>
 
                             <div className={styles.formGroup}>
-                                <label className={styles.formLabel}>CEP</label>
-                                <input
-                                    type="text"
-                                    className={styles.formInput}
-                                    value={newClient.cep}
-                                    onChange={(e) =>
-                                        setNewClient({
-                                            ...newClient,
-                                            cep: e.target.value,
-                                        })
-                                    }
-                                    placeholder="00000-000"
-                                />
-                            </div>
-
-                            <div className={styles.formGroup}>
                                 <label className={styles.formLabel}>
-                                    Rua/Avenida
+                                    Endereço
                                 </label>
                                 <input
                                     type="text"
                                     className={styles.formInput}
-                                    value={newClient.rua}
+                                    value={newClient.endereco}
                                     onChange={(e) =>
                                         setNewClient({
                                             ...newClient,
-                                            rua: e.target.value,
+                                            endereco: e.target.value,
                                         })
                                     }
-                                />
-                            </div>
-
-                            <div className={styles.formGroup}>
-                                <label className={styles.formLabel}>
-                                    Bairro
-                                </label>
-                                <input
-                                    type="text"
-                                    className={styles.formInput}
-                                    value={newClient.bairro}
-                                    onChange={(e) =>
-                                        setNewClient({
-                                            ...newClient,
-                                            bairro: e.target.value,
-                                        })
-                                    }
-                                />
-                            </div>
-
-                            <div className={styles.formGroup}>
-                                <label className={styles.formLabel}>
-                                    Cidade
-                                </label>
-                                <input
-                                    type="text"
-                                    className={styles.formInput}
-                                    value={newClient.cidade}
-                                    onChange={(e) =>
-                                        setNewClient({
-                                            ...newClient,
-                                            cidade: e.target.value,
-                                        })
-                                    }
-                                />
-                            </div>
-
-                            <div className={styles.formGroup}>
-                                <label className={styles.formLabel}>
-                                    Estado
-                                </label>
-                                <input
-                                    type="text"
-                                    className={styles.formInput}
-                                    value={newClient.estado}
-                                    onChange={(e) =>
-                                        setNewClient({
-                                            ...newClient,
-                                            estado: e.target.value,
-                                        })
-                                    }
-                                    placeholder="SP"
-                                    maxLength="2"
+                                    placeholder="Rua, número, bairro, cidade"
                                 />
                             </div>
 
@@ -679,44 +554,66 @@ function App() {
                                             segmento: e.target.value,
                                         })
                                     }
+                                    placeholder="Ex: Tecnologia, Varejo, Serviços..."
                                 />
                             </div>
 
                             <div className={styles.formGroup}>
                                 <label className={styles.formLabel}>
-                                    Status da venda
+                                    Funcionário responsável
                                 </label>
                                 <select
                                     className={styles.formSelect}
-                                    value={newClient.status}
+                                    value={newClient.funcionario_ID}
                                     onChange={(e) =>
                                         setNewClient({
                                             ...newClient,
-                                            status: e.target.value,
+                                            funcionario_ID: Number(
+                                                e.target.value
+                                            ),
                                         })
                                     }
+                                    required
                                 >
-                                    <option value="Pendente">Pendente</option>
-                                    <option value="Ativo">Ativo</option>
-                                    <option value="Concluído">Concluído</option>
+                                    <option value="">
+                                        Selecione um funcionário
+                                    </option>
+                                    {vendedores.map((vendedor) => (
+                                        <option
+                                            key={vendedor.funcionario_ID}
+                                            value={vendedor.funcionario_ID}
+                                        >
+                                            {vendedor.nome} — {vendedor.cargo}
+                                        </option>
+                                    ))}
                                 </select>
                             </div>
 
                             <div className={styles.formGroup}>
                                 <label className={styles.formLabel}>
-                                    Departamento responsável
+                                    Funil de vendas
                                 </label>
-                                <input
-                                    type="text"
-                                    className={styles.formInput}
-                                    value={newClient.departamento}
+                                <select
+                                    className={styles.formSelect}
+                                    value={newClient.funil_ID}
                                     onChange={(e) =>
                                         setNewClient({
                                             ...newClient,
-                                            departamento: e.target.value,
+                                            funil_ID: Number(e.target.value),
                                         })
                                     }
-                                />
+                                    required
+                                >
+                                    <option value="">Selecione um funil</option>
+                                    <option value={1}>Prospecção</option>
+                                    <option value={2}>Followup</option>
+                                    <option value={3}>Negociação</option>
+                                    <option value={4}>Inicial</option>
+                                    <option value={5}>Potencial</option>
+                                    <option value={6}>Manutencao</option>
+                                    <option value={7}>Nao Venda</option>
+                                    <option value={8}>Venda</option>
+                                </select>
                             </div>
 
                             <div className={styles.formGroup}>
@@ -725,11 +622,11 @@ function App() {
                                 </label>
                                 <select
                                     className={styles.formSelect}
-                                    value={newClient.tipoContato}
+                                    value={newClient.tipo_contato}
                                     onChange={(e) =>
                                         setNewClient({
                                             ...newClient,
-                                            tipoContato: e.target.value,
+                                            tipo_contato: e.target.value,
                                         })
                                     }
                                 >
@@ -746,15 +643,15 @@ function App() {
                                 <input
                                     type="text"
                                     className={styles.formInput}
-                                    value={newClient.contatoValor}
+                                    value={newClient.valor_contato}
                                     onChange={(e) =>
                                         setNewClient({
                                             ...newClient,
-                                            contatoValor: e.target.value,
+                                            valor_contato: e.target.value,
                                         })
                                     }
                                     placeholder={
-                                        newClient.tipoContato === "email"
+                                        newClient.tipo_contato === "email"
                                             ? "exemplo@email.com"
                                             : "(00) 00000-0000"
                                     }

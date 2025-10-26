@@ -6,8 +6,6 @@
   width: 0; 
 }
 
-
-/* ===== Layout geral ===== */
 .layout {
   display: flex !important;
   flex-direction: row;
@@ -33,7 +31,6 @@
   justify-content: center;
 }
 
-/* ===== Formulário ===== */
 .formularioWrapper {
   flex: 1;
   display: flex;
@@ -54,17 +51,15 @@
   padding: 40px;
 }
 
-
-/* ===== Voltar link ===== */
 .link {
   color: #736b66;
   position: absolute;
   top: 40px;
   left: 60px;
   text-decoration: none;
+  cursor: pointer;
 }
 
-/* ===== Títulos e textos ===== */
 .formulario h1,
 .formulario h2 {
   color: #1f4af4;
@@ -79,7 +74,6 @@
   line-height: 1.6;
 }
 
-/* ===== Inputs e labels ===== */
 .label {
   display: block;
   font-weight: 500;
@@ -108,7 +102,6 @@
   box-shadow: 0 0 0 3px rgba(90, 45, 247, 0.15);
 }
 
-/* ===== Input de imagem ===== */
 .inputImage {
   font-size: 16px;
   padding: 6px;
@@ -184,7 +177,6 @@
   box-shadow: 0 0 4px rgba(31, 74, 244, 0.2);
 }
 
-/* ===== Botão Enviar ===== */
 .btn_enviar {
   background-color: #1f4af4;
   border-radius: 25px;
@@ -206,7 +198,6 @@
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 }
 
-/* ===== Tabelas de radios (se você ainda usar) ===== */
 .radioTable {
   width: 100%;
   border-collapse: collapse;
@@ -235,7 +226,6 @@
   color: #2b2b2b;
 }
 
-/* ===== Radios em tabelas ===== */
 .radioTable input[type="radio"] {
   appearance: none;
   width: 18px;
@@ -258,7 +248,6 @@
   box-shadow: 0 0 6px rgba(31, 74, 244, 0.4);
 }
 
-/* ===== Responsivo ===== */
 @media (max-width: 900px) {
   .layout {
     flex-direction: column;

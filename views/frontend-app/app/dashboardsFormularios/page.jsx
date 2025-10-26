@@ -1,70 +1,67 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./App.module.css";
-import { useState, useEffect } from "react";
-import axios from "axios"
+import { Line } from "react-chartjs-2";
+import {
+    Chart as ChartJS,
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    LineElement,
+    Title,
+    Tooltip,
+    Legend,
+} from "chart.js";
 
-export default function page() {
-    const [respostasFormulario, setRespostasFormulario] = useState([]);
+ChartJS.register(
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    LineElement,
+    Title,
+    Tooltip,
+    Legend
+);
 
-    const [totalPreenchidos, setTotalpreenchidos] = useState(0);
-    const [totalPreenchidosSemana, setTotalPreenchidosSemana] = useState(0);
+export default function Page() {
+    const mockFormulariosFuncionarios = [
+        {
+            formulario: "Cadastro de Usuário",
+            data: "25/10/2025",
+            horario: "08:30",
+        },
+        {
+            formulario: "Login de Sistema",
+            data: "24/10/2025",
+            horario: "14:15",
+        },
+        {
+            formulario: "Envio de Relatório",
+            data: "23/10/2025",
+            horario: "09:45",
+        },
+        {
+            formulario: "Atualização de Perfil",
+            data: "22/10/2025",
+            horario: "16:00",
+        },
+    ];
 
-    const [totalAgregados, setTotalAgregados] = useState(0);
-    const [totalAgregadosSemana, setTotalAgregadosSemana] = useState(0);
+    const [respostasFormulario, setRespostasFormulario] = useState(
+        mockFormulariosFuncionarios
+    );
 
-    useEffect(() => {
-        const carregarFormularios = async () => {
-            try {
-                const response = await axios.get("localhost:3000/api/formularios");
+    const totalPreenchidos = respostasFormulario.length;
 
-                const data = response.data;
-                setRespostasFormulario(data);
-                setTotalPreenchidos(data.length);
+    const seteDiasAtras = new Date();
+    seteDiasAtras.setDate(seteDiasAtras.getDate() - 7);
 
-                const seteDiasAtras = new Date();
-                seteDiasAtras.setDate(seteDiasAtras.getDate() - 7);
-
-                const preenchidosSemana = data.filter((item) => {
-                    const dataItem = new Date(item.data);
-                    return dataItem >= seteDiasAtras;
-                });
-
-                setTotalPreenchidosSemana(preenchidosSemana.length);
-            } catch (error) {
-                console.error("Erro ao carregar formulários:", error);
-            }
-        };
-
-        carregarFormularios();
-    }, []);
-
-    useEffect(() => {
-        const carregarFormulariosFuncionarios = async () => {
-            try {
-                const response = await axios.get("localhost:3000/api/formulariosFuncionarios");
-
-                const data = response.data;
-                setRespostasFormulario(data);
-                setTotalPreenchidos(data.length);
-
-                const seteDiasAtras = new Date();
-                seteDiasAtras.setDate(seteDiasAtras.getDate() - 7);
-
-                const preenchidosSemana = data.filter((item) => {
-                    const dataItem = new Date(item.data);
-                    return dataItem >= seteDiasAtras;
-                });
-
-                setTotalPreenchidosSemana(preenchidosSemana.length);
-            } catch (error) {
-                console.error("Erro ao carregar formulários:", error);
-            }
-        };
-
-        carregarFormulariosFuncionarios();
-    }, []);
+    const totalPreenchidosSemana = respostasFormulario.filter((item) => {
+        const [dia, mes, ano] = item.data.split("/");
+        const dataItem = new Date(`${ano}-${mes}-${dia}`);
+        return dataItem >= seteDiasAtras;
+    }).length;
 
     const respostasFuncionarioBase = [
         { funcionario: "Ana Souza", quantidade: 134 },
@@ -109,11 +106,48 @@ export default function page() {
         percentual: ((item.quantidade / totalVeiculos) * 100).toFixed(1) + "%",
     }));
 
+    const dadosPorDia = [
+        { dia: "Segunda", quantidade: 50 },
+        { dia: "Terça", quantidade: 75 },
+        { dia: "Quarta", quantidade: 60 },
+        { dia: "Quinta", quantidade: 90 },
+        { dia: "Sexta", quantidade: 120 },
+        { dia: "Sábado", quantidade: 80 },
+        { dia: "Domingo", quantidade: 40 },
+    ];
+
+    const data = {
+        labels: dadosPorDia.map((item) => item.dia),
+        datasets: [
+            {
+                label: "Formulários Preenchidos",
+                data: dadosPorDia.map((item) => item.quantidade),
+                fill: false,
+                borderColor: "#1f4af4",
+                backgroundColor: "#1f4af4",
+                tension: 0.3,
+            },
+        ],
+    };
+
+    const options = {
+        responsive: true,
+        plugins: {
+            legend: { position: "top" },
+            title: { display: true, text: "Formulários por dia da semana" },
+        },
+        scales: {
+            y: {
+                beginAtZero: true,
+            },
+        },
+    };
     return (
         <div className={styles.main}>
             <h1 className={styles.tittle}>
                 Dashboard de resposta dos formulários
             </h1>
+
             <container className={styles.container}>
                 <section className={styles.section}>
                     <div className={styles.titleDash}>
@@ -122,8 +156,9 @@ export default function page() {
                             src="images/iconcliente.svg"
                             alt=""
                         />
-                        <h2>Funcionarios</h2>
+                        <h2>Funcionários</h2>
                     </div>
+
                     <aside className={styles.preenchidosAside}>
                         <div className={styles.preenchidosTitle}>
                             <h3>Total Preenchidos</h3>
@@ -201,6 +236,7 @@ export default function page() {
                         </ul>
                     </div>
                 </section>
+
                 <section className={styles.section}>
                     <div className={styles.titleDash}>
                         <img
@@ -210,23 +246,25 @@ export default function page() {
                         />
                         <h2>Agregados</h2>
                     </div>
+
                     <aside className={styles.preenchidosAside}>
                         <div className={styles.preenchidosTitle}>
                             <h3>Total Preenchidos</h3>
-                            <h3>{totalAgregados}</h3>
+                            <h3>{totalVeiculos}</h3>
                         </div>
                         <div className={styles.preenchidosTitle}>
                             <h3>Essa Semana</h3>
-                            <h3>{totalAgregadosSemana}</h3>
+                            <h3>{0}</h3>
                         </div>
                     </aside>
+
                     <div className={styles.ultimaAtualizacao}>
                         <h3>Quantidade por Agregado</h3>
                         <ul>
                             <li
                                 className={`${styles.linha_par} ${styles.primeiraLinha}`}
                             >
-                                <span className={styles.col}>Veiculo</span>
+                                <span className={styles.col}>Veículo</span>
                                 <span className={styles.col}>Quantidade</span>
                                 <span className={styles.col}>Percentual</span>
                             </li>
@@ -252,38 +290,11 @@ export default function page() {
                             ))}
                         </ul>
                     </div>
-                    <div className={styles.ultimaAtualizacao}>
-                        <h3>Última atualização por formulário</h3>
-                        <ul>
-                            <li
-                                className={`${styles.linha_par} ${styles.primeiraLinha}`}
-                            >
-                                <span className={styles.col}>Formulário</span>
-                                <span className={styles.col}>Data</span>
-                                <span className={styles.col}>Horario</span>
-                            </li>
-                            {respostasFormulario.map((item, index) => (
-                                <li
-                                    key={index}
-                                    className={
-                                        index % 2 === 0
-                                            ? styles.linha_par
-                                            : styles.linha_impar
-                                    }
-                                >
-                                    <span className={styles.col}>
-                                        {item.formulario}
-                                    </span>
-                                    <span className={styles.col}>
-                                        {item.data}
-                                    </span>
-                                    <span className={styles.col}>
-                                        {item.horario}
-                                    </span>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
+
+                        <div className={styles.ultimaAtualizacao}>
+                            <Line data={data} options={options}  style={{ width: "100%", height: "100%" }} 
+/>
+                        </div>
                 </section>
             </container>
         </div>

@@ -130,6 +130,10 @@ export default function Page() {
       </div>
 
       <div className={styles.right}>
+        <a className={styles.link} onClick={() => router.push("/pagina-agregado")}>
+
+          <strong>← Voltar</strong>
+        </a>
         <div className={styles.formWrapper}>
           <main className={styles.container}>
             <h2>Formulário de agregado</h2>

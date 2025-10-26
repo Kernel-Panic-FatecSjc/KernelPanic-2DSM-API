@@ -5,8 +5,7 @@ export function getRespostas(req: Request, res: Response){
 }
 
 export function getRespostaByID(req: Request, res: Response){
-    const id = req.params.id;
-
+    
 }
 
 

@@ -4,6 +4,7 @@
     font-family: Arial, sans-serif;
     background-color: white;
     border-radius: 10px;
+    padding-bottom: 4rem;
 }
 
 .container {
@@ -19,13 +20,13 @@
     align-items: center;
 }
 
-.tittle {
-    color: #1f4af4;
-    margin-bottom: 25px;
-    text-align: left;
+.titulo {
     font-size: 50px;
     font-weight: 600;
-    text-align: center;
+    color: #1F4AF4;
+    margin: 0 0 25px 0;
+    font-family: Arial, sans-serif;
+    text-align: left;
 }
 
 .svg {
@@ -69,7 +70,7 @@
     width: 100%;
     margin-top: 2rem;
     padding: 1rem;
-    max-height: 300px; 
+    max-height: 300px;
     overflow-y: auto;
     border-radius: 5px;
 }
@@ -84,7 +85,7 @@
     width: 100%;
     margin-top: 2rem;
     padding: 1rem;
-    max-height: 300px; 
+    max-height: 300px;
     overflow-y: auto;
     border-radius: 5px;
 }
