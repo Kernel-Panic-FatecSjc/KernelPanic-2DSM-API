@@ -1,12 +1,13 @@
+
 # Backlog da Segunda Sprint 
 
-| Rank | Prioridade |  User Story | Estimativa | Sprint |  Requisitos do Parceiro |
-| :--: | :--------: | :------------------------------------------------------------------------------------------------------------------------------------: | :--------: | :----: | :------------------------------------------------------------------------------------------------------------------ |
-| 1 | 🔴 Alta | Eu como gestor, quero unificar e padronizar todos os checklists e cadastros atualmente utilizados em ferramentas distintas em uma única plataforma | 5 | 2 | Centralização, padronização e unificação de checklists e cadastros |
-| 2 | 🔴 Alta | Eu como gestor, quero eleger as permissões customizáveis que cada liderado terá dentro do sistema, para controlar o nível de acesso conforme a função de cada colaborador | 8 | 2 | Controle de permissões customizáveis por usuário |
-| 3 | 🟠 Média | Eu como cliente, quero acessar informações da parte comercial e operacional em um só ambiente para amplo acesso aos dados e com esses dados ter insights | 6 | 2 | Integração de dados comerciais e operacionais na mesma plataforma |
-| 4 | 🟠 Média | Eu como cliente, quero cadastrar agregados com devolutiva automática após a conclusão do processo de cadastro para facilitar o controle e acompanhamento dos cadastros| 6 | 2 | Cadastro de agregados com feedback automático |
-| 5 | 🟠 Média | Eu como cliente, quero poder calcular a cotação de um frete de forma automática para agilizar a criação de cotações e eliminar cálculos manuais | 4 | 2 | Cotação com cálculo automático de custos, valores e adicionais | 
+| Rank | Prioridade | Sprint | User Story | Estimativa | Requisitos do Parceiro |
+| :--: | :--------: | :----: | :-------- | :--------: | :---------------------- |
+| 1 | 🔴 Alta | 2 | Eu como gestor, quero unificar e padronizar todos os checklists e cadastros atualmente utilizados em ferramentas distintas, para centralizá-los em uma única plataforma | 5 | Centralização, padronização e unificação de checklists e cadastros |
+| 2 | 🔴 Alta | 2 | Eu como gestor, quero eleger as permissões customizáveis que cada liderado terá dentro do sistema, para controlar o nível de acesso conforme a função de cada colaborador | 8 | Controle de permissões customizáveis por usuário |
+| 3 | 🟠 Média | 2 | Eu como cliente, quero acessar informações da parte comercial e operacional em um só ambiente, para obter insights a partir desses dados | 6 | Integração de dados comerciais e operacionais na mesma plataforma |
+| 4 | 🟠 Média | 2 | Eu como cliente, quero cadastrar agregados com devolutiva automática após a conclusão do processo de cadastro, para facilitar o controle e acompanhamento dos cadastros | 6 | Cadastro de agregados com feedback automático |
+| 5 | 🟠 Média | 2 | Eu como cliente, quero calcular a cotação de um frete de forma automática, para agilizar a criação de cotações e eliminar cálculos manuais | 4 | Cotação com cálculo automático de custos, valores e adicionais |
 
 ---
 
@@ -87,37 +88,38 @@
 
 <hr>
 
-## ✅ DoR - Definition of Ready <a id="dor"></a>
+## ✅ DoR - Definition of Ready
 
 | Critério | Descrição |
 | :--- | :--- |
-| **User Story Bem Definida** | A história de usuário está clara e compreensível, descrevendo quem é o usuário, o que ele quer fazer e por quê, de acordo com o backlog. |
-| **Estimativa Definida** | A história de usuário foi avaliada em Story Points. |
-| **Cenários de Teste Especificados** | A história possui cenários de teste detalhados (`Dado, Quando, Então`) para validar os requisitos, conforme os exemplos fornecidos. |
-| **Regras de Negócio Claras** | As regras de negócio e validações, como as permissões de acesso e a imutabilidade do histórico de interações, estão documentadas. |
-| **Compreensão Compartilhada** | A equipe, o gestor e o parceiro compreendem o propósito da história e seus objetivos. |
+| **User Story Bem Definida** | Cada User Story está clara e compreensível, descrevendo quem é o usuário, o que ele quer fazer e por quê, de acordo com o backlog. |
+| **Estimativa Definida** | A história de usuário foi avaliada e estimada em Story Points pela Dev Team. |
+| **Cenários de Teste Especificados** | A história possui cenários de teste detalhados (`Dado, Quando, Então`) para validar os requisitos. |
+| **Regras de Negócio Claras** | As regras de negócio e validações estão documentadas e compreendidas pela equipe. |
+| **Mockup Validado com o Cliente** | O mockup da sprint foi apresentado e validado com o cliente antes do início das atividades da Dev Team. |
+| **DoD Definido** | Cada User Story possui critérios claros de Definition of Done específicos para sua conclusão. |
+| **Compreensão Compartilhada** | O Scrum Master, a Product Owner e a Dev Team compreendem o propósito da história e seus objetivos. |
 
 ---
 
-## ✅ DoD - Definition of Done <a id="dod"></a>
+## ✅ DoD - Definition of Done
 
 | Critério | Descrição |
 | :--- | :--- |
 | **Critérios de Aceitação Atendidos** | Todos os cenários de teste foram executados e aprovados com sucesso. |
-| **Funcionalidade Implementada** | A funcionalidade do backlog foi totalmente desenvolvida, seguindo o que foi acordado. |
-| **Código Revisado** | O código foi revisado por pelo menos um membro da equipe e está em conformidade com os padrões. |
-| **Testes Automatizados Aprovados** | Testes de unidade e/ou integração para a funcionalidade foram criados e executados com sucesso. |
-| **Dados Persistidos e Acessíveis** | Os dados da funcionalidade (por exemplo, clientes cadastrados, histórico de interações) estão corretamente salvos e recuperáveis. |
-| **Relatórios e Gráficos Gerados** | A extração e visualização dos dados para os relatórios e gráficos funcionam como esperado. |
-| **Validação do Gestor** | O gestor ou o parceiro validou a entrega e confirmou que ela atende aos requisitos. |
+| **Funcionalidade Implementada** | Unificação e padronização de checklists e cadastros, sistema de permissões customizáveis por usuário, integração de dados comerciais e operacionais, cadastro de agregados com devolutiva automática e cálculo automático de cotação de frete foram desenvolvidos conforme acordado. |
+| **Código Revisado** | O código foi revisado por pelo menos um membro da equipe e está em conformidade com os padrões do projeto. |
+| **Dados Persistidos e Acessíveis** | Dados de checklists, cadastros unificados, permissões de usuários, agregados e cotações estão salvos e recuperáveis. |
+| **Visualização integrada** | Visualização integrada de dados comerciais e operacionais está funcionando corretamente. |
+| **Validação do Master e da PO** | O master e a product owner da equipe validaram a entrega das funcionalidades e realizaram os testes necessários. |
 
 ---
 
 ## 🧪 Estratégia de Testes
 
-**O que será testado?**
-- Todos os tipos de formulário de envio, para garantir a integridade dos dados no banco.
+**O que será testado?**  
+- Todos os tipos de formulário de envio, para garantir a integridade dos dados no banco.  
 - Todas as requisições usando o banco de dados com dados e sem dados.
 
-**Como será testado?**
+**Como será testado?**  
 - Será testado de forma manual.
