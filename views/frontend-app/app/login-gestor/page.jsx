@@ -7,9 +7,6 @@ import { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 
 
-
-
-
 const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 export default function Page() {
   const router = useRouter();
