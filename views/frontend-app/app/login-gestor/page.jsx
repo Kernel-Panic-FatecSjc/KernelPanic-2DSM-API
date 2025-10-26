@@ -6,15 +6,8 @@ import Login from "../../components/layout/Login/login";
 import { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 
-export default function Page() {
-  const router = useRouter();
-  const { login } = useAuth();
-  const [email, setEmail] = useState("");
-  const [senha, setSenha] = useState("");
-  const [erro, setErro] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
 
-const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+
 export default function Page() {
   const router = useRouter();
   const { login } = useAuth();

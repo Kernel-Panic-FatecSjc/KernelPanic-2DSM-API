@@ -46,12 +46,12 @@ export default function Page() {
 
       login(data.accessToken);
 
-      router.push("/"); // Main Page
+      router.push("/"); 
 
     } catch (error) {
       setErro(error.message);
     } finally {
-      setIsLoading(false); // Desativa o estado de carregamento
+      setIsLoading(false); 
 
     }
   };
