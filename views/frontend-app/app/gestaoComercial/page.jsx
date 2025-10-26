@@ -32,7 +32,8 @@ export default function GestaoComercial() {
     };
 
     return (
-        <div className={styles.conteudo}>
+         <ProtectRoute>
+                 <div className={styles.conteudo}>
             <div className={styles.containerCentral}>
                 <div className={styles.header}>
                     <h1 className={styles.titulo}>Gestão Comercial</h1>
@@ -222,5 +223,7 @@ export default function GestaoComercial() {
                 </div>
             )}
         </div>
+        </ProtectRoute>
+
     );
 }

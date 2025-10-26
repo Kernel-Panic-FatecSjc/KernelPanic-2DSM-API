@@ -7,6 +7,7 @@ const eventoRoute = require("./API/Routes/eventoEmailRoutes");
 
 dotenv.config();
 
+const AuthRoutes = require("./API/Routes/AuthRoutes"); 
 const calendarioRoute = require("./API/Routes/calendarioRoutes"); 
 const funilVendasRoute = require("./API/Routes/funilVendasRoutes");
 const clientesRoute = require("./API/Routes/clientesRoutes");
@@ -16,7 +17,7 @@ const vendedorRoute = require("./API/Routes/VendedorRoutes")
 const agregadoRoute = require("./API/Routes/checklistAgregadoRoutes")
 const checklistRoute = require("./API/Routes/checklistRoutes")
 const cadastroAgregado = require("./API/Routes/cadastroAgregadoRoutes")
-const emailCadastroRoutes = require("./API/routes/emailAgregadoRoute");
+const emailCadastroRoutes = require("./API/Routes/emailAgregadoRoute");
 const app = express(); 
 
 app.use(cors()); 
@@ -33,6 +34,8 @@ AppDataSource.initialize()
     console.error(err, "❌ Erro ao conectar ao MySQL, VERIFIQUE SE O .ENV ESTA CONFIGURADO CORRETAMENTE!!!:");
   });
 
+
+app.use("/login", AuthRoutes)
 app.use("/funilVendas",funilVendasRoute )
 app.use("/calendario", calendarioRoute)
 app.use("/clientes", clientesRoute)

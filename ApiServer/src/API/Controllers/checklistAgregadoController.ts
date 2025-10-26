@@ -144,7 +144,7 @@ export class ChecklistAgregadoController {
         if (err) {
           console.error('Erro durante o download:', err);
           if (!res.headersSent) {
-            return res.status(500).json({ error: "Erro durante o download" });
+            res.status(500).json({ error: "Erro durante o download" });
           }
         }
       });

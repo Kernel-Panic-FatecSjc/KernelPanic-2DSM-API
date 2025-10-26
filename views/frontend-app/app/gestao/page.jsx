@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import styles from "./App.module.css";
+import ProtectRoute from "../../components/ProtectRoute";
 
 function App() {
     const [searchTerm, setSearchTerm] = useState("");
@@ -259,6 +260,8 @@ function App() {
     };
 
     return (
+        <ProtectRoute>
+       
         <div className={styles.conteudo}>
             <div className={styles["container-gestao"]}>
                 <div className={styles.header}>
@@ -678,6 +681,7 @@ function App() {
                 </div>
             )}
         </div>
+         </ProtectRoute>
     );
 }
 

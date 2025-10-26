@@ -10,3 +10,5 @@ EMAIL_PASS=lqkt hkoj vgso dlxt
 
 #Configuração da Porta do BackEnd sendo usada
 PORT=5000
+
+JWT_SECRET=SuaChaveSecretaSuper32Caracteres

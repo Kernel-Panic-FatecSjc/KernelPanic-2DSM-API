@@ -12,6 +12,7 @@
     "bcryptjs": "^3.0.2",
     "cors": "^2.8.5",
     "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
     "jszip": "^3.10.1",
     "juice": "^11.0.3",
     "multer": "^2.0.2",
@@ -30,6 +31,7 @@
   "devDependencies": {
     "@types/cors": "^2.8.19",
     "@types/express": "^4.17.23",
+    "@types/jsonwebtoken": "^9.0.10",
     "@types/jszip": "^3.4.0",
     "@types/multer": "^2.0.0",
     "@types/node": "^20.19.13",

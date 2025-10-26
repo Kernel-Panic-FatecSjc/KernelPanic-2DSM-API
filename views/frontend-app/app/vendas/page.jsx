@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Select from "react-select";
 import styles from "./App.module.css";
+import ProtectRoute from "../../components/ProtectRoute";
 
 const opcoesMes = [
     { value: "Janeiro", label: "Janeiro" },
@@ -113,6 +114,7 @@ export default function Page() {
     );
 
     return (
+        <ProtectRoute>
         <div className={styles.container}>
             <div className={styles.cardsContainer}>
                 <div className={styles.card}>
@@ -209,5 +211,6 @@ export default function Page() {
                 </table>
             </div>
         </div>
+        </ProtectRoute>
     );
 }

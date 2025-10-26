@@ -1,9 +1,9 @@
-  {
+{
     "compilerOptions": {
       "rootDir": "./src",
       "outDir": "./dist",
 
-      "lib": ["es5", "es6", "dom"],  
+      "lib": ["es5", "es6", "dom"],
       "moduleResolution": "node",
       "target": "es5", 
       "types": ["node"],

@@ -15,7 +15,7 @@ function page() {
   };
 
   return (
-    <ProtectRoute>
+    
     <div className={styles.container}>
       <div className={styles.content}>
         <h1 className={styles.title}>Checklists e Formulários</h1>
@@ -59,7 +59,7 @@ function page() {
         </div>
       </div>
     </div>
-    </ProtectRoute>
+   
   );
 }
 

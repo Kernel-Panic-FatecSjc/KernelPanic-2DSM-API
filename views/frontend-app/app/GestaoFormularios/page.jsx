@@ -102,6 +102,7 @@ export default function GestaoFormularios() {
     };
 
     return (
+        <ProtectRoute>
         <div className={styles.container}>
             <div className={styles.header}>
                 <h1 className={styles.tittle}>Respostas</h1>
@@ -318,5 +319,6 @@ export default function GestaoFormularios() {
             )}
 
         </div>
+        </ProtectRoute>
     );
 }

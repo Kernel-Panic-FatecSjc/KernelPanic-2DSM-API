@@ -46,7 +46,7 @@ export default function Page() {
 
       login(data.accessToken);
 
-      router.push("/"); 
+      router.push("/gerenciar-permissao"); 
 
     } catch (error) {
       setErro(error.message);
@@ -57,6 +57,7 @@ export default function Page() {
   };
 
   return (
+    
     <div className={styles.container}>
       <div className={styles.lateral}>
         <Login />

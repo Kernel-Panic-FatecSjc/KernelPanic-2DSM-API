@@ -13,6 +13,7 @@ import {
     Tooltip,
     Legend,
 } from "chart.js";
+import ProtectRoute from "../../components/ProtectRoute";
 
 ChartJS.register(
     CategoryScale,
@@ -143,6 +144,8 @@ export default function Page() {
         },
     };
     return (
+        <ProtectRoute>
+        
         <div className={styles.main}>
             <h1 className={styles.tittle}>
                 Dashboard de resposta dos formulários
@@ -298,5 +301,6 @@ export default function Page() {
                 </section>
             </container>
         </div>
+        </ProtectRoute>
     );
 }

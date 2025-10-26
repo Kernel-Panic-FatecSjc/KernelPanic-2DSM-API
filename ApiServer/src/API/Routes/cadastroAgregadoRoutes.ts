@@ -16,8 +16,7 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage });
-
-router.post("/", checklistController.create.bind(checklistController));
+router.post("/", upload.array('files'), checklistController.create.bind(checklistController));
 router.get("/", checklistController.getAll.bind(checklistController));
 router.get("/:tipo", checklistController.getByTipo.bind(checklistController));
 
