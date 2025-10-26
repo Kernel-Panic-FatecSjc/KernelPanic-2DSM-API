@@ -52,6 +52,7 @@ export default function Page() {
       setErro(error.message);
     } finally {
       setIsLoading(false); // Desativa o estado de carregamento
+
     }
   };
 

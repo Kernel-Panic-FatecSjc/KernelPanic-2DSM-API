@@ -14,6 +14,15 @@ export default function Page() {
   const [erro, setErro] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
+const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+export default function Page() {
+  const router = useRouter();
+  const { login } = useAuth();
+  const [email, setEmail] = useState("");
+  const [senha, setSenha] = useState("");
+  const [erro, setErro] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
   console.log("Bem Vindo Gestor");
 
   const handleSubmit = async (event) => {

@@ -19,6 +19,7 @@ export default function Home() {
   }, [router]);
 
   return (
+    <ProtectRoute>
     <div className={styles.container}>
       <div className={styles.content}>
         <Image
@@ -36,5 +37,6 @@ export default function Home() {
       </div>
   
     </div>
+    </ProtectRoute>
   );
 }

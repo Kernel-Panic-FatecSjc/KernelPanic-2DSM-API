@@ -1,15 +1,127 @@
 'use client';
-import React, { useState } from 'react';
-import Image from 'next/image';
-import styles from './App.module.css';
-import Login from '../../components/layout/Login/login';
-import { useRouter } from 'next/navigation';
+import React, { useState } from "react";
+import styles from "./App.module.css";
+import { useRouter } from "next/navigation";
+import Login from "../../components/layout/Login/login";
 
 export default function Page() {
-  const [genero, setGenero] = useState('');
-  const [bau, setBau] = useState('');
-  const [seguro, setSeguro] = useState('');
   const router = useRouter();
+   const [form, setForm] = useState({
+    genero: "",
+    nomeMotorista: "",
+    CNPJMotorista: "",
+    CPFMotorista: "",
+    dataMotorista: "",
+    cidadeMotorista: "",
+    telefoneMotorista: "",
+    emailMotorista: "",
+    RGMotorista: "",
+    RGEmissaoMotorista: "",
+    orgaoMotorista: "",
+    nomePaiMotorista: "",
+    nomeMaeMotorista: "",
+    pisMotorista: "",
+    CEPMotorista: "",
+    enderecoMotorista: "",
+    nomeProprietarioVeiculo: "",
+    placaVeiculo: "",
+    marcaVeiculo: "",
+    modeloVeiculo: "",
+    corVeiculo: "",
+    anoVeiculo: "",
+    cilindradaVeiculo: "",
+    bau: "",
+    seguro: "",
+    valorMin: "",
+    valorMinKM: "",
+  });
+
+
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setForm((prev) => ({
+      ...prev,
+      [name]: type === "checkbox" ? checked : value,
+    }));
+  };
+  
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!form.genero || !form.nomeMotorista || !form.placaVeiculo) {
+      alert("⚠️ Preencha todos os campos obrigatórios.");
+      return;
+    }
+
+    try {
+      const payload = {
+        tipo: "agregado",
+        respostas: form
+      };
+
+      console.log("📤 Enviando dados para cadastro...", payload);
+
+      const response = await fetch("http://localhost:5000/cadastro_agregado", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(`Erro ao enviar cadastro: ${errorText}`);
+      }
+
+      const data = await response.json();
+      console.log("✅ Resposta do servidor:", data);
+      
+      // Mensagem personalizada baseada no envio de email
+      if (data.emailEnviado && data.emailDestinatario) {
+        alert(`✅ Cadastro realizado com sucesso!\n📧 Um email com o comprovante foi enviado para: ${data.emailDestinatario}`);
+      } else if (data.emailEnviado === false) {
+        alert("✅ Cadastro realizado com sucesso!\nℹ️  Nenhum email foi enviado (campo de email não preenchido)");
+      } else {
+        alert("✅ Cadastro realizado com sucesso!");
+      }
+
+      // Resetar formulário
+      setForm({
+        genero: "",
+        nomeMotorista: "",
+        CNPJMotorista: "",
+        CPFMotorista: "",
+        dataMotorista: "",
+        cidadeMotorista: "",
+        telefoneMotorista: "",
+        emailMotorista: "",
+        RGMotorista: "",
+        RGEmissaoMotorista: "",
+        orgaoMotorista: "",
+        nomePaiMotorista: "",
+        nomeMaeMotorista: "",
+        pisMotorista: "",
+        CEPMotorista: "",
+        enderecoMotorista: "",
+        nomeProprietarioVeiculo: "",
+        placaVeiculo: "",
+        marcaVeiculo: "",
+        modeloVeiculo: "",
+        corVeiculo: "",
+        anoVeiculo: "",
+        cilindradaVeiculo: "",
+        bau: "",
+        seguro: "",
+        valorMin: "",
+        valorMinKM: "",
+      });
+
+    } catch (error) {
+      console.error("❌ Erro:", error);
+      alert(`❌ Erro no cadastro: ${error.message}`);
+    }
+  };
+
 
   return (
     <div className={styles.layout}>
@@ -29,7 +141,7 @@ export default function Page() {
               Quando você enviar este formulário, o proprietário verá seu nome e
               endereço de email.
             </p>
-
+          <form onSubmit={handleSubmit}>
             <div className={styles.formGroup}>
               <label className={styles.inputtitle}>
                 <p>
@@ -38,155 +150,288 @@ export default function Page() {
               </label>
 
               <div className={styles.radioGroup}>
-                <input
-                  id="genero_m"
-                  className={styles.radioInput}
-                  type="radio"
-                  name="genero"
-                  value="Masculino"
-                  checked={genero === 'Masculino'}
-                  onChange={(e) => setGenero(e.target.value)}
-                />
-                <label htmlFor="genero_m" className={styles.radioLabel}>
-                  Masculino
-                </label>
-
-                <input
-                  id="genero_f"
-                  className={styles.radioInput}
-                  type="radio"
-                  name="genero"
-                  value="Feminino"
-                  checked={genero === 'Feminino'}
-                  onChange={(e) => setGenero(e.target.value)}
-                />
-                <label htmlFor="genero_f" className={styles.radioLabel}>
-                  Feminino
-                </label>
-
-                <input
-                  id="genero_n"
-                  className={styles.radioInput}
-                  type="radio"
-                  name="genero"
-                  value="Prefiro não informar"
-                  checked={genero === 'Prefiro não informar'}
-                  onChange={(e) => setGenero(e.target.value)}
-                />
-                <label htmlFor="genero_n" className={styles.radioLabel}>
-                  Prefiro não informar
-                </label>
+                {["Masculino", "Feminino", "Prefiro não informar"].map((opcao) => (
+                  <React.Fragment key={opcao}>
+                    <input
+                      type="radio"
+                      id={`genero_${opcao}`}
+                      name="genero"
+                      value={opcao}
+                      checked={form.genero === opcao}
+                      onChange={handleChange}
+                      className={styles.radioInput}
+                    />
+                    <label htmlFor={`genero_${opcao}`} className={styles.radioLabel}>
+                      {opcao}
+                    </label>
+                  </React.Fragment>
+                ))}
               </div>
+
             </div>
 
             <div className={styles.textgroup}>
               <label className={styles.inputtitle}>Nome completo do motorista</label>
-              <input className={styles.input1} type="text" id="nomeMotorista" name="nomeMotorista" />
+              <input
+                className={styles.input1}
+                type="text"
+                id="nomeMotorista"
+                name="nomeMotorista"
+                value={form.nomeMotorista}
+                onChange={handleChange}
+              />
             </div>
 
             <div className={styles.textgroup}>
               <label className={styles.inputtitle}>CNPJ (Pergunta obrigatória para pessoas jurídicas)</label>
-              <input className={styles.input1} type="text" id="CNPJMotorista" name="CNPJMotorista" />
+              <input
+                className={styles.input1}
+                type="text"
+                id="CNPJMotorista"
+                name="CNPJMotorista"
+                value={form.CNPJMotorista}
+                onChange={handleChange}
+              />
             </div>
 
             <div className={styles.textgroup}>
               <label className={styles.inputtitle}>CPF</label>
-              <input className={styles.input1} type="text" id="CPFMotorista" name="CPFMotorista" />
+              <input
+                className={styles.input1}
+                type="text"
+                id="CPFMotorista"
+                name="CPFMotorista"
+                value={form.CPFMotorista}
+                onChange={handleChange}
+              />
             </div>
 
             <div className={styles.textgroup}>
               <label className={styles.inputtitle}>Data de nascimento</label>
-              <input className={styles.input1} type="date" id="dataMotorista" name="dataMotorista" />
+              <input
+                className={styles.input1}
+                type="date"
+                id="dataMotorista"
+                name="dataMotorista"
+                value={form.dataMotorista}
+                onChange={handleChange}
+              />
             </div>
 
             <div className={styles.textgroup}>
               <label className={styles.inputtitle}>Cidade de nascimento</label>
-              <input className={styles.input1} type="text" id="cidadeMotorista" name="cidadeMotorista" />
+              <input
+                className={styles.input1}
+                type="text"
+                id="cidadeMotorista"
+                name="cidadeMotorista"
+                value={form.cidadeMotorista}
+                onChange={handleChange}
+              />
             </div>
 
             <div className={styles.textgroup}>
               <label className={styles.inputtitle}>Telefone</label>
-              <input className={styles.input1} type="text" id="telefoneMotorista" name="telefoneMotorista" />
+              <input
+                className={styles.input1}
+                type="text"
+                id="telefoneMotorista"
+                name="telefoneMotorista"
+                value={form.telefoneMotorista}
+                onChange={handleChange}
+              />
             </div>
 
             <div className={styles.textgroup}>
               <label className={styles.inputtitle}>Email</label>
-              <input className={styles.input1} type="text" id="emailMotorista" name="emailMotorista" />
+              <input
+                className={styles.input1}
+                type="text"
+                id="emailMotorista"
+                name="emailMotorista"
+                value={form.emailMotorista}
+                onChange={handleChange}
+              />
             </div>
 
             <div className={styles.textgroup}>
               <label className={styles.inputtitle}>RG</label>
-              <input className={styles.input1} type="text" id="RGMotorista" name="RGMotorista" />
+              <input
+                className={styles.input1}
+                type="text"
+                id="RGMotorista"
+                name="RGMotorista"
+                value={form.RGMotorista}
+                onChange={handleChange}
+              />
             </div>
 
             <div className={styles.textgroup}>
               <label className={styles.inputtitle}>Data de emissão RG</label>
-              <input className={styles.input1} type="date" id="RGEmissãoMotorista" name="RGEmissãoMotorista" />
+              <input
+                className={styles.input1}
+                type="date"
+                id="RGEmissaoMotorista"
+                name="RGEmissaoMotorista"
+                value={form.RGEmissaoMotorista}
+                onChange={handleChange}
+              />
             </div>
 
             <div className={styles.textgroup}>
               <label className={styles.inputtitle}>Órgão expedidor</label>
-              <input className={styles.input1} type="text" id="órgãoMotorista" name="órgãoMotorista" />
+              <input
+                className={styles.input1}
+                type="text"
+                id="orgaoMotorista"
+                name="orgaoMotorista"
+                value={form.orgaoMotorista}
+                onChange={handleChange}
+              />
             </div>
 
             <div className={styles.textgroup}>
               <label className={styles.inputtitle}>Nome do pai</label>
-              <input className={styles.input1} type="text" id="nomePaiMotorista" name="nomePaiMotorista" />
+              <input
+                className={styles.input1}
+                type="text"
+                id="nomePaiMotorista"
+                name="nomePaiMotorista"
+                value={form.nomePaiMotorista}
+                onChange={handleChange}
+              />
             </div>
 
             <div className={styles.textgroup}>
               <label className={styles.inputtitle}>Nome da mãe</label>
-              <input className={styles.input1} type="text" id="nomeMãeMotorista" name="nomeMãeMotorista" />
+              <input
+                className={styles.input1}
+                type="text"
+                id="nomeMaeMotorista"
+                name="nomeMaeMotorista"
+                value={form.nomeMaeMotorista}
+                onChange={handleChange}
+              />
             </div>
 
             <div className={styles.textgroup}>
               <label className={styles.inputtitle}>Pis/Pasep</label>
-              <input className={styles.input1} type="text" id="pisMotorista" name="pisMotorista" />
+              <input
+                className={styles.input1}
+                type="text"
+                id="pisMotorista"
+                name="pisMotorista"
+                value={form.pisMotorista}
+                onChange={handleChange}
+              />
             </div>
 
             <div className={styles.textgroup}>
               <label className={styles.inputtitle}>CEP</label>
-              <input className={styles.input1} type="text" id="CEPMotorista" name="CEPMotorista" />
+              <input
+                className={styles.input1}
+                type="text"
+                id="CEPMotorista"
+                name="CEPMotorista"
+                value={form.CEPMotorista}
+                onChange={handleChange}
+              />
             </div>
 
             <div className={styles.textgroup}>
               <label className={styles.inputtitle}>Endereço (Rua, Nº, Bairro, Cidade)</label>
-              <input className={styles.input1} type="text" id="enderecoMotorista" name="enderecoMotorista" />
+              <input
+                className={styles.input1}
+                type="text"
+                id="enderecoMotorista"
+                name="enderecoMotorista"
+                value={form.enderecoMotorista}
+                onChange={handleChange}
+              />
             </div>
 
             <div className={styles.textgroup}>
               <label className={styles.inputtitle}>Nome completo do proprietário do veículo</label>
-              <input className={styles.input1} type="text" id="nomeProprietarioVeiculo" name="nomeProprietarioVeiculo" />
+              <input
+                className={styles.input1}
+                type="text"
+                id="nomeProprietarioVeiculo"
+                name="nomeProprietarioVeiculo"
+                value={form.nomeProprietarioVeiculo}
+                onChange={handleChange}
+              />
             </div>
 
             <div className={styles.textgroup}>
               <label className={styles.inputtitle}>Placa</label>
-              <input className={styles.input1} type="text" id="placaVeiculo" name="placaVeiculo" />
+              <input
+                className={styles.input1}
+                type="text"
+                id="placaVeiculo"
+                name="placaVeiculo"
+                value={form.placaVeiculo}
+                onChange={handleChange}
+              />
             </div>
 
             <div className={styles.textgroup}>
               <label className={styles.inputtitle}>Marca</label>
-              <input className={styles.input1} type="text" id="marcaVeiculo" name="marcaVeiculo" />
+              <input
+                className={styles.input1}
+                type="text"
+                id="marcaVeiculo"
+                name="marcaVeiculo"
+                value={form.marcaVeiculo}
+                onChange={handleChange}
+              />
             </div>
 
             <div className={styles.textgroup}>
               <label className={styles.inputtitle}>Modelo</label>
-              <input className={styles.input1} type="text" id="modeloVeiculo" name="modeloVeiculo" />
+              <input
+                className={styles.input1}
+                type="text"
+                id="modeloVeiculo"
+                name="modeloVeiculo"
+                value={form.modeloVeiculo}
+                onChange={handleChange}
+              />
             </div>
 
             <div className={styles.textgroup}>
               <label className={styles.inputtitle}>Cor</label>
-              <input className={styles.input1} type="text" id="corVeiculo" name="corVeiculo" />
+              <input
+                className={styles.input1}
+                type="text"
+                id="corVeiculo"
+                name="corVeiculo"
+                value={form.corVeiculo}
+                onChange={handleChange}
+              />
             </div>
 
             <div className={styles.textgroup}>
               <label className={styles.inputtitle}>Ano de fabricação</label>
-              <input className={styles.input1} type="text" id="anoVeiculo" name="anoVeiculo" />
+              <input
+                className={styles.input1}
+                type="text"
+                id="anoVeiculo"
+                name="anoVeiculo"
+                value={form.anoVeiculo}
+                onChange={handleChange}
+              />
             </div>
 
             <div className={styles.textgroup}>
               <label className={styles.inputtitle}>Cilindrada</label>
-              <input className={styles.input1} type="text" id="cilindradaVeiculo" name="cilindradaVeiculo" />
+              <input
+                className={styles.input1}
+                type="text"
+                id="cilindradaVeiculo"
+                name="cilindradaVeiculo"
+                value={form.cilindradaVeiculo}
+                onChange={handleChange}
+              />
             </div>
 
             <div className={styles.formGroupBau}>
@@ -194,28 +439,24 @@ export default function Page() {
                 <p>Possui baú ou suporte para carga?</p>
               </label>
               <div className={styles.radioGroup}>
-                <input
-                  id="bau_sim"
-                  className={styles.radioInput}
-                  type="radio"
-                  name="bau"
-                  value="Sim"
-                  checked={bau === 'Sim'}
-                  onChange={(e) => setBau(e.target.value)}
-                />
-                <label htmlFor="bau_sim" className={styles.radioLabel}>Sim</label>
-
-                <input
-                  id="bau_nao"
-                  className={styles.radioInput}
-                  type="radio"
-                  name="bau"
-                  value="Não"
-                  checked={bau === 'Não'}
-                  onChange={(e) => setBau(e.target.value)}
-                />
-                <label htmlFor="bau_nao" className={styles.radioLabel}>Não</label>
+                {["Sim", "Não"].map((opcao) => (
+                  <React.Fragment key={opcao}>
+                    <input
+                      type="radio"
+                      id={`bau_${opcao}`}
+                      name="bau"
+                      value={opcao}
+                      checked={form.bau === opcao}
+                      onChange={handleChange}
+                      className={styles.radioInput}
+                    />
+                    <label htmlFor={`bau_${opcao}`} className={styles.radioLabel}>
+                      {opcao}
+                    </label>
+                  </React.Fragment>
+                ))}
               </div>
+
             </div>
 
             <div className={styles.formGroupSeguro}>
@@ -223,40 +464,51 @@ export default function Page() {
                 <p>Possui seguro?</p>
               </label>
               <div className={styles.radioGroup}>
-                <input
-                  id="seguro_sim"
-                  className={styles.radioInput}
-                  type="radio"
-                  name="seguro"
-                  value="Sim"
-                  checked={seguro === 'Sim'}
-                  onChange={(e) => setSeguro(e.target.value)}
-                />
-                <label htmlFor="seguro_sim" className={styles.radioLabel}>Sim</label>
-
-                <input
-                  id="seguro_nao"
-                  className={styles.radioInput}
-                  type="radio"
-                  name="seguro"
-                  value="Não"
-                  checked={seguro === 'Não'}
-                  onChange={(e) => setSeguro(e.target.value)}
-                />
-                <label htmlFor="seguro_nao" className={styles.radioLabel}>Não</label>
+                {["Sim", "Não"].map((opcao) => (
+                  <React.Fragment key={opcao}>
+                    <input
+                      type="radio"
+                      id={`seguro_${opcao}`}
+                      name="seguro"
+                      value={opcao}
+                      checked={form.seguro === opcao}
+                      onChange={handleChange}
+                      className={styles.radioInput}
+                    />
+                    <label htmlFor={`seguro_${opcao}`} className={styles.radioLabel}>
+                      {opcao}
+                    </label>
+                  </React.Fragment>
+                ))}
               </div>
+
             </div>
 
             <div className={styles.textgroup}>
               <label className={styles.inputtitle}>Qual valor mínimo você cobraria por saída?</label>
-              <input className={styles.input1} type="text" id="valorMin" name="valorMin" />
+              <input
+                className={styles.input1}
+                type="text"
+                id="valorMin"
+                name="valorMin"
+                value={form.valorMin}
+                onChange={handleChange}
+              />
             </div>
 
             <div className={styles.textgroup}>
               <label className={styles.inputtitle}>Qual valor mínimo você cobraria por KM rodado?</label>
-              <input className={styles.input1} type="text" id="valorMinKM" name="valorMinKM" />
+              <input
+                className={styles.input1}
+                type="text"
+                id="valorMinKM"
+                name="valorMinKM"
+                value={form.valorMinKM}
+                onChange={handleChange}
+              />
             </div>
             <button type="submit" className={styles.buttonenviar}>Enviar</button>
+            </form>
           </main>
         </div>
       </div>

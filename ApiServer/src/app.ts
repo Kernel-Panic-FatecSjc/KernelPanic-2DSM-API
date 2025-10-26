@@ -13,9 +13,10 @@ const clientesRoute = require("./API/Routes/clientesRoutes");
 const gestaoRoute = require("./API/Routes/gestaoRoutes")
 const historicoRoute = require("./API/Routes/historicoRoutes")
 const vendedorRoute = require("./API/Routes/VendedorRoutes")
-
+const agregadoRoute = require("./API/Routes/checklistAgregadoRoutes")
 const checklistRoute = require("./API/Routes/checklistRoutes")
-
+const cadastroAgregado = require("./API/Routes/cadastroAgregadoRoutes")
+const emailCadastroRoutes = require("./API/routes/emailAgregadoRoute");
 const app = express(); 
 
 app.use(cors()); 
@@ -40,9 +41,10 @@ app.use("/historico",historicoRoute)
 app.use("/gestao",gestaoRoute)
 app.use("/checklist", checklistRoute)
 app.use("/eventos", eventoRoute);
+app.use("/agregado", agregadoRoute)
+app.use("/cadastro_agregado", cadastroAgregado)
+app.use("/api/email", emailCadastroRoutes);
 iniciarCron();
-app.use("/funilVendas", funilVendasRoute); 
-app.use("/calendario", calendarioRoute); 
 
 app.get("/", (req, res) => {
   res.send("API funcionando");
@@ -93,5 +95,6 @@ app.get('/hash', async (req, res) => {
 // app.listen(3000, () => {
 //   console.log('Servidor rodando na porta 3000');
 // });
+
 
 export default app; 
