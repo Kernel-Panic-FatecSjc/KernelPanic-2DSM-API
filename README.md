@@ -86,6 +86,11 @@ O sistema tem como objetivo principal centralizar todos os processos e dados da 
 <details>
   <summary><b>Clique aqui</b></summary>
 
+**Video Demostrativo:**
+<br>
+[Assistir no YouTube](https://youtu.be/ByP_ZCdOPqk)
+<br>
+
 | Rank | Prioridade | Sprint | User Story | Estimativa | Requisitos do Parceiro |
 | :--: | :--------: | :----: | :-------- | :--------: | :---------------------- |
 | 1 | 🔴 Alta | 2 | Eu como gestor, quero unificar e padronizar todos os checklists e cadastros atualmente utilizados em ferramentas distintas, para centralizá-los em uma única plataforma | 5 | Centralização, padronização e unificação de checklists e cadastros |
