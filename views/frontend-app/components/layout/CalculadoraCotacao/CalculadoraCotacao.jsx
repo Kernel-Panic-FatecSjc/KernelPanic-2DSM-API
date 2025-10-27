@@ -1,6 +1,6 @@
 "use client"
 
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import styles from './App.module.css'; 
 
 const CalculadoraCotacao = () => {
@@ -11,7 +11,6 @@ const CalculadoraCotacao = () => {
   const [gris, setGris] = useState("");
   const [valorFinal, setValorFinal] = useState(null);
 
-  // 🔹 Tabela base e frete mínimo
   const tabelaBase = {
     fiorino: { base: 150, minimo: 200 },
     van: { base: 180, minimo: 250 },
@@ -24,7 +23,6 @@ const CalculadoraCotacao = () => {
     moto: { base: 80, minimo: 100 },
   };
 
-  // 🔸 Frete mínimo
   const freteMinimo = () => {
     if (!veiculo) {
       alert("Selecione um veículo para calcular o frete mínimo!");
@@ -35,7 +33,6 @@ const CalculadoraCotacao = () => {
     setValorFinal(valorMinimo.toFixed(2));
   };
 
-  // 🔸 Adicionais (GRIS, ajudante, av valorem)
   const usarAdicionais = () => {
     const ajud = parseInt(ajudante) || 0;
     const valorem = parseFloat(avValorem.replace(",", ".")) || 0;
@@ -55,7 +52,6 @@ const CalculadoraCotacao = () => {
     });
   };
 
-  // 🔸 Frete completo
   const calcularFrete = () => {
     if (!veiculo || !km) {
       alert("Preencha pelo menos o veículo e a quilometragem!");
@@ -77,10 +73,30 @@ const CalculadoraCotacao = () => {
     const custoAjudante = ajud * 100;
     const resultado = base + custoKm + valorem + grisValor + custoAjudante;
 
-    // Garante que o valor nunca fique abaixo do mínimo
-    const valorFinal = Math.max(resultado, minimo);
+    const valorFinalCalc = Math.max(resultado, minimo);
 
-    setValorFinal(valorFinal.toFixed(2));
+    setValorFinal(valorFinalCalc.toFixed(2));
+  };
+
+  const salvarCotacao = () => {
+    if (!veiculo || !km || valorFinal === null) {
+      alert("Calcule o frete antes de salvar!");
+      return;
+    }
+
+    const dados = {
+      veiculo: veiculo,
+      km: km,
+      ajudante: ajudante || 0,
+      avValorem: avValorem || 0,
+      gris: gris || 0,
+      valorFinal: valorFinal
+    };
+
+    console.log('Dados salvos:', dados);
+    
+    // AQUI rota para salvar
+    // window.location.href = `/rota-para-salvar?valor=${valorFinal}&veiculo=${veiculo}`;
   };
   
   return (
@@ -169,6 +185,9 @@ const CalculadoraCotacao = () => {
         <div className={styles.calculadoraAcao}>
           <button className={styles.btnSubmit} onClick={calcularFrete}>
             Calcular Frete Total
+          </button>
+          <button className={styles.btnSubmit} onClick={salvarCotacao}>
+            Salvar
           </button>
         </div>
 

@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import styles from "./App.module.css";
-import ProtectRoute from "../../components/ProtectRoute";
+import ProtectRoute from "../../components/ProtectRoute"; 
 
 function App() {
     const [searchTerm, setSearchTerm] = useState("");
@@ -12,43 +12,36 @@ function App() {
     const [showModalUpdate, setShowModalUpdate] = useState(false);
     const [selectedClient, setSelectedClient] = useState(null);
 
-    const [vendedores, setVendedores] = useState([]);
+    const funcionariosMocados = [
+      { id: 1, nome: "Carlos Silva", email: "carlos@empresa.com" },
+      { id: 2, nome: "Ana Oliveira", email: "ana@empresa.com" },
+      { id: 3, nome: "João Souza", email: "joao@empresa.com" },
+    ];
+
+    const dadosMockados = []; 
 
     const [showModalAdd, setShowModalAdd] = useState(false);
+    
+    
     const [newClient, setNewClient] = useState({
         nome: "",
         endereco: "",
         segmento: "",
-        funcionario_ID: 0,
-        funil_ID: 0,
+        funcionario_ID: "", 
+        funil_ID: "",       
         tipo_contato: "telefone",
         valor_contato: "",
     });
 
-    const fetchVendedores = async () => {
-        try {
-            const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-            const response = await axios.get(
-                `${apiUrl}/vendedor/getVendedores`
-            );
-            setVendedores(response.data);
-        } catch (error) {
-            console.error("Erro ao buscar vendedores:", error);
-        }
-    };
-
-    useEffect(() => {
-        fetchVendedores();
-    }, []);
-
     const fetchClientes = async () => {
         try {
-            const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+            const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+            
+            const response = await axios.get(`${apiUrl}/clientes`);
+            
+            const clientesData = response.data.message || response.data; 
 
-            const response = await axios.get(`${apiUrl}/gestao`);
-            const clientes = response.data.message;
-
-            const mapaClientes = clientes.map((cliente) => {
+            const mapaClientes = clientesData.map((cliente) => {
                 const contatos =
                     cliente.contatos
                         ?.map((c) => `${c.tipo_contato}: ${c.valor_contato}`)
@@ -69,7 +62,7 @@ function App() {
                     tipoContato: primeiroContato.tipo_contato || "telefone",
                     contatoValor: primeiroContato.valor_contato || "",
                     departamento: cliente.funcionario?.cargo || "",
-                    departamentoId: cliente.funcionario?.funcionario_ID || null,
+                    departmentoId: cliente.funcionario?.funcionario_ID || null, // Corrigido
                     ultimaInteracao:
                         ultimaInteracao?.data_interacao ||
                         ultimaVenda?.data_venda ||
@@ -81,6 +74,7 @@ function App() {
             setClients(mapaClientes);
         } catch (error) {
             console.error("Erro ao buscar clientes:", error);
+        
         }
     };
 
@@ -90,7 +84,6 @@ function App() {
                 await fetchClientes();
             } catch (error) {
                 console.warn("API offline, usando dados mockados...");
-                setClients(dadosMockados);
             }
         };
 
@@ -134,7 +127,7 @@ function App() {
 
     const formatCurrency = (value) => {
         return `R$ ${value.toLocaleString("pt-BR", {
-            minimumFractionDigits: 3,
+            minimumFractionDigits: 2, 
         })}`;
     };
 
@@ -142,7 +135,11 @@ function App() {
         e.preventDefault();
 
         if (!newClient.nome?.trim()) {
-            alert("O nome do cliente não pode ficar vazio!");
+            console.warn("O nome do cliente não pode ficar vazio!");
+            return;
+        }
+        if (!newClient.funcionario_ID || !newClient.funil_ID) {
+            console.warn("Por favor, selecione um funcionário e um funil.");
             return;
         }
 
@@ -150,25 +147,25 @@ function App() {
             nome: newClient.nome,
             endereco: newClient.endereco,
             segmento: newClient.segmento || "Não informado",
-            funcionario_ID: newClient.funcionario_ID,
-            funil_ID: newClient.funil_ID,
+            funcionario_ID: Number(newClient.funcionario_ID),
+            funil_ID: Number(newClient.funil_ID),
             tipo_contato: newClient.tipo_contato,
             valor_contato: newClient.valor_contato,
         };
 
         try {
-            const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-
+            const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
            await axios.post(`${apiUrl}/clientes`, formData);
 
-            alert("Cliente adicionado com sucesso!");
+            console.log("Cliente adicionado com sucesso!");
+            await fetchClientes();
 
             setNewClient({
                 nome: "",
                 endereco: "",
                 segmento: "",
-                funcionario_ID: "",
-                funil_ID: "",
+                funcionario_ID: "", 
+                funil_ID: "",       
                 tipo_contato: "telefone",
                 valor_contato: "",
             });
@@ -176,14 +173,14 @@ function App() {
             setShowModalAdd(false);
         } catch (error) {
             console.error(error);
-            alert("Erro ao adicionar cliente. Tente novamente!");
+            console.error("Erro ao adicionar cliente. Tente novamente!");
         }
     };
 
     const handleSave = async (e) => {
         e.preventDefault();
         if (!selectedClient.cliente?.trim()) {
-            alert("O nome do cliente não pode ficar vazio!");
+            console.warn("O nome do cliente não pode ficar vazio!");
             return;
         }
 
@@ -205,483 +202,470 @@ function App() {
             status: selectedClient.status || "",
             funcionario: {
                 cargo: selectedClient.departamento || "",
-                funcionario_ID: selectedClient.departamentoId || null,
+                funcionario_ID: selectedClient.departmentoId || null,
             },
         };
 
         try {
+            const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
             const response = await axios.put(
-                `http://localhost:5000/gestao/${selectedClient.id}`,
+                `${apiUrl}/clientes/${selectedClient.id}`, 
                 dadosEnvio
             );
-            const updated = response.data;
-
+            
+            const updated = response.data; 
             const updatedClients = clientes.map((c) =>
-                c.id === selectedClient.id
-                    ? {
-                          ...c,
-                          cliente: updated.cliente.nome,
-                          endereco: updated.cliente.endereco,
-                          segmento: updated.cliente.segmentoAtuacao,
-                          contatos:
-                              updated.cliente.contatos
-                                  ?.map(
-                                      (ct) =>
-                                          `${ct.tipo_contato}: ${ct.valor_contato}`
-                                  )
-                                  .join(" | ") || "",
-                          tipoContato:
-                              updated.cliente.contatos?.[0]?.tipo_contato ||
-                              "telefone",
-                          contatoValor:
-                              updated.cliente.contatos?.[0]?.valor_contato ||
-                              "",
-                          status: updated.status,
-                          departamento: updated.funcionario.cargo || "",
-                          departamentoId:
-                              updated.funcionario?.funcionario_ID || null,
-                      }
-                    : c
+                c.id === selectedClient.id ? { ...c, ...selectedClient } : c 
             );
-
             setClients(updatedClients);
+            await fetchClientes(); 
+
             setShowModalUpdate(false);
-            alert("Atualizado com sucesso!");
+            console.log("Atualizado com sucesso!");
         } catch (error) {
             console.error("Erro ao atualizar:", error);
-
             const updatedClients = clientes.map((c) =>
                 c.id === selectedClient.id ? { ...selectedClient } : c
             );
             setClients(updatedClients);
             setShowModalUpdate(false);
-            alert("Atualizado com sucesso! (modo teste)");
+            console.log("Atualizado com sucesso! (modo teste)");
         }
     };
 
+    const handleDelete = async (clientId) => {
+        if (!window.confirm("Tem certeza que deseja excluir este cliente?")) {
+            return;
+        }
+
+        try {
+            const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+            await axios.delete(`${apiUrl}/clientes/${clientId}`);
+
+            setClients(clientes.filter((c) => c.id !== clientId));
+            console.log("Cliente excluído com sucesso!");
+
+        } catch (error) {
+            console.error("Erro ao excluir cliente:", error);
+            alert("Erro ao excluir cliente. Tente novamente.");
+        }
+    };
+
+
     return (
         <ProtectRoute>
-       
-        <div className={styles.conteudo}>
-            <div className={styles["container-gestao"]}>
-                <div className={styles.header}>
-                    <div className={styles.headerLeft}>
-                        <h1 className={styles.titulo}>Gestão de clientes</h1>
-                        <p className={styles.subtitulo}>
-                            Gerencie seus clientes e acompanhe vendas
-                        </p>
-                    </div>
-                    <div className={styles.headerRight}>
-                        <div className={styles.statCard}>
-                            <p
-                                className={`${styles.statNumber} ${styles.total}`}
-                            >
-                                {totalClientes}
+            <div className={styles.conteudo}>
+                <div className={styles["container-gestao"]}>
+                    <div className={styles.header}>
+                        <div className={styles.headerLeft}>
+                            <h1 className={styles.titulo}>Gestão de clientes</h1>
+                            <p className={styles.subtitulo}>
+                                Gerencie seus clientes e acompanhe vendas
                             </p>
-                            <p className={styles.statLabel}>Total Clientes</p>
                         </div>
-                        <div className={styles.statCard}>
-                            <p
-                                className={`${styles.statNumber} ${styles.pendente}`}
-                            >
-                                {clientesPendentes}
-                            </p>
-                            <p className={styles.statLabel}>Pendentes</p>
-                        </div>
-                        <div className={styles.statCard}>
-                            <p
-                                className={`${styles.statNumber} ${styles.ativo}`}
-                            >
-                                {clientesAtivos}
-                            </p>
-                            <p className={styles.statLabel}>Ativos</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div className={styles.searchContainer}>
-                    <div className={styles.leftControls}>
-                        <input
-                            type="text"
-                            placeholder="Buscar clientes..."
-                            className={styles.pesquisa}
-                            value={searchTerm}
-                            onChange={(e) => setSearchTerm(e.target.value)}
-                        />
-                        <button
-                            className={styles.addButton}
-                            onClick={() => setShowModalAdd(true)}
-                        >
-                            Adicionar novo cliente
-                        </button>
-                    </div>
-                    <select
-                        className={styles.sortDropdown}
-                        value={sortKey}
-                        onChange={(e) => setSortKey(e.target.value)}
-                    >
-                        <option value="newest">Ordenar: Mais recentes</option>
-                        <option value="oldest">Ordenar: Mais antigas</option>
-                    </select>
-                </div>
-
-                <div className={styles.cardsContainer}>
-                    {sortedClients.map((client) => (
-                        <div key={client.id} className={styles.clientCard}>
-                            <div className={styles.cardHeader}>
-                                <div className={styles.clientInfo}>
-                                    <h3>{client.cliente}</h3>
-                                    <p>{client.segmento || "Sem segmento"}</p>
-                                </div>
-                                <span
-                                    className={`${styles.statusBadge} ${
-                                        styles[getStatusClass(client.status)]
-                                    }`}
-                                >
-                                    {client.status}
-                                </span>
+                        <div className={styles.headerRight}>
+                            <div className={styles.statCard}>
+                                <p className={`${styles.statNumber} ${styles.total}`}>
+                                    {totalClientes}
+                                </p>
+                                <p className={styles.statLabel}>Total Clientes</p>
                             </div>
-
-                            <div className={styles.cardDetails}>
-                                <div className={styles.detailItem}>
-                                    <span className={styles.detailLabel}>
-                                        Última Interação
-                                    </span>
-                                    <span className={styles.detailValue}>
-                                        {new Date(
-                                            client.ultimaInteracao
-                                        ).toLocaleDateString("pt-BR")}
-                                    </span>
-                                </div>
-                                <div className={styles.detailItem}>
-                                    <span className={styles.detailLabel}>
-                                        Vendas
-                                    </span>
-                                    <span className={styles.detailValue}>
-                                        {formatCurrency(client.vendas)}
-                                    </span>
-                                </div>
+                            <div className={styles.statCard}>
+                                <p className={`${styles.statNumber} ${styles.pendente}`}>
+                                    {clientesPendentes}
+                                </p>
+                                <p className={styles.statLabel}>Pendentes</p>
                             </div>
-
-                            <div className={styles.cardActions}>
-                                <button className={styles.btnDetalhes}>
-                                    Histórico de interações
-                                </button>
-                                <button
-                                    className={styles.btnEditar}
-                                    onClick={() => {
-                                        setSelectedClient(client);
-                                        setShowModalUpdate(true);
-                                    }}
-                                >
-                                    Editar
-                                </button>
-                                <button className={styles.btnExcluir}>
-                                    Deletar
-                                </button>
+                            <div className={styles.statCard}>
+                                <p className={`${styles.statNumber} ${styles.ativo}`}>
+                                    {clientesAtivos}
+                                </p>
+                                <p className={styles.statLabel}>Ativos</p>
                             </div>
                         </div>
-                    ))}
-                </div>
-            </div>
+                    </div>
 
-            {showModalUpdate && selectedClient && (
-                <div className={styles.modalOverlay}>
-                    <div className={styles.modalContent}>
-                        <button
-                            className={styles.closeButton}
-                            onClick={() => setShowModalUpdate(false)}
-                        >
-                            X
-                        </button>
-                        <h2>Editar Cliente</h2>
-                        <form onSubmit={handleSave}>
-                            <label>Nome:</label>
+                    <div className={styles.searchContainer}>
+                        <div className={styles.leftControls}>
                             <input
                                 type="text"
-                                className={styles.inputText}
-                                value={selectedClient.cliente}
-                                onChange={(e) =>
-                                    setSelectedClient({
-                                        ...selectedClient,
-                                        cliente: e.target.value,
-                                    })
-                                }
+                                placeholder="Buscar clientes..."
+                                className={styles.pesquisa}
+                                value={searchTerm}
+                                onChange={(e) => setSearchTerm(e.target.value)}
                             />
-
-                            <label>Endereço:</label>
-                            <input
-                                type="text"
-                                className={styles.inputText}
-                                value={selectedClient.endereco}
-                                onChange={(e) =>
-                                    setSelectedClient({
-                                        ...selectedClient,
-                                        endereco: e.target.value,
-                                    })
-                                }
-                            />
-
-                            <label>Segmento:</label>
-                            <input
-                                type="text"
-                                className={styles.inputText}
-                                value={selectedClient.segmento || ""}
-                                onChange={(e) =>
-                                    setSelectedClient({
-                                        ...selectedClient,
-                                        segmento: e.target.value,
-                                    })
-                                }
-                            />
-
-                            <label>Status da venda:</label>
-                            <input
-                                type="text"
-                                className={styles.inputText}
-                                value={selectedClient.status}
-                                onChange={(e) =>
-                                    setSelectedClient({
-                                        ...selectedClient,
-                                        status: e.target.value,
-                                    })
-                                }
-                            />
-
-                            <label>Departamento:</label>
-                            <input
-                                type="text"
-                                className={styles.inputText}
-                                value={selectedClient.departamento}
-                                onChange={(e) =>
-                                    setSelectedClient({
-                                        ...selectedClient,
-                                        departamento: e.target.value,
-                                    })
-                                }
-                            />
-
-                            <label>Contato: </label>
-                            <select
-                                id="contato"
-                                className={styles.selectInput}
-                                value={selectedClient.tipoContato || "telefone"}
-                                onChange={(e) =>
-                                    setSelectedClient({
-                                        ...selectedClient,
-                                        tipoContato: e.target.value,
-                                    })
-                                }
+                            <button
+                                className={styles.addButton}
+                                onClick={() => setShowModalAdd(true)}
                             >
-                                <option value="email">E-mail</option>
-                                <option value="telefone">Telefone</option>
-                                <option value="celular">Celular</option>
-                            </select>
-                            <input
-                                className={styles.inputText}
-                                type="text"
-                                value={selectedClient.contatoValor || ""}
-                                onChange={(e) =>
-                                    setSelectedClient({
-                                        ...selectedClient,
-                                        contatoValor: e.target.value,
-                                    })
-                                }
-                            />
-
-                            <button type="submit" className={styles.botao}>
-                                Salvar
+                                Adicionar novo cliente
                             </button>
-                        </form>
+                        </div>
+                        <select
+                            className={styles.sortDropdown}
+                            value={sortKey}
+                            onChange={(e) => setSortKey(e.target.value)}
+                        >
+                            <option value="newest">Ordenar: Mais recentes</option>
+                            <option value="oldest">Ordenar: Mais antigas</option>
+                        </select>
+                    </div>
+
+
+                    <div className={styles.cardsContainer}>
+                        {sortedClients.map((client) => (
+                            <div key={client.id} className={styles.clientCard}>
+                                <div className={styles.cardHeader}>
+                                    <div className={styles.clientInfo}>
+                                        <h3>{client.cliente}</h3>
+                                        <p>{client.segmento || "Sem segmento"}</p>
+                                    </div>
+                                    <span
+                                        className={`${styles.statusBadge} ${
+                                            styles[getStatusClass(client.status)]
+                                        }`}
+                                    >
+                                        {client.status}
+                                    </span>
+                                </div>
+
+                                <div className={styles.cardDetails}>
+                                    <div className={styles.detailItem}>
+                                        <span className={styles.detailLabel}>
+                                            Última Interação
+                                        </span>
+                                        <span className={styles.detailValue}>
+                                            {new Date(
+                                                client.ultimaInteracao
+                                            ).toLocaleDateString("pt-BR", {timeZone: 'UTC'})}
+                                        </span>
+                                    </div>
+                                    <div className={styles.detailItem}>
+                                        <span className={styles.detailLabel}>
+                                            Vendas
+                                        </span>
+                                        <span className={styles.detailValue}>
+                                            {formatCurrency(client.vendas)}
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div className={styles.cardActions}>
+                                    <button className={styles.btnDetalhes}>
+                                        Histórico de interações
+                                    </button>
+                                    <button
+                                        className={styles.btnEditar}
+                                        onClick={() => {
+                                            setSelectedClient(client);
+                                            setShowModalUpdate(true);
+                                        }}
+                                    >
+                                        Editar
+                                    </button>
+                                    <button 
+                                        className={styles.btnExcluir}
+                                        onClick={() => handleDelete(client.id)}
+                                    >
+                                        Deletar
+                                    </button>
+                                </div>
+                            </div>
+                        ))}
                     </div>
                 </div>
-            )}
 
-            {showModalAdd && (
-                <div className={styles.modalAddOverlay}>
-                    <div className={styles.modalAddContent}>
-                        <h2>Adicionar novo cliente</h2>
-                        <p className={styles.subtitle}>
-                            Preencha os dados abaixo para cadastrar um novo
-                            cliente no sistema.
-                        </p>
-
-                        <form onSubmit={handleAdd}>
-                            <div className={styles.formGroup}>
-                                <label className={styles.formLabel}>
-                                    Nome do cliente *
-                                </label>
+                {showModalUpdate && selectedClient && (
+                    <div className={styles.modalOverlay}>
+                        <div className={styles.modalContent}>
+                            <button
+                                className={styles.closeButton}
+                                onClick={() => setShowModalUpdate(false)}
+                            >
+                                X
+                            </button>
+                            <h2>Editar Cliente</h2>
+                            <form onSubmit={handleSave}>
+                                <label>Nome:</label>
                                 <input
                                     type="text"
-                                    className={styles.formInput}
-                                    value={newClient.nome}
+                                    className={styles.inputText}
+                                    value={selectedClient.cliente}
                                     onChange={(e) =>
-                                        setNewClient({
-                                            ...newClient,
-                                            nome: e.target.value,
+                                        setSelectedClient({
+                                            ...selectedClient,
+                                            cliente: e.target.value,
                                         })
                                     }
-                                    required
                                 />
-                            </div>
-
-                            <div className={styles.formGroup}>
-                                <label className={styles.formLabel}>
-                                    Endereço
-                                </label>
+                                <label>Endereço:</label>
                                 <input
                                     type="text"
-                                    className={styles.formInput}
-                                    value={newClient.endereco}
+                                    className={styles.inputText}
+                                    value={selectedClient.endereco}
                                     onChange={(e) =>
-                                        setNewClient({
-                                            ...newClient,
+                                        setSelectedClient({
+                                            ...selectedClient,
                                             endereco: e.target.value,
                                         })
                                     }
-                                    placeholder="Rua, número, bairro, cidade"
                                 />
-                            </div>
-
-                            <div className={styles.formGroup}>
-                                <label className={styles.formLabel}>
-                                    Segmento de atuação
-                                </label>
+                                <label>Segmento:</label>
                                 <input
                                     type="text"
-                                    className={styles.formInput}
-                                    value={newClient.segmento}
+                                    className={styles.inputText}
+                                    value={selectedClient.segmento || ""}
                                     onChange={(e) =>
-                                        setNewClient({
-                                            ...newClient,
+                                        setSelectedClient({
+                                            ...selectedClient,
                                             segmento: e.target.value,
                                         })
                                     }
-                                    placeholder="Ex: Tecnologia, Varejo, Serviços..."
                                 />
-                            </div>
-
-                            <div className={styles.formGroup}>
-                                <label className={styles.formLabel}>
-                                    Funcionário responsável
-                                </label>
-                                <select
-                                    className={styles.formSelect}
-                                    value={newClient.funcionario_ID}
-                                    onChange={(e) =>
-                                        setNewClient({
-                                            ...newClient,
-                                            funcionario_ID: Number(
-                                                e.target.value
-                                            ),
-                                        })
-                                    }
-                                    required
-                                >
-                                    <option value="">
-                                        Selecione um funcionário
-                                    </option>
-                                    {vendedores.map((vendedor) => (
-                                        <option
-                                            key={vendedor.funcionario_ID}
-                                            value={vendedor.funcionario_ID}
-                                        >
-                                            {vendedor.nome} — {vendedor.cargo}
-                                        </option>
-                                    ))}
-                                </select>
-                            </div>
-
-                            <div className={styles.formGroup}>
-                                <label className={styles.formLabel}>
-                                    Funil de vendas
-                                </label>
-                                <select
-                                    className={styles.formSelect}
-                                    value={newClient.funil_ID}
-                                    onChange={(e) =>
-                                        setNewClient({
-                                            ...newClient,
-                                            funil_ID: Number(e.target.value),
-                                        })
-                                    }
-                                    required
-                                >
-                                    <option value="">Selecione um funil</option>
-                                    <option value={1}>Prospecção</option>
-                                    <option value={2}>Followup</option>
-                                    <option value={3}>Negociação</option>
-                                    <option value={4}>Inicial</option>
-                                    <option value={5}>Potencial</option>
-                                    <option value={6}>Manutencao</option>
-                                    <option value={7}>Nao Venda</option>
-                                    <option value={8}>Venda</option>
-                                </select>
-                            </div>
-
-                            <div className={styles.formGroup}>
-                                <label className={styles.formLabel}>
-                                    Tipo de contato
-                                </label>
-                                <select
-                                    className={styles.formSelect}
-                                    value={newClient.tipo_contato}
-                                    onChange={(e) =>
-                                        setNewClient({
-                                            ...newClient,
-                                            tipo_contato: e.target.value,
-                                        })
-                                    }
-                                >
-                                    <option value="telefone">Telefone</option>
-                                    <option value="celular">Celular</option>
-                                    <option value="email">E-mail</option>
-                                </select>
-                            </div>
-
-                            <div className={styles.formGroup}>
-                                <label className={styles.formLabel}>
-                                    Contato
-                                </label>
+                                <label>Status da venda:</label>
                                 <input
                                     type="text"
-                                    className={styles.formInput}
-                                    value={newClient.valor_contato}
+                                    className={styles.inputText}
+                                    value={selectedClient.status}
                                     onChange={(e) =>
-                                        setNewClient({
-                                            ...newClient,
-                                            valor_contato: e.target.value,
+                                        setSelectedClient({
+                                            ...selectedClient,
+                                            status: e.target.value,
                                         })
                                     }
-                                    placeholder={
-                                        newClient.tipo_contato === "email"
-                                            ? "exemplo@email.com"
-                                            : "(00) 00000-0000"
+                                />
+                                <label>Departamento:</label>
+                                <input
+                                    type="text"
+                                    className={styles.inputText}
+                                    value={selectedClient.departamento}
+                                    onChange={(e) =>
+                                        setSelectedClient({
+                                            ...selectedClient,
+                                            departamento: e.target.value,
+                                        })
                                     }
                                 />
-                            </div>
 
-                            <div className={styles.buttonGroup}>
-                                <button
-                                    type="button"
-                                    className={styles.btnCancel}
-                                    onClick={() => setShowModalAdd(false)}
+                                <label>Contato: </label>
+                                <select
+                                    id="contato"
+                                    className={styles.selectInput}
+                                    value={selectedClient.tipoContato || "telefone"}
+                                    onChange={(e) =>
+                                        setSelectedClient({
+                                            ...selectedClient,
+                                            tipoContato: e.target.value,
+                                        })
+                                    }
                                 >
-                                    Cancelar
+                                    <option value="email">E-mail</option>
+                                    <option value="telefone">Telefone</option>
+                                    <option value="celular">Celular</option>
+                                </select>
+                                <input
+                                    className={styles.inputText}
+                                    type="text"
+                                    value={selectedClient.contatoValor || ""}
+                                    onChange={(e) =>
+                                        setSelectedClient({
+                                            ...selectedClient,
+                                            contatoValor: e.target.value,
+                                        })
+                                    }
+                                />
+
+                                <button type="submit" className={styles.botao}>
+                                    Salvar
                                 </button>
-                                <button
-                                    type="submit"
-                                    className={styles.btnSubmit}
-                                >
-                                    Adicionar cliente
-                                </button>
-                            </div>
-                        </form>
+                            </form>
+                        </div>
                     </div>
-                </div>
-            )}
-        </div>
-         </ProtectRoute>
+                )}
+
+                {showModalAdd && (
+                    <div className={styles.modalAddOverlay}>
+                        <div className={styles.modalAddContent}>
+                            <h2>Adicionar novo cliente</h2>
+                            <p className={styles.subtitle}>
+                                Preencha os dados abaixo para cadastrar um novo
+                                cliente no sistema.
+                            </p>
+
+                            <form onSubmit={handleAdd}>
+                                <div className={styles.formGroup}>
+                                    <label className={styles.formLabel}>
+                                        Nome do cliente *
+                                    </label>
+                                    <input
+                                        type="text"
+                                        className={styles.formInput}
+                                        value={newClient.nome}
+                                        onChange={(e) =>
+                                            setNewClient({
+                                                ...newClient,
+                                                nome: e.target.value,
+                                            })
+                                        }
+                                        required
+                                    />
+                                </div>
+
+                                <div className={styles.formGroup}>
+                                    <label className={styles.formLabel}>
+                                        Endereço
+                                    </label>
+                                    <input
+                                        type="text"
+                                        className={styles.formInput}
+                                        value={newClient.endereco}
+                                        onChange={(e) =>
+                                            setNewClient({
+                                                ...newClient,
+                                                endereco: e.target.value,
+                                            })
+                                        }
+                                        placeholder="Rua, número, bairro, cidade"
+                                    />
+                                </div>
+
+                                <div className={styles.formGroup}>
+                                    <label className={styles.formLabel}>
+                                        Segmento de atuação
+                                    </label>
+                                    <input
+                                        type="text"
+                                        className={styles.formInput}
+                                        value={newClient.segmento}
+                                        onChange={(e) =>
+                                            setNewClient({
+                                                ...newClient,
+                                                segmento: e.target.value,
+                                            })
+                                        }
+                                        placeholder="Ex: Tecnologia, Varejo..."
+                                    />
+                                </div>
+
+                                <div className={styles.formGroup}>
+                                    <label className={styles.formLabel}>
+                                        Funcionário responsável
+                                    </label>
+                                    <select
+                                        className={styles.formSelect}
+                                        value={newClient.funcionario_ID}
+                                        onChange={(e) =>
+                                            setNewClient({
+                                                ...newClient,
+                                                funcionario_ID: e.target.value,
+                                            })
+                                        }
+                                        required
+                                    >
+                                        <option value="">
+                                            Selecione um funcionário
+                                        </option>
+                                        {funcionariosMocados.map((vendedor) => (
+                                            <option
+                                                key={vendedor.id}
+                                                value={vendedor.id}
+                                            >
+                                                {vendedor.nome}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </div>
+
+                                <div className={styles.formGroup}>
+                                    <label className={styles.formLabel}>
+                                        Funil de vendas
+                                    </label>
+                                    <select
+                                        className={styles.formSelect}
+                                        value={newClient.funil_ID}
+                                        onChange={(e) =>
+                                            setNewClient({
+                                                ...newClient,
+                                                funil_ID: e.target.value,
+                                            })
+                                        }
+                                        required
+                                    >
+                                        <option value="">Selecione um funil</option>
+                                        <option value={1}>Prospecção</option>
+                                        <option value={2}>Followup</option>
+                                        <option value={3}>Negociação</option>
+                                        <option value={4}>Inicial</option>
+                                        <option value={5}>Potencial</option>
+                                        <option value={6}>Manutencao</option>
+                                        <option value={7}>Nao Venda</option>
+                                        <option value={8}>Venda</option>
+                                    </select>
+                                </div>
+
+                                <div className={styles.formGroup}>
+                                    <label className={styles.formLabel}>
+                                        Tipo de contato
+                                    </label>
+                                    <select
+                                        className={styles.formSelect}
+                                        value={newClient.tipo_contato}
+                                        onChange={(e) =>
+                                            setNewClient({
+                                                ...newClient,
+                                                tipo_contato: e.target.value,
+                                            })
+                                        }
+                                    >
+                                        <option value="telefone">Telefone</option>
+                                        <option value="celular">Celular</option>
+                                        <option value="email">E-mail</option>
+                                    </select>
+                                </div>
+
+                                <div className={styles.formGroup}>
+                                    <label className={styles.formLabel}>
+                                        Contato
+                                    </label>
+                                    <input
+                                        type="text"
+                                        className={styles.formInput}
+                                        value={newClient.valor_contato}
+                                        onChange={(e) =>
+                                            setNewClient({
+                                                ...newClient,
+                                                valor_contato: e.target.value,
+                                            })
+                                        }
+                                        placeholder={
+                                            newClient.tipo_contato === "email"
+                                                ? "exemplo@email.com"
+                                                : "(00) 00000-0000"
+                                        }
+                                    />
+                                </div>
+
+                                <div className={styles.buttonGroup}>
+                                    <button
+                                        type="button"
+                                        className={styles.btnCancel}
+                                        onClick={() => setShowModalAdd(false)}
+                                    >
+                                        Cancelar
+                                    </button>
+                                    <button
+                                        type="submit"
+                                        className={styles.btnSubmit}
+                                    >
+                                        Adicionar cliente
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                )}
+            </div>
+        </ProtectRoute>
     );
 }
 

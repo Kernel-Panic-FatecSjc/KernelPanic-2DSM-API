@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import styles from './App.module.css';
 import ProtectRoute from '../../components/ProtectRoute';
 import { useRouter } from 'next/navigation';
-import ProtectRoute from '../../components/ProtectRoute';
 
 function Page() {
   const router = useRouter();

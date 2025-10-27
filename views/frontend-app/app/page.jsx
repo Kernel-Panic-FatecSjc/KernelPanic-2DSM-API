@@ -19,7 +19,7 @@ export default function Home() {
   }, [router]);
 
   return (
-    <ProtectRoute>
+    <ProtectRoute perfisPermitidos={["master"]}>
     <div className={styles.container}>
       <div className={styles.content}>
         <Image

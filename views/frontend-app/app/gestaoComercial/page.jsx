@@ -1,5 +1,5 @@
 'use client';
-
+import ProtectRoute from '../../components/ProtectRoute';
 import React, { useState } from 'react';
 import styles from './App.module.css';
 import CalculadoraCotacao from '../../components/layout/CalculadoraCotacao/CalculadoraCotacao'; 

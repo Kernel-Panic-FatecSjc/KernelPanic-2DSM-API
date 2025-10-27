@@ -15,6 +15,10 @@
   gap: 1.5rem;
 }
 
+.calculadoraRow:last-of-type {
+  grid-template-columns: 1fr;
+}
+
 .formGroup {
   margin-bottom: 0;
 }
@@ -33,16 +37,26 @@
   border: 2px solid #e1e5e9;
   border-radius: 8px;
   font-size: 1rem;
-  color:#000;
+  color: #000;
   box-sizing: border-box;
   background-color: #fff;
+  transition: all 0.3s ease;
+}
+
+.formInput:hover {
+  border-color: #adb5bd;
 }
 
 .formInput:focus {
   outline: none;
-  border-color: #007bff;
+  border-color: #1F4AF4;
   color: #000;
-  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+  box-shadow: 0 0 0 3px rgba(31, 74, 244, 0.1);
+}
+
+.formInput::placeholder {
+  color: #6c757d;
+  opacity: 0.7;
 }
 
 .formSelect {
@@ -51,17 +65,27 @@
   border: 2px solid #e1e5e9;
   border-radius: 8px;
   font-size: 1rem;
-  color:#000;
+  color: #000;
   box-sizing: border-box;
   transition: all 0.3s ease;
   background-color: #fff;
   cursor: pointer;
 }
 
+.formSelect:hover {
+  border-color: #adb5bd;
+}
+
 .formSelect:focus {
   outline: none;
-  border-color: #007bff;
-  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+  border-color: #1F4AF4;
+  box-shadow: 0 0 0 3px rgba(31, 74, 244, 0.1);
+}
+
+.formSelect option {
+  padding: 0.5rem;
+  background-color: white;
+  color: #000;
 }
 
 .calculadoraBotoes {
@@ -73,7 +97,7 @@
 
 .botaoSecundario {
   padding: 0.75rem 1.5rem;
-  background-color: #6c757d;
+  background: linear-gradient(to bottom right, #5AA6FA, #87DBFF);
   color: white;
   border: none;
   border-radius: 8px;
@@ -86,7 +110,7 @@
 }
 
 .botaoSecundario:hover {
-  background-color: #5a6268;
+  background: linear-gradient(to bottom right, #4686F5, #5AA6FA);
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
@@ -95,34 +119,57 @@
   transform: translateY(0);
 }
 
+.botaoSecundario:focus-visible {
+  outline: 2px solid #1F4AF4;
+  outline-offset: 2px;
+}
+
 .calculadoraAcao {
   display: flex;
+  gap: 1rem;
   justify-content: center;
   margin-top: 1rem;
 }
 
-
 .btnSubmit {
   padding: 1rem 2.5rem;
-  background: linear-gradient(135deg, #007bff, #0056b3);
-  color: white; /* Se quiser mudar a cor do texto do botão, altere aqui */
+  background: linear-gradient(135deg, #2A49EB, #1F4AF4);
+  color: white;
   border: none;
   border-radius: 10px;
   cursor: pointer;
   font-size: 1.1rem;
   font-weight: 700;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+  box-shadow: 0 4px 15px rgba(42, 73, 235, 0.3);
 }
 
 .btnSubmit:hover {
   transform: translateY(-3px);
-  box-shadow: 0 6px 20px rgba(0, 123, 255, 0.4);
-  background: linear-gradient(135deg, #0056b3, #004085);
+  box-shadow: 0 6px 20px rgba(42, 73, 235, 0.4);
+  background: linear-gradient(135deg, #1F4AF4, #1a38d9);
 }
 
 .btnSubmit:active {
   transform: translateY(-1px);
+}
+
+.btnSubmit:focus-visible {
+  outline: 2px solid #1a38d9;
+  outline-offset: 2px;
+}
+
+.btnSubmit:disabled {
+  background: #6c757d;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.btnSubmit:disabled:hover {
+  background: #6c757d;
+  transform: none;
+  box-shadow: none;
 }
 
 .resultadoContainer {
@@ -146,11 +193,10 @@
   margin: 0;
   font-size: 2.5rem;
   font-weight: 800;
-  color: #2a49eb;
+  color: #2A49EB;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Animações */
 @keyframes slideUp {
   from {
     opacity: 0;
@@ -162,25 +208,6 @@
   }
 }
 
-/* Estados de erro */
-.formInput:invalid,
-.formSelect:invalid {
-  border-color: #dc3545;
-}
-
-.formInput:invalid:focus,
-.formSelect:invalid:focus {
-  border-color: #dc3545;
-  box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1);
-}
-
-/* Placeholder styling */
-.formInput::placeholder {
-  color: #6c757d;
-  opacity: 0.7;
-}
-
-/* Responsividade */
 @media (max-width: 768px) {
   .calculadoraRow {
     grid-template-columns: 1fr;
@@ -204,6 +231,14 @@
   .calculadoraContent {
     gap: 1rem;
   }
+
+  .calculadoraAcao {
+    flex-direction: column;
+  }
+
+  .btnSubmit {
+    width: 100%;
+  }
 }
 
 @media (max-width: 480px) {
@@ -219,56 +254,4 @@
   .resultadoValor {
     font-size: 1.8rem;
   }
-}
-
-/* Estados de hover para inputs */
-.formInput:hover,
-.formSelect:hover {
-  border-color: #adb5bd;
-}
-
-/* Estilo para opções do select */
-.formSelect option {
-  padding: 0.5rem;
-  background-color: white;
-}
-
-/* Loading state (para futuras implementações) */
-.btnSubmit:disabled {
-  background: #6c757d;
-  cursor: not-allowed;
-  transform: none;
-  box-shadow: none;
-}
-
-.btnSubmit:disabled:hover {
-  background: #6c757d;
-  transform: none;
-  box-shadow: none;
-}
-
-/* Efeito de foco para acessibilidade */
-.botaoSecundario:focus-visible,
-.btnSubmit:focus-visible {
-  outline: 2px solid #007bff;
-  outline-offset: 2px;
-}
-
-/* Custom scrollbar para o modal */
-.calculadoraContent::-webkit-scrollbar {
-  width: 6px;
-}
-
-.calculadoraContent::-webkit-scrollbar-track {
-  background: #f1f1f1;
-  border-radius: 3px;
-}
-
-.calculadoraContent::-webkit-scrollbar-thumb {
-  background: #c1c1c1;
-  border-radius: 3px;
-}
-
-.calculadoraContent::-webkit-scrollbar-thumb:hover {
-  background: #a8a8a8;
 }

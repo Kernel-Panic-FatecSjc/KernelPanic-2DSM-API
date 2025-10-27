@@ -6,7 +6,8 @@
 | 1 | 🔴 Alta | 3 | Eu como administrativo, quero receber notificações automáticas de eventos com link, confirmação ou recusa justificada, conclusão após participação, formulário de avaliação e documento padrão de registro, para gerenciar todos os eventos de forma rápida e confiável | 8 | Sistema de eventos com notificações, formulários e geração automática de relatórios |
 | 2 | 🔴 Alta | 3 | Eu como gestor, quero gerar relatórios específicos da minha área (comercial, operacional ou administrativa), para acompanhar indicadores e otimizar processos internos | 8 | Integração de dados comerciais e operacionais na mesma plataforma |
 | 3 | 🟠 Média | 3 | Eu como cliente, quero visualizar a quantidade de funcionários e agregados, além dos veículos cadastrados, para realizar uma análise de perfil | 5 | Cadastro de funcionários, agregados e veículos com perfis atualizados |
-| 4 | 🟡 Baixa | 3 | Eu como usuário, quero que a plataforma seja responsiva para mobile, para conseguir acessar e utilizar todas as funcionalidades pelo celular ou tablet | 4 | Responsividade da plataforma para dispositivos móveis |
+| 4 | 🟠 Média | 3 | Eu como usuário, quero selecionar de onde estou fazendo login após autenticar, para que o administrativo tenha acesso às informações da origem | 5 | Tela de seleção de origem integrada ao fluxo de login |
+| 5 | 🟡 Baixa | 3 | Eu como usuário, quero que a plataforma seja responsiva para mobile, para conseguir acessar e utilizar todas as funcionalidades pelo celular ou tablet | 4 | Responsividade da plataforma para dispositivos móveis |
 
 ---
 
@@ -59,8 +60,24 @@
 </details>
 
 ---
+### User Story: US04 – Seleção de origem/departamento após login
 
-### User Story: US04 – Plataforma responsiva para mobile
+<details>
+<summary><b>Clique aqui para ver os cenários</b></summary>
+
+| Título do Cenário | Dado que | Quando | Então |
+| :--- | :--- | :--- | :--- |
+| Exibir tela de seleção após login | O usuário realizou login com sucesso | Ele é redirecionado após autenticação | O sistema exibe tela com opções de origem/departamento disponíveis |
+| Selecionar origem/departamento | O usuário está na tela de seleção | Ele seleciona uma origem/departamento | O sistema registra a seleção e direciona para o dashboard |
+| Acesso do administrativo aos dados | O administrativo fez login e selecionou uma origem | Ele acessa a plataforma | O sistema exibe dados filtrados da origem/departamento selecionado |
+| Falha na seleção de origem | O usuário está na tela de seleção | O sistema encontra erro ao processar a seleção | O sistema exibe mensagem de erro e permite nova tentativa |
+| Alterar origem/departamento | O usuário já está na plataforma | Ele clica em alterar origem/departamento | O sistema retorna à tela de seleção permitindo trocar a origem |
+
+</details>
+
+---
+
+### User Story: US05 – Plataforma responsiva para mobile
 
 <details>
 <summary><b>Clique aqui para ver os cenários</b></summary>

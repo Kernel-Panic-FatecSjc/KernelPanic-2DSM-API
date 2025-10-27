@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import ProtectRoute from "../../components/ProtectRoute";
 import styles from "./App.module.css";
 import axios from "axios";
 
@@ -102,7 +103,7 @@ export default function GestaoFormularios() {
     };
 
     return (
-        <ProtectRoute>
+        <ProtectRoute perfisPermitidos={["master","gestor"]}>
         <div className={styles.container}>
             <div className={styles.header}>
                 <h1 className={styles.tittle}>Respostas</h1>

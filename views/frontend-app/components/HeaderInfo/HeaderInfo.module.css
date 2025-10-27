@@ -1,0 +1,62 @@
+/* components/HeaderInfo/HeaderInfo.module.css */
+
+.infoContainer {
+    justify-content: center;
+    
+    margin-left:  16px;
+    margin-right: 16px;
+  display: flex;
+  flex-direction: column; /* Empilha o texto e o botão */
+  gap: 100%;
+  padding: 12px;
+  background-color: #ffffff; /* Um cinza bem claro, para destacar do fundo branco */
+  border-radius: 6px;
+  border: 0.2px solid #e9ecef; /* Borda sutil */
+}
+
+.userInfo {
+    
+  /* Não precisa de estilos, só agrupa os <p> */
+}
+
+.userInfo p {
+  margin: 0px;
+  line-height: 1.4;
+}
+
+.usuarioEmail {
+  font-size: 14px;
+  font-weight: 600; /* Mais forte que os links (500) */
+
+  color: #3e4347;   /* Texto mais escuro que o padrão #9197B3 */
+}
+
+.usuarioPerfil {
+  font-size: 13px;
+  font-weight: 500;
+  color: #9197B3; /* Cor padrão dos links */
+  text-transform: capitalize;
+}
+
+.logoutButton {
+  display: block;
+  width: 100%;
+  padding: 10px 15px;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center; /* Centralizado */
+  
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  
+  /* Tema "danger" sutil */
+  background-color: #c0e5fa; /* Vermelho bem claro */
+  color: #001e94; /* Vermelho */
+  transition: all 0.2s ease-in-out;
+}
+
+.logoutButton:hover {
+  background-color: #839af5; /* Vermelho sólido */
+  color: #ffffff; /* Texto branco */
+}

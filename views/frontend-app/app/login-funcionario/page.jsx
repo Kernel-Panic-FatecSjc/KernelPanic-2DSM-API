@@ -45,7 +45,7 @@ export default function Page() {
 
       login(data.accessToken);
 
-      router.push("/funil-vendas"); 
+      router.push("/checklists"); 
 
     } catch (error) {
       setErro(error.message);

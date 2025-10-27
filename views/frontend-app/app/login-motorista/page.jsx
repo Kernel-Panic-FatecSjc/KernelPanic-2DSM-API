@@ -1,59 +1,56 @@
 "use client";
 
-import styles from "./App.module.css";
 import { useRouter } from "next/navigation";
+import styles from "./App.module.css";
 import Login from "../../components/layout/Login/login";
 
 export default function Page() {
   const router = useRouter();
-    console.log("Bem Vindo Motorista")
 
   return (
-    <div className={styles.container}>
+    <div className={styles.layout}>
       <div className={styles.lateral}>
         <Login />
       </div>
-
-      <div className={styles.content}>
-        <a
-          className={styles.linkVoltar}
-          onClick={() => router.push("/login-inicial")}
+      <div className={styles.right}>
+        <button
+          className={styles.link}
+          onClick={() => router.push("/home-menu")}
+          style={{ border: 'none', background: 'none', cursor: 'pointer' }}
         >
           <strong>← Voltar</strong>
-        </a>
+        </button>
 
-        <div className={styles.card}>
-          <h2 className={styles.title}>Área do Motorista</h2>
+        <div className={styles.principal}>
+          <h1>Área do motorista</h1>
 
-          <div className={styles.buttonsContainer}>
-            <div
-              className={styles.panel}
-              onClick={() => router.push("/checklist-veiculo")}
-            >
-              <div className={styles.iconCircle}>
-                <img
-                  src="/images/caminhao.svg"
-                  alt="Caminhão"
-                  className={styles.icon}
-                />
-              </div>
-              <span className={styles.text}>Checklist Veículo</span>
+          <button
+            className={styles.btn_checklist}
+            onClick={() => router.push("/checklist-veiculo")}
+          >
+            <div className={styles.iconWrapper}>
+              <img
+                src="/images/caminhao.png"
+                alt="Caminhão"
+                className={styles.icon}
+              />
             </div>
+            <span className={styles.btnText}>Checklist do Veículo</span>
+          </button>
 
-            <div
-              className={styles.panel}
-              onClick={() => router.push("/cadastro-motorista")}
-            >
-              <div className={styles.iconCircle}>
-                <img
-                  src="/images/motorista.svg"
-                  alt="Motorista"
-                  className={styles.icon}
-                />
-              </div>
-              <span className={styles.text}>Cadastro do Motorista</span>
+          <button
+            className={styles.btn_cadastro}
+            onClick={() => router.push("/formulario-agregado")}
+          >
+            <div className={styles.iconWrapper}>
+              <img
+                src="/images/motorista.png"
+                alt="Motorista"
+                className={styles.icon}
+              />
             </div>
-          </div>
+            <span className={styles.btnText}>Cadastro do Motorista</span>
+          </button>
         </div>
       </div>
     </div>

@@ -13,9 +13,9 @@ const funcionariosMocados = [
 ];
 
 const PERFIL_MAP = {
-  "admin": 1,
+  "master": 1,
   "vendedor": 2,
-  "consultor": 3,
+  "gestor": 3,
 };
 
 
@@ -59,7 +59,7 @@ function Gerenciamento() {
     };
 
     fetchTodosOsPerfis();
-  }, []); // Array vazio, roda uma vez
+  }, []); 
 
   
   const abrirModal = (func) => {
@@ -136,7 +136,7 @@ function Gerenciamento() {
   };
 
   return (
-    <ProtectRoute>
+    <ProtectRoute perfisPermitidos={["master"]}>
     <div className={styles.container}>
       <h1 className={styles.titulo}>Gerenciamento de Permissões</h1>
 

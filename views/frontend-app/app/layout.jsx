@@ -26,7 +26,10 @@ export default function RootLayout({ children }) {
         <AuthProvider>
           <div className="layout">
             <ConditionalLateralBar />
-            <main className="conteudo">{children}</main>
+            <main className="conteudo">
+              {children}
+             
+              </main>
           </div>
         </AuthProvider>
         

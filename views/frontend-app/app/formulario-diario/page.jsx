@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import styles from './App.module.css';
 import ProtectRoute from '../../components/ProtectRoute';
 import { useRouter } from 'next/navigation';
-import ProtectRoute from '../../components/ProtectRoute';
 
 function Page() {
   const router = useRouter();
@@ -48,7 +47,7 @@ function Page() {
     };
 
     try {
-      const response = await fetch('http://localhost:5000/checklist/diario', {
+      const response = await fetch('http://localhost:5000/checklist/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

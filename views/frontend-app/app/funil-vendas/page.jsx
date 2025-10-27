@@ -6,7 +6,7 @@ import ProtectRoute from '../../components/ProtectRoute';
 
 export default function page() {
   return (
-    <ProtectRoute>
+    <ProtectRoute perfisPermitidos={["master","gestor","vendedor"]}>
     <div>
         <Kanban>
         </Kanban>

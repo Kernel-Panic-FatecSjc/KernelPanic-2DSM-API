@@ -4,10 +4,11 @@ import Image from "next/image";
 import TabButton from "./TabButton";
 import styles from "./LateralBar.module.css";
 import { useRouter } from "next/navigation";
+import HeaderInfo from "../../HeaderInfo/HeaderInfo";
+import { useAuth } from "../../../context/AuthContext";
 
 const tab_data = [
   {
-
     title: "login",
     id: "login",
     route: "/login-inicial",
@@ -32,6 +33,7 @@ const tab_data = [
     title: "gerenciar-permissoes",
     id: "gerenciar-permissoes",
     route: "/gerenciar-permissao",
+    perfisPermitidos: ["master"], //
     content: (active) => (
       <>
         <Image
@@ -53,6 +55,7 @@ const tab_data = [
     title: "agendamento-comercial",
     id: "agendamento-comercial",
     route: "/agendamento",
+    perfisPermitidos: ["master","gestor","vendedor"], //
     content: (active) => (
       <>
         <Image
@@ -74,6 +77,7 @@ const tab_data = [
     title: "area-agregados",
     id: "area-agregados",
     route: "/pagina-agregado",
+    perfisPermitidos: ["master","gestor","vendedor"], //
     content: (active) => (
       <>
         <Image
@@ -95,6 +99,7 @@ const tab_data = [
     title: "checklists-formularios",
     id: "checklists-formularios",
     route: "/checklists",
+    perfisPermitidos: ["master","gestor","vendedor"], //
     content: (active) => (
       <>
         <Image
@@ -116,6 +121,7 @@ const tab_data = [
     title: "dashboard-comercial",
     id: "dashboard-comercial",
     route: "/dashboardsFormularios",
+    perfisPermitidos: ["master","gestor"], //
     content: (active) => (
       <>
         <Image
@@ -137,6 +143,7 @@ const tab_data = [
     title: "dashboard-vendas",
     id: "dashboard-vendas",
     route: "/grafico",
+    perfisPermitidos: ["master","gestor"], //
     content: (active) => (
       <>
         <Image
@@ -158,6 +165,7 @@ const tab_data = [
     title: "desempenho-vendedores",
     id: "desempenho-vendedores",
     route: "/vendas",
+    perfisPermitidos: ["master","gestor"], //
     content: (active) => (
       <>
         <Image
@@ -174,9 +182,52 @@ const tab_data = [
     ),
   },
   {
+    title: "funil-vendas",
+    id: "funil-vendas",
+    route: "/funil-vendas",
+    perfisPermitidos: ["master","gestor","vendedor"], //
+    content: (active) => (
+      <>
+        <Image
+          src={
+            active
+              ? "/images/iconedesempenhobranco.svg"
+              : "/images/iconedesempenho.svg"
+          }
+          width={24}
+          height={25}
+          alt="Ícone de Funil de Vendas"
+          className={styles.icone}
+        />
+        <h3>Funil de Vendas</h3>
+      </>
+    ),
+  },
+  {
+    title: "gestao-comercial",
+    id: "gestao-comercial",
+    route: "/gestaoComercial",
+    perfisPermitidos: ["master","gestor","vendedor"], //
+    content: (active) => (
+      <>
+        <Image
+          src={
+            active ? "/images/icongestaobranco.svg" : "/images/icongestao.svg"
+          }
+          width={24}
+          height={25}
+          alt="Ícone de Gestão Comercial"
+          className={styles.icone}
+        />
+        <h3>Gestão Comercial</h3>
+      </>
+    ),
+  },
+  {
     title: "gestao-clientes",
     id: "gestao-clientes",
     route: "/gestao",
+    perfisPermitidos: ["master","gestor",], //
     content: (active) => (
       <>
         <Image
@@ -196,6 +247,7 @@ const tab_data = [
     title: "gestao-formularios",
     id: "gestao-formularios",
     route: "/gestaoFormularios",
+    perfisPermitidos: ["master","gestor"], //
     content: (active) => (
       <>
         <Image
@@ -211,16 +263,36 @@ const tab_data = [
       </>
     ),
   },
+
+
 ];
 
 function LateralBar() {
   const [tab, setTab] = useState("login");
   const router = useRouter();
 
+  const { user, isAuthenticated } = useAuth();
+  const perfisDoUsuario = user?.perfis || []; 
   const handleTabChange = (id, route) => {
     setTab(id);
     router.push(route);
   };
+
+  const linksVisiveis = tab_data.filter(tab => {
+    if (tab.id === 'login') {
+      return !isAuthenticated; 
+    }
+
+    if (!isAuthenticated) {
+      return false;
+    }
+
+    if (!tab.perfisPermitidos) {
+      return true;
+    }
+    return tab.perfisPermitidos.some(perfil => perfisDoUsuario.includes(perfil));
+  });
+  
 
   return (
     <div className={styles.boxglobal}>
@@ -232,7 +304,7 @@ function LateralBar() {
           alt="Logo da Newe"
         />
         <div className={styles.tabButtons}>
-          {tab_data.map((t) => (
+          {linksVisiveis.map((t) => (
             <TabButton
               key={t.id}
               selectTab={() => handleTabChange(t.id, t.route)}
@@ -240,8 +312,15 @@ function LateralBar() {
             >
               {t.content(tab === t.id)}
             </TabButton>
+            
           ))}
+             <div >
+          <HeaderInfo />
         </div>
+        </div>
+
+     
+
       </div>
     </div>
   );

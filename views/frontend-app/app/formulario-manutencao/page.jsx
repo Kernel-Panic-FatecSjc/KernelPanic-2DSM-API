@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import styles from './App.module.css';
 import ProtectRoute from '../../components/ProtectRoute';
 import { useRouter } from 'next/navigation';
-import ProtectRoute from '../../components/ProtectRoute';
 
 function Page() {
   const router = useRouter();
@@ -63,13 +62,17 @@ function Page() {
     event.preventDefault();
 
     const dadosParaEnviar = {
-      tipo: "manutencao_predial",
+      tipo: "manutencao_predial", // O tipo vai no corpo (body)
       respostas: { ...form },
       path_img: null,
     };
 
     try {
-      const response = await fetch('http://localhost:5000/checklist/manutencao-predial', {
+      // --- CORREÇÃO ---
+      // A rota POST no seu backend é "/checklist" (ou "/checklist/").
+      // O tipo ("manutencao_predial") é enviado no corpo da requisição (acima),
+      // e não como um parâmetro na URL.
+      const response = await fetch('http://localhost:5000/checklist', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -80,7 +83,11 @@ function Page() {
       const data = await response.json();
       console.log('✅ Resposta do servidor:', data);
 
+      // O 'alert' pode travar a navegação em alguns casos,
+      // considere usar uma notificação ou modal.
       alert("Checklist enviado com sucesso!");
+      
+      // Limpar o formulário
       setForm({
         dataDaVerificacao: "",
         condiPisoEscritorioADM_Diretoria_SalaReuniao: "",
@@ -155,6 +162,7 @@ function Page() {
             name="dataDaVerificacao"
             value={form.dataDaVerificacao}
             onChange={handleChange}
+            required // Adicionando 'required' para campos importantes
           />
         </div>
 
@@ -428,6 +436,25 @@ function Page() {
           </div>
         </div>
 
+        {/* --- CAMPO FALTANTE ---
+          Adicionei o "Banheiro Feminino" que estava no seu 'useState'
+          mas não estava sendo renderizado no formulário.
+        */}
+        <div className={styles.checkboxGroup}>
+          <label className={styles.inputtitle}>Verificação das lâmpadas - Banheiro Feminino</label>
+          <div className={styles.checkboxOption}>
+            <input 
+              className={styles.inputcheckbox} 
+              type="checkbox" 
+              id="verificLampadasBanheiroFeminino" 
+              name="verificLampadasBanheiroFeminino" 
+              checked={form.verificLampadasBanheiroFeminino} 
+              onChange={handleChange} 
+            />
+            <label htmlFor="verificLampadasBanheiroFeminino">Sim</label>
+          </div>
+        </div>
+
         <div className={styles.checkboxGroup}>
           <label className={styles.inputtitle}>Verificação das lâmpadas - Banheiro Masculino</label>
           <div className={styles.checkboxOption}>
@@ -644,6 +671,8 @@ function Page() {
             name="setorCadeiraMasCondicoes"
             value={form.setorCadeiraMasCondicoes}
             onChange={handleChange}
+            // Habilitar/desabilitar baseado na checkbox
+            disabled={!form.cadeiraMasCondicoes}
           />
         </div>
 

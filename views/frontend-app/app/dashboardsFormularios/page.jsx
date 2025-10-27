@@ -144,7 +144,7 @@ export default function Page() {
         },
     };
     return (
-        <ProtectRoute>
+        <ProtectRoute perfisPermitidos={["gestor","master"]}>
         
         <div className={styles.main}>
             <h1 className={styles.tittle}>
