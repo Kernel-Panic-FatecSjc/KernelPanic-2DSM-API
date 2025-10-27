@@ -77,7 +77,7 @@ const tab_data = [
     title: "area-agregados",
     id: "area-agregados",
     route: "/pagina-agregado",
-    perfisPermitidos: ["master","gestor","vendedor"], //
+    perfisPermitidos: [], //
     content: (active) => (
       <>
         <Image
