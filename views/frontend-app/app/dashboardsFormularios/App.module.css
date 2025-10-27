@@ -1,0 +1,145 @@
+.main {
+    margin: 0 auto;
+    padding: 2rem;
+    font-family: Arial, sans-serif;
+    background-color: white;
+    border-radius: 10px;
+    padding-bottom: 4rem;
+}
+
+.container {
+    margin-top: 4rem;
+    display: flex;
+    justify-content: space-around;
+}
+
+.section {
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.titulo {
+    font-size: 50px;
+    font-weight: 600;
+    color: #1F4AF4;
+    margin: 0 0 25px 0;
+    font-family: Arial, sans-serif;
+    text-align: left;
+}
+
+.svg {
+    color: black;
+    height: 30px;
+    margin-right: 15px;
+}
+
+.titleDash {
+    padding: 1rem;
+    background-color: #5aa6fa4d;
+    margin-bottom: 1rem;
+    border-radius: 80px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.titleDash h2 {
+    margin: 0;
+    padding: 0;
+    background: none;
+    color: black;
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.preenchidosAside {
+    display: flex;
+}
+
+.preenchidosTitle h3 {
+    margin: 10px 50px;
+    color: #1f4af4;
+    font-size: 25px;
+    font-weight: 100;
+}
+
+.ultimaAtualizacao {
+    background-color: #f0f0f0;
+    width: 100%;
+    margin-top: 2rem;
+    padding: 1rem;
+    max-height: 300px;
+    overflow-y: auto;
+    border-radius: 5px;
+}
+
+.ultimaAtualizacao h3 {
+    margin: 1rem;
+    font-weight: 700;
+}
+
+.formulariosPorFuncionario {
+    background-color: #f0f0f0;
+    width: 100%;
+    margin-top: 2rem;
+    padding: 1rem;
+    max-height: 300px;
+    overflow-y: auto;
+    border-radius: 5px;
+}
+
+.formulariosPorFuncionario h3 {
+    margin: 1rem;
+    font-weight: 700;
+}
+
+.list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    font-family: Arial, sans-serif;
+}
+
+.list li {
+    display: flex;
+    padding: 1rem;
+}
+
+.linha_par {
+    background-color: white;
+}
+
+.linha_impar {
+    background-color: #f0f0f0;
+}
+
+.linha_par,
+.linha_impar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+}
+
+.primeiraLinha {
+    border-bottom: #1f4af4 3px solid;
+}
+
+.primeiraLinha .col {
+    flex: 1;
+    text-align: center;
+    padding: 0 0.5rem;
+    color: #1f4af4;
+    font-weight: 700;
+}
+
+.col {
+    flex: 1;
+    text-align: center;
+    padding: 0 0.5rem;
+    font-weight: 500;
+    color: #1f4af4;
+}
