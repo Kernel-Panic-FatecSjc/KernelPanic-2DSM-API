@@ -6,7 +6,7 @@ import ProtectRoute from "../../components/ProtectRoute";
 
 export default function HomeMenu() {
     return (
-        <ProtectRoute>
+        
             <div className={styles.container}>
                 <div className={styles.content}>
                     <div className={styles.logoWrapper}>
@@ -24,6 +24,6 @@ export default function HomeMenu() {
                     </div>
                 </div>
             </div>
-        </ProtectRoute>
+    
     );
 }
