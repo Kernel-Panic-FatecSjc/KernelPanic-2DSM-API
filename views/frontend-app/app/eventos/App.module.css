@@ -1,0 +1,61 @@
+.container {
+  display: grid;
+  grid-template-areas: 
+  "calendar" "eventos"
+  "calendar" "eventos";
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  padding: 20px;
+}
+
+.calendarContainer{
+  background-color: white;
+  grid-area: calendar;
+  border-radius: 16px;
+
+}
+
+.eventosContainer{
+  grid-area: eventos;
+  background-color: white;
+  border-radius: 16px;
+}
+
+.navCustom {
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: space-between;
+  width: 350px;
+  padding: 0 16px;
+}
+
+.calendarTitle {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 22px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.calendarButton {
+  width: 40px;
+  height: 40px;
+  background-color: #1F4AF4;
+  border: none;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.calendarButton img {
+  width: 16px;
+  height: 16px;
+}
+
+.calendarButton:hover {
+  background: #3366F0;
+}
