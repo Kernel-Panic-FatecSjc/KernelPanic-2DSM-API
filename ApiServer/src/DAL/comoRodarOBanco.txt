@@ -1,0 +1,7 @@
+
+Como rodar o backup do banco e recrialo na sua maquina:
+
+--Dentro do Sql
+CREATE DATABASE IF NOT EXISTS newe_database; --nome do banco
+
+mysql -u root -p newe_database < backupBancoNewe.sql
