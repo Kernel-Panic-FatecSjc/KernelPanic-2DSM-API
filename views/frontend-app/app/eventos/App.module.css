@@ -1,21 +1,27 @@
 .container {
   display: grid;
   grid-template-areas: 
-  "calendar" "eventos"
-  "calendar" "eventos";
+  "calendar eventos"
+  "calendar eventos";
   grid-template-columns: 1fr 1fr;
   gap: 24px;
   padding: 20px;
 }
 
-.calendarContainer{
+.calendarContainer {
   background-color: white;
   grid-area: calendar;
   border-radius: 16px;
-
+  padding: 30px;
+  width: 100%;
+  max-width: 900px;
+  min-height: 700px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.eventosContainer{
+.eventosContainer {
   grid-area: eventos;
   background-color: white;
   border-radius: 16px;
@@ -26,22 +32,24 @@
   position: relative;
   align-items: center;
   justify-content: space-between;
-  width: 350px;
+  width: 100%;
   padding: 0 16px;
+  margin-bottom: 20px;
+  box-sizing: border-box;
 }
 
 .calendarTitle {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  font-size: 22px;
+  font-size: 26px;
   font-weight: 600;
   text-transform: capitalize;
 }
 
 .calendarButton {
-  width: 40px;
-  height: 40px;
+  width: 50px;
+  height: 50px;
   background-color: #1F4AF4;
   border: none;
   border-radius: 12px;
@@ -52,10 +60,100 @@
 }
 
 .calendarButton img {
-  width: 16px;
-  height: 16px;
+  width: 20px;
+  height: 20px;
 }
 
 .calendarButton:hover {
   background: #3366F0;
+}
+
+:global(.rdp) {
+  width: 100%;
+}
+
+:global(.rdp-table) {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+:global(.rdp-head_row) {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+:global(.rdp-head_cell) {
+  flex: 1;
+  text-align: center;
+  min-width: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  padding-bottom: 10px;
+}
+
+:global(.rdp-day) {
+  height: 80px;
+  width: 80px;
+  font-size: 20px;
+  margin: 2px;
+}
+
+:global(.rdp-day_button) {
+  height: 80px;
+  width: 80px;
+  font-size: 20px;
+  margin: 2px;
+  border-radius: 12px;
+}
+
+:global(.rdp-weekday) {
+  color: #1F4AF4;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+:global(.rdp-day_eventos),
+.evento {
+  background-color: #87DBFF !important;
+  color: #FFFFFF !important;
+  border-radius: 12px !important;
+  font-weight: 700 !important;
+}
+
+.hoje {
+  background-color: #1F4AF4 !important;
+  color: #FFFFFF !important;
+  border-radius: 12px !important;
+  font-weight: 700 !important;
+}
+
+.evento:hover,
+.hoje:hover {
+  filter: brightness(1.1);
+}
+
+:global(.rdp-day_button),
+:global(.rdp-day_button:focus),
+:global(.rdp-day_button:focus-visible),
+:global(.rdp-day_button:active),
+:global(.rdp-day_button:hover) {
+  background: transparent !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+:global(.rdp-selected) {
+  background-color: transparent !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+:global(.rdp-selected) {
+  background-color: #e0e0e0 !important;
+  color: black !important;
+  border-radius: 12px !important;
 }
