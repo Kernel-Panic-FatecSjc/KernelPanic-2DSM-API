@@ -188,19 +188,12 @@
   padding: 20px 0;
 }
 
-
-.eventosContainer{
-  grid-area: eventos;
-  background-color: white;
-  border-radius: 16px;
-}
-
 .navCustom {
   display: flex;
   position: relative;
   align-items: center;
   justify-content: space-between;
-  width: 350px;
+  width: 470px;
   padding: 0 16px;
 }
 
@@ -233,6 +226,21 @@
 .calendarButton:hover {
   background: #3366F0;
 }
+
+:global(.rdp-day_button) {
+  height: 60px !important;
+  width: 60px !important;
+  font-size: 18px;
+  margin: 2px;
+  border-radius: 12px;
+}
+
+:global(.rdp-day) {
+  height: 60px;
+  width: 60px;
+  margin: 2px;
+}
+
 
 :global(.rdp-day_eventos),
 .evento {

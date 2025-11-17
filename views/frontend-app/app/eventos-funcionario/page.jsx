@@ -229,9 +229,6 @@ function Page() {
                         />
 
                     </div>
-                    <div className={styles.eventosContainer}>
-                        <h2 className={styles.eventosTitle}>Eventos</h2>
-                    </div>
                 </div>
 
                 <div className={styles.card}>
