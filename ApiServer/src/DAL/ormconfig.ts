@@ -10,7 +10,7 @@ dotenv.config();
 const host = process.env.DB_HOST || "127.0.0.1";
 const port = Number(process.env.DB_PORT) || 3306;
 const username = process.env.DB_USERNAME || "root";
-const password = process.env.DB_PASSWORD || "fatec";
+const password = process.env.DB_PASSWORD || "root";
 const database = process.env.DB_DB || "newe_database";
 
 // Exporta a instância do DataSource do TypeORM

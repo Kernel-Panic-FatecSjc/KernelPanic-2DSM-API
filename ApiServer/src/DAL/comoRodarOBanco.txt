@@ -1,0 +1,14 @@
+
+Como rodar o backup do banco e recrialo na sua maquina:
+
+--Dentro do Sql
+CREATE DATABASE IF NOT EXISTS newe_database; --nome do banco
+
+-- cole no terminal
+cd KernelPanic-2DSM-API/ApiServer/src/DAL
+mysql -u root -p newe_database < backupBancoNewe.sql
+
+-- no PowerShel
+
+cmd.exe /c "mysql -u root -p newe_database < backupBancoNewe.sql"
+
