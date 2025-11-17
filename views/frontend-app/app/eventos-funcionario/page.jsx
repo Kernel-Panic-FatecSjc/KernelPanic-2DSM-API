@@ -8,11 +8,22 @@ import { useState } from "react";
 function Page() {
     const [selected, setSelected] = useState();
     const [month, setMes] = useState(new Date());
+    const [eventoSelecionado, setEventoSelecionado] = useState(null);
+    const [modalConfirmarAberto, setModalConfirmarAberto] = useState(false);
+    const [modalRecusarAberto, setModalRecusarAberto] = useState(false);
+    const [modalAvaliarAberto, setModalAvaliarAberto] = useState(false);
+    const [nota, setNota] = useState(0);
+
+    function Data(ano, mes, dia) {
+        return new Date(ano, mes - 1, dia);
+    }
 
     const eventos = [
-        { id: 1, date: new Date(2025, 9, 27), nome: "Evento X" },
-        { id: 2, date: new Date(2025, 9, 30), nome: "Evento Y" }
+        { id: 1, date: new Data(2025, 11, 27), nome: "Evento X" },
+        { id: 2, date: new Data(2025, 11, 30), nome: "Evento Y" }
     ];
+
+    const weekdays = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
 
     const eventosPendentes = [
         {
@@ -39,8 +50,120 @@ function Page() {
         setMes(new Date(month.setMonth(month.getMonth() + 1)));
     }
 
+    function abrirModalConfirmar(evento) {
+    setEventoSelecionado(evento);
+    setModalConfirmarAberto(true);
+    }
+
+    function abrirModalRecusar(evento) {
+        setEventoSelecionado(evento);
+        setModalRecusarAberto(true);
+    }
+
+    function abrirModalAvaliar(evento) {
+        setEventoSelecionado(evento);
+        setModalAvaliarAberto(true);
+    }
+
+    const modalAvaliar = modalAvaliarAberto && (
+        <div className={styles.modalOverlay}>
+            <div className={styles.modalBox}>
+                
+                <h2 className={styles.modalTitulo}>Formulário do Participação</h2>
+
+                <input 
+                    className={styles.input}
+                    placeholder="Nome do Funcionário"
+                    type="text"
+                />
+
+                <label className={styles.label}>Data</label>
+                <input 
+                    className={styles.input}
+                    placeholder="DD/MM/AAAA"
+                    type="text"
+                />
+
+                <label className={styles.label}>Duração do evento</label>
+                <input 
+                    className={styles.input}
+                    placeholder="00:00h"
+                    type="text"
+                />
+
+               <div className={styles.estrelas}>
+                {[1, 2, 3, 4, 5].map((valor) => (
+                    <span
+                        key={valor}
+                        className={valor <= nota ? styles.estrelaAtiva : styles.estrela}
+                        onClick={() => setNota(valor)}
+                    >
+                        ★
+                    </span>
+                ))}
+            </div>
+
+
+                <label className={styles.label}>Descrição do desenvolvimento adquirido</label>
+                <textarea 
+                    className={styles.textarea}
+                    placeholder="Breve descrição"
+                />
+
+                <button className={styles.botaoPrincipal}>Enviar</button>
+
+                <button 
+                    className={styles.cancelar}
+                    onClick={() => setModalAvaliarAberto(false)}
+                >
+                    Cancelar
+                </button>
+
+            </div>
+        </div>
+    );
+
+
+    const modalConfirmar = modalConfirmarAberto && (
+            <div className={styles.modalOverlay}>
+                <div className={styles.modalBox}>
+                    <h2>Confirmar participação</h2>
+                    <p>Você confirma sua participação?</p>
+
+                    <button className={styles.botaoPrincipal}>
+                        Sim
+                    </button>
+                    <button className={styles.cancelar} onClick={() => setModalConfirmarAberto(false)}>
+                        Cancelar
+                    </button>
+                </div>
+        </div>
+    );
+
+    const modalRecusar = modalRecusarAberto && (
+        <div className={styles.modalOverlay}>
+            <div className={styles.modalBox}>
+                <h2>Recusar Participação</h2>
+
+                <label className={styles.label}>Justificativa:</label>
+                <textarea className={styles.textarea}></textarea>
+
+                <button className={styles.botaoPrincipal}>
+                    Enviar
+                </button>
+                <button className={styles.cancelar} onClick={() => setModalRecusarAberto(false)}>
+                    Cancelar
+                </button>
+            </div>
+    </div>
+    );
+
     return (
         <div className={styles.conteudo}>
+            {modalConfirmar}
+            {modalRecusar}
+            {modalAvaliar}
+
             <h1 className={styles.titulo}>Gerenciamento de Eventos</h1>
 
             <div className={styles.conteudoPagina}>
@@ -76,17 +199,35 @@ function Page() {
                         </div>
 
                         <DayPicker
-                        mode="single"
-                        selected={selected}
-                        onSelect={setSelected}
-                        month={month}
-                        onMonthChange={setMes}
-                        components={{
-                            Caption: () => null,
-                            CaptionLabel: () => null,
-                            Nav: () => null,
-                        }}
+                            mode="multiple"
+                            selected={selected}
+                            onSelect={(days) => {
+                                console.log("Dias clicados:", days);
+                                setSelected(days ?? []);
+                            }}
+                            month={month}
+                            onMonthChange={setMes}
+                            modifiers={{
+                                hoje: new Date(),
+                                eventos: eventos.map((e) => e.date),
+                            }}
+                        
+                            modifiersClassNames={{
+                                hoje: styles.hoje,
+                                eventos: styles.evento,
+                            }}
+                        
+                            formatters={{
+                                formatWeekdayName: (weekday) => weekdays[weekday.getDay()],
+                            }}
+                        
+                            components={{
+                                Caption: () => null,
+                                CaptionLabel: () => null,
+                                Nav: () => null,
+                            }}
                         />
+
                     </div>
                     <div className={styles.eventosContainer}>
                         <h2 className={styles.eventosTitle}>Eventos</h2>
@@ -126,8 +267,20 @@ function Page() {
                                             </div>
 
                                             <div className={styles.buttons}>
-                                                <button className={styles.confirm}>✔ Confirmar</button>
-                                                <button className={styles.reject}>✖ Recusar</button>
+                                                <button 
+                                                    className={styles.confirm} 
+                                                    onClick={() => abrirModalConfirmar(evento)}
+                                                >
+                                                    ✔ Confirmar
+                                                </button>
+
+                                                <button 
+                                                    className={styles.reject} 
+                                                    onClick={() => abrirModalRecusar(evento)}
+                                                >
+                                                    ✖ Recusar
+                                                </button>
+
                                             </div>
                                         </div>
                                     ))
@@ -160,7 +313,14 @@ function Page() {
                                                 <span>{evento.hora}</span>
                                                 <span>{evento.local}</span>
                                             </div>
-
+                                            <div className={styles.buttons}>
+                                                <button 
+                                                    className={styles.confirm} 
+                                                    onClick={() => abrirModalConfirmar(evento)}
+                                                >
+                                                    ⇋ Trocar
+                                                </button>
+                                            </div>
                                         </div>
                                     ))
                                 )}
@@ -191,6 +351,14 @@ function Page() {
                                                 <span>{evento.hora}</span>
                                                 <span>{evento.local}</span>
                                             </div>
+                                            <div className={styles.buttons}>
+                                                <button 
+                                                    className={styles.confirm} 
+                                                    onClick={() => abrirModalConfirmar(evento)}
+                                                >
+                                                    ⇋ Trocar
+                                                </button>
+                                            </div>
                                         </div>
                                     ))
                                 )}
@@ -220,6 +388,15 @@ function Page() {
                                                 <span>{evento.data}</span>
                                                 <span>{evento.hora}</span>
                                                 <span>{evento.local}</span>
+                                            </div>
+                                            <div className={styles.buttons}>
+                                                <button 
+                                                    className={styles.confirm} 
+                                                    onClick={() => abrirModalAvaliar(evento)}
+                                                >
+                                                    ★ Avaliar
+                                                </button>
+
                                             </div>
                                         </div>
                                     ))
