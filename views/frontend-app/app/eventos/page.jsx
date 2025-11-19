@@ -9,21 +9,50 @@ function Page() {
     const [month, setMes] = useState(new Date());
     const [eventoSelecionado, setEventoSelecionado] = useState(null);
 
-    // Estados dos modais
     const [modalEditarAberto, setModalEditarAberto] = useState(false);
     const [modalExcluirAberto, setModalExcluirAberto] = useState(false);
+    const [modalAdicionarAberto, setModalAdicionarAberto] = useState(false);
 
-    // Lista única de eventos
     const [eventos, setEventos] = useState([
         { id: 1, titulo: "Evento xxxxx", data: "28/10/2025", hora: "14:00h", local: "Fatec" },
         { id: 2, titulo: "Evento yyyyy", data: "30/11/2025", hora: "16:30h", local: "Auditório" }
     ]);
 
-    // Estados de edição do evento
     const [editarTitulo, setEditarTitulo] = useState("");
     const [editarData, setEditarData] = useState("");
     const [editarHora, setEditarHora] = useState("");
     const [editarLocal, setEditarLocal] = useState("");
+
+    const [novoTitulo, setNovoTitulo] = useState("");
+    const [novaData, setNovaData] = useState("");
+    const [novaHora, setNovaHora] = useState("");
+    const [novoLocal, setNovoLocal] = useState("");
+    const [novaDescrição, setNovaDescrição] = useState("");
+    const [novoLink, setNovoLink] = useState("");
+    
+
+    function adicionarEvento() {
+    const novoEvento = {
+        id: Date.now(),
+        titulo: novoTitulo,
+        data: novaData,
+        hora: novaHora,
+        local: novoLocal,
+        descricao: novaDescrição,
+        link: novoLink
+    };
+
+    setEventos(prev => [...prev, novoEvento]);
+    setModalAdicionarAberto(false);
+
+    setNovoTitulo("");
+    setNovaData("");
+    setNovaHora("");
+    setNovoLocal("");
+    setNovaDescrição("");
+    setNovoLink("");
+    }
+
 
     function Data(ano, mes, dia) {
         return new Date(ano, mes - 1, dia);
@@ -74,7 +103,85 @@ function Page() {
         setModalExcluirAberto(false);
     }
 
-    // Modal editar
+const modalAdicionar = modalAdicionarAberto && (
+    <div className={styles.modalOverlay}>
+        <div className={styles.modalBox}>
+            <h2>Adicionar evento</h2>
+
+            <input
+                className={styles.input}
+                type="text"
+                placeholder="Nome do evento"
+                value={novoTitulo}
+                onChange={e => setNovoTitulo(e.target.value)}
+            />
+
+            <input
+                className={styles.input}
+                type="text"
+                placeholder="DD/MM/AAAA"
+                value={novaData}
+                onChange={e => setNovaData(e.target.value)}
+            />
+
+            <input
+                className={styles.input}
+                type="text"
+                placeholder="Hora"
+                value={novaHora}
+                onChange={e => setNovaHora(e.target.value)}
+            />
+
+            <input
+                className={styles.input}
+                type="text"
+                placeholder="Localização do evento"
+                value={novoLocal}
+                onChange={e => setNovoLocal(e.target.value)}
+            />
+
+            <input
+                className={styles.input}
+                type="text"
+                placeholder="Breve descrição"
+                value={novaDescrição}
+                onChange={e => setNovaDescrição(e.target.value)}
+            />
+
+            <input
+                className={styles.input}
+                type="text"
+                placeholder="Link do meet"
+                value={novoLink}
+                onChange={e => setNovoLink(e.target.value)}
+            />
+            <div className={styles.adicionarButtonsContainer}>
+                <div className={styles.categorias}>
+                    <button className={styles.adicionarButtons}>
+                        <p className={styles.iconTitulo}>Comercial</p>
+                        <img src='/images/comercialIcon.svg' alt='icon comercial' className={styles.adicionarIcons}></img>
+                    </button>
+
+                    <button className={styles.adicionarButtons}>
+                        <p className={styles.iconTitulo}>Operacional</p>
+                        <img src='/images/operacionalIcon.svg' alt='icon operacional' className={styles.adicionarIcons}></img>
+                    </button>
+
+                    <button className={styles.adicionarButtons}>
+                        <p className={styles.iconTitulo}>Administrativo</p>
+                        <img src='/images/administrativoIcon.svg' alt='icon adiminstrativo' className={styles.adicionarIcons}></img>
+                    </button>
+                </div>
+
+            <div className={styles.modalButtons}>
+                <button className={styles.botaoPrincipal} onClick={adicionarEvento}>Adicionar</button>
+                <button className={styles.cancelar} onClick={() => setModalAdicionarAberto(false)}>Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+);
+
     const modalEditar = modalEditarAberto && (
         <div className={styles.modalOverlay}>
             <div className={styles.modalBox}>
@@ -120,10 +227,9 @@ function Page() {
         </div>
     );
 
-    // Modal excluir
     const modalExcluir = modalExcluirAberto && (
         <div className={styles.modalOverlay}>
-            <div className={styles.modalBox}>
+            <div className={styles.modalBoxExcluir}>
                 <h2>Excluir evento</h2>
                 <p>Tem certeza que deseja excluir permanentemente?</p>
 
@@ -135,13 +241,14 @@ function Page() {
 
     return (
         <div className={styles.conteudo}>
+            {modalAdicionar}
             {modalEditar}
             {modalExcluir}
+
 
             <h1 className={styles.titulo}>Gerenciamento de Eventos</h1>
 
             <div className={styles.conteudoPagina}>
-                {/* CALENDÁRIO */}
                 <div className={styles.card}>
                     <div className={styles.cardHeader}>
                         <h3>Calendário</h3>
@@ -191,7 +298,10 @@ function Page() {
                 <div className={styles.card}>
                     <div className={styles.cardHeader}>
                         <h3>Eventos</h3>
-                        <button className={styles.adicionarEventos}>
+                        <button 
+                        className={styles.adicionarEventos}
+                        onClick={() => setModalAdicionarAberto(true)}
+                        >
                           <img src='/images/iconAdicionar.svg' className={styles.adicionarIcon} alt='icon adicionar'></img>
                           Adicionar
                         </button>
