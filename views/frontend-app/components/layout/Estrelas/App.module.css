@@ -1,0 +1,16 @@
+.starsContainer {
+    display: flex;
+    gap: 5px;
+}
+
+.starFilled {
+    font-size: 22px;
+    color: #facc15;
+    transition: 0.2s;
+}
+
+.starEmpty {
+    font-size: 22px;
+    color: #d1d5db;
+    transition: 0.2s;
+}
