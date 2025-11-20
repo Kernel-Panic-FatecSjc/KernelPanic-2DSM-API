@@ -17,7 +17,7 @@ INSERT INTO funil_vendas (estagio_nome) VALUES
 
 -- 2. Tabela: perfil
 INSERT INTO perfil (nome, descricao) VALUES
-('admin', 'Acesso total ao sistema')
+('master', 'Acesso total ao sistema')
 ON DUPLICATE KEY UPDATE descricao = VALUES(descricao);
 
 INSERT INTO perfil (nome, descricao) VALUES
@@ -25,16 +25,16 @@ INSERT INTO perfil (nome, descricao) VALUES
 ON DUPLICATE KEY UPDATE descricao = VALUES(descricao);
 
 INSERT INTO perfil (nome, descricao) VALUES
-('consultor', 'Acesso limitado a relatórios e dados de clientes')
+('gestor', 'Acesso intermediario entre master e vendedor')
 ON DUPLICATE KEY UPDATE descricao = VALUES(descricao);
 
 -- 3. Tabela: funcionario (sem definir ID)
 INSERT INTO funcionario 
 (nome, genero, endereco, numero_telefone, cargo, email, senha_hash, localizacao_funcionario, gerente_ID) 
 VALUES
-('Carlos Silva', 'Masculino', 'Rua A, 123', '11999999999', 'Gerente de Vendas', 'carlos@empresa.com', '$2b$10$G57wY7QOSnA5zTMiKiDmueKtGcO0dUpHShkMmZhy9I9F0BRiL6jxa', 'São Paulo', NULL),
-('Ana Oliveira', 'Feminino', 'Rua B, 456', '11888888888', 'Vendedor', 'ana@empresa.com', '$2a$10$aB1c2D3e4F5g6H7i8J9k.lM/n0O1p2Q3r4S5t6U7v8W9x0Y1z2A3.', 'São Paulo', 1),
-('João Souza', 'Masculino', 'Rua C, 789', '11777777777', 'Consultor', 'joao@empresa.com', '$2a$10$bC2d3E4f5G6h7I8j9K0l.mN/o1P2q3R4s5T6u7V8w9X0y1Z2a3B4.', 'Rio de Janeiro', 1);
+('Carlos Silva', 'Masculino', 'Rua A, 123', '11999999999', 'Gerente de Vendas', 'carlos@empresa.com', '$2b$10$QjuumfTaMDQUKeUTs9HQ8O0FpgjZiET9ExG8h1pUuUzYqQxTc6VDq', 'São Paulo', NULL),
+('Ana Oliveira', 'Feminino', 'Rua B, 456', '11888888888', 'Vendedor', 'ana@empresa.com', '$2b$10$QjuumfTaMDQUKeUTs9HQ8O0FpgjZiET9ExG8h1pUuUzYqQxTc6VDq', 'São Paulo', 1),
+('João Souza', 'Masculino', 'Rua C, 789', '11777777777', 'Consultor', 'joao@empresa.com', '$2b$10$QjuumfTaMDQUKeUTs9HQ8O0FpgjZiET9ExG8h1pUuUzYqQxTc6VDq', 'Rio de Janeiro', 1);
 
 -- 4. Tabela: funcionario_perfis (associando funcionários aos perfis)
 INSERT INTO funcionario_perfis (funcionario_ID, perfil_ID) VALUES
