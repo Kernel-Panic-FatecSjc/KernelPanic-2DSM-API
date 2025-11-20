@@ -95,7 +95,7 @@ function LateralBar() {
       submenus: [
         { id: "area-agregado", title: "Área do Agregado", route: "/pagina-agregado", perfisPermitidos: [], iconInactive: "/images/iconeagregado.svg", iconActive: "/images/iconeagregadobranco.svg" },
         { id: "gestao-formularios", title: "Gestão de Formulários", route: "/gestaoFormularios", perfisPermitidos: ["master", "gestor"], iconInactive: "/images/iconechecklist.svg", iconActive: "/images/iconechecklistbranco.svg" },
-        { id: "checklists-formularios", title: "Checklists e Formulários", route: "/checklists", perfisPermitidos: [], iconActive: "/images/iconechecklistbranco (2).svg", iconInactive: "/images/iconechecklist (2).svg"},
+        { id: "checklists-formularios", title: "Checklists e Formulários", route: "/checklists", perfisPermitidos: [], iconActive: "/images/iconechecklistbranco (2).svg", iconInactive: "/images/iconechecklist (2).svg" },
         // BONUS { id: "gestao-motoristas", title: "Gestão dos Motoristas", route: "", perfisPermitidos: ["master", "gestor"], iconInactive: "/images/iconOperacional.svg", iconActive: "/images/iconOperacionalbranco.svg"}, OPERACIONAL - motoristas
       ],
     },
@@ -106,7 +106,7 @@ function LateralBar() {
       perfisPermitidos: ["master", "gestor"],
       iconInactive: "/images/iconedashboard.svg",
       iconActive: "/images/iconedashboardbranco.svg",
-      route: "", //PAGINA dashboards
+      route: "/dashboardPagina",
     },
 
     {
