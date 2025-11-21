@@ -5,8 +5,10 @@ import "react-day-picker/dist/style.css";
 import styles from './App.module.css';
 
 function Page() {
-    const [selected, setSelected] = useState();
     const [month, setMes] = useState(new Date());
+    
+    const [diaSelecionado, setDiaSelecionado] = useState(null);
+
     const [eventoSelecionado, setEventoSelecionado] = useState(null);
 
     const [modalConfirmarAberto, setModalConfirmarAberto] = useState(false);
@@ -19,17 +21,6 @@ function Page() {
     const [eventoTroca, setEventoTroca] = useState(null);
     const [origemTroca, setOrigemTroca] = useState("");
 
-    function Data(ano, mes, dia) {
-        return new Date(ano, mes - 1, dia);
-    }
-
-    const eventos = [
-        { id: 1, date: new Data(2025, 11, 27), nome: "Evento X" },
-        { id: 2, date: new Data(2025, 11, 30), nome: "Evento Y" }
-    ];
-
-    const weekdays = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
-
     const [pendentes, setPendentes] = useState([
         { id: 1, titulo: "Evento xxxxx", data: "28/10/2025", hora: "14:00h", local: "Fatec" },
         { id: 2, titulo: "Evento yyyyy", data: "28/10/2025", hora: "14:00h", local: "Fatec" }
@@ -38,6 +29,32 @@ function Page() {
     const [aceitos, setAceitos] = useState([]);
     const [recusados, setRecusados] = useState([]);
     const [finalizados, setFinalizados] = useState([]);
+
+    function formatarData(d) {
+        if (!d) return null;
+        const dia = String(d.getDate()).padStart(2, "0");
+        const mes = String(d.getMonth() + 1).padStart(2, "0");
+        const ano = d.getFullYear();
+        return `${dia}/${mes}/${ano}`;
+    }
+
+    const filtrarLista = (lista) => {
+        if (!diaSelecionado) return lista;
+        return lista.filter(e => e.data === formatarData(diaSelecionado));
+    };
+
+    const pendentesFiltrados = filtrarLista(pendentes);
+    const aceitosFiltrados = filtrarLista(aceitos);
+    const recusadosFiltrados = filtrarLista(recusados);
+    const finalizadosFiltrados = filtrarLista(finalizados);
+
+    const todosEventos = [...pendentes, ...aceitos, ...recusados, ...finalizados];
+    const datasMarcadas = todosEventos.map(e => {
+        const [dia, mes, ano] = e.data.split('/');
+        return new Date(ano, mes - 1, dia);
+    });
+
+    const weekdays = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
 
     function handlePrevious() {
         setMes(new Date(month.setMonth(month.getMonth() - 1)));
@@ -167,9 +184,6 @@ function Page() {
         </div>
     );
 
-    // ----------------------------
-    // JSX FINAL
-    // ----------------------------
     return (
         <div className={styles.conteudo}>
             {modalConfirmar}
@@ -201,14 +215,14 @@ function Page() {
                         </div>
 
                         <DayPicker
-                            mode="multiple"
-                            selected={selected}
-                            onSelect={days => setSelected(days || [])}
+                            mode="single"
+                            selected={diaSelecionado}
+                            onSelect={setDiaSelecionado}
                             month={month}
                             onMonthChange={setMes}
                             modifiers={{
                                 hoje: new Date(),
-                                eventos: eventos.map(e => e.date),
+                                eventos: datasMarcadas,
                             }}
                             modifiersClassNames={{
                                 hoje: styles.hoje,
@@ -233,7 +247,7 @@ function Page() {
 
                     <div className={styles.listaEventos}>
 
-                        <details className={styles.box}>
+                        <details className={styles.box} open>
                             <summary className={styles.itemResumo}>
                                 <div className={styles.left}>
                                     <img src="/images/ampulheta.png" alt="pendentes" />
@@ -243,10 +257,10 @@ function Page() {
                             </summary>
 
                             <div className={styles.listaEventosAbertos}>
-                                {pendentes.length === 0 ? (
+                                {pendentesFiltrados.length === 0 ? (
                                     <p>Nenhum evento encontrado</p>
                                 ) : (
-                                    pendentes.map(evento => (
+                                    pendentesFiltrados.map(evento => (
                                         <div key={evento.id} className={styles.eventCard}>
                                             <h4>{evento.titulo}</h4>
 
@@ -281,10 +295,10 @@ function Page() {
                             </summary>
 
                             <div className={styles.listaEventosAbertos}>
-                                {aceitos.length === 0 ? (
+                                {aceitosFiltrados.length === 0 ? (
                                     <p>Nenhum evento encontrado</p>
                                 ) : (
-                                    aceitos.map(evento => (
+                                    aceitosFiltrados.map(evento => (
                                         <div key={evento.id} className={styles.eventCard}>
                                             <h4>{evento.titulo}</h4>
 
@@ -322,10 +336,10 @@ function Page() {
                             </summary>
 
                             <div className={styles.listaEventosAbertos}>
-                                {recusados.length === 0 ? (
+                                {recusadosFiltrados.length === 0 ? (
                                     <p>Nenhum evento encontrado</p>
                                 ) : (
-                                    recusados.map(evento => (
+                                    recusadosFiltrados.map(evento => (
                                         <div key={evento.id} className={styles.eventCard}>
                                             <h4>{evento.titulo}</h4>
 
@@ -362,10 +376,10 @@ function Page() {
                             </summary>
 
                             <div className={styles.listaEventosAbertos}>
-                                {finalizados.length === 0 ? (
+                                {finalizadosFiltrados.length === 0 ? (
                                     <p>Nenhum evento encontrado</p>
                                 ) : (
-                                    finalizados.map(evento => (
+                                    finalizadosFiltrados.map(evento => (
                                         <div key={evento.id} className={styles.eventCard}>
                                             <h4>{evento.titulo}</h4>
 

@@ -4,8 +4,10 @@ import React, { useState } from 'react';
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
 import styles from "./App.module.css";
+import { useRouter } from "next/navigation";
 
 export default function Page() {
+    const router = useRouter();
     const [selected, setSelected] = useState();
     const [month, setMes] = useState(new Date());
     const [diaSelecionado, setDiaSelecionado] = useState(null);
@@ -349,6 +351,11 @@ export default function Page() {
                                 </div>
                             ))
                         )}
+                        <button 
+                        className={styles.buttonVerRespostas}
+                        onClick={() => router.push('/respostas-funcionarios')}
+                        >Ver Respostas Funcionários
+                        </button>
                     </div>
                 </div>
             </div>
