@@ -478,3 +478,53 @@
     from { opacity: 0; transform: scale(0.93); }
     to { opacity: 1; transform: scale(1); }
 }
+
+.filtrosContainer {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.filtroInputWrapper {
+    position: relative;
+    width: 250px;
+}
+
+.filtroInputWrapper input {
+    width: 100%;
+    height: 50px;
+    padding: 0 18px 0 40px;
+    border: 1px solid #000000;
+    border-radius: 12px;
+    background: #fff;
+    font-size: 16px;
+    color: #000000;
+    outline: none;
+    transition: 0.2s;
+    margin: 10px;
+}
+
+.filtroInputWrapper input:focus {
+    border-color: #1F4AF4; 
+}
+
+.filtroInputWrapper .icon {
+    position: absolute;
+    top: 50%;
+    left: 12px;
+    width: 18px;
+    height: 18px;
+    transform: translateY(-50%);
+    opacity: 0.6;
+}
+
+.icon {
+    display: flex;
+    margin-left: 10px;
+    filter: brightness(0) saturate(100%);
+}
+
+.inputDate {
+    cursor: pointer;
+}

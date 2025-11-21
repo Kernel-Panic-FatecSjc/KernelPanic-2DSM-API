@@ -1,0 +1,113 @@
+.containerCards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.cards {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+}
+
+.tituloEvento {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.funcionarioWrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.funcionario {
+  display: flex;
+  align-items: center;
+}
+
+.funcionarioCargo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: #000 solid 1px;
+  border-radius: 30px;
+  width: 170px;
+  height: 50px;
+}
+
+.iconCargo {
+  margin-right: 10px;
+  width: 30px;
+  height: 30px;
+  filter: brightness(0);
+}
+
+.iconLer{
+  margin-right: 10px;
+  width: 30px;
+  height: 30px;
+}
+
+.btnJustificativa {
+  padding: 6px 12px;
+  border: none;
+  background: #1d4ed8;
+  color: white;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 170px;
+  height: 50px;
+}
+
+
+.btnJustificativa:hover {
+  background: #163ea6;
+}
+
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.modal {
+  background: #fff;
+  padding: 25px;
+  border-radius: 12px;
+  width: 400px;
+  text-align: center;
+}
+
+.justificativaTexto {
+  margin-top: 10px;
+}
+
+.btnFechar {
+  margin-top: 15px;
+  padding: 8px 16px;
+  background: #e11d48;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.btnFechar:hover {
+  background: #b81439;
+}

@@ -14,3 +14,12 @@
     color: #d1d5db;
     transition: 0.2s;
 }
+
+.starHalf {
+    font-size: 22px;
+    background: linear-gradient(90deg, #facc15 50%, #d1d5db 50%);
+    color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+    transition: 0.2s;
+}

@@ -18,6 +18,36 @@
   margin-bottom: 15px;
 }
 
+.funcionarioWrapper{
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+}
+
 .funcionario {
+  display: flex;
   margin-bottom: 10px;
+  justify-content: left;
+  align-items: center;
+}
+
+.funcionarioCargo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+  border: #000000 solid 1px;
+  border-radius: 30px;
+  width: 170px;
+  height: 50px;
+}
+
+.iconCargo {
+  display: flex;
+  margin-right: 10px;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: brightness(0);
 }
