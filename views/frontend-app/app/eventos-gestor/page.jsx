@@ -6,17 +6,18 @@ import "react-day-picker/dist/style.css";
 import styles from "./App.module.css";
 
 export default function Page() {
-    const [selected, setSelected] = useState([]);
+    const [selected, setSelected] = useState();
     const [month, setMes] = useState(new Date());
-    const [eventoSelecionado, setEventoSelecionado] = useState(null);
+    const [diaSelecionado, setDiaSelecionado] = useState(null);
 
+    const [eventoSelecionado, setEventoSelecionado] = useState(null);
     const [modalEditarAberto, setModalEditarAberto] = useState(false);
     const [modalExcluirAberto, setModalExcluirAberto] = useState(false);
     const [modalAdicionarAberto, setModalAdicionarAberto] = useState(false);
 
     const [eventos, setEventos] = useState([
-        { id: 1, titulo: "Evento xxxxx", data: "28/10/2025", hora: "14:00h", local: "Fatec" },
-        { id: 2, titulo: "Evento yyyyy", data: "30/11/2025", hora: "16:30h", local: "Auditório" }
+        { id: 1, titulo: "Evento xxxxx", data: "28/10/2025", hora: "14:00h", local: "Fatec", descricao: "Descrição x", link: "" },
+        { id: 2, titulo: "Evento yyyyy", data: "30/11/2025", hora: "16:30h", local: "Auditório", descricao: "Descrição y", link: "" }
     ]);
 
     const [editarTitulo, setEditarTitulo] = useState("");
@@ -30,6 +31,9 @@ export default function Page() {
     const [novoLocal, setNovoLocal] = useState("");
     const [novaDescricao, setNovaDescricao] = useState("");
     const [novoLink, setNovoLink] = useState("");
+
+    const [filtroNome, setFiltroNome] = useState("");
+    const [filtroData, setFiltroData] = useState("");
 
     function adicionarEvento() {
         if (!novoTitulo.trim() || !novaData.trim() || !novaHora.trim() || !novoLocal.trim() || !novaDescricao.trim()) {
@@ -61,11 +65,18 @@ export default function Page() {
     function Data(ano, mes, dia) {
         return new Date(ano, mes - 1, dia);
     }
+    
+    function formatarData(d) {
+        const dia = String(d.getDate()).padStart(2, "0");
+        const mes = String(d.getMonth() + 1).padStart(2, "0");
+        const ano = d.getFullYear();
+        return `${dia}/${mes}/${ano}`;
+    }
 
-    const marcacoesCalendario = [
-        { id: 1, date: new Data(2025, 11, 27), nome: "Evento X" },
-        { id: 2, date: new Data(2025, 11, 30), nome: "Evento Y" }
-    ];
+    const marcacoesCalendario = eventos.map(e => {
+        const [dia, mes, ano] = e.data.split('/');
+        return { id: e.id, date: new Date(ano, mes - 1, dia), nome: e.titulo };
+    });
 
     const weekdays = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
 
@@ -106,6 +117,13 @@ export default function Page() {
         setEventos(prev => prev.filter(e => e.id !== eventoSelecionado.id));
         setModalExcluirAberto(false);
     }
+    
+    const eventosDoDia = eventos
+        .filter(e =>
+            (!diaSelecionado || e.data === formatarData(diaSelecionado)) &&
+            e.titulo.toLowerCase().includes(filtroNome.toLowerCase()) &&
+            e.data.includes(filtroData)
+        );
 
     const modalAdicionar = modalAdicionarAberto && (
         <div className={styles.modalOverlay}>
@@ -219,7 +237,7 @@ export default function Page() {
             </div>
         </div>
     );
-
+    
     return (
         <div className={styles.conteudo}>
             {modalAdicionar}
@@ -250,9 +268,12 @@ export default function Page() {
                         </div>
 
                         <DayPicker
-                            mode="multiple"
+                            mode="single"
                             selected={selected}
-                            onSelect={days => setSelected(days || [])}
+                            onSelect={day => {
+                                setDiaSelecionado(day);
+                                setSelected(day);
+                            }}
                             month={month}
                             onMonthChange={setMes}
                             modifiers={{ hoje: new Date(), eventos: marcacoesCalendario.map(e => e.date) }}
@@ -274,12 +295,37 @@ export default function Page() {
                             Adicionar
                         </button>
                     </div>
+                    
+                    <div className={styles.filtrosContainer}>
+
+                        <div className={styles.filtroInputWrapper}>
+                            <img src="/images/lupa.svg" className={styles.icon} alt="lupa" />
+                            <input
+                                type="text"
+                                placeholder="Buscar por nome"
+                                value={filtroNome}
+                                onChange={(e) => setFiltroNome(e.target.value)}
+                            />
+                        </div>
+
+                        <div className={styles.filtroInputWrapper}>
+                            <img src="/images/lupa.svg" className={styles.icon} alt="lupa" />
+                            <input
+                                type="text"
+                                placeholder='Buscar por data'
+                                className={styles.inputDate}
+                                value={filtroData}
+                                onChange={(e) => setFiltroData(e.target.value)}
+                            />
+                        </div>
+
+                    </div>
 
                     <div className={styles.listaEventosAbertos}>
-                        {eventos.length === 0 ? (
-                            <p>Nenhum evento cadastrado</p>
+                        {eventosDoDia.length === 0 ? (
+                            <p>Nenhum evento encontrado</p>
                         ) : (
-                            eventos.map(evento => (
+                            eventosDoDia.map(evento => (
                                 <div key={evento.id} className={styles.eventCard}>
                                     <h4>{evento.titulo}</h4>
 
