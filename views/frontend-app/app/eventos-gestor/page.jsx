@@ -1,14 +1,13 @@
-'use client';
+"use client";
+
 import React, { useState } from 'react';
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
-import styles from './App.module.css';
+import styles from "./App.module.css";
 
-function Page() {
-    const [selected, setSelected] = useState();
+export default function Page() {
+    const [selected, setSelected] = useState([]);
     const [month, setMes] = useState(new Date());
-    const [diaSelecionado, setDiaSelecionado] = useState(null);
-
     const [eventoSelecionado, setEventoSelecionado] = useState(null);
 
     const [modalEditarAberto, setModalEditarAberto] = useState(false);
@@ -16,12 +15,9 @@ function Page() {
     const [modalAdicionarAberto, setModalAdicionarAberto] = useState(false);
 
     const [eventos, setEventos] = useState([
-        { id: 1, titulo: "Evento xxxxx", data: "27/11/2025", hora: "14:00h", local: "Fatec" },
+        { id: 1, titulo: "Evento xxxxx", data: "28/10/2025", hora: "14:00h", local: "Fatec" },
         { id: 2, titulo: "Evento yyyyy", data: "30/11/2025", hora: "16:30h", local: "Auditório" }
     ]);
-
-    const [filtroNome, setFiltroNome] = useState("");
-    const [filtroData, setFiltroData] = useState("");
 
     const [editarTitulo, setEditarTitulo] = useState("");
     const [editarData, setEditarData] = useState("");
@@ -32,17 +28,22 @@ function Page() {
     const [novaData, setNovaData] = useState("");
     const [novaHora, setNovaHora] = useState("");
     const [novoLocal, setNovoLocal] = useState("");
-    const [novaDescrição, setNovaDescrição] = useState("");
+    const [novaDescricao, setNovaDescricao] = useState("");
     const [novoLink, setNovoLink] = useState("");
 
     function adicionarEvento() {
+        if (!novoTitulo.trim() || !novaData.trim() || !novaHora.trim() || !novoLocal.trim() || !novaDescricao.trim()) {
+            alert("Por favor, preencha os campos obrigatórios: Título, Data, Hora, Local e Descrição");
+            return;
+        }
+
         const novoEvento = {
             id: Date.now(),
             titulo: novoTitulo,
             data: novaData,
             hora: novaHora,
             local: novoLocal,
-            descricao: novaDescrição,
+            descricao: novaDescricao,
             link: novoLink
         };
 
@@ -53,7 +54,7 @@ function Page() {
         setNovaData("");
         setNovaHora("");
         setNovoLocal("");
-        setNovaDescrição("");
+        setNovaDescricao("");
         setNovoLink("");
     }
 
@@ -106,23 +107,125 @@ function Page() {
         setModalExcluirAberto(false);
     }
 
-    function formatarData(d) {
-        const dia = String(d.getDate()).padStart(2, "0");
-        const mes = String(d.getMonth() + 1).padStart(2, "0");
-        const ano = d.getFullYear();
-        return `${dia}/${mes}/${ano}`;
-    }
+    const modalAdicionar = modalAdicionarAberto && (
+        <div className={styles.modalOverlay}>
+            <div className={styles.modalBox}>
+                <h2>Adicionar evento</h2>
 
-    const eventosDoDia = eventos
-        .filter(e =>
-            (!diaSelecionado || e.data === formatarData(diaSelecionado)) &&
-            e.titulo.toLowerCase().includes(filtroNome.toLowerCase()) &&
-            e.data.includes(filtroData)
-        );
+                <input
+                    className={styles.input}
+                    type="text"
+                    placeholder="Nome do evento *"
+                    value={novoTitulo}
+                    onChange={e => setNovoTitulo(e.target.value)}
+                    required
+                />
+
+                <input
+                    className={styles.input}
+                    type="text"
+                    placeholder="DD/MM/AAAA *"
+                    value={novaData}
+                    onChange={e => setNovaData(e.target.value)}
+                    required
+                />
+
+                <input
+                    className={styles.input}
+                    type="text"
+                    placeholder="Hora *"
+                    value={novaHora}
+                    onChange={e => setNovaHora(e.target.value)}
+                    required
+                />
+
+                <input
+                    className={styles.input}
+                    type="text"
+                    placeholder="Localização do evento *"
+                    value={novoLocal}
+                    onChange={e => setNovoLocal(e.target.value)}
+                    required
+                />
+
+                <input
+                    className={styles.input}
+                    type="text"
+                    placeholder="Breve descrição *"
+                    value={novaDescricao}
+                    onChange={e => setNovaDescricao(e.target.value)}
+                />
+
+                <input
+                    className={styles.input}
+                    type="text"
+                    placeholder="Link do meet (opcional)"
+                    value={novoLink}
+                    onChange={e => setNovoLink(e.target.value)}
+                />
+                <div className={styles.adicionarButtonsContainer}>
+                    <div className={styles.categorias}>
+                        <button className={styles.adicionarButtons}>
+                            <p className={styles.iconTitulo}>Comercial</p>
+                            <img src='/images/comercialIcon.svg' alt='icon comercial' className={styles.adicionarIcons}></img>
+                        </button>
+
+                        <button className={styles.adicionarButtons}>
+                            <p className={styles.iconTitulo}>Operacional</p>
+                            <img src='/images/operacionalIcon.svg' alt='icon operacional' className={styles.adicionarIcons}></img>
+                        </button>
+
+                        <button className={styles.adicionarButtons}>
+                            <p className={styles.iconTitulo}>Administrativo</p>
+                            <img src='/images/iconAdm.svg' alt='icon adiminstrativo' className={styles.adicionarIcons}></img>
+                        </button>
+                    </div>
+
+                    <div className={styles.modalButtons}>
+                        <button className={styles.botaoPrincipal} onClick={adicionarEvento}>Adicionar</button>
+                        <button className={styles.cancelar} onClick={() => setModalAdicionarAberto(false)}>Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+
+    const modalEditar = modalEditarAberto && (
+        <div className={styles.modalOverlay}>
+            <div className={styles.modalBox}>
+                <h2>Editar evento</h2>
+
+                <input className={styles.input} type="text" value={editarTitulo} onChange={e => setEditarTitulo(e.target.value)} placeholder="Título" />
+                <input className={styles.input} type="text" value={editarData} onChange={e => setEditarData(e.target.value)} placeholder="Data" />
+                <input className={styles.input} type="text" value={editarHora} onChange={e => setEditarHora(e.target.value)} placeholder="Hora" />
+                <input className={styles.input} type="text" value={editarLocal} onChange={e => setEditarLocal(e.target.value)} placeholder="Local" />
+
+                <div className={styles.modalButtons}>
+                    <button className={styles.botaoPrincipal} onClick={salvarEdicao}>Salvar</button>
+                    <button className={styles.cancelar} onClick={() => setModalEditarAberto(false)}>Cancelar</button>
+                </div>
+            </div>
+        </div>
+    );
+
+    const modalExcluir = modalExcluirAberto && (
+        <div className={styles.modalOverlay}>
+            <div className={styles.modalBoxExcluir}>
+                <h2>Excluir evento</h2>
+                <p>Tem certeza que deseja excluir permanentemente?</p>
+
+                <button className={styles.botaoPrincipal} onClick={excluirEvento}>Excluir</button>
+                <button className={styles.cancelar} onClick={() => setModalExcluirAberto(false)}>Cancelar</button>
+            </div>
+        </div>
+    );
 
     return (
         <div className={styles.conteudo}>
-            
+            {modalAdicionar}
+            {modalEditar}
+            {modalExcluir}
+
             <h1 className={styles.titulo}>Gerenciamento de Eventos</h1>
 
             <div className={styles.conteudoPagina}>
@@ -147,12 +250,9 @@ function Page() {
                         </div>
 
                         <DayPicker
-                            mode="single"
+                            mode="multiple"
                             selected={selected}
-                            onSelect={day => {
-                                setDiaSelecionado(day);
-                                setSelected(day);
-                            }}
+                            onSelect={days => setSelected(days || [])}
                             month={month}
                             onMonthChange={setMes}
                             modifiers={{ hoje: new Date(), eventos: marcacoesCalendario.map(e => e.date) }}
@@ -166,42 +266,23 @@ function Page() {
                 <div className={styles.card}>
                     <div className={styles.cardHeader}>
                         <h3>Eventos</h3>
-                        <button className={styles.adicionarEventos} onClick={() => setModalAdicionarAberto(true)}>
+                        <button 
+                            className={styles.adicionarEventos}
+                            onClick={() => setModalAdicionarAberto(true)}
+                        >
                             <img src='/images/iconAdicionar.svg' className={styles.adicionarIcon} alt='icon adicionar'></img>
                             Adicionar
                         </button>
                     </div>
-                    <div className={styles.filtrosContainer}>
 
-                        <div className={styles.filtroInputWrapper}>
-                            <img src="/images/lupa.svg" className={styles.icon} />
-                            <input
-                                type="text"
-                                placeholder="Buscar por nome"
-                                value={filtroNome}
-                                onChange={(e) => setFiltroNome(e.target.value)}
-                            />
-                        </div>
-
-                        <div className={styles.filtroInputWrapper}>
-                            <img src="/images/lupa.svg" className={styles.icon} />
-                            <input
-                                type="text"
-                                placeholder='Buscar por data'
-                                className={styles.inputDate}
-                                value={filtroData}
-                                onChange={(e) => setFiltroData(e.target.value)}
-                            />
-                        </div>
-
-                    </div>
                     <div className={styles.listaEventosAbertos}>
-                        {eventosDoDia.length === 0 ? (
-                            <p>Nenhum evento encontrado</p>
+                        {eventos.length === 0 ? (
+                            <p>Nenhum evento cadastrado</p>
                         ) : (
-                            eventosDoDia.map(evento => (
+                            eventos.map(evento => (
                                 <div key={evento.id} className={styles.eventCard}>
                                     <h4>{evento.titulo}</h4>
+
                                     <div className={styles.eventInfo}>
                                         <span>{evento.data}</span>
                                         <span>{evento.hora}</span>
@@ -210,22 +291,21 @@ function Page() {
 
                                     <div className={styles.buttons}>
                                         <button className={styles.confirm} onClick={() => abrirModalEditar(evento)}>
-                                            <img src='/images/iconEditar.svg' className={styles.editarIcon} alt='icon editar'></img> Editar
+                                            <img src='/images/iconEditar.svg' className={styles.editarIcon} alt='icon editar' />
+                                            Editar
                                         </button>
 
                                         <button className={styles.reject} onClick={() => abrirModalExcluir(evento)}>
-                                            <img src='/images/iconExcluir.svg' className={styles.excluirIcon} alt='icon excluir'></img> Deletar
+                                            <img src='/images/iconExcluir.svg' className={styles.excluirIcon} alt='icon excluir' />
+                                            Deletar
                                         </button>
                                     </div>
                                 </div>
                             ))
                         )}
                     </div>
-
                 </div>
             </div>
         </div>
     );
 }
-
-export default Page;
