@@ -17,15 +17,14 @@ function page() {
                 <div className={styles.content}>
                     <h1 className={styles.pageTitle}>Dashboards</h1>
                     <div className={styles.cardsContainer}>
-                        <div className={styles.card} onClick={() => handleNavigate("/dashboard-comercial")}>
-                            <div className={styles.iconcontainer}>
-                                <img src='/images/comercial.svg' alt='Ícone Comercial'></img>
-                            </div>
+                        <div className={styles.card} onClick={() => handleNavigate("/grafico")}>                            <div className={styles.iconcontainer}>
+                            <img src='/images/comercial.svg' alt='Ícone Comercial'></img>
+                        </div>
                             <h2>Comercial</h2>
                             <p>Apresenta gráficos sobre vendas, interações com clientes e novos cadastros. Permite filtrar por período para visualizar relatórios customizados sobre o desempenho comercial.</p>
                         </div>
 
-                        <div className={styles.card} onClick={() => handleNavigate("/dashboard-operacional")}>
+                        <div className={styles.card} onClick={() => handleNavigate("/dashboardsFormularios")}>
                             <div className={styles.iconcontainer}>
                                 <img src='/images/caminhao.png' alt='Ícone Operacional'></img>
                             </div>
@@ -33,7 +32,7 @@ function page() {
                             <p>Acompanhe indicadores preenchidos pelos funcionários, mostra quem preencheu mais, qual foi a última atualização e a tendência de preenchimentos ao longo da semana.</p>
                         </div>
 
-                        <div className={styles.card} onClick={() => handleNavigate("/dashboard-administrativo")}>
+                        <div className={styles.card} onClick={() => handleNavigate("/dashboardAdm")}>
                             <div className={styles.iconcontainer}>
                                 <img src='/images/adm.svg' alt='Ícone Administrativo'></img>
                             </div>

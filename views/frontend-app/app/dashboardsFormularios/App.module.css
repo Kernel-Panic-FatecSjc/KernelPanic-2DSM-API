@@ -1,32 +1,32 @@
 .main {
     margin: 0 auto;
-    padding: 2rem;
+    padding: 3rem;
     font-family: Arial, sans-serif;
     background-color: white;
     border-radius: 10px;
-    padding-bottom: 4rem;
+    min-height: 100vh;
+}
+
+.tittle {
+    color: #1f4af4;
+    margin-bottom: 40px;
+    text-align: left;
+    font-size: 50px;
+    font-weight: 600;
 }
 
 .container {
     margin-top: 4rem;
     display: flex;
-    justify-content: space-around;
+    gap: 30px;
+    justify-content: space-between;
 }
 
 .section {
-    width: 45%;
+    flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-.titulo {
-    font-size: 50px;
-    font-weight: 600;
-    color: #1F4AF4;
-    margin: 0 0 25px 0;
-    font-family: Arial, sans-serif;
-    text-align: left;
 }
 
 .svg {
@@ -36,9 +36,9 @@
 }
 
 .titleDash {
-    padding: 1rem;
+    padding: 1rem 2rem;
     background-color: #5aa6fa4d;
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
     border-radius: 80px;
     display: inline-flex;
     align-items: center;
@@ -56,76 +56,118 @@
 
 .preenchidosAside {
     display: flex;
+    gap: 20px;
+    width: 100%;
+    justify-content: center;
+    margin-bottom: 1rem;
 }
 
-.preenchidosTitle h3 {
-    margin: 10px 50px;
+.preenchidosTitle {
+    background: white;
+    border-radius: 8px;
+    padding: 20px 40px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.preenchidosTitle:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 12px rgba(31, 74, 244, 0.2);
+}
+
+.preenchidosTitle h3:first-child {
+    margin: 0 0 10px 0;
+    color: #666;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.preenchidosTitle h3:last-child {
+    margin: 0;
     color: #1f4af4;
-    font-size: 25px;
-    font-weight: 100;
+    font-size: 42px;
+    font-weight: 700;
 }
 
 .ultimaAtualizacao {
-    background-color: #f0f0f0;
+    background-color: white;
     width: 100%;
     margin-top: 2rem;
-    padding: 1rem;
-    max-height: 300px;
-    overflow-y: auto;
-    border-radius: 5px;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .ultimaAtualizacao h3 {
-    margin: 1rem;
-    font-weight: 700;
+    margin: 0 0 20px 0;
+    font-weight: 600;
+    color: #1f4af4;
+    font-size: 20px;
 }
 
-.formulariosPorFuncionario {
-    background-color: #f0f0f0;
-    width: 100%;
-    margin-top: 2rem;
-    padding: 1rem;
-    max-height: 300px;
-    overflow-y: auto;
-    border-radius: 5px;
-}
-
-.formulariosPorFuncionario h3 {
-    margin: 1rem;
-    font-weight: 700;
-}
-
-.list {
+.ultimaAtualizacao ul {
     list-style: none;
     padding: 0;
     margin: 0;
-    width: 100%;
-    font-family: Arial, sans-serif;
+    max-height: 300px;
+    overflow-y: auto;
 }
 
-.list li {
-    display: flex;
-    padding: 1rem;
+.formulariosPorFuncionario {
+    background-color: white;
+    width: 100%;
+    margin-top: 2rem;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.formulariosPorFuncionario h3 {
+    margin: 0 0 20px 0;
+    font-weight: 600;
+    color: #1f4af4;
+    font-size: 20px;
+}
+
+.formulariosPorFuncionario ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-height: 300px;
+    overflow-y: auto;
 }
 
 .linha_par {
-    background-color: white;
+    background-color: #f8f9fa;
 }
 
 .linha_impar {
-    background-color: #f0f0f0;
+    background-color: white;
 }
 
 .linha_par,
 .linha_impar {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    padding: 1rem;
+    padding: 15px 10px;
+    transition: background 0.2s;
+}
+
+.linha_par:hover,
+.linha_impar:hover {
+    background-color: #e6f2ff;
 }
 
 .primeiraLinha {
-    border-bottom: #1f4af4 3px solid;
+    background-color: white !important;
+    border-bottom: 2px solid #1f4af4;
+    padding: 12px 10px;
+}
+
+.primeiraLinha:hover {
+    background-color: white !important;
 }
 
 .primeiraLinha .col {
@@ -134,6 +176,7 @@
     padding: 0 0.5rem;
     color: #1f4af4;
     font-weight: 700;
+    font-size: 14px;
 }
 
 .col {
@@ -141,5 +184,186 @@
     text-align: center;
     padding: 0 0.5rem;
     font-weight: 500;
-    color: #1f4af4;
+    color: #333;
+    font-size: 14px;
+}
+
+/* Responsividade para Tablet */
+@media (max-width: 768px) {
+    .main {
+        padding: 1.5rem;
+    }
+
+    .tittle {
+        font-size: 32px;
+        margin-bottom: 25px;
+    }
+
+    .container {
+        flex-direction: column;
+        gap: 40px;
+        margin-top: 2rem;
+    }
+
+    .section {
+        width: 100%;
+    }
+
+    .titleDash {
+        padding: 0.8rem 1.5rem;
+    }
+
+    .titleDash h2 {
+        font-size: 1.1rem;
+    }
+
+    .preenchidosAside {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .preenchidosTitle {
+        padding: 15px 30px;
+    }
+
+    .preenchidosTitle h3:first-child {
+        font-size: 14px;
+    }
+
+    .preenchidosTitle h3:last-child {
+        font-size: 32px;
+    }
+
+    .ultimaAtualizacao,
+    .formulariosPorFuncionario {
+        padding: 20px;
+    }
+
+    .ultimaAtualizacao h3,
+    .formulariosPorFuncionario h3 {
+        font-size: 18px;
+    }
+
+    .linha_par,
+    .linha_impar {
+        padding: 12px 8px;
+    }
+
+    .col {
+        font-size: 13px;
+        padding: 0 0.3rem;
+    }
+
+    .primeiraLinha .col {
+        font-size: 13px;
+    }
+}
+
+.ultimaAtualizacao ul::-webkit-scrollbar,
+.formulariosPorFuncionario ul::-webkit-scrollbar {
+    width: 8px;
+}
+
+.ultimaAtualizacao ul::-webkit-scrollbar-track,
+.formulariosPorFuncionario ul::-webkit-scrollbar-track {
+    background: #f0f0f0;
+}
+
+.ultimaAtualizacao ul::-webkit-scrollbar-thumb,
+.formulariosPorFuncionario ul::-webkit-scrollbar-thumb {
+    background: #1F4AF4;
+    border-radius: 4px;
+}
+
+.ultimaAtualizacao ul::-webkit-scrollbar-thumb:hover,
+.formulariosPorFuncionario ul::-webkit-scrollbar-thumb:hover {
+    background: #2A49EB;
+}
+
+.ultimaAtualizacao ul,
+.formulariosPorFuncionario ul {
+    scrollbar-color: #1F4AF4 #f0f0f0;
+    scrollbar-width: thin;
+}
+
+/* RESPONSIVIDADE para Mobile */
+@media (max-width: 480px) {
+    .main {
+        padding: 1rem;
+    }
+
+    .tittle {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+    .container {
+        margin-top: 1.5rem;
+        gap: 30px;
+    }
+
+    .titleDash {
+        padding: 0.7rem 1.2rem;
+    }
+
+    .titleDash h2 {
+        font-size: 1rem;
+    }
+
+    .svg {
+        height: 24px;
+        margin-right: 10px;
+    }
+
+    .preenchidosAside {
+        gap: 12px;
+    }
+
+    .preenchidosTitle {
+        padding: 12px 25px;
+    }
+
+    .preenchidosTitle h3:first-child {
+        font-size: 13px;
+        margin-bottom: 8px;
+    }
+
+    .preenchidosTitle h3:last-child {
+        font-size: 28px;
+    }
+
+    .ultimaAtualizacao,
+    .formulariosPorFuncionario {
+        padding: 15px;
+        margin-top: 1.5rem;
+    }
+
+    .ultimaAtualizacao h3,
+    .formulariosPorFuncionario h3 {
+        font-size: 16px;
+        margin-bottom: 15px;
+    }
+
+    .ultimaAtualizacao ul,
+    .formulariosPorFuncionario ul {
+        max-height: 250px;
+    }
+
+    .linha_par,
+    .linha_impar {
+        padding: 10px 6px;
+    }
+
+    .primeiraLinha {
+        padding: 10px 6px;
+    }
+
+    .col {
+        font-size: 11px;
+        padding: 0 0.2rem;
+    }
+
+    .primeiraLinha .col {
+        font-size: 11px;
+    }
 }

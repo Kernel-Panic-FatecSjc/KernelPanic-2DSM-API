@@ -1,0 +1,140 @@
+.paginaGrafico {
+    padding: 20px;
+    max-width: 1400px;
+    margin: auto;
+    text-align: center;
+}
+
+.relatoriosSection {
+    margin-top: 40px;
+    margin-bottom: 30px;
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.relatoriosSection h2 {
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 1.5em;
+}
+
+.relatoriosGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    max-width: none;
+    margin: 0;
+}
+
+.relatorioBtn {
+    padding: 15px 20px;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    color: #333;
+    font-size: 16px;
+    font-weight: 400;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: left;
+}
+
+.relatorioBtn:hover {
+    background-color: #f5f5f5;
+    border-color: #999;
+}
+
+.filtroContainer {
+    margin: 20px 0;
+}
+
+.filtroBotao {
+    background-color: white;
+    color: #2A49EB;
+    border: 2px solid #2A49EB;
+    padding: 10px 20px;
+    margin: 0 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.filtroBotao:hover {
+    background-color: #f0f4ff;
+}
+
+.filtroAtivo {
+    background-color: #2A49EB;
+    color: white;
+    border: 2px solid #2A49EB;
+    padding: 10px 20px;
+    margin: 0 5px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.gridGraficos {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.graficoCard {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+    .paginaGrafico {
+        padding: 15px;
+    }
+
+    .relatoriosGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .gridGraficos {
+        grid-template-columns: 1fr;
+    }
+
+    .relatoriosSection {
+        padding: 20px;
+    }
+
+    .filtroBotao,
+    .filtroAtivo {
+        padding: 8px 15px;
+        margin: 0 3px;
+    }
+}
+
+@media (max-width: 480px) {
+    .paginaGrafico {
+        padding: 10px;
+    }
+
+    .filtroBotao,
+    .filtroAtivo {
+        padding: 8px 12px;
+        font-size: 14px;
+        margin: 2px;
+    }
+
+    .graficoCard {
+        padding: 15px;
+    }
+
+    .relatoriosSection {
+        padding: 15px;
+    }
+
+    .relatorioBtn {
+        padding: 12px 15px;
+        font-size: 14px;
+    }
+}
