@@ -10,6 +10,7 @@ import { title } from "process";
 function LateralBar() {
   const [tab, setTab] = useState("login");
   const [expandedMenus, setExpandedMenus] = useState({});
+  const [menuAberto, setMenuAberto] = useState(false);
   const router = useRouter();
   const { user, isAuthenticated } = useAuth();
   const perfisDoUsuario = user?.perfis || [];
@@ -25,6 +26,7 @@ function LateralBar() {
     setTab(id);
     if (!isParent && route) {
       router.push(route);
+      setMenuAberto(false);
     }
   };
 
@@ -142,7 +144,37 @@ function LateralBar() {
 
   return (
     <div className={styles.boxglobal}>
-      <aside className={styles.barralateral}>
+      {!menuAberto && (
+        <button
+          type="button"
+          className={styles.hamburgerButton}
+          onClick={() => setMenuAberto(!menuAberto)}
+          aria-label="Menu"
+        >
+          <div className={styles.hamburgerIcon}>
+            <span className={styles.hamburgerLine}></span>
+            <span className={styles.hamburgerLine}></span>
+            <span className={styles.hamburgerLine}></span>
+          </div>
+        </button>
+      )}
+
+      <aside className={`${styles.barralateral} ${menuAberto ? styles.barralateralAberta : ''}`}>
+        {menuAberto && (
+          <button
+            type="button"
+            className={`${styles.hamburgerButton} ${styles.hamburgerButtonExpandido}`}
+            onClick={() => setMenuAberto(!menuAberto)}
+            aria-label="Menu"
+          >
+            <div className={styles.hamburgerIcon}>
+              <span className={styles.hamburgerLine}></span>
+              <span className={styles.hamburgerLine}></span>
+              <span className={styles.hamburgerLine}></span>
+            </div>
+          </button>
+        )}
+
         <div className={styles.topArea}>
           <Image
             src="/images/logoneweglobal.jpg"
@@ -191,8 +223,6 @@ function LateralBar() {
                         .sort((a, b) => a.title.localeCompare(b.title, "pt-BR"))
                         .map((s) => {
                           const submenuAtivo = tab === s.id;
-
-                          // SUBITENS com icones próprios
                           const iconInactive = s.iconInactive ?? menu.iconInactive;
                           const iconActive = s.iconActive ?? menu.iconActive;
 
@@ -230,4 +260,3 @@ function LateralBar() {
 }
 
 export default LateralBar;
-
