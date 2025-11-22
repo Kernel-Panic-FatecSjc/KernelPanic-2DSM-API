@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import styles from "./App.module.css";
 import ProtectRoute from "../../components/ProtectRoute";
@@ -8,13 +8,12 @@ import axios from "axios";
 export default function page() {
     const [form, setForm] = useState({
         nome: "",
-        endereco: "",
-        numero_telefone: "",
-        cargo: "",
+        CPF: "",
+        dataDeNascimento: "",
+        dataDeAdmissao: "",
         email: "",
-        senha_hash: "",
-        genero: "",
-        gerente: "",
+        funcao: "",
+        setor: "",
     });
 
     const handleChange = (e) => {
@@ -37,7 +36,7 @@ export default function page() {
         console.log(dadosParaEnviar);
         try {
             const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-            const response = await fetch( `${apiUrl}/funcionario`, {
+            const response = await fetch(${\"$\"}{apiUrl}/funcionario, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -50,6 +49,16 @@ export default function page() {
             if (!response.ok) throw new Error(resultado.message);
 
             alert("Funcionário cadastrado com sucesso!");
+            
+            setForm({
+                nome: "",
+                CPF: "",
+                dataDeNascimento: "",
+                dataDeAdmissao: "",
+                email: "",
+                funcao: "",
+                setor: "",
+            });
         } catch (error) {
             console.error(error);
             alert("Erro ao cadastrar: " + error.message);
@@ -62,7 +71,6 @@ export default function page() {
                 <h1>Cadastro de funcionários</h1>
                 <div className={styles.mainContainer}>
                     <form onSubmit={handleSubmit}>
-                        {/* Nome */}
                         <div className={styles.textgroup}>
                             <label className={styles.inputtitle}>Nome:</label>
                             <input
@@ -75,52 +83,50 @@ export default function page() {
                             />
                         </div>
 
-                        {/* Endereço */}
                         <div className={styles.textgroup}>
-                            <label className={styles.inputtitle}>
-                                Endereço:
-                            </label>
+                            <label className={styles.inputtitle}>CPF:</label>
                             <input
                                 className={styles.input2}
                                 type="text"
-                                name="endereco"
-                                value={form.endereco}
+                                name="CPF"
+                                value={form.CPF}
+                                onChange={handleChange}
+                                placeholder="000.000.000-00"
+                                maxLength="14"
+                                required
+                            />
+                        </div>
+
+                        <div className={styles.textgroup}>
+                            <label className={styles.inputtitle}>
+                                Data de Nascimento:
+                            </label>
+                            <input
+                                className={styles.input2}
+                                type="date"
+                                name="dataDeNascimento"
+                                value={form.dataDeNascimento}
                                 onChange={handleChange}
                                 required
                             />
                         </div>
 
-                        {/* Telefone */}
                         <div className={styles.textgroup}>
                             <label className={styles.inputtitle}>
-                                Telefone:
+                                Data de Admissão:
                             </label>
                             <input
-    className={styles.input2}
-    type="text"
-    name="numero_telefone"
-    value={form.numero_telefone}
-    onChange={handleChange}
-    required
-/>
-                        </div>
-
-                        {/* Cargo */}
-                        <div className={styles.textgroup}>
-                            <label className={styles.inputtitle}>Cargo:</label>
-                            <input
                                 className={styles.input2}
-                                type="text"
-                                name="cargo"
-                                value={form.cargo}
+                                type="date"
+                                name="dataDeAdmissao"
+                                value={form.dataDeAdmissao}
                                 onChange={handleChange}
                                 required
                             />
                         </div>
 
-                        {/* Email */}
                         <div className={styles.textgroup}>
-                            <label className={styles.inputtitle}>Email:</label>
+                            <label className={styles.inputtitle}>E-mail:</label>
                             <input
                                 className={styles.input2}
                                 type="email"
@@ -131,88 +137,25 @@ export default function page() {
                             />
                         </div>
 
-                        <div className={styles.formGroup}>
-                            <label className={styles.inputtitle}>
-                                <p>Gênero:</p>
-                            </label>
-
-                            <div className={styles.radioGroup}>
-                                {[
-                                    "Masculino",
-                                    "Feminino",
-                                    "Prefiro não informar",
-                                ].map((opcao) => {
-                                    const id = `genero_${opcao}`;
-
-                                    return (
-                                        <React.Fragment key={opcao}>
-                                            <input
-                                                type="radio"
-                                                id={id}
-                                                name="genero"
-                                                value={opcao}
-                                                checked={form.genero === opcao}
-                                                onChange={handleChange}
-                                                className={styles.radioInput}
-                                            />
-                                            <label
-                                                htmlFor={id}
-                                                className={styles.radioLabel}
-                                            >
-                                                {opcao}
-                                            </label>
-                                        </React.Fragment>
-                                    );
-                                })}
-                            </div>
-                        </div>
-
-                        <div className={styles.formGroup}>
-                            <label className={styles.inputtitle}>
-                                <p>Gerente:</p>
-                            </label>
-
-                            <div className={styles.radioGroup}>
-                                {[
-                                    { label: "É gerente", valor: 1 },
-                                    { label: "Não é gerente", valor: 0 },
-                                ].map((opcao) => {
-                                    const id = `gerente_${opcao.valor}`;
-
-                                    return (
-                                        <React.Fragment key={opcao.valor}>
-                                            <input
-                                                type="radio"
-                                                id={id}
-                                                name="gerente"
-                                                value={opcao.valor}
-                                                checked={
-                                                    String(form.gerente) ===
-                                                    String(opcao.valor)
-                                                }
-                                                onChange={handleChange}
-                                                className={styles.radioInput}
-                                            />
-                                            <label
-                                                htmlFor={id}
-                                                className={styles.radioLabel}
-                                            >
-                                                {opcao.label}
-                                            </label>
-                                        </React.Fragment>
-                                    );
-                                })}
-                            </div>
-                        </div>
-
-                        {/* Senha */}
                         <div className={styles.textgroup}>
-                            <label className={styles.inputtitle}>Senha:</label>
+                            <label className={styles.inputtitle}>Função:</label>
                             <input
                                 className={styles.input2}
-                                type="password"
-                                name="senha"
-                                value={form.senha}
+                                type="text"
+                                name="funcao"
+                                value={form.funcao}
+                                onChange={handleChange}
+                                required
+                            />
+                        </div>
+
+                        <div className={styles.textgroup}>
+                            <label className={styles.inputtitle}>Setor:</label>
+                            <input
+                                className={styles.input2}
+                                type="text"
+                                name="setor"
+                                value={form.setor}
                                 onChange={handleChange}
                                 required
                             />
