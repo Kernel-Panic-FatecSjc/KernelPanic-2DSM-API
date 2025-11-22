@@ -5,5 +5,6 @@ const router = Router();
 
 router.get("/:id", FuncionarioController.getById);
 router.put("/:id/localizacao", FuncionarioController.atualizarLocalizacao);
+router.post("/", FuncionarioController.postFuncionario)
 
 module.exports = router;
