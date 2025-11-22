@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import styles from "./App.module.css";
-import ProtectRoute from "../../components/ProtectRoute"; 
+import ProtectRoute from "../../components/ProtectRoute";
 
 function App() {
     const [searchTerm, setSearchTerm] = useState("");
@@ -13,22 +13,22 @@ function App() {
     const [selectedClient, setSelectedClient] = useState(null);
 
     const funcionariosMocados = [
-      { id: 1, nome: "Carlos Silva", email: "carlos@empresa.com" },
-      { id: 2, nome: "Ana Oliveira", email: "ana@empresa.com" },
-      { id: 3, nome: "João Souza", email: "joao@empresa.com" },
+        { id: 1, nome: "Carlos Silva", email: "carlos@empresa.com" },
+        { id: 2, nome: "Ana Oliveira", email: "ana@empresa.com" },
+        { id: 3, nome: "João Souza", email: "joao@empresa.com" },
     ];
 
-    const dadosMockados = []; 
+    const dadosMockados = [];
 
     const [showModalAdd, setShowModalAdd] = useState(false);
-    
-    
+
+
     const [newClient, setNewClient] = useState({
         nome: "",
         endereco: "",
         segmento: "",
-        funcionario_ID: "", 
-        funil_ID: "",       
+        funcionario_ID: "",
+        funil_ID: "",
         tipo_contato: "telefone",
         valor_contato: "",
     });
@@ -36,10 +36,10 @@ function App() {
     const fetchClientes = async () => {
         try {
             const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
-            
+
             const response = await axios.get(`${apiUrl}/clientes`);
-            
-            const clientesData = response.data.message || response.data; 
+
+            const clientesData = response.data.message || response.data;
 
             const mapaClientes = clientesData.map((cliente) => {
                 const contatos =
@@ -74,7 +74,7 @@ function App() {
             setClients(mapaClientes);
         } catch (error) {
             console.error("Erro ao buscar clientes:", error);
-        
+
         }
     };
 
@@ -127,7 +127,7 @@ function App() {
 
     const formatCurrency = (value) => {
         return `R$ ${value.toLocaleString("pt-BR", {
-            minimumFractionDigits: 2, 
+            minimumFractionDigits: 2,
         })}`;
     };
 
@@ -155,7 +155,7 @@ function App() {
 
         try {
             const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
-           await axios.post(`${apiUrl}/clientes`, formData);
+            await axios.post(`${apiUrl}/clientes`, formData);
 
             console.log("Cliente adicionado com sucesso!");
             await fetchClientes();
@@ -164,8 +164,8 @@ function App() {
                 nome: "",
                 endereco: "",
                 segmento: "",
-                funcionario_ID: "", 
-                funil_ID: "",       
+                funcionario_ID: "",
+                funil_ID: "",
                 tipo_contato: "telefone",
                 valor_contato: "",
             });
@@ -191,12 +191,12 @@ function App() {
                 segmentoAtuacao: selectedClient.segmento?.trim() || "",
                 contatos: selectedClient.contatoValor?.trim()
                     ? [
-                          {
-                              tipo_contato:
-                                  selectedClient.tipoContato || "telefone",
-                              valor_contato: selectedClient.contatoValor.trim(),
-                          },
-                      ]
+                        {
+                            tipo_contato:
+                                selectedClient.tipoContato || "telefone",
+                            valor_contato: selectedClient.contatoValor.trim(),
+                        },
+                    ]
                     : [],
             },
             status: selectedClient.status || "",
@@ -209,16 +209,16 @@ function App() {
         try {
             const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
             const response = await axios.put(
-                `${apiUrl}/clientes/${selectedClient.id}`, 
+                `${apiUrl}/clientes/${selectedClient.id}`,
                 dadosEnvio
             );
-            
-            const updated = response.data; 
+
+            const updated = response.data;
             const updatedClients = clientes.map((c) =>
-                c.id === selectedClient.id ? { ...c, ...selectedClient } : c 
+                c.id === selectedClient.id ? { ...c, ...selectedClient } : c
             );
             setClients(updatedClients);
-            await fetchClientes(); 
+            await fetchClientes();
 
             setShowModalUpdate(false);
             console.log("Atualizado com sucesso!");
@@ -259,9 +259,6 @@ function App() {
                     <div className={styles.header}>
                         <div className={styles.headerLeft}>
                             <h1 className={styles.titulo}>Gestão de clientes</h1>
-                            <p className={styles.subtitulo}>
-                                Gerencie seus clientes e acompanhe vendas
-                            </p>
                         </div>
                         <div className={styles.headerRight}>
                             <div className={styles.statCard}>
@@ -321,9 +318,8 @@ function App() {
                                         <p>{client.segmento || "Sem segmento"}</p>
                                     </div>
                                     <span
-                                        className={`${styles.statusBadge} ${
-                                            styles[getStatusClass(client.status)]
-                                        }`}
+                                        className={`${styles.statusBadge} ${styles[getStatusClass(client.status)]
+                                            }`}
                                     >
                                         {client.status}
                                     </span>
@@ -337,7 +333,7 @@ function App() {
                                         <span className={styles.detailValue}>
                                             {new Date(
                                                 client.ultimaInteracao
-                                            ).toLocaleDateString("pt-BR", {timeZone: 'UTC'})}
+                                            ).toLocaleDateString("pt-BR", { timeZone: 'UTC' })}
                                         </span>
                                     </div>
                                     <div className={styles.detailItem}>
@@ -363,7 +359,7 @@ function App() {
                                     >
                                         Editar
                                     </button>
-                                    <button 
+                                    <button
                                         className={styles.btnExcluir}
                                         onClick={() => handleDelete(client.id)}
                                     >

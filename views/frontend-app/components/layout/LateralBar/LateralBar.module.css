@@ -211,57 +211,155 @@
   background: #0d3dd9;
 }
 
-/* ARRUMANDO - responsividade */
-@media (max-width: 1024px) {
-  .barralateral {
-    width: 250px;
-  }
-
-  .menuLabel {
-    font-size: 13px;
-  }
-
-  .submenuLabel {
-    font-size: 12px;
-  }
+.hamburgerIcon {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
 }
 
+.hamburgerButton {
+  display: none;
+}
+
+.hamburgerLine {
+  display: none;
+}
+
+/* RESPONSIVIDADE */
 @media (max-width: 768px) {
-  .boxglobal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1000;
-  }
-
-  .barralateral {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: auto;
-    max-height: 50vh;
-    width: 100%;
-    flex-direction: column;
-    padding: 8px;
-    overflow-y: auto;
-    border-right: none;
-    border-bottom: 1px solid #eaeaea;
-    z-index: 999;
-    box-sizing: border-box;
-  }
-
-  .topArea {
-    flex-direction: row;
+  .hamburgerButton {
+    display: flex;
+    flex-direction: row-reverse;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    z-index: 1001;
+    background: linear-gradient(135deg, #1f4af4 0%, #2A49EB 100%);
+    border: none;
+    border-radius: 10px;
+    padding: 10px 18px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(31, 74, 244, 0.4);
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: white;
+    transition: all 0.3s ease;
+  }
+
+  .hamburgerButtonExpandido {
+    position: static;
+    width: calc(100% - 20px);
+    margin: 0 10px 15px 10px;
     justify-content: space-between;
   }
 
+  .hamburgerButton::before {
+    content: "Menu";
+  }
+
+  .hamburgerButton:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(31, 74, 244, 0.5);
+  }
+
+  .hamburgerButtonExpandido:hover {
+    transform: none;
+  }
+
+  .hamburgerLine {
+    display: block;
+    width: 20px;
+    height: 2px;
+    background-color: white;
+    margin: 3px 0;
+    border-radius: 2px;
+  }
+
+  .hamburgerIcon {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .boxglobal {
+    display: block;
+    height: 100vh;
+  }
+
+  .conteudo {
+    width: 100%;
+    height: 100vh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-top: 85px;
+  }
+
+  .conteudo::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .conteudo::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+  }
+
+  .conteudo::-webkit-scrollbar-thumb {
+    background: #1f4af4;
+    border-radius: 10px;
+  }
+
+  .conteudo::-webkit-scrollbar-thumb:hover {
+    background: #5AA6FA;
+  }
+
+  .barralateral {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 280px;
+    height: 100vh;
+    background-color: #ffffff;
+    z-index: 1000;
+    transition: right 0.3s ease;
+    overflow-y: auto;
+    padding: 20px 0;
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .barralateral::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .barralateral::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+  }
+
+  .barralateral::-webkit-scrollbar-thumb {
+    background: #1f4af4;
+    border-radius: 10px;
+  }
+
+  .barralateral::-webkit-scrollbar-thumb:hover {
+    background: #0d3dd9;
+  }
+
+  .barralateralAberta {
+    right: 0;
+  }
+
+  .topArea {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0px;
+    padding: 0 10px;
+  }
+
   .logoImage {
-    width: 80px;
-    height: auto;
+    display: none;
   }
 
   .tabButtons {
@@ -269,13 +367,13 @@
   }
 
   .menuItem {
-    width: 100%;
-    margin-left: 0;
+    width: calc(100% - 20px);
+    margin-left: 10px;
   }
 
   .menuItemAtivo {
-    width: 100%;
-    margin-left: 0;
+    width: calc(100% - 20px);
+    margin-left: 10px;
   }
 
   .menuLabel {
@@ -288,52 +386,22 @@
   }
 
   .submenu {
-    flex-direction: row;
-    gap: 8px;
+    flex-direction: column;
+    gap: 4px;
     margin-top: 4px;
-    margin-left: 40px;
-    overflow-x: auto;
-    overflow-y: hidden;
-    padding-bottom: 6px;
-    margin-bottom: 0;
-    flex-wrap: nowrap;
-    -webkit-overflow-scrolling: touch;
-    white-space: nowrap;
-  }
-
-  .submenu::after {
-    content: "";
-    display: inline-block;
-    width: 20px;
-    height: 1px;
+    margin-left: 60px;
   }
 
   .submenuItem {
-    flex: 0 0 auto;
-    min-width: 120px;
-    box-sizing: border-box;
+    min-width: auto;
+    width: 100%;
   }
 
   .submenuLabel {
     font-size: 12px;
   }
-}
 
-@media (max-width: 480px) {
-  .menuLabel {
-    font-size: 12px;
-  }
-
-  .menuIcon {
-    width: 18px;
-    height: 18px;
-  }
-
-  .submenuLabel {
-    font-size: 11px;
-  }
-
-  .submenuItem {
-    min-width: 100px;
+  .bottomArea {
+    padding: 0 10px;
   }
 }
