@@ -262,6 +262,36 @@
   filter: brightness(1.1);
 }
 
+.input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 18px;
+    border: 1px solid #dcdcdc;
+    background: #fafafa;
+    outline: none;
+    color: #000000 !important;
+}
+
+.input::placeholder {
+    color: #b6b6b6;
+}
+
+.textarea {
+    background-color: #fff;
+    color: #000000 !important;
+    width: 100%;
+    height: 120px;
+    border-radius: 12px;
+    border: 1px solid #ccc;
+    padding: 12px;
+    font-size: 14px;
+    resize: none;
+}
+
+.textarea::placeholder {
+    color: #b6b6b6;
+}
+
 :global(.rdp-day_button),
 :global(.rdp-day_button:focus),
 :global(.rdp-day_button:focus-visible),

@@ -1,11 +1,12 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
 import styles from './App.module.css';
+import axios from 'axios';
 
 function Page() {
-    const [selected, setSelected] = useState();
+    const [selected, setSelected] = useState([]);
     const [month, setMes] = useState(new Date());
     const [eventoSelecionado, setEventoSelecionado] = useState(null);
 
@@ -19,32 +20,177 @@ function Page() {
     const [eventoTroca, setEventoTroca] = useState(null);
     const [origemTroca, setOrigemTroca] = useState("");
 
-    function Data(ano, mes, dia) {
-        return new Date(ano, mes - 1, dia);
-    }
+    const funcionarioId = 2;
 
-    const eventos = [
-        { id: 1, date: new Data(2025, 11, 27), nome: "Evento X" },
-        { id: 2, date: new Data(2025, 11, 30), nome: "Evento Y" }
-    ];
-
-    const weekdays = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
-
-    const [pendentes, setPendentes] = useState([
-        { id: 1, titulo: "Evento xxxxx", data: "28/10/2025", hora: "14:00h", local: "Fatec" },
-        { id: 2, titulo: "Evento yyyyy", data: "28/10/2025", hora: "14:00h", local: "Fatec" }
-    ]);
-
+    const [pendentes, setPendentes] = useState([]);
     const [aceitos, setAceitos] = useState([]);
     const [recusados, setRecusados] = useState([]);
     const [finalizados, setFinalizados] = useState([]);
+    const [carregando, setCarregando] = useState(false);
+
+    function converterParaDate(dataString) {
+        if (!dataString) return null;
+        
+        try {
+            const [dia, mes, ano] = dataString.split('/').map(Number);
+            return new Date(ano, mes - 1, dia);
+        } catch (error) {
+            console.error('Erro ao converter data:', dataString, error);
+            return null;
+        }
+    }
+
+    function dataEstaSelecionada(dataEvento) {
+        if (!dataEvento || selected.length === 0) return true;
+        
+        return selected.some(selectedDate => {
+            return selectedDate.getDate() === dataEvento.getDate() &&
+                   selectedDate.getMonth() === dataEvento.getMonth() &&
+                   selectedDate.getFullYear() === dataEvento.getFullYear();
+        });
+    }
+
+    const eventosFiltrados = useMemo(() => {
+        if (selected.length === 0) {
+            return {
+                pendentes,
+                aceitos,
+                recusados,
+                finalizados
+            };
+        }
+
+        const filtrarEventos = (eventos) => {
+            return eventos.filter(evento => {
+                const dataEvento = converterParaDate(evento.data);
+                return dataEstaSelecionada(dataEvento);
+            });
+        };
+
+        return {
+            pendentes: filtrarEventos(pendentes),
+            aceitos: filtrarEventos(aceitos),
+            recusados: filtrarEventos(recusados),
+            finalizados: filtrarEventos(finalizados)
+        };
+    }, [selected, pendentes, aceitos, recusados, finalizados]);
+
+    const datasComEventos = useMemo(() => {
+        const todasDatas = [
+            ...pendentes,
+            ...aceitos,
+            ...recusados,
+            ...finalizados
+        ];
+        
+        const datasUnicas = todasDatas
+            .map(evento => converterParaDate(evento.data))
+            .filter(data => data !== null);
+        
+        return datasUnicas;
+    }, [pendentes, aceitos, recusados, finalizados]);
+
+    const weekdays = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
+
+    const api = axios.create({
+        baseURL: 'http://localhost:5000/eventoFunc',
+    });
+
+    const carregarEventos = async () => {
+        try {
+            setCarregando(true);
+            const response = await api.get(`/funcionario/${funcionarioId}`);
+            
+            setPendentes(response.data.pendentes || []);
+            setAceitos(response.data.aceitos || []);
+            setRecusados(response.data.recusados || []);
+            setFinalizados(response.data.finalizados || []);
+            
+        } catch (error) {
+            console.error('Erro ao carregar eventos:', error);
+            const eventosMock = [
+                { id: 1, titulo: "Evento xxxxx", data: "28/10/2025", hora: "14:00h", local: "Fatec" },
+                { id: 2, titulo: "Evento yyyyy", data: "29/10/2025", hora: "15:00h", local: "Fatec" },
+                { id: 3, titulo: "Evento zzzzz", data: "30/10/2025", hora: "16:00h", local: "Fatec" }
+            ];
+            setPendentes(eventosMock);
+            setAceitos([]);
+            setRecusados([]);
+            setFinalizados([]);
+        } finally {
+            setCarregando(false);
+        }
+    };
+
+    const confirmarEventoAPI = async (funcionarioId, eventoId) => {
+        try {
+            await api.post('/confirmar', {
+                funcionario_id: funcionarioId,
+                evento_id: eventoId
+            });
+        } catch (error) {
+            console.error('Erro ao confirmar evento:', error);
+            throw error;
+        }
+    };
+
+    const recusarEventoAPI = async (funcionarioId, eventoId, justificativa) => {
+        try {
+            await api.post('/recusar', {
+                funcionario_id: funcionarioId,
+                evento_id: eventoId,
+                justificativa: justificativa
+            });
+        } catch (error) {
+            console.error('Erro ao recusar evento:', error);
+            throw error;
+        }
+    };
+
+    const trocarStatusEventoAPI = async (funcionarioId, eventoId, justificativa = '') => {
+        try {
+            await api.post('/trocar-status', {
+                funcionario_id: funcionarioId,
+                evento_id: eventoId,
+                justificativa: justificativa
+            });
+        } catch (error) {
+            console.error('Erro ao trocar status:', error);
+            throw error;
+        }
+    };
+
+    const avaliarEventoAPI = async (funcionarioId, eventoId, linkFeedback) => {
+        try {
+            await api.post('/avaliar', {
+                funcionario_id: funcionarioId,
+                evento_id: eventoId,
+                link_feedback: linkFeedback
+            });
+        } catch (error) {
+            console.error('Erro ao avaliar evento:', error);
+            throw error;
+        }
+    };
+
+    useEffect(() => {
+        carregarEventos();
+    }, []);
 
     function handlePrevious() {
-        setMes(new Date(month.setMonth(month.getMonth() - 1)));
+        const newMonth = new Date(month);
+        newMonth.setMonth(newMonth.getMonth() - 1);
+        setMes(newMonth);
     }
 
     function handleNext() {
-        setMes(new Date(month.setMonth(month.getMonth() + 1)));
+        const newMonth = new Date(month);
+        newMonth.setMonth(newMonth.getMonth() + 1);
+        setMes(newMonth);
+    }
+
+    function handleDateSelect(dates) {
+        setSelected(dates || []);
     }
 
     function abrirModalConfirmar(evento) {
@@ -52,14 +198,18 @@ function Page() {
         setModalConfirmarAberto(true);
     }
 
-    function confirmarEvento() {
+    async function confirmarEvento() {
         if (!eventoSelecionado) return;
 
-        setPendentes(prev => prev.filter(e => e.id !== eventoSelecionado.id));
-        setAceitos(prev => [...prev, eventoSelecionado]);
-
-        setModalConfirmarAberto(false);
-        setEventoSelecionado(null);
+        try {
+            await confirmarEventoAPI(funcionarioId, eventoSelecionado.id);
+            await carregarEventos();
+            setModalConfirmarAberto(false);
+            setEventoSelecionado(null);
+            alert('Evento confirmado com sucesso!');
+        } catch (error) {
+            alert('Erro ao confirmar evento: ' + (error.response?.data?.erro || error.message));
+        }
     }
 
     function abrirModalRecusar(evento) {
@@ -68,35 +218,48 @@ function Page() {
         setModalRecusarAberto(true);
     }
 
-
-    function confirmarTroca() {
+    async function confirmarTroca() {
         if (!eventoTroca) return;
 
-        const eventoComJustificativa = {
-            ...eventoTroca,
-            justificativa
-        };
-
-        if (origemTroca === "aceitos") {
-            setAceitos(prev => prev.filter(e => e.id !== eventoTroca.id));
-            setRecusados(prev => [...prev, eventoComJustificativa]);
+        try {
+            if (origemTroca === "pendentes") {
+                await recusarEventoAPI(funcionarioId, eventoTroca.id, justificativa);
+            } else if (origemTroca === "trocarStatus") {
+                await trocarStatusEventoAPI(funcionarioId, eventoTroca.id, justificativa);
+            } else {
+                await trocarStatusEventoAPI(funcionarioId, eventoTroca.id, justificativa);
+            }
+            
+            await carregarEventos();
+            setJustificativa("");
+            setEventoTroca(null);
+            setOrigemTroca("");
+            setModalRecusarAberto(false);
+            alert('Ação realizada com sucesso!');
+        } catch (error) {
+            alert('Erro: ' + (error.response?.data?.erro || error.message));
         }
+    }
 
-        if (origemTroca === "recusados") {
-            setRecusados(prev => prev.filter(e => e.id !== eventoTroca.id));
-            setAceitos(prev => [...prev, eventoComJustificativa]);
+    async function trocarStatusRapido(evento, statusAtual) {
+        try {
+            if (statusAtual === "aceito") {
+                setEventoTroca(evento);
+                setOrigemTroca("trocarStatus");
+                setModalRecusarAberto(true);
+                return;
+            }
+            
+            if (statusAtual === "recusado") {
+                await trocarStatusEventoAPI(funcionarioId, evento.id, "");
+                await carregarEventos();
+                alert('Status alterado para confirmado com sucesso!');
+                return;
+            }
+            
+        } catch (error) {
+            alert('Erro ao trocar status: ' + (error.response?.data?.erro || error.message));
         }
-
-        if (origemTroca === "pendentes") {
-            setPendentes(prev => prev.filter(e => e.id !== eventoTroca.id));
-            setRecusados(prev => [...prev, eventoComJustificativa]);
-        }
-
-        setJustificativa("");
-        setEventoTroca(null);
-        setOrigemTroca("");
-
-        setModalRecusarAberto(false);
     }
 
     function abrirModalAvaliar(evento) {
@@ -104,10 +267,26 @@ function Page() {
         setModalAvaliarAberto(true);
     }
 
+    async function enviarAvaliacao() {
+        if (!eventoSelecionado) return;
+
+        try {
+            const linkFeedback = "https://forms.google.com/meu-feedback";
+            await avaliarEventoAPI(funcionarioId, eventoSelecionado.id, linkFeedback);
+            await carregarEventos();
+            setModalAvaliarAberto(false);
+            setEventoSelecionado(null);
+            setNota(0);
+            alert('Avaliação enviada com sucesso!');
+        } catch (error) {
+            alert('Erro ao enviar avaliação: ' + (error.response?.data?.erro || error.message));
+        }
+    }
+
     const modalAvaliar = modalAvaliarAberto && (
         <div className={styles.modalOverlay}>
             <div className={styles.modalBox}>
-                <h2 className={styles.modalTitulo}>Formulário de Participação</h2>
+                <h2>Formulário de Participação</h2>
 
                 <input className={styles.input} placeholder="Nome do Funcionário" type="text" />
                 <label className={styles.label}>Data</label>
@@ -131,7 +310,7 @@ function Page() {
                 <label className={styles.label}>Descrição do desenvolvimento adquirido</label>
                 <textarea className={styles.textarea} placeholder="Breve descrição" />
 
-                <button className={styles.botaoPrincipal}>Enviar</button>
+                <button className={styles.botaoPrincipal} onClick={enviarAvaliacao}>Enviar</button>
                 <button className={styles.cancelar} onClick={() => setModalAvaliarAberto(false)}>Cancelar</button>
             </div>
         </div>
@@ -152,24 +331,34 @@ function Page() {
     const modalRecusar = modalRecusarAberto && (
         <div className={styles.modalOverlay}>
             <div className={styles.modalBox}>
-                <h2>Justificativa</h2>
+                <h2>
+                    {origemTroca === "trocarStatus" ? "Cancelar Participação" : "Justificativa"}
+                </h2>
 
-                <label className={styles.label}>Explique o motivo:</label>
+                <label className={styles.label}>
+                    {origemTroca === "trocarStatus" 
+                        ? "Explique o motivo do cancelamento:" 
+                        : "Explique o motivo:"}
+                </label>
                 <textarea
                     className={styles.textarea}
                     value={justificativa}
                     onChange={e => setJustificativa(e.target.value)}
+                    placeholder={
+                        origemTroca === "trocarStatus" 
+                            ? "Digite o motivo do cancelamento..." 
+                            : "Digite sua justificativa..."
+                    }
                 />
 
-                <button className={styles.botaoPrincipal} onClick={confirmarTroca}>Enviar</button>
+                <button className={styles.botaoPrincipal} onClick={confirmarTroca}>
+                    {origemTroca === "trocarStatus" ? "Confirmar Cancelamento" : "Enviar"}
+                </button>
                 <button className={styles.cancelar} onClick={() => setModalRecusarAberto(false)}>Cancelar</button>
             </div>
         </div>
     );
 
-    // ----------------------------
-    // JSX FINAL
-    // ----------------------------
     return (
         <div className={styles.conteudo}>
             {modalConfirmar}
@@ -177,6 +366,8 @@ function Page() {
             {modalAvaliar}
 
             <h1 className={styles.titulo}>Gerenciamento de Eventos</h1>
+
+            {carregando && <div style={{textAlign: 'center', padding: '10px'}}>Carregando eventos...</div>}
 
             <div className={styles.conteudoPagina}>
                 
@@ -203,12 +394,12 @@ function Page() {
                         <DayPicker
                             mode="multiple"
                             selected={selected}
-                            onSelect={days => setSelected(days || [])}
+                            onSelect={handleDateSelect}
                             month={month}
                             onMonthChange={setMes}
                             modifiers={{
                                 hoje: new Date(),
-                                eventos: eventos.map(e => e.date),
+                                eventos: datasComEventos,
                             }}
                             modifiersClassNames={{
                                 hoje: styles.hoje,
@@ -233,20 +424,20 @@ function Page() {
 
                     <div className={styles.listaEventos}>
 
-                        <details className={styles.box}>
+                        <details className={styles.details}>
                             <summary className={styles.itemResumo}>
                                 <div className={styles.left}>
                                     <img src="/images/ampulheta.png" alt="pendentes" />
-                                    Pendentes
+                                    Pendentes ({eventosFiltrados.pendentes.length})
                                 </div>
                                 <span className={styles.arrow}></span>
                             </summary>
 
                             <div className={styles.listaEventosAbertos}>
-                                {pendentes.length === 0 ? (
-                                    <p>Nenhum evento encontrado</p>
+                                {eventosFiltrados.pendentes.length === 0 ? (
+                                    <p>Nenhum evento {selected.length > 0 ? 'nas datas selecionadas' : 'encontrado'}</p>
                                 ) : (
-                                    pendentes.map(evento => (
+                                    eventosFiltrados.pendentes.map(evento => (
                                         <div key={evento.id} className={styles.eventCard}>
                                             <h4>{evento.titulo}</h4>
 
@@ -271,20 +462,20 @@ function Page() {
                             </div>
                         </details>
 
-                        <details className={styles.box}>
+                        <details className={styles.details}>
                             <summary className={styles.itemResumo}>
                                 <div className={styles.left}>
                                     <img src="/images/sim.png" alt="sim" />
-                                    Aceitos
+                                    Aceitos ({eventosFiltrados.aceitos.length})
                                 </div>
                                 <span className={styles.arrow}></span>
                             </summary>
 
                             <div className={styles.listaEventosAbertos}>
-                                {aceitos.length === 0 ? (
-                                    <p>Nenhum evento encontrado</p>
+                                {eventosFiltrados.aceitos.length === 0 ? (
+                                    <p>Nenhum evento {selected.length > 0 ? 'nas datas selecionadas' : 'encontrado'}</p>
                                 ) : (
-                                    aceitos.map(evento => (
+                                    eventosFiltrados.aceitos.map(evento => (
                                         <div key={evento.id} className={styles.eventCard}>
                                             <h4>{evento.titulo}</h4>
 
@@ -297,13 +488,9 @@ function Page() {
                                             <div className={styles.buttons}>
                                                 <button 
                                                     className={styles.confirm}
-                                                    onClick={() => {
-                                                        setEventoTroca(evento);
-                                                        setOrigemTroca("aceitos");
-                                                        setModalRecusarAberto(true);
-                                                    }}
+                                                    onClick={() => trocarStatusRapido(evento, "aceito")}
                                                 >
-                                                    ⇋ Trocar
+                                                    ⇋ Trocar para Recusado
                                                 </button>
                                             </div>
                                         </div>
@@ -312,20 +499,20 @@ function Page() {
                             </div>
                         </details>
 
-                        <details className={styles.box}>
+                        <details className={styles.details}>
                             <summary className={styles.itemResumo}>
                                 <div className={styles.left}>
                                     <img src="/images/desmarcado.png" alt="desmarcado" />
-                                    Recusados
+                                    Recusados ({eventosFiltrados.recusados.length})
                                 </div>
                                 <span className={styles.arrow}></span>
                             </summary>
 
                             <div className={styles.listaEventosAbertos}>
-                                {recusados.length === 0 ? (
-                                    <p>Nenhum evento encontrado</p>
+                                {eventosFiltrados.recusados.length === 0 ? (
+                                    <p>Nenhum evento {selected.length > 0 ? 'nas datas selecionadas' : 'encontrado'}</p>
                                 ) : (
-                                    recusados.map(evento => (
+                                    eventosFiltrados.recusados.map(evento => (
                                         <div key={evento.id} className={styles.eventCard}>
                                             <h4>{evento.titulo}</h4>
 
@@ -338,12 +525,9 @@ function Page() {
                                             <div className={styles.buttons}>
                                                 <button 
                                                     className={styles.confirm}
-                                                    onClick={() => {
-                                                        setRecusados(prev => prev.filter(e => e.id !== evento.id));
-                                                        setAceitos(prev => [...prev, evento]);
-                                                    }}
+                                                    onClick={() => trocarStatusRapido(evento, "recusado")}
                                                 >
-                                                    ⇋ Trocar
+                                                    ⇋ Trocar para Confirmado
                                                 </button>
                                             </div>
                                         </div>
@@ -352,20 +536,20 @@ function Page() {
                             </div>
                         </details>
                         
-                        <details className={styles.box}>
+                        <details className={styles.details}>
                             <summary className={styles.itemResumo}>
                                 <div className={styles.left}>
                                     <img src="/images/fim.png" alt="fim" />
-                                    Finalizados
+                                    Finalizados ({eventosFiltrados.finalizados.length})
                                 </div>
                                 <span className={styles.arrow}></span>
                             </summary>
 
                             <div className={styles.listaEventosAbertos}>
-                                {finalizados.length === 0 ? (
-                                    <p>Nenhum evento encontrado</p>
+                                {eventosFiltrados.finalizados.length === 0 ? (
+                                    <p>Nenhum evento {selected.length > 0 ? 'nas datas selecionadas' : 'encontrado'}</p>
                                 ) : (
-                                    finalizados.map(evento => (
+                                    eventosFiltrados.finalizados.map(evento => (
                                         <div key={evento.id} className={styles.eventCard}>
                                             <h4>{evento.titulo}</h4>
 
