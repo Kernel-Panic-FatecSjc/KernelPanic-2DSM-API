@@ -5,6 +5,7 @@ import Login from "../../components/layout/Login/login";
 import { useState } from "react";
 import React from "react";
 import styles from "./App.module.css";
+import axios from "axios";
 
 export default function page() {
   const router = useRouter();
@@ -13,9 +14,11 @@ export default function page() {
   const options = [
     { id: "home", label: "Home Office", icon: "/images/casa.png" },
     { id: "evento", label: "Evento", icon: "/images/calendario.png" },
-    { id: "visita", label: "Visita", icon: "/images/reuniao.png" },
+    { id: "visita", label: "Visita", icon: "/images/caminhao.png" },
     { id: "ferias", label: "Férias", icon: "/images/maleta.png" },
     { id: "medico", label: "Médico", icon: "/images/estetoscopio.png" },
+    { id: "escritorio", label: "Escritório", icon: "/images/construcao-2.svg" },
+    { id: "reuniao", label: "Reunião", icon: "/images/reuniao.png" },
     { id: "outro", label: "Outro", icon: "/images/reticencias.png" },
   ];
 
@@ -58,7 +61,25 @@ export default function page() {
             ))}
           </div>
 
-          <button className={styles.loginButton}>Logar →</button>
+          <button className={styles.loginButton}
+          onClick={async () => {
+    try {
+      await axios.put("http://localhost:5000/funcionario-localizacao", {
+        funcionarioId: 1,      
+        localizacao: selected, 
+      });
+
+      router.push("/dashboard");
+    } catch (error) {
+      console.error("Erro ao enviar localização:", error);
+    }
+  }}
+          
+          
+          
+          
+          
+          >Logar →</button>
         </div>
       </div>
     </div>

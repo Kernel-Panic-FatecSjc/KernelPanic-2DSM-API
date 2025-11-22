@@ -90,6 +90,7 @@
 .icon {
   width: 22px;
   height: 22px;
+  filter: brightness(0) saturate(0) opacity(0.5);
 }
 
 .radioWrapper input[type="radio"] {
