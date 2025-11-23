@@ -4,11 +4,11 @@ body,
   height: 100%;
 }
 
-
 :global(main.conteudo) {
   padding: 0 !important;
 }
 
+/* CONTAINER PRINCIPAL */
 .container {
   display: flex;
   height: 100vh;
@@ -17,65 +17,67 @@ body,
   overflow: hidden;
 }
 
+/* LATERAL */
 .lateral {
   background-color: #1f4af4;
   width: 500px;
-  min-width: 500px;
+  min-width: 350px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: center; /* 🔵 CENTRALIZA A LOGO SEMPRE */
   flex-shrink: 0;
 }
 
+/* PAINEL */
 .painel-container {
   flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: #fff;
-  box-sizing: border-box;
   overflow: auto;
+  padding: 20px;
 }
 
 .painel-conteudo {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   text-align: center;
   width: 100%;
   gap: 30px;
   font-family: "Poppins", sans-serif;
 }
 
+/* TÍTULOS */
 .titulo-bemvindo {
   color: #2563eb;
   font-size: 2.8rem;
   font-weight: 600;
-  margin-bottom: 5px;
 }
 
 .texto-selecao {
   color: #555;
-  margin-bottom: 40px;
   font-size: 1.02rem;
-  font-family: "Poppins", sans-serif;
   font-weight: 500;
+  margin-bottom: 30px;
 }
 
+/* GRID DE OPÇÕES */
 .opcoes-login {
   display: grid;
   grid-template-columns: repeat(2, 200px);
-  grid-gap: 100px;
+  gap: 60px;
   justify-content: center;
 }
 
+/* CARD */
 .card-login {
   background-color: #5AA6FA45;
   border-radius: 20px;
   padding: 30px 0;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: 0.2s ease;
   box-shadow: 0 2px 0 #1F4AF4;
 }
 
@@ -92,8 +94,7 @@ body,
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 28px;
-  margin: 0 auto 10px auto;
+  margin: 0 auto 10px;
 }
 
 .icone-card img {
@@ -103,10 +104,10 @@ body,
 
 .card-login p {
   font-weight: 500;
-  color: #000000;
-  margin: 0;
+  color: #000;
 }
 
+/* WRAPPER DO TÍTULO */
 .titulo-wrapper {
   display: flex;
   align-items: center;
@@ -114,6 +115,7 @@ body,
   justify-content: center;
 }
 
+/* BOTÃO */
 .btn-teste {
   background-color: #2563eb;
   color: white;
@@ -124,11 +126,98 @@ body,
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
-  font-family: "Poppins", sans-serif;
 }
 
 .btn-teste:hover {
   background-color: #1d4ed8;
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(37, 99, 235, 0.3);
+}
+
+/* ========================= */
+/*        RESPONSIVIDADE     */
+/* ========================= */
+
+/* Tablets (1024px ↓) */
+@media (max-width: 1024px) {
+  .lateral {
+    width: 320px;
+    min-width: 280px;
+  }
+
+  .opcoes-login {
+    grid-template-columns: repeat(2, minmax(160px, 1fr));
+    gap: 40px;
+    width: 100%;
+    max-width: 500px;
+  }
+
+  .card-login {
+    padding: 25px 0;
+  }
+
+  .icone-card {
+    width: 70px;
+    height: 70px;
+  }
+
+  .icone-card img {
+    width: 42px;
+    height: 42px;
+  }
+}
+
+/* Celulares grandes (768px ↓) */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .lateral {
+    width: 100%;
+    min-width: 100%;
+    height: 220px; /* logo centralizada */
+  }
+
+  .titulo-bemvindo {
+    font-size: 2.2rem;
+  }
+
+  .opcoes-login {
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+    width: 100%;
+    max-width: 400px;
+  }
+}
+
+/* Celulares pequenos (480px ↓) */
+@media (max-width: 480px) {
+  .titulo-bemvindo {
+    font-size: 1.8rem;
+  }
+
+  .texto-selecao {
+    font-size: 0.9rem;
+  }
+
+  .opcoes-login {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .card-login {
+    width: 200px;
+    margin: 0 auto;
+  }
+
+  .icone-card {
+    width: 65px;
+    height: 65px;
+  }
+
+  .icone-card img {
+    width: 38px;
+    height: 38px;
+  }
 }
