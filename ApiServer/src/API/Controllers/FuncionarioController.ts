@@ -25,4 +25,14 @@ export class FuncionarioController {
       res.status(400).json({ erro: (error as Error).message });
     }
   }
+
+  static async getFuncionarios(req: Request, res: Response){
+    try{
+      const funcionarios = await service.getFuncionarios()
+      res.json({ mensagem: "Funcionarios encontrados:", funcionarios });
+    }catch (error) {
+      res.status(400).json({ erro: (error as Error).message });
+    }
+  }
+ 
 }

@@ -1,10 +1,17 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./App.module.css";
 import ProtectRoute from "../../components/ProtectRoute";
+import axios from "axios";
 
 export default function page() {
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+    const [quantidadeFuncionarios, setQuantidadeFuncionarios] = useState(0);
+    const [quantidadeAtivadade, setQuantidadeAtividade] = useState(0);
+    const [quantidadeAusente, setQuantidadeAusente] = useState(0);
+    const [funcionarios, setFuncionarios] = useState(0);
+
     const coresFunil = [
         "#2A49EB",
         "#3366F0",
@@ -37,6 +44,88 @@ export default function page() {
 
     const contagens = [];
 
+    const localizacoes = {
+        homeOffice: [],
+        evento: [],
+        visitaCliente: [],
+        escritorio: [],
+        ferias: [],
+        reuniao: [],
+        medico: [],
+        outro: [],
+    };
+
+    useEffect(() => {
+        const fetchFuncionarios = async () => {
+            try {
+                const response = await axios.get(`${apiUrl}/funcionario`);
+                const funcionariosLista = response.data.funcionarios;
+                console.log(funcionariosLista);
+                setFuncionarios(funcionariosLista);
+                setQuantidadeFuncionarios(funcionariosLista.length);
+                const novosCards = {
+                    colunaUm: { "Home Office": [], Ferias: [] },
+                    colunaDois: { Evento: [], Reunião: [] },
+                    colunaTres: { "Visita Cliente": [], Médico: [] },
+                    colunaQuatro: { Escritório: [], Outro: [] },
+                };
+
+                funcionariosLista.forEach((f) => {
+                    switch (f.localizacao_funcionario.toLowerCase()) {
+                        case "homeoffice":
+                            novosCards.colunaUm["Home Office"].push(f);
+                            break;
+                        case "ferias":
+                            novosCards.colunaUm.Ferias.push(f);
+                            break;
+                        case "evento":
+                            novosCards.colunaDois.Evento.push(f);
+                            break;
+                        case "reuniao":
+                            novosCards.colunaDois.Reunião.push(f);
+                            break;
+                        case "visitacliente":
+                            novosCards.colunaTres["Visita Cliente"].push(f);
+                            break;
+                        case "medico":
+                            novosCards.colunaTres.Médico.push(f);
+                            break;
+                        case "escritorio":
+                            novosCards.colunaQuatro.Escritório.push(f);
+                            break;
+                        case "outro":
+                            novosCards.colunaQuatro.Outro.push(f);
+                            break;
+                        default:
+                            novosCards.colunaQuatro.Outro.push(f);
+                    }
+                });
+
+                setCards(novosCards);
+
+                const totalFuncionarios = funcionariosLista.length;
+
+                const ausentes = funcionariosLista.filter(
+                    (f) =>
+                        f.status === "ausente" ||
+                        ["ferias", "medico", "outro"].includes(
+                            f.localizacao_funcionario.toLowerCase()
+                        )
+                ).length;
+
+                const atividade = totalFuncionarios - ausentes;
+
+                setQuantidadeAusente(ausentes);
+                setQuantidadeAtividade(atividade);
+                setQuantidadeFuncionarios(totalFuncionarios);
+            } catch (error) {
+                console.error("Erro ao buscar funcionários:", error);
+            }
+        };
+
+        fetchFuncionarios();
+    }, []);
+
     Object.entries(cards).forEach(([coluna, cardsObj]) => {
         Object.entries(cardsObj).forEach(([cardKey, clientes]) => {
             contagens.push({
@@ -50,6 +139,15 @@ export default function page() {
 
     contagens.sort((a, b) => b.qtd - a.qtd);
     const maxQtd = Math.max(...contagens.map((c) => c.qtd), 1);
+
+    const renderCliente = (cliente, coluna, cardKey, index) => (
+        <div key={index} className={styles.clienteCard}>
+            <strong> {cliente.nome}</strong>
+            <div>📞 {cliente.numero_telefone}</div>
+            <div>✉️ {cliente.cargo}</div>
+            <div>⚙️ {cliente.email}</div>
+        </div>
+    );
 
     const renderCard = (titulo, coluna, cardKey) => (
         <div className={styles.card}>
@@ -71,10 +169,6 @@ export default function page() {
         </div>
     );
 
-    const [quantidadeFuncionarios, setQuantidadeFuncionarios] = useState(0);
-    const [quantidadeAtivadade, setQuantidadeAtividade] = useState(0);
-    const [quantidadeAusente, setQuantidadeAusente] = useState(0);
-
     return (
         <ProtectRoute>
             <div>
@@ -92,14 +186,22 @@ export default function page() {
                             <div className={styles.containerAusenteAtividade}>
                                 <img src="/images/companhia-1.svg" alt="" />
                                 <div className={styles.inside}>
-                                    <h3 className={styles.info}>{quantidadeAtivadade}</h3>
+                                    <h3 className={styles.info}>
+                                        {quantidadeAtivadade}
+                                    </h3>
                                     <h3>Em atividade</h3>
                                 </div>
                             </div>
                             <div className={styles.containerAusenteAtividade}>
-                                <img className={styles.iconCliente} src="/images/iconclienteBlack.svg" alt="" />
+                                <img
+                                    className={styles.iconCliente}
+                                    src="/images/iconclienteBlack.svg"
+                                    alt=""
+                                />
                                 <div className={styles.inside}>
-                                    <h3 className={styles.info}>{quantidadeAusente}</h3>
+                                    <h3 className={styles.info}>
+                                        {quantidadeAusente}
+                                    </h3>
                                     <h3>Ausente</h3>
                                 </div>
                             </div>
