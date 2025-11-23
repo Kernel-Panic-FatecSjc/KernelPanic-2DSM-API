@@ -1,0 +1,310 @@
+.container {
+  background-color: white;
+  padding: 3rem;
+  border-radius: 10px;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.tittle {
+  color: #1f4af4;
+  margin-bottom: 25px;
+  text-align: left;
+  font-size: 50px;
+  font-weight: 600;
+}
+
+.filters {
+  text-align: left;
+  margin-bottom: 30px;
+}
+
+.filters select,
+.filters button {
+  margin: 0 5px;
+  padding: 8px 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  height: 40px;
+}
+
+.filters select {
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2'%3E%3Cpolyline points='6,9 12,15 18,9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  background-size: 16px 16px;
+  padding-right: 32px;
+}
+
+.filters select:focus,
+.filters select:active {
+  outline: none;
+  border-color: #ccc;
+  background-color: white;
+  color: #1f4af479;
+}
+
+.filters button {
+  background: #1f4af4;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.kanban {
+  display: flex;
+  gap: 15px;
+  max-height: 500px;
+  margin-bottom: 40px;
+}
+
+.column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.card {
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.cardHeader {
+  background: #1f4af4;
+  color: white;
+  padding: 15px 20px;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  flex-shrink: 0;
+}
+
+.cardHeader span {
+  background: rgba(255, 255, 255, 0.3);
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 12px;
+}
+
+.cardBody {
+  padding: 20px;
+  background: #f8f9fa;
+  color: #666;
+  font-size: 14px;
+  line-height: 1.5;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  flex-grow: 1;
+  scrollbar-color: #c0c0c0 #f0f0f0;
+  scrollbar-width: thin;
+}
+
+.clienteCard {
+  cursor: pointer;
+  background-color: #f9f9f9;
+  border: 1px solid #575756;
+  padding: 10px;
+  border-radius: 6px;
+  margin-bottom: 8px;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.clienteCard strong {
+  font-size: 16px;
+  color: #1f4af4;
+}
+
+.clienteCard em {
+  font-style: italic;
+  color: #999;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+.clienteCard div {
+  font-size: 14px;
+  color: #555;
+}
+
+.clienteCard:hover {
+  background-color: #e2eaff;
+  border-color: #1f4af4;
+  box-shadow: 0 0 8px #1f4af4aa;
+  transition: 0.3s;
+}
+
+.buttonHistorico,
+.buttonHistoricoOver {
+  margin: 0 4px;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 16px;
+  color: white;
+  background-color: #1f4af4;
+}
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modalContent {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  padding: 2rem;
+  border-radius: 8px;
+  width: 90vh;
+  max-width: 90%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  position: relative;
+  height: 60%;
+  overflow-x: auto;
+}
+
+.modalContent h2 {
+  margin-top: 0;
+  color: #1f4af4;
+}
+
+.modalContent button {
+  margin-top: 1rem;
+  padding: 0.5rem 1.5rem;
+  background-color: #1f4af4;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.tableHistorico {
+  margin-top: 1rem;
+  border-collapse: collapse;
+  width: 100%;
+  text-align: center;
+}
+
+.tableHistorico th,
+.tableHistorico td {
+  border: none;
+  padding: 8px 12px;
+}
+
+.tableHistorico tr {
+  border-bottom: 1px solid #ddd;
+}
+
+.tableHistorico thead tr {
+  border-bottom: 2px solid black;
+}
+
+.funnel-bar {
+  height: 2rem;
+  border-radius: 6px;
+  color: white;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px;
+  transition: width 0.5s;
+  white-space: nowrap;
+}
+
+.funilDiv {
+  margin-top: 2rem;
+  background-color: white;
+  padding: 3rem;
+  border-radius: 10px;
+}
+
+.titleContainer {
+  display: flex;
+  align-items: start;
+  gap: 2rem;
+  flex-wrap: nowrap;
+}
+
+.quantidadeFuncionariosContainer {
+  margin-left: 6rem;
+  border-bottom: 4px solid #1f4af4;
+  border-radius: 35px;
+  height: auto;
+  padding: 1rem;
+}
+
+.quantidadeFuncionariosContainer img {
+  width: 50px;
+}
+
+.containerFunc {
+  margin-left: 1rem;
+}
+
+.secondInfoContainer {
+  margin-left: 6rem;
+}
+
+.info {
+  color: #1f4af4;
+}
+
+.containerAusenteAtividade {
+  display: flex;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  border-bottom: 4px solid #1f4af4;
+  border-radius: 35px;
+}
+
+.containerAusenteAtividade img{
+  width: 35px;
+}
+
+.iconCliente{
+  margin-top: 1rem;
+  height: 35px;
+}
+
+.imgQuantidade {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.imgQuantidade h2 {
+  color: #1f4af4;
+}
+
+.inside {
+  margin: 0.5rem;
+}

@@ -11,7 +11,7 @@ CREATE TABLE AgendamentoInteracao (
     notas varchar(255)  NULL,
     cliente_ID int  NOT NULL,
     funcionario_ID int  NOT NULL,
-    CONSTRAINT CustomerInteractionSchedule_pk PRIMARY KEY (agendamento_interacao_ID)
+    CONSTRAINT CustomerInteractionSchedule_pk PaRIMARY KEY (agendamento_interacao_ID)
 );
 
 -- Table: Cliente

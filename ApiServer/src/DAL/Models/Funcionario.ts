@@ -31,7 +31,7 @@ import { Funcionario as FuncionarioEntity } from "./Funcionario.js";
 import { Perfil as PerfilEntity } from "./Perfil.js";
 
 @Entity("Funcionario") 
-@Unique(["email"]) 
+@Unique(["email", "cpf"]) 
 export class Funcionario {
   @PrimaryGeneratedColumn({ name: "funcionario_ID" })
   funcionario_ID!: number;
@@ -41,6 +41,15 @@ export class Funcionario {
 
   @Column({ name: "genero", type: "varchar", length: 10 }) 
   genero!: string;
+
+  @Column({ name: "cpf", type: "varchar", length: 11})
+  cpf!: string;
+
+  @Column({ name: "data_admissao", type: "datetime" }) 
+  data_admissao!: Date;
+  
+  @Column({ name: "data_nascimento", type: "date" }) 
+  data_nascimento!: Date;
 
   @Column({ name: "endereco", type: "varchar", length: 255 }) 
   endereco!: string;

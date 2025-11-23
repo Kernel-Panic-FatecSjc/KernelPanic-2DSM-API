@@ -22,6 +22,7 @@ const funcionarioPerfilRoutes = require("./API/Routes/FuncionarioPerfilRoutes")
 const funcionarioRoutes = require("./API/Routes/FuncionarioRoutes")
 const funcionarioLocalizacaoRoute = require("./API/Routes/funcionarioLocalizacaoRoute")
 const relatoriosRoutes = require("./API/Routes/RelatoriosRoutes")
+const eventoFuncionario = require("./API/Routes/EventoFuncionarioRoutes")
 
 const app = express(); 
 
@@ -56,6 +57,7 @@ app.use("/api/funcionarios", funcionarioPerfilRoutes);
 app.use("/funcionario", funcionarioRoutes)
 app.use("/funcionario-localizacao", funcionarioLocalizacaoRoute)
 app.use("/relatorios", relatoriosRoutes);
+app.use("/eventoFunc", eventoFuncionario)
 
 iniciarCron();
 
