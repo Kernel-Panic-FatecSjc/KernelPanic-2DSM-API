@@ -1,0 +1,414 @@
+.conteudo {
+    width: 100%;
+    padding: 20px 40px;
+}
+
+.titulo {
+    font-size: 28px;
+    font-weight: 700;
+    color: #1d4ed8; 
+    margin-bottom: 20px;
+}
+
+.conteudoPagina {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+
+.card {
+    background: #fff;
+    border-radius: 20px;
+    width: 48%;
+    padding-bottom: 20px;
+    box-shadow: 0 0 15px #0000000f;
+}
+
+.cardHeader {
+    background: #1d4ed8;
+    color: white;
+    padding: 15px 20px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+
+.calendario {
+    padding: 20px;
+}
+
+.calendario_container {
+    background: #eef1ff;
+    height: 420px;
+    width: 100%;
+    border-radius: 12px;
+}
+
+.listaEventos {
+    color: #1d4ed8;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.summary {
+    cursor: pointer;
+    font-weight: 600;
+    padding: 10px;
+    border-radius: 8px;
+    background: #f5f7ff;
+}
+
+.summary:hover {
+    background: #e8ecff;
+}
+
+.details {
+    border: 1px solid #e3e6f9;
+    border-radius: 8px;
+    padding: 5px;
+}
+
+.itemResumo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 600;
+    padding: 12px;
+    border-radius: 10px;
+    background: #fff;
+    cursor: pointer;
+    list-style: none;
+}
+
+.left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.itemResumo img {
+    width: 20px;
+    height: 20px;
+}
+
+.arrow {
+    width: 10px;
+    height: 10px;
+    border-right: 3px solid #444;
+    border-bottom: 3px solid #444;
+    transform: rotate(-45deg);  
+    transition: 0.2s;
+}
+
+.box[open] .arrow {
+    transform: rotate(45deg); 
+}
+
+.listaEventosAbertos {
+    padding: 15px 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.eventCard {
+    background: #f1f4ff;
+    border: 2px solid #4c6ef5;
+    padding: 12px 16px;
+    border-radius: 25px;
+    box-shadow: 0 4px 10px #00000010;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.eventCard h4 {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0;
+    color: #1b1d4e;
+}
+
+.eventInfo {
+    display: flex;
+    gap: 20px;
+    font-size: 13px;
+    color: #6b6b6b;
+}
+
+.buttons {
+    margin-top: 8px;
+    display: flex;
+    gap: 12px;
+}
+
+.confirm {
+    background: #4C99FF;
+    color: white;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.reject {
+    background: #3F57F0;
+    color: white;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.confirm:hover,
+.reject:hover {
+    opacity: .85;
+}
+
+.calendarContainer {
+  background-color: white;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;   
+  justify-content: start;
+  padding: 20px 0;
+}
+
+.navCustom {
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: space-between;
+  width: 470px;
+  padding: 0 16px;
+}
+
+.calendarTitle {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 22px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.calendarButton {
+  width: 40px;
+  height: 40px;
+  background-color: #1F4AF4;
+  border: none;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.calendarButton img {
+  width: 16px;
+  height: 16px;
+}
+
+.calendarButton:hover {
+  background: #3366F0;
+}
+
+:global(.rdp-day_button) {
+  height: 60px !important;
+  width: 60px !important;
+  font-size: 18px;
+  margin: 2px;
+  border-radius: 12px;
+}
+
+:global(.rdp-day) {
+  height: 60px;
+  width: 60px;
+  margin: 2px;
+}
+
+
+:global(.rdp-day_eventos),
+.evento {
+  background-color: #87DBFF !important;
+  color: #FFFFFF !important;
+  border-radius: 12px !important;
+  font-weight: 700 !important;
+}
+
+.hoje {
+  background-color: #1F4AF4 !important;
+  color: #FFFFFF !important;
+  border-radius: 12px !important;
+  font-weight: 700 !important;
+}
+
+.evento:hover,
+.hoje:hover {
+  filter: brightness(1.1);
+}
+
+:global(.rdp-day_button),
+:global(.rdp-day_button:focus),
+:global(.rdp-day_button:focus-visible),
+:global(.rdp-day_button:active),
+:global(.rdp-day_button:hover) {
+  background: transparent !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+:global(.rdp-selected) {
+  background-color: transparent !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+:global(.rdp-selected) {
+  background-color: #e0e0e0 !important;
+  color: black !important;
+  border-radius: 12px !important;
+}
+
+.modalOverlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+.modalBox {
+    background: white;
+    padding: 30px;
+    width: 380px;
+    border-radius: 18px;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.15);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+}
+
+.modalBox h2 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.modalBox p {
+    margin: 0;
+    font-size: 15px;
+    color: #333;
+}
+
+.label {
+    text-align: left;
+    font-weight: 500;
+    margin-bottom: -10px;
+}
+
+.textarea {
+    background-color: #fff;
+    color: #000;
+    width: 100%;
+    height: 120px;
+    border-radius: 12px;
+    border: 1px solid #ccc;
+    padding: 12px;
+    font-size: 14px;
+    resize: none;
+}
+
+.botaoPrincipal, .cancelar {
+    background: #80b6ff;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 30px;
+    font-size: 15px;
+    cursor: pointer;
+    width: 70%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    align-items: center;
+}
+
+.botaoPrincipal:hover {
+    background: #6aa9ff;
+}
+
+.input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 18px;
+    border: 1px solid #dcdcdc;
+    background: #fafafa;
+    outline: none;
+}
+
+.input::placeholder {
+    color: #b6b6b6;
+}
+
+.estrelas {
+    display: flex;
+    gap: 6px;
+    font-size: 32px;
+    cursor: pointer;
+}
+
+.estrela {
+    color: #d7d7d7;
+    transition: 0.2s;
+}
+
+.estrela:hover {
+    transform: scale(1.2);
+}
+
+.estrelaAtiva {
+    color: gold;
+    transition: 0.2s;
+}
+
+.estrelaAtiva:hover {
+    transform: scale(1.2);
+}
+
+.cargoContainer {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.cargoIcon {
+  width: 20px;
+  height: 20px;
+  filter: brightness(0) invert(0.33);
+}
+
+.cargoText {
+  font-size: 14px;
+  color: #555;
+}

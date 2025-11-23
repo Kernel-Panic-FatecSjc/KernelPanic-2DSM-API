@@ -34,6 +34,12 @@ export class Presenca {
   @Column({ name: "link_feedback", type: "longtext", nullable: true })
   link_feedback?: string;
 
+  @Column({ name: "funcionario_ID", type: "int" })
+  funcionario_ID!: number;
+
+  @Column({ name: "evento_ID", type: "int" })
+  evento_ID!: number;
+  
   // Relacionamento muitos-para-um com FuncionariosConvidados (convidado de um evento)
   // Associação feita pela chave composta funcionario_ID + evento_ID
   @ManyToOne(
