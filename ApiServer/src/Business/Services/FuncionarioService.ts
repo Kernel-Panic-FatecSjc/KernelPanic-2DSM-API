@@ -60,23 +60,7 @@ export class FuncionarioService {
     return this.funcionarioRepo.save(funcionario);
   }
 
-  async getVendedor(): Promise<Funcionario[]> {
-    return this.funcionarioRepo.find({
-      where: { cargo: ILike("vendedor") },
-      relations: ["clientes", "agendamentos", "interacoes", "vendas"],
-    });
-  }
-    async atualizarLocalizacao(
-        funcionarioId: number,
-        localizacao: string
-    ): Promise<Funcionario> {
-        const funcionario = await this.funcionarioRepo.findOneBy({
-            funcionario_ID: funcionarioId,
-        });
-        if (!funcionario) throw new Error("Funcionário não encontrado");
-        funcionario.localizacao_funcionario = localizacao;
-        return this.funcionarioRepo.save(funcionario);
-    }
+
 
     async getVendedor(): Promise<Funcionario[]> {
         return this.funcionarioRepo.find({
