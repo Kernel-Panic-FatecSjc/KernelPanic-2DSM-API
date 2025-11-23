@@ -4,6 +4,7 @@
   z-index: 1 !important;
 }
 
+/* LAYOUT BASE */
 .layout {
   display: flex;
   height: 100vh;
@@ -16,8 +17,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border-right: none;
-  margin: 0;
 }
 
 .rightContainer {
@@ -35,6 +34,7 @@
   margin-bottom: 50px;
 }
 
+/* GRID */
 .cardsGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -42,6 +42,7 @@
   justify-items: center;
 }
 
+/* CARD */
 .card {
   width: 280px;
   height: 180px;
@@ -62,10 +63,16 @@
   box-shadow: 0 6px 16px rgba(0,0,0,0.1);
 }
 
+/* ICON */
 .icon {
-  font-size: 40px;
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  display: block;
+  filter: brightness(0) saturate(100%);
 }
 
+/* CARD TITLE */
 .cardTitle {
   font-size: 16px;
   color: #333;
@@ -73,6 +80,7 @@
   text-align: center;
 }
 
+/* BUTTON */
 .btn {
   background: #1f4af4;
   color: #fff;
@@ -88,10 +96,79 @@
   background: #2947d3;
 }
 
-.icon {
-  width: 48px;
-  height: 48px;
-  object-fit: contain;
-  display: block;
-  filter: brightness(0) saturate(100%);
+/* ============================= */
+/*         RESPONSIVIDADE        */
+/* ============================= */
+
+/* 📺 Tablets (1024px para baixo) */
+@media (max-width: 1024px) {
+  .lateral {
+    width: 320px;
+  }
+
+  .cardsGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+  }
+
+  .card {
+    width: 240px;
+    height: 160px;
+  }
+}
+
+/* 📱 Celulares grandes (768px para baixo) */
+@media (max-width: 768px) {
+  .layout {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .lateral {
+    width: 100%;
+    height: 200px;
+  }
+
+  .rightContainer {
+    padding: 30px 20px;
+  }
+
+  .title {
+    font-size: 26px;
+    margin-top: 40px;
+  }
+
+  .cardsGrid {
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+  }
+
+  .card {
+    width: 200px;
+    height: 150px;
+  }
+}
+
+/* 📱 Celulares pequenos (480px para baixo) */
+@media (max-width: 480px) {
+  .title {
+    font-size: 22px;
+     margin-top: 40px;
+  }
+
+  .cardsGrid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .card {
+    width: 220px;
+    height: 150px;
+    margin: 0 auto;
+  }
+
+  .icon {
+    width: 42px;
+    height: 42px;
+  }
 }
