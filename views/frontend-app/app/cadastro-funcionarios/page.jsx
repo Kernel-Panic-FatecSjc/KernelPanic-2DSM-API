@@ -36,7 +36,7 @@ export default function page() {
         console.log(dadosParaEnviar);
         try {
             const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-            const response = await fetch(${\"$\"}{apiUrl}/funcionario, {
+            const response = await fetch(`${apiUrl}/funcionario`,  {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
