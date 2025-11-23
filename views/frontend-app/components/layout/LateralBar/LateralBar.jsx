@@ -65,7 +65,7 @@ function LateralBar() {
         { id: "cadastro-funcionarios", title: "Cadastro de Funcionários", route: "", perfisPermitidos: ["master", "gestor"], iconInactive: "/images/iconefuncionario.svg", iconActive: "/images/iconefuncionariobranco.svg" }, //FUNCIONARIO - cadastro
         { id: "calendario", title: "Calendário", route: "", perfisPermitidos: ["master", "gestor"], iconInactive: "/images/iconcalendatio.svg", iconActive: "/images/iconecalendariobranco.svg" }, //FUNCIONARIO - eventos
         { id: "eventos", title: "Eventos", route: "", perfisPermitidos: ["master", "gestor"], iconInactive: "/images/iconinteracoes.svg", iconActive: "/images/iconinteracoesbranco.svg" }, //GESTOR - eventos
-        { id: "gestao-localizacao", title: "Gestão de Localização", route: "", perfisPermitidos: ["master", "gestor"], iconInactive: "/images/iconelocalizacao.svg", iconActive: "/images/iconelocazalicaobranco.svg" }, //LOCALIZAÇÃO - dashboard
+        { id: "gestao-localizacao", title: "Gestão de Localização", route: "/localizacao-funcionarios", perfisPermitidos: ["master", "gestor"], iconInactive: "/images/iconelocalizacao.svg", iconActive: "/images/iconelocazalicaobranco.svg" }, //LOCALIZAÇÃO - dashboard
         //BONUS{ id: "certificados", title: "Certificados", route: "", perfisPermitidos: ["master", "gestor"], iconInactive: "/images/iconecertificado.svg", iconActive: "/images/iconecertificadosbranco.svg" }, CERTIFICADOS
       ],
     },
