@@ -119,8 +119,8 @@ function LateralBar() {
       iconActive: "/images/iconechecklistbranco.svg",
       submenus: [
         { id: "relatorio-adm", title: "Administrativo", route: "/relatorio-administrativo", perfisPermitidos: ["master", "gestor"], iconInactive: "/images/iconAdm.svg", iconActive: "/images/iconAdmbranco.svg" }, //ADMINISTRATIVO - relatorios
-        { id: "relatorio-comercial", title: "Comercial", route: "", perfisPermitidos: ["master", "gestor"], iconInactive: "/images/iconComercial.svg", iconActive: "/images/iconComercialbranco.svg" }, //COMERCIAL - relatorios
-        { id: "relatorio-operacional", title: "Operacional", route: "", perfisPermitidos: ["master", "gestor"], iconInactive: "/images/iconOperacional.svg", iconActive: "/images/iconOperacionalbranco.svg" }, //OPERACIONAL - relatorios
+        { id: "relatorio-comercial", title: "Comercial", route: "/relatorio-comercial", perfisPermitidos: ["master", "gestor"], iconInactive: "/images/iconComercial.svg", iconActive: "/images/iconComercialbranco.svg" }, //COMERCIAL - relatorios
+        { id: "relatorio-operacional", title: "Operacional", route: "/relatorio-operacional", perfisPermitidos: ["master", "gestor"], iconInactive: "/images/iconOperacional.svg", iconActive: "/images/iconOperacionalbranco.svg" }, //OPERACIONAL - relatorios
       ],
     },
   ];

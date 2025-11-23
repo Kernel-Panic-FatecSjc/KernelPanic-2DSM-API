@@ -11,7 +11,7 @@ export default function Page() {
 
   return (
     <div className={styles.rightContainer}>
-      <h1 className={styles.title}>Relatórios Administrativo</h1>
+      <h1 className={styles.title}>Relatórios Comerciais</h1>
 
       <div className={styles.cardsGrid}>
 
