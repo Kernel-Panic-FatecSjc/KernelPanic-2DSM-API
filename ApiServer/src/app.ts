@@ -21,6 +21,7 @@ const emailCadastroRoutes = require("./API/Routes/emailAgregadoRoute");
 const funcionarioPerfilRoutes = require("./API/Routes/FuncionarioPerfilRoutes")
 const funcionarioRoutes = require("./API/Routes/FuncionarioRoutes")
 const funcionarioLocalizacaoRoute = require("./API/Routes/funcionarioLocalizacaoRoute")
+const relatoriosRoutes = require("./API/Routes/RelatoriosRoutes")
 
 const app = express(); 
 
@@ -54,6 +55,7 @@ app.use("/api/email", emailCadastroRoutes);
 app.use("/api/funcionarios", funcionarioPerfilRoutes);
 app.use("/funcionario", funcionarioRoutes)
 app.use("/funcionario-localizacao", funcionarioLocalizacaoRoute)
+app.use("/relatorios", relatoriosRoutes);
 
 iniciarCron();
 
