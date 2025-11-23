@@ -64,7 +64,7 @@ function LateralBar() {
       submenus: [
         { id: "avaliacao-eventos", title: "Avaliação de Eventos", route: "", perfisPermitidos: ["master", "gestor"], iconInactive: "/images/iconeavaliacao.svg", iconActive: "/images/iconeavaliacaobranco.svg" }, //EVENTOS - avaliação do evento
         { id: "justificativa-eventos", title: "Justificativas", route: "", perfisPermitidos: ["master", "gestor"], iconInactive: "/images/iconrecusa.svg", iconActive: "/images/iconrecusabranco.svg" }, //EVENTOS - justifica da recusa do evento
-        { id: "cadastro-funcionarios", title: "Cadastro de Funcionários", route: "", perfisPermitidos: ["master", "gestor"], iconInactive: "/images/iconefuncionario.svg", iconActive: "/images/iconefuncionariobranco.svg" }, //FUNCIONARIO - cadastro
+        { id: "cadastro-funcionarios", title: "Cadastro de Funcionários", route: "/cadastro-funcionarios", perfisPermitidos: ["master", "gestor"], iconInactive: "/images/iconefuncionario.svg", iconActive: "/images/iconefuncionariobranco.svg" }, //FUNCIONARIO - cadastro
         { id: "calendario", title: "Calendário", route: "", perfisPermitidos: ["master", "gestor"], iconInactive: "/images/iconcalendatio.svg", iconActive: "/images/iconecalendariobranco.svg" }, //FUNCIONARIO - eventos
         { id: "eventos", title: "Eventos", route: "", perfisPermitidos: ["master", "gestor"], iconInactive: "/images/iconinteracoes.svg", iconActive: "/images/iconinteracoesbranco.svg" }, //GESTOR - eventos
         { id: "gestao-localizacao", title: "Gestão de Localização", route: "/localizacao-funcionarios", perfisPermitidos: ["master", "gestor"], iconInactive: "/images/iconelocalizacao.svg", iconActive: "/images/iconelocazalicaobranco.svg" }, //LOCALIZAÇÃO - dashboard

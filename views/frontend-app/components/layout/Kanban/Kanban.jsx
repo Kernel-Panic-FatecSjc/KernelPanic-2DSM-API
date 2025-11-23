@@ -53,7 +53,7 @@ export default function CicloDeVendas() {
         try {
             const apiUrl = process.env.NEXT_PUBLIC_API_URL;
             const response = await axios.get(
-                `${apiUrl}/funilVendas` 
+                `${apiUrl}/funilVendas`
             );
             const clientes = response.data.message;
 
@@ -107,6 +107,41 @@ export default function CicloDeVendas() {
             setCards(novoCards);
         } catch (err) {
             console.error("Erro ao buscar clientes:", err);
+
+            const clientesMock = {
+                colunaUm: {
+                    prospeccao: [
+                        { id: 1, nome: "Jose", empresa: "Jose Transportes", telefone: "(11) 98765-4321", email: "jose@email.com", status: "Prospeccao" },
+                        { id: 2, nome: "Daniele", empresa: "Daniele Logística", telefone: "(11) 98765-4322", email: "daniele@email.com", status: "Prospeccao" }
+                    ],
+                    negociacao: [
+                        { id: 3, nome: "Frida", empresa: "Frida Express", telefone: "(11) 98765-4323", email: "frida@email.com", status: "Negociacao" }
+                    ]
+                },
+                colunaDois: {
+                    inicial: [
+                        { id: 4, nome: "Amy", empresa: "Amy Cargas", telefone: "(11) 98765-4324", email: "amy@email.com", status: "Inicial" }
+                    ],
+                    followUp: [
+                        { id: 5, nome: "Hanna", empresa: "Hanna Transportadora", telefone: "(11) 98765-4325", email: "hanna@email.com", status: "FollowUp" },
+                        { id: 6, nome: "Pink", empresa: "Pink Logistics", telefone: "(11) 98765-4326", email: "pink@email.com", status: "FollowUp" }
+                    ]
+                },
+                colunaTres: {
+                    potencial: [
+                        { id: 7, nome: "Mingau", empresa: "Mingau Fretes", telefone: "(11) 98765-4327", email: "mingau@email.com", status: "Potencial" }
+                    ],
+                    vendas: [
+                        { id: 8, nome: "Lola", empresa: "Lola Transportes", telefone: "(11) 98765-4328", email: "lola@email.com", status: "Vendas" }
+                    ]
+                },
+                colunaQuatro: {
+                    manutencao: [],
+                    naoVendas: []
+                }
+            };
+
+            setCards(clientesMock);
         }
     };
 
