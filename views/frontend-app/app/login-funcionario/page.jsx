@@ -45,7 +45,7 @@ export default function Page() {
 
       login(data.accessToken);
 
-      router.push("/checklists"); 
+      router.push("/login-localizacao"); 
 
     } catch (error) {
       setErro(error.message);

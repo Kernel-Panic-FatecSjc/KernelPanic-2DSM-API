@@ -48,7 +48,7 @@ export default function Page() {
 
       login(data.accessToken); 
 
-      router.push("/gestao"); 
+      router.push("/login-localizacao"); 
 
     } catch (error) {
       setErro(error.message);

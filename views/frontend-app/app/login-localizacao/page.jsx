@@ -69,7 +69,7 @@ export default function page() {
         localizacao: selected, 
       });
 
-      router.push("/dashboard");
+      router.push("/home-menu");
     } catch (error) {
       console.error("Erro ao enviar localização:", error);
     }

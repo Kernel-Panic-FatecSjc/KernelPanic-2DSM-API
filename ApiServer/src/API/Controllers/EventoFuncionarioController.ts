@@ -4,12 +4,14 @@ import { EventosFuncionarioService } from "../../Business/Services/eventoFuncion
 const service = new EventosFuncionarioService();
 
 export class EventosFuncionarioController {
-  static async buscarEventosDoFuncionario(req: Request, res: Response) {
+
+  static async buscarEventosDoFuncionario(req: Request, res: Response): Promise<void> {
     try {
       const funcionarioId = Number(req.params.funcionarioId);
       
       if (!funcionarioId || isNaN(funcionarioId)) {
-        return res.status(400).json({ erro: "ID do funcionário inválido" });
+        res.status(400).json({ erro: "ID do funcionário inválido" });
+        return;
       }
 
       const eventos = await service.buscarEventosDoFuncionario(funcionarioId);
@@ -20,12 +22,13 @@ export class EventosFuncionarioController {
     }
   }
 
-  static async confirmarEvento(req: Request, res: Response) {
+  static async confirmarEvento(req: Request, res: Response): Promise<void> {
     try {
       const { funcionario_id, evento_id } = req.body;
 
       if (!funcionario_id || !evento_id) {
-        return res.status(400).json({ erro: "Dados incompletos" });
+        res.status(400).json({ erro: "Dados incompletos" });
+        return;
       }
 
       const resultado = await service.confirmarEvento(funcionario_id, evento_id);
@@ -36,12 +39,13 @@ export class EventosFuncionarioController {
     }
   }
 
-  static async recusarEvento(req: Request, res: Response) {
+  static async recusarEvento(req: Request, res: Response): Promise<void> {
     try {
       const { funcionario_id, evento_id, justificativa } = req.body;
 
       if (!funcionario_id || !evento_id || !justificativa) {
-        return res.status(400).json({ erro: "Dados incompletos" });
+        res.status(400).json({ erro: "Dados incompletos" });
+        return;
       }
 
       const resultado = await service.recusarEvento(funcionario_id, evento_id, justificativa);
@@ -52,12 +56,13 @@ export class EventosFuncionarioController {
     }
   }
 
-  static async trocarStatusEvento(req: Request, res: Response) {
+  static async trocarStatusEvento(req: Request, res: Response): Promise<void> {
     try {
       const { funcionario_id, evento_id, justificativa } = req.body;
 
       if (!funcionario_id || !evento_id) {
-        return res.status(400).json({ erro: "Dados incompletos" });
+        res.status(400).json({ erro: "Dados incompletos" });
+        return;
       }
 
       const resultado = await service.trocarStatusEvento(funcionario_id, evento_id, justificativa);
@@ -68,12 +73,13 @@ export class EventosFuncionarioController {
     }
   }
 
-  static async avaliarEvento(req: Request, res: Response) {
+  static async avaliarEvento(req: Request, res: Response): Promise<void> {
     try {
       const { funcionario_id, evento_id, link_feedback } = req.body;
 
       if (!funcionario_id || !evento_id || !link_feedback) {
-        return res.status(400).json({ erro: "Dados incompletos" });
+        res.status(400).json({ erro: "Dados incompletos" });
+        return;
       }
 
       const resultado = await service.avaliarEvento(funcionario_id, evento_id, link_feedback);
