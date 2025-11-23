@@ -15,7 +15,7 @@ export default function Page() {
         endereco: "",
         cargo: "",
         senha_hash: "",
-        gerente_ID: 0
+        gerente_ID: 0,
     });
 
     const handleChange = (e) => {
@@ -26,16 +26,27 @@ export default function Page() {
         }));
     };
 
+    const handleChangeCPF = (e) => {
+        let { name, value } = e.target;
+
+        if (name === "cpf") {
+            value = maskCPF(value);
+        }
+
+        setForm({ ...form, [name]: value });
+    };
+
     const handleSubmit = async (event) => {
         event.preventDefault();
 
+        const cpfSemFormatacao = form.cpf.replace(/[.\-]/g, "");
+
         const dadosParaEnviar = {
-            data: {
-                ...form,
-                localizacao_funcionario: null,
-                data_admissao: new Date().toLocaleString("pt-BR"), // DATA ATUAL
-                data_ultimo_login: null,
-            },
+            ...form,
+            cpf: cpfSemFormatacao,
+            localizacao_funcionario: null,
+            data_admissao: new Date().toISOString(),
+            data_ultimo_login: null,
         };
 
         console.log("Enviando dados:", dadosParaEnviar);
@@ -75,13 +86,20 @@ export default function Page() {
         }
     };
 
+    const maskCPF = (value) => {
+        return value
+            .replace(/\D/g, "")
+            .replace(/(\d{3})(\d)/, "$1.$2")
+            .replace(/(\d{3})(\d)/, "$1.$2")
+            .replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+    };
+
     return (
         <ProtectRoute perfisPermitidos={["master", "gestor", "vendedor"]}>
             <div className={styles.mainDiv}>
                 <h1>Cadastro de funcionários</h1>
                 <div className={styles.mainContainer}>
                     <form onSubmit={handleSubmit}>
-
                         <div className={styles.textgroup}>
                             <label className={styles.inputtitle}>Nome:</label>
                             <input
@@ -93,7 +111,6 @@ export default function Page() {
                                 required
                             />
                         </div>
-
 
                         <div className={styles.textgroup}>
                             <label className={styles.inputtitle}>Gênero:</label>
@@ -116,7 +133,9 @@ export default function Page() {
                         </div>
 
                         <div className={styles.textgroup}>
-                            <label className={styles.inputtitle}>Endereço:</label>
+                            <label className={styles.inputtitle}>
+                                Endereço:
+                            </label>
                             <input
                                 className={styles.input2}
                                 type="text"
@@ -127,7 +146,9 @@ export default function Page() {
                         </div>
 
                         <div className={styles.textgroup}>
-                            <label className={styles.inputtitle}>Telefone:</label>
+                            <label className={styles.inputtitle}>
+                                Telefone:
+                            </label>
                             <input
                                 className={styles.input2}
                                 type="text"
@@ -138,7 +159,6 @@ export default function Page() {
                             />
                         </div>
 
-     
                         <div className={styles.textgroup}>
                             <label className={styles.inputtitle}>Cargo:</label>
                             <input
@@ -150,7 +170,6 @@ export default function Page() {
                             />
                         </div>
 
-    
                         <div className={styles.textgroup}>
                             <label className={styles.inputtitle}>E-mail:</label>
                             <input
@@ -163,7 +182,6 @@ export default function Page() {
                             />
                         </div>
 
-       
                         <div className={styles.textgroup}>
                             <label className={styles.inputtitle}>Senha:</label>
                             <input
@@ -177,7 +195,9 @@ export default function Page() {
                         </div>
 
                         <div className={styles.textgroup}>
-                            <label className={styles.inputtitle}>É gerente?</label>
+                            <label className={styles.inputtitle}>
+                                É gerente?
+                            </label>
                             <input
                                 type="checkbox"
                                 checked={form.gerente_ID === 1}
@@ -197,7 +217,7 @@ export default function Page() {
                                 type="text"
                                 name="cpf"
                                 value={form.cpf}
-                                onChange={handleChange}
+                                onChange={handleChangeCPF}
                                 maxLength="14"
                                 placeholder="000.000.000-00"
                                 required
@@ -205,7 +225,9 @@ export default function Page() {
                         </div>
 
                         <div className={styles.textgroup}>
-                            <label className={styles.inputtitle}>Data de Nascimento:</label>
+                            <label className={styles.inputtitle}>
+                                Data de Nascimento:
+                            </label>
                             <input
                                 className={styles.input2}
                                 type="date"
