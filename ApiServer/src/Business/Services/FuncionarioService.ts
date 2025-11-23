@@ -55,6 +55,7 @@ export class FuncionarioService {
             senha_hash: data.senha_hash,
             localizacao_funcionario: "",
             gerente_ID: data.gerente,
+            
         });
         return await this.funcionarioRepo.save(novoFuncionario);
     }

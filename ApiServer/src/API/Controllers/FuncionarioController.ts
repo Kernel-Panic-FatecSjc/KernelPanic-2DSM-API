@@ -36,20 +36,23 @@ export class FuncionarioController {
     static async postFuncionario(req: Request, res: Response) {
         try {
             const {
-                funcionario_ID,
                 nome,
                 genero,
                 endereco,
                 numero_telefone,
                 cargo,
                 email,
+                senha_hash,
                 localizacao_funcionario,
                 gerente,
-                senha_hash,
+                cpf,
+                data_admissao,
+                data_nascimento,
+                data_ultimo_login
+
             } = req.body;
 
             const novoFuncionario = {
-                funcionario_ID,
                 nome,
                 genero,
                 endereco,
@@ -59,6 +62,10 @@ export class FuncionarioController {
                 senha_hash,
                 localizacao_funcionario,
                 gerente,
+                cpf,
+                data_admissao,
+                data_nascimento,
+                data_ultimo_login
             };
 
 
