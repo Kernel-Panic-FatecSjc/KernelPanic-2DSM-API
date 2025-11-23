@@ -57,10 +57,10 @@ export class Funcionario {
   @Column({ name: "numero_telefone", type: "varchar", length: 20 })
   numero_telefone!: string;
 
-  @Column({ name: "cargo", type: "varchar", length: 50 }) // ===== Cargo =====
+  @Column({ name: "cargo", type: "varchar", length: 50 }) 
   cargo!: string;
 
-  @Column({ name: "email", type: "varchar", length: 50 }) // ===== Email =====
+  @Column({ name: "email", type: "varchar", length: 50 })
   email!: string;
 
   @Column({ name: "senha_hash", type: "varchar", length: 255 }) // ===== Hash da senha =====
@@ -68,6 +68,9 @@ export class Funcionario {
 
   @Column({ name: "localizacao_funcionario", type: "varchar", length: 100 }) // ===== Localização =====
   localizacao_funcionario!: string;
+
+  @Column({ name: "data_ultimo_login", type: "varchar", length: 100 }) // ===== Localização =====
+  data_ultimo_login!: string;
 
   // ===== Relação ManyToMany: perfis de acesso =====
   @ManyToMany(() => PerfilEntity, (perfil) => perfil.funcionarios)

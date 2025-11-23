@@ -202,6 +202,7 @@ CREATE TABLE `Funcionario` (
   `cpf` varchar(11) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `data_admissao` datetime DEFAULT NULL,
   `data_nascimento` date DEFAULT NULL,
+  `data_ultimo_login` datetime DEFAULT NULL,
   PRIMARY KEY (`funcionario_ID`),
   UNIQUE KEY `IDX_0e2ca5f6f89d0a834ee47c195f` (`email`),
   UNIQUE KEY `unique_cpf` (`cpf`),
@@ -216,8 +217,33 @@ CREATE TABLE `Funcionario` (
 
 LOCK TABLES `Funcionario` WRITE;
 /*!40000 ALTER TABLE `Funcionario` DISABLE KEYS */;
-INSERT INTO `Funcionario` VALUES (1,'Carlos Silva','Masculino','Rua A, 123','11999999999','Gerente de Vendas','carlos@empresa.com','$2b$10$MFzYXnHP3r4sURVJvahPvOGAaeFKDxlYDF.yvHF5VCAty8JLG5ZIi','São Paulo',NULL,'12345678901','2023-01-15 09:00:00','1990-05-20'),(2,'Ana Oliveira','Feminino','Rua B, 456','11888888888','Vendedor','ana@empresa.com','$2b$10$MFzYXnHP3r4sURVJvahPvOGAaeFKDxlYDF.yvHF5VCAty8JLG5ZIi','São Paulo',1,'98765432100','2023-02-01 09:00:00','1992-08-15'),(3,'João Souza','Masculino','Rua C, 789','11777777777','Consultor','joao@empresa.com','$2b$10$MFzYXnHP3r4sURVJvahPvOGAaeFKDxlYDF.yvHF5VCAty8JLG5ZIi','Rio de Janeiro',1,'11122233344','2023-03-10 09:00:00','1988-12-30');
-/*!40000 ALTER TABLE `Funcionario` ENABLE KEYS */;
+INSERT INTO Funcionario (
+    funcionario_ID,
+    nome,
+    genero,
+    endereco,
+    numero_telefone,
+    cargo,
+    email,
+    senha_hash,
+    localizacao_funcionario,
+    gerente_ID,
+    cpf,
+    data_admissao,
+    data_nascimento,
+    data_ultimo_login
+) VALUES
+(1, 'Carlos Silva', 'Masculino', 'Rua A, 123', '11999999999', 'Gerente de Vendas',
+ 'carlos@empresa.com', '$2b$10$MFzYXnHP3r4sURVJvahPvOGAaeFKDxlYDF.yvHF5VCAty8JLG5ZIi',
+ 'escritorio', NULL, '12345678901', '2023-01-15 09:00:00', '1990-05-20', NULL),
+
+(2, 'Ana Oliveira', 'Feminino', 'Rua B, 456', '11888888888', 'Vendedor',
+ 'ana@empresa.com', '$2b$10$MFzYXnHP3r4sURVJvahPvOGAaeFKDxlYDF.yvHF5VCAty8JLG5ZIi',
+ 'evento', 1, '98765432100', '2023-02-01 09:00:00', '1992-08-15', NULL),
+
+(3, 'João Souza', 'Masculino', 'Rua C, 789', '11777777777', 'Consultor',
+ 'joao@empresa.com', '$2b$10$MFzYXnHP3r4sURVJvahPvOGAaeFKDxlYDF.yvHF5VCAty8JLG5ZIi',
+ 'evento', 1, '11122233344', '2023-03-10 09:00:00', '1988-12-30', NULL);/*!40000 ALTER TABLE `Funcionario` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
