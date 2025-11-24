@@ -39,6 +39,7 @@
   border-radius: 30px;
   width: 170px;
   height: 50px;
+  margin-left: 38%;
 }
 
 .iconCargo {
@@ -85,7 +86,6 @@
   display: flex;
   margin: 15px 0;
   padding: 10px;
-  background: #f8f9fa;
   border-radius: 10px;
 }
 
@@ -131,4 +131,88 @@
 
 .btnFechar:hover {
   background: #b81439;
+}
+
+@media (max-width: 1000px) {
+  .titulo {
+    margin-top: 40px;
+  }
+
+  .containerCards {
+    grid-template-columns: 1fr;
+  }
+
+  .funcionarioWrapper {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .funcionarioCargo {
+    margin-left: 0;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .btnAvaliacao {
+    width: 100%;
+  }
+
+  .cards {
+    padding: 15px;
+  }
+
+  .modal {
+    width: 80%;
+  }
+}
+
+@media (max-width: 600px) {
+  .tituloEvento {
+    font-size: 18px;
+  }
+
+  .funcionarioCargo {
+    height: 45px;
+  }
+
+  .btnAvaliacao {
+    height: 45px;
+    font-size: 13px;
+  }
+
+  .iconCargo,
+  .iconLer {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+@media (max-width: 430px) {
+  .container {
+    padding: 10px;
+  }
+
+  .cards {
+    padding: 12px;
+  }
+
+  .funcionarioWrapper {
+    gap: 6px;
+  }
+
+  .funcionarioCargo,
+  .btnAvaliacao {
+    height: 42px;
+    font-size: 12px;
+  }
+
+  .modal {
+    width: 90%;
+    padding: 18px;
+  }
+
+  .avaliacaoTexto {
+    font-size: 14px;
+    padding: 12px;
+  }
 }
