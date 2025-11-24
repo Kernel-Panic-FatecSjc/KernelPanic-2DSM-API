@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
-import { Bar, Doughnut, Line } from 'react-chartjs-2';
+import React, { useState, useEffect } from "react";
+import axios from "axios";   
+import { Bar, Doughnut, Line } from "react-chartjs-2";
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -12,10 +13,10 @@ import {
     Legend,
     ArcElement,
     LineElement,
-    PointElement
-} from 'chart.js';
+    PointElement,
+} from "chart.js";
 
-import styles from './App.module.css';
+import styles from "./App.module.css";
 
 ChartJS.register(
     CategoryScale,
@@ -38,84 +39,162 @@ export default function GraficoPage() {
         "#6DC6FF",
         "#87DBFF",
         "#9EEFFF",
-        "#B6FFFF"
+        "#B6FFFF",
     ];
 
-    const [filtroTempo, setFiltroTempo] = useState('mes');
-    const [vendasDados, setVendasDados] = useState({ labels: [], datasets: [] });
-    const [interacoesDados, setInteracoesDados] = useState({ labels: [], datasets: [] });
-    const [clientesCadastradosDados, setClientesCadastradosDados] = useState({ labels: [], datasets: [] });
-    const [clientesPorCidadeDados, setClientesPorCidadeDados] = useState({ labels: [], datasets: [] });
+    const [filtroTempo, setFiltroTempo] = useState("mes");
+    const [vendasDados, setVendasDados] = useState({
+        labels: [],
+        datasets: [],
+    });
+    const [interacoesDados, setInteracoesDados] = useState({
+        labels: [],
+        datasets: [],
+    });
+    const [clientesCadastradosDados, setClientesCadastradosDados] = useState({
+        labels: [],
+        datasets: [],
+    });
+    const [clientesPorCidadeDados, setClientesPorCidadeDados] = useState({
+        labels: [],
+        datasets: [],
+    });
     const [opcoesGrafico, setOpcoesGrafico] = useState({});
 
     useEffect(() => {
-        const gerarDados = (filtro) => {
-            let vendasLabels = [];
+    const gerarDados = async (filtro) => {
+        try {
+            const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+            const response = await axios.get(`${apiUrl}/vendedor`);
+            const vendas = response.data;
+
+            console.log("VENDAS:", vendas);
+
+
+            let labels = [];
             let vendasData = [];
-            let vendasTitulo = '';
-            switch (filtro) {
-                case 'dia':
-                    vendasLabels = ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom']; vendasData = [10, 15, 20, 18, 25, 30, 22]; vendasTitulo = 'Vendas por Dia'; break;
-                case 'mes':
-                    vendasLabels = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Sep', 'Out', 'Nov', 'Dez']; vendasData = [65, 59, 80, 81, 56, 75, 69, 45, 78, 53, 23, 76]; vendasTitulo = 'Vendas por Mês'; break;
-                case 'ano':
-                    vendasLabels = ['2022', '2023', '2024']; vendasData = [800, 950, 1200]; vendasTitulo = 'Vendas por Ano'; break;
-                default: break;
+            let clientesData = [];
+
+            if (filtro === "dia") {
+                labels = ["Seg", "Ter", "Qua", "Qui", "Sex", "Sáb", "Dom"];
+                vendasData = Array(7).fill(0);
+                clientesData = Array(7).fill(0);
+
+                vendas.forEach(v => {
+                    const dia = new Date(v.data_venda).getDay(); 
+                    const valor = parseFloat(v.valor_total) || 0;
+
+                    const idx = dia === 0 ? 6 : dia - 1;
+                    vendasData[idx] += valor;
+                    clientesData[idx] += 1;
+                });
             }
+
+            if (filtro === "mes") {
+                labels = ["Jan","Fev","Mar","Abr","Mai","Jun","Jul","Ago","Set","Out","Nov","Dez"];
+                vendasData = Array(12).fill(0);
+                clientesData = Array(12).fill(0);
+
+                vendas.forEach(v => {
+                    const mes = new Date(v.data_venda).getMonth();
+                    const valor = parseFloat(v.valor_total) || 0;
+
+                    vendasData[mes] += valor;
+                    clientesData[mes] += 1;
+                });
+            }
+
+            if (filtro === "ano") {
+                const anos = {};
+                
+                vendas.forEach(v => {
+                    const ano = new Date(v.data_venda).getFullYear();
+                    const valor = parseFloat(v.valor_total) || 0;
+
+                    anos[ano] = anos[ano] || { vendas: 0, clientes: 0 };
+                    anos[ano].vendas += valor;
+                    anos[ano].clientes += 1;
+                });
+
+                labels = Object.keys(anos);
+                vendasData = labels.map(a => anos[a].vendas);
+                clientesData = labels.map(a => anos[a].clientes);
+            }
+
             setVendasDados({
-                labels: vendasLabels, datasets: [{ label: vendasTitulo, data: vendasData, backgroundColor: coresFunil[0] + '99' }]
+                labels,
+                datasets: [
+                    {
+                        label: "Vendas",
+                        data: vendasData,
+                        backgroundColor: coresFunil[0] + "99",
+                    },
+                ],
             });
 
-            let interacoesLabels = [];
-            let interacoesData = [];
-            let interacoesTitulo = 'Interações';
-            switch (filtro) {
-                case 'dia':
-                    interacoesLabels = ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom']; interacoesData = [15, 20, 18, 25, 30, 22, 19]; break;
-                case 'mes':
-                    interacoesLabels = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Sep', 'Out', 'Nov', 'Dez']; interacoesData = [90, 85, 100, 95, 110, 120, 100, 80, 60, 54, 43, 21]; break;
-                case 'ano':
-                    interacoesLabels = ['2022', '2023', '2024']; interacoesData = [500, 750, 900]; break;
-                default: break;
-            }
+
+            const interacoesMap = {};
+
+            vendas.forEach(v => {
+                const nome = v.funcionario?.nome || "Desconhecido";
+                interacoesMap[nome] = (interacoesMap[nome] || 0) + 1;
+            });
+
             setInteracoesDados({
-                labels: interacoesLabels, datasets: [{ label: interacoesTitulo, data: interacoesData, borderColor: coresFunil[1], backgroundColor: coresFunil[6] }]
+                labels: Object.keys(interacoesMap),
+                datasets: [
+                    {
+                        label: "Interações por Vendedor",
+                        data: Object.values(interacoesMap),
+                        borderColor: coresFunil[1],
+                        backgroundColor: coresFunil[6],
+                    },
+                ],
+            });
+
+            const cidadeMap = {};
+
+            vendas.forEach(v => {
+                const cidade = v.cliente?.endereco || "Indefinido";
+                cidadeMap[cidade] = (cidadeMap[cidade] || 0) + 1;
             });
 
             setClientesPorCidadeDados({
-                labels: ['São Paulo', 'Rio de Janeiro', 'Belo Horizonte', 'Porto Alegre'],
-                datasets: [{
-                    label: 'Clientes por Cidade',
-                    data: [300, 150, 100, 80],
-                    backgroundColor: [coresFunil[0], coresFunil[2], coresFunil[4], coresFunil[6]],
-                    hoverBackgroundColor: [coresFunil[0], coresFunil[2], coresFunil[4], coresFunil[6]]
-                }]
+                labels: Object.keys(cidadeMap),
+                datasets: [
+                    {
+                        label: "Clientes por Cidade",
+                        data: Object.values(cidadeMap),
+                        backgroundColor: [
+                            coresFunil[0],
+                            coresFunil[2],
+                            coresFunil[4],
+                            coresFunil[6],
+                        ],
+                    },
+                ],
             });
 
             setClientesCadastradosDados({
-                labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Sep', 'Out', 'Nov', 'Dez'],
-                datasets: [{
-                    label: 'Clientes Cadastrados',
-                    data: [10, 25, 40, 55, 70, 85, 45, 65, 34, 65, 65, 34],
-                    borderColor: coresFunil[2],
-                    backgroundColor: coresFunil[2] + '33',
-                    fill: true
-                }]
+                labels,
+                datasets: [
+                    {
+                        label: "Clientes Cadastrados",
+                        data: clientesData,
+                        borderColor: coresFunil[2],
+                        backgroundColor: coresFunil[2] + "33",
+                        fill: true,
+                    },
+                ],
             });
 
-            setOpcoesGrafico({
-                responsive: true,
-                plugins: {
-                    legend: { position: 'top' },
-                    title: { display: true, text: `Relatório de ${filtro}` },
-                },
-                scales: { y: { beginAtZero: true } },
-            });
-        };
+        } catch (error) {
+            console.error("Erro ao buscar dados do dashboard:", error);
+        }
+    };
 
-        gerarDados(filtroTempo);
-
-    }, [filtroTempo]);
+    gerarDados(filtroTempo);
+}, [filtroTempo]);
 
     return (
         <div className={styles.paginaGrafico}>
@@ -123,18 +202,33 @@ export default function GraficoPage() {
 
             <div className={styles.filtroContainer}>
                 <button
-                    className={filtroTempo === 'dia' ? styles.filtroAtivo : styles.filtroBotao}
-                    onClick={() => setFiltroTempo('dia')}>
+                    className={
+                        filtroTempo === "dia"
+                            ? styles.filtroAtivo
+                            : styles.filtroBotao
+                    }
+                    onClick={() => setFiltroTempo("dia")}
+                >
                     Dia
                 </button>
                 <button
-                    className={filtroTempo === 'mes' ? styles.filtroAtivo : styles.filtroBotao}
-                    onClick={() => setFiltroTempo('mes')}>
+                    className={
+                        filtroTempo === "mes"
+                            ? styles.filtroAtivo
+                            : styles.filtroBotao
+                    }
+                    onClick={() => setFiltroTempo("mes")}
+                >
                     Mês
                 </button>
                 <button
-                    className={filtroTempo === 'ano' ? styles.filtroAtivo : styles.filtroBotao}
-                    onClick={() => setFiltroTempo('ano')}>
+                    className={
+                        filtroTempo === "ano"
+                            ? styles.filtroAtivo
+                            : styles.filtroBotao
+                    }
+                    onClick={() => setFiltroTempo("ano")}
+                >
                     Ano
                 </button>
             </div>
@@ -142,22 +236,55 @@ export default function GraficoPage() {
             <div className={styles.gridGraficos}>
                 <div className={styles.graficoCard}>
                     <h2>Vendas</h2>
-                    <Bar data={vendasDados} options={{ ...opcoesGrafico, plugins: { title: { display: true, text: 'Vendas' } } }} />
+                    <Bar
+                        data={vendasDados}
+                        options={{
+                            ...opcoesGrafico,
+                            plugins: {
+                                title: { display: true, text: "Vendas" },
+                            },
+                        }}
+                    />
                 </div>
 
                 <div className={styles.graficoCard}>
                     <h2>Interações</h2>
-                    <Line data={interacoesDados} options={{ ...opcoesGrafico, plugins: { title: { display: true, text: 'Interações' } } }} />
+                    <Line
+                        data={interacoesDados}
+                        options={{
+                            ...opcoesGrafico,
+                            plugins: {
+                                title: { display: true, text: "Interações" },
+                            },
+                        }}
+                    />
                 </div>
 
                 <div className={styles.graficoCard}>
                     <h2>Clientes por Cidade</h2>
-                    <Doughnut data={clientesPorCidadeDados} options={{ ...opcoesGrafico, scales: { y: { display: false } } }} />
+                    <Doughnut
+                        data={clientesPorCidadeDados}
+                        options={{
+                            ...opcoesGrafico,
+                            scales: { y: { display: false } },
+                        }}
+                    />
                 </div>
 
                 <div className={styles.graficoCard}>
                     <h2>Clientes Cadastrados</h2>
-                    <Line data={clientesCadastradosDados} options={{ ...opcoesGrafico, plugins: { title: { display: true, text: 'Clientes Cadastrados' } } }} />
+                    <Line
+                        data={clientesCadastradosDados}
+                        options={{
+                            ...opcoesGrafico,
+                            plugins: {
+                                title: {
+                                    display: true,
+                                    text: "Clientes Cadastrados",
+                                },
+                            },
+                        }}
+                    />
                 </div>
             </div>
         </div>
