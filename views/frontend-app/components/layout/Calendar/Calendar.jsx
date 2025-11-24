@@ -42,7 +42,7 @@ const CalendarComponent = () => {
                 ...prevArray,
                 ...eventosConvertidos,
             ]);
-        } catch (err) {}
+        } catch (err) { }
     };
 
     const handleSalvar = async () => {
@@ -76,27 +76,29 @@ const CalendarComponent = () => {
     }, []);
 
     return (
-        <div className={styles.container}>
-            <FullCalendar
-                plugins={[timeGridPlugin, interactionPlugin, listPlugin]}
-                initialView="timeGridWeek"
-                slotMinTime="08:00:00"
-                slotMaxTime="19:00:00"
-                height={800}
-                headerToolbar={{
-                    left: "",
-                    center: "title",
-                    right: "prev,next today timeGridWeek,timeGridDay,listWeek",
-                }}
-                locale="pt-br"
-                events={arrayLembretes}
-                selectable={false}
-                selectMirror={false}
-                allDaySlot={false}
-                slotDuration="01:00:00"
-                slotLabelInterval="01:00:00"
-                dayMaxEvents={true}
-            />
+        <div>
+            <div className={styles.container}>
+                <FullCalendar
+                    plugins={[timeGridPlugin, interactionPlugin, listPlugin]}
+                    initialView="timeGridWeek"
+                    slotMinTime="08:00:00"
+                    slotMaxTime="19:00:00"
+                    height="auto"
+                    headerToolbar={{
+                        left: "",
+                        center: "title",
+                        right: "prev,next today timeGridWeek,timeGridDay,listWeek",
+                    }}
+                    locale="pt-br"
+                    events={arrayLembretes}
+                    selectable={false}
+                    selectMirror={false}
+                    allDaySlot={false}
+                    slotDuration="01:00:00"
+                    slotLabelInterval="01:00:00"
+                    dayMaxEvents={true}
+                />
+            </div>
 
             <button
                 onClick={() => setShowModal(true)}
@@ -148,11 +150,10 @@ const CalendarComponent = () => {
                                     <button
                                         key={tag}
                                         onClick={() => setSelectedTag(tag)}
-                                        className={`${styles.tagButton} ${
-                                            selectedTag === tag
-                                                ? styles.selected
-                                                : ""
-                                        }`}
+                                        className={`${styles.tagButton} ${selectedTag === tag
+                                            ? styles.selected
+                                            : ""
+                                            }`}
                                     >
                                         {tag}
                                     </button>

@@ -3,6 +3,7 @@
   border: 1px solid #e0e0e0;
   border-radius: 8px;
   overflow: hidden;
+  margin-bottom: 40px;
 }
 
 .pageTitle {
@@ -127,9 +128,9 @@
 }
 
 .addButton {
-  position: fixed;
-  bottom: 20px;
+  position: absolute;
   right: 20px;
+  bottom: 40px;
   width: 60px;
   height: 60px;
   background-color: #1F4AF4;
@@ -263,4 +264,158 @@
   cursor: pointer;
   font-weight: 500;
   font-family: Arial, sans-serif;
+}
+
+/* RESPONSIVIDADE */
+
+@media (max-width: 768px) {
+  .pageTitle {
+    font-size: 32px;
+    margin-top: 1rem;
+    margin-bottom: 20px;
+  }
+
+  .container {
+    border-radius: 4px;
+    margin-bottom: 30px;
+  }
+
+  .container :global(.fc-toolbar) {
+    padding: 10px;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .container :global(.fc-toolbar-chunk) {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .container :global(.fc-button) {
+    font-size: 12px !important;
+    padding: 6px 10px !important;
+  }
+
+  .container :global(.fc-toolbar-title) {
+    font-size: 18px !important;
+  }
+
+  .container :global(.fc-timegrid-axis) {
+    width: 60px !important;
+  }
+
+  .container :global(.fc-col-header-cell) {
+    padding: 10px 5px !important;
+    font-size: 12px !important;
+  }
+
+  .container :global(.fc-timegrid-slot-label) {
+    font-size: 12px !important;
+  }
+
+  .addButton {
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+    bottom: 30px;
+    right: 15px;
+  }
+
+  .modalContent {
+    width: 90vw;
+    padding: 20px;
+  }
+
+  .modalTitle {
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+
+  .input,
+  .textarea {
+    font-size: 16px;
+    padding: 10px;
+  }
+
+  .tagsContainer {
+    gap: 8px;
+  }
+
+  .tagButton {
+    font-size: 11px;
+    padding: 6px 12px;
+  }
+
+  .buttonContainer {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .cancelButton,
+  .saveButton {
+    width: 100%;
+    padding: 10px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .pageTitle {
+    font-size: 24px;
+    margin-bottom: 15px;
+  }
+
+  .container {
+    margin-bottom: 20px;
+  }
+
+  .container :global(.fc-toolbar-title) {
+    font-size: 14px !important;
+  }
+
+  .container :global(.fc-button) {
+    font-size: 10px !important;
+    padding: 4px 8px !important;
+  }
+
+  .container :global(.fc-timegrid-axis) {
+    width: 50px !important;
+  }
+
+  .container :global(.fc-col-header-cell) {
+    padding: 8px 3px !important;
+    font-size: 10px !important;
+  }
+
+  .container :global(.fc-timegrid-slot-label) {
+    font-size: 10px !important;
+    padding-right: 4px !important;
+  }
+
+  .container :global(.fc-event) {
+    font-size: 10px !important;
+  }
+
+  .addButton {
+    width: 45px;
+    height: 45px;
+    font-size: 18px;
+    bottom: 20px;
+  }
+
+  .modalContent {
+    padding: 15px;
+  }
+
+  .modalTitle {
+    font-size: 18px;
+  }
+
+  .label {
+    font-size: 14px;
+  }
+
+  .input,
+  .textarea {
+    font-size: 14px;
+  }
 }
