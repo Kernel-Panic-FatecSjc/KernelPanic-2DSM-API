@@ -1,3 +1,6 @@
+create database newe_database;
+use newe_database;
+
 -- MySQL dump 10.13  Distrib 8.0.44, for Linux (x86_64)
 --
 -- Host: localhost    Database: newe_database
@@ -97,7 +100,11 @@ CREATE TABLE `Cliente` (
 
 LOCK TABLES `Cliente` WRITE;
 /*!40000 ALTER TABLE `Cliente` DISABLE KEYS */;
-INSERT INTO `Cliente` VALUES (2,'Empresa Beta','Av. Rio Branco, 200','Metalúrgia',3,4),(7,'Empresa Alpha','Rua Alguma Coisa','Atuações',2,2),(11,'Empresa Z','Rua da Empresa Y','Vendas',1,7),(13,'Guarana Dolly','iuhiuhi','iuiniu',2,2);
+INSERT INTO `Cliente` VALUES 
+(2, 'TechNova S.A.', 'Av. Rio Branco, 200', 'Metalúrgia', 3, 4),
+(7, 'AlfaCorp Ltda.', 'Rua das Flores, 150', 'Consultoria', 2, 2),
+(11, 'VendasPrime EIRELI', 'Rua da Empresa Y, 45', 'Comércio', 1, 7),
+(13, 'Solux Indústria Ltda.', 'Av. Central, 300', 'Energia', 2, 2);
 /*!40000 ALTER TABLE `Cliente` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -243,7 +250,30 @@ INSERT INTO Funcionario (
 
 (3, 'João Souza', 'Masculino', 'Rua C, 789', '11777777777', 'Consultor',
  'joao@empresa.com', '$2b$10$MFzYXnHP3r4sURVJvahPvOGAaeFKDxlYDF.yvHF5VCAty8JLG5ZIi',
- 'evento', 1, '11122233344', '2023-03-10 09:00:00', '1988-12-30', NULL);/*!40000 ALTER TABLE `Funcionario` ENABLE KEYS */;
+ 'evento', 1, '11122233344', '2023-03-10 09:00:00', '1988-12-30', NULL);
+ 
+INSERT INTO Funcionario (
+    funcionario_ID,
+    nome,
+    genero,
+    endereco,
+    numero_telefone,
+    cargo,
+    email,
+    senha_hash,
+    localizacao_funcionario,
+    gerente_ID,
+    cpf,
+    data_admissao,
+    data_nascimento,
+    data_ultimo_login
+) VALUES
+(4, 'Carlos Silva', 'Masculino', 'Rua A, 123', '1199999', 'Gerente de Vendas',
+ 'vitor@empresa.com', '$2b$10$MFzYXnHP3r4sURVJvahPvOGAaeFKDxlYDF.yvHF5VCAty8JLG5ZIi',
+ 'ferias', NULL, '12378901', '2023-01-15 09:00:00', '1990-05-20', NULL);
+
+ 
+ /*!40000 ALTER TABLE `Funcionario` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -530,7 +560,7 @@ CREATE TABLE `Vendas` (
 
 LOCK TABLES `Vendas` WRITE;
 /*!40000 ALTER TABLE `Vendas` DISABLE KEYS */;
-INSERT INTO `Vendas` VALUES (2,'2025-09-16 03:00:00',3200.00,'Manutencao',2,3);
+INSERT INTO `Vendas` VALUES (2,'2025-09-16 03:00:00',3200.00,'Manutencao',2,2);
 /*!40000 ALTER TABLE `Vendas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -597,3 +627,42 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2025-11-22 22:22:34
+
+INSERT INTO Funcionario (
+    nome, genero, endereco, numero_telefone, cargo, email, senha_hash,
+    localizacao_funcionario, gerente_ID, cpf, data_admissao, data_nascimento, data_ultimo_login
+) VALUES
+('Mariana Costa', 'Feminino', 'Rua D, 987', '11988887777', 'Vendedor',
+ 'mariana@empresa.com', '$2b$10$MFzYXnHP3r4sURVJvahPvOGAaeFKDxlYDF.yvHF5VCAty8JLG5ZIi',
+ 'escritorio', 1, '22233344455', '2024-01-12 09:00:00', '1995-03-11', NULL),
+
+('Ricardo Mendes', 'Masculino', 'Rua E, 654', '11977776666', 'Vendedor',
+ 'ricardo@empresa.com', '$2b$10$MFzYXnHP3r4sURVJvahPvOGAaeFKDxlYDF.yvHF5VCAty8JLG5ZIi',
+ 'escritorio', 1, '55566677788', '2024-02-20 09:00:00', '1989-09-08', NULL),
+
+('Fernanda Lima', 'Feminino', 'Rua F, 321', '11966665555', 'Vendedor',
+ 'fernanda@empresa.com', '$2b$10$MFzYXnHP3r4sURVJvahPvOGAaeFKDxlYDF.yvHF5VCAty8JLG5ZIi',
+ 'escritorio', 1, '99988877766', '2024-03-05 09:00:00', '1993-12-21', NULL);
+ 
+ INSERT INTO funcionario_perfis (funcionario_ID, perfil_ID) VALUES
+((SELECT funcionario_ID FROM Funcionario WHERE email='mariana@empresa.com'), 2),
+((SELECT funcionario_ID FROM Funcionario WHERE email='ricardo@empresa.com'), 2),
+((SELECT funcionario_ID FROM Funcionario WHERE email='fernanda@empresa.com'), 2);
+
+INSERT INTO Vendas (data_venda, valor_total, status, cliente_ID, funcionario_ID) VALUES
+('2025-10-12 10:30:00', 1500.00, 'Manutencao', 7,
+ (SELECT funcionario_ID FROM Funcionario WHERE email='mariana@empresa.com')),
+
+('2025-10-15 14:10:00', 4800.00, 'Vendas', 2,
+ (SELECT funcionario_ID FROM Funcionario WHERE email='ricardo@empresa.com')),
+
+('2025-10-18 09:00:00', 2200.00, 'FollowUp', 11,
+ (SELECT funcionario_ID FROM Funcionario WHERE email='fernanda@empresa.com')),
+
+('2025-10-20 16:40:00', 3500.00, 'Negociacao', 13,
+ (SELECT funcionario_ID FROM Funcionario WHERE email='ana@empresa.com')),
+
+('2025-10-22 11:25:00', 900.00, 'Potencial', 7,
+ (SELECT funcionario_ID FROM Funcionario WHERE email='joao@empresa.com'));
+ 
+
