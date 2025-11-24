@@ -6,7 +6,7 @@ import styles from "./App.module.css";
 import axios from "axios";
 
 export default function GestaoFormularios() {
-    const apiUrl = process.env.REACT_APP_API_URL || process.env.VITE_API_URL || 'http://localhost:5000';
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
 
     const [formularios, setFormularios] = useState([
         { id: 1, nome: 'Cotação', area: 'Comercial', destaque: true, icone: 'document', respostas: [], tipo: "cotacao" },

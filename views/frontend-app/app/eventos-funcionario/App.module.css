@@ -425,3 +425,128 @@
 .estrelaAtiva:hover {
     transform: scale(1.2);
 }
+
+@media (max-width: 1024px) {
+  .conteudo {
+    padding: 20px;
+  }
+
+  .conteudoPagina {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .card {
+    width: 100%;
+  }
+
+  .navCustom {
+    width: 100%;
+    max-width: 420px;
+  }
+
+  :global(.rdp-day_button),
+  :global(.rdp-day) {
+    height: 50px !important;
+    width: 50px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .titulo {
+    font-size: 22px;
+    text-align: center;
+    margin-top: 40px;
+  }
+
+  .conteudoPagina {
+    flex-direction: column;
+  }
+
+  .card {
+    width: 100%;
+  }
+
+  .navCustom {
+    width: 100%;
+    padding: 0 10px;
+  }
+
+  .calendarTitle {
+    font-size: 18px;
+  }
+
+  .eventInfo {
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .buttons {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .confirm,
+  .reject {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .filtrosContainer {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .filtroInputWrapper {
+    width: 100%;
+  }
+
+  .buttonVerRespostas {
+    width: 100%;
+  }
+
+  .modalBox {
+    width: 90%;
+  }
+
+  .modalBoxExcluir {
+    width: 85%;
+  }
+}
+
+@media (max-width: 480px) {
+  .conteudo {
+    padding: 0;
+  }
+
+  .titulo {
+    font-size: 20px;
+    margin-bottom: 15px;
+  }
+
+  .calendarContainer {
+    padding: 10px 0;
+  }
+
+  .navCustom {
+    max-width: 300px;
+  }
+
+  .calendarButton {
+    width: 32px;
+    height: 32px;
+  }
+
+  .calendarButton img {
+    width: 12px;
+    height: 12px;
+  }
+
+  :global(.rdp-day_button),
+  :global(.rdp-day) {
+    height: 40px !important;
+    width: 40px !important;
+    font-size: 14px !important;
+  }
+
+}

@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { AuthService } from "../../Business/Services/AuthService";
+import { FuncionarioService } from "../../Business/Services/FuncionarioService";
 
 export class AuthController {
   private authService: AuthService;
@@ -20,6 +21,10 @@ export class AuthController {
 
     try {
       const resultado = await this.authService.login({ email, senha });
+
+      const funcionario = new FuncionarioService()
+
+      funcionario.atualizarUltimoLogin(email)
 
       return res.status(200).json(resultado);
     } catch (error: any) {

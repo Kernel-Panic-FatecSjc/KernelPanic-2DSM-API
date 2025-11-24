@@ -111,3 +111,56 @@
 .btnFechar:hover {
   background: #b81439;
 }
+
+@media (max-width: 900px) {
+  .container {
+    margin-top: 40px;
+  }
+  
+  .containerCards {
+    grid-template-columns: 1fr;
+  }
+
+  .funcionarioWrapper {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .funcionarioCargo {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .btnJustificativa {
+    width: 100%;
+  }
+
+  .cards {
+    padding: 15px;
+  }
+}
+
+@media (max-width: 500px) {
+  .tituloEvento {
+    font-size: 18px;
+  }
+
+  .funcionarioCargo {
+    height: 45px;
+  }
+
+  .btnJustificativa {
+    height: 45px;
+    font-size: 13px;
+  }
+
+  .iconCargo,
+  .iconLer {
+    width: 24px;
+    height: 24px;
+  }
+
+  .modal {
+    width: 90%;
+  }
+}

@@ -10,6 +10,7 @@ import { title } from "process";
 function LateralBar() {
   const [tab, setTab] = useState("login");
   const [expandedMenus, setExpandedMenus] = useState({});
+  const [menuAberto, setMenuAberto] = useState(false);
   const router = useRouter();
   const { user, isAuthenticated } = useAuth();
   const perfisDoUsuario = user?.perfis || [];
@@ -25,6 +26,7 @@ function LateralBar() {
     setTab(id);
     if (!isParent && route) {
       router.push(route);
+      setMenuAberto(false);
     }
   };
 
@@ -62,10 +64,10 @@ function LateralBar() {
       submenus: [
         { id: "avaliacao-eventos", title: "Avaliação de Eventos", route: "", perfisPermitidos: ["master", "gestor"], iconInactive: "/images/iconeavaliacao.svg", iconActive: "/images/iconeavaliacaobranco.svg" }, //EVENTOS - avaliação do evento
         { id: "justificativa-eventos", title: "Justificativas", route: "", perfisPermitidos: ["master", "gestor"], iconInactive: "/images/iconrecusa.svg", iconActive: "/images/iconrecusabranco.svg" }, //EVENTOS - justifica da recusa do evento
-        { id: "cadastro-funcionarios", title: "Cadastro de Funcionários", route: "", perfisPermitidos: ["master", "gestor"], iconInactive: "/images/iconefuncionario.svg", iconActive: "/images/iconefuncionariobranco.svg" }, //FUNCIONARIO - cadastro
+        { id: "cadastro-funcionarios", title: "Cadastro de Funcionários", route: "/cadastro-funcionarios", perfisPermitidos: ["master", "gestor"], iconInactive: "/images/iconefuncionario.svg", iconActive: "/images/iconefuncionariobranco.svg" }, //FUNCIONARIO - cadastro
         { id: "calendario", title: "Calendário", route: "", perfisPermitidos: ["master", "gestor"], iconInactive: "/images/iconcalendatio.svg", iconActive: "/images/iconecalendariobranco.svg" }, //FUNCIONARIO - eventos
         { id: "eventos", title: "Eventos", route: "", perfisPermitidos: ["master", "gestor"], iconInactive: "/images/iconinteracoes.svg", iconActive: "/images/iconinteracoesbranco.svg" }, //GESTOR - eventos
-        { id: "gestao-localizacao", title: "Gestão de Localização", route: "", perfisPermitidos: ["master", "gestor"], iconInactive: "/images/iconelocalizacao.svg", iconActive: "/images/iconelocazalicaobranco.svg" }, //LOCALIZAÇÃO - dashboard
+        { id: "gestao-localizacao", title: "Gestão de Localização", route: "/localizacao-funcionarios", perfisPermitidos: ["master", "gestor"], iconInactive: "/images/iconelocalizacao.svg", iconActive: "/images/iconelocazalicaobranco.svg" }, //LOCALIZAÇÃO - dashboard
         //BONUS{ id: "certificados", title: "Certificados", route: "", perfisPermitidos: ["master", "gestor"], iconInactive: "/images/iconecertificado.svg", iconActive: "/images/iconecertificadosbranco.svg" }, CERTIFICADOS
       ],
     },
@@ -95,7 +97,7 @@ function LateralBar() {
       submenus: [
         { id: "area-agregado", title: "Área do Agregado", route: "/pagina-agregado", perfisPermitidos: [], iconInactive: "/images/iconeagregado.svg", iconActive: "/images/iconeagregadobranco.svg" },
         { id: "gestao-formularios", title: "Gestão de Formulários", route: "/gestaoFormularios", perfisPermitidos: ["master", "gestor"], iconInactive: "/images/iconechecklist.svg", iconActive: "/images/iconechecklistbranco.svg" },
-        { id: "checklists-formularios", title: "Checklists e Formulários", route: "/checklists", perfisPermitidos: [], iconActive: "/images/iconechecklistbranco (2).svg", iconInactive: "/images/iconechecklist (2).svg"},
+        { id: "checklists-formularios", title: "Checklists e Formulários", route: "/checklists", perfisPermitidos: [], iconActive: "/images/iconechecklistbranco (2).svg", iconInactive: "/images/iconechecklist (2).svg" },
         // BONUS { id: "gestao-motoristas", title: "Gestão dos Motoristas", route: "", perfisPermitidos: ["master", "gestor"], iconInactive: "/images/iconOperacional.svg", iconActive: "/images/iconOperacionalbranco.svg"}, OPERACIONAL - motoristas
       ],
     },
@@ -106,7 +108,7 @@ function LateralBar() {
       perfisPermitidos: ["master", "gestor"],
       iconInactive: "/images/iconedashboard.svg",
       iconActive: "/images/iconedashboardbranco.svg",
-      route: "", //PAGINA dashboards
+      route: "/dashboardPagina",
     },
 
     {
@@ -142,7 +144,37 @@ function LateralBar() {
 
   return (
     <div className={styles.boxglobal}>
-      <aside className={styles.barralateral}>
+      {!menuAberto && (
+        <button
+          type="button"
+          className={styles.hamburgerButton}
+          onClick={() => setMenuAberto(!menuAberto)}
+          aria-label="Menu"
+        >
+          <div className={styles.hamburgerIcon}>
+            <span className={styles.hamburgerLine}></span>
+            <span className={styles.hamburgerLine}></span>
+            <span className={styles.hamburgerLine}></span>
+          </div>
+        </button>
+      )}
+
+      <aside className={`${styles.barralateral} ${menuAberto ? styles.barralateralAberta : ''}`}>
+        {menuAberto && (
+          <button
+            type="button"
+            className={`${styles.hamburgerButton} ${styles.hamburgerButtonExpandido}`}
+            onClick={() => setMenuAberto(!menuAberto)}
+            aria-label="Menu"
+          >
+            <div className={styles.hamburgerIcon}>
+              <span className={styles.hamburgerLine}></span>
+              <span className={styles.hamburgerLine}></span>
+              <span className={styles.hamburgerLine}></span>
+            </div>
+          </button>
+        )}
+
         <div className={styles.topArea}>
           <Image
             src="/images/logoneweglobal.jpg"
@@ -191,8 +223,6 @@ function LateralBar() {
                         .sort((a, b) => a.title.localeCompare(b.title, "pt-BR"))
                         .map((s) => {
                           const submenuAtivo = tab === s.id;
-
-                          // SUBITENS com icones próprios
                           const iconInactive = s.iconInactive ?? menu.iconInactive;
                           const iconActive = s.iconActive ?? menu.iconActive;
 
@@ -230,4 +260,3 @@ function LateralBar() {
 }
 
 export default LateralBar;
-
