@@ -549,3 +549,23 @@
     width: 300px;
     height: 50px;
 }
+
+.cargoSelecionado {
+    background-color: #e0e0e0;
+    border: 2px solid #007bff;
+    transform: scale(1.05);
+}
+
+.cargosSelecionadosInfo {
+    margin: 10px 0;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.cargosContador {
+    font-size: 0.9em;
+    color: #666;
+    margin-top: 5px;
+}
