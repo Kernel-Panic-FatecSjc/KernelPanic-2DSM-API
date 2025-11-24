@@ -6,26 +6,6 @@ import axios from "axios";
 
 const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
-const funcionariosMocados = [
-    {
-        id: 1,
-        nome: "Carlos Silva",
-        permissao: "Carregando...",
-        email: "carlos@empresa.com",
-    },
-    {
-        id: 2,
-        nome: "Ana Oliveira",
-        permissao: "Carregando...",
-        email: "ana@empresa.com",
-    },
-    {
-        id: 3,
-        nome: "João Souza",
-        permissao: "Carregando...",
-        email: "joao@empresa.com",
-    },
-];
 
 const PERFIL_MAP = {
     master: 1,
@@ -36,7 +16,7 @@ const PERFIL_MAP = {
 function Gerenciamento() {
     const [modalOpen, setModalOpen] = useState(false);
     const [funcionarioSelecionado, setFuncionarioSelecionado] = useState(null);
-    const [funcionarios, setFuncionarios] = useState(funcionariosMocados);
+    const [funcionarios, setFuncionarios] = useState([]);
     const [cargoSelecionado, setCargoSelecionado] = useState("");
     const [isSaving, setIsSaving] = useState(false);
 
@@ -148,7 +128,7 @@ function Gerenciamento() {
                                 <strong>Funcionário:</strong> {f.nome}
                             </p>
                             <p>
-                                <strong>Nível de permissão: </strong>
+                                <strong>Cargo: </strong>
                                 {f.cargo}
                             </p>
                             <button
