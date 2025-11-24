@@ -21,6 +21,10 @@ const emailCadastroRoutes = require("./API/Routes/emailAgregadoRoute");
 const funcionarioPerfilRoutes = require("./API/Routes/FuncionarioPerfilRoutes")
 const funcionarioRoutes = require("./API/Routes/FuncionarioRoutes")
 const eventoFuncionario = require("./API/Routes/EventoFuncionarioRoutes")
+const eventoGestor = require("./API/Routes/eventoGestorRoute")
+const eventoAval = require("./API/Routes/avaliacaoRoutes")
+const eventoRecusa = require("./API/Routes/recusaRoutes")
+const eventoResp = require("./API/Routes/RespostaRoutes")
 
 const app = express(); 
 
@@ -54,6 +58,10 @@ app.use("/api/email", emailCadastroRoutes);
 app.use("/api/funcionarios", funcionarioPerfilRoutes);
 app.use("/funcionario", funcionarioRoutes)
 app.use("/eventoFunc", eventoFuncionario)
+app.use("/eventoGestor",eventoGestor)
+app.use("/eventoAval", eventoAval)
+app.use("/eventoRecusa", eventoRecusa)
+app.use("/eventoResp", eventoResp)
 
 iniciarCron();
 
