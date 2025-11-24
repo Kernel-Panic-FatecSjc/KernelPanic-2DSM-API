@@ -61,6 +61,7 @@ export default function Page() {
 
             const response = await axios.get(`${apiUrl}/vendedor`);
             const vendas = response.data;
+            console.log(vendas);
 
             const mapa = new Map();
 
@@ -81,16 +82,34 @@ export default function Page() {
 
                 const vendedor = mapa.get(id);
                 vendedor.visitas += 1;
+                vendedor.faturamento += valorVenda;
 
-                if (status === "Fechada") {
+                if (status === "Vendas") {
                     vendedor.vendas += 1;
-                    vendedor.faturamento += valorVenda;
                 }
             });
 
             setVendedores(Array.from(mapa.values()));
         } catch (err) {
             console.error("Erro ao carregar vendedores:", err);
+
+            const vendedoresMock = [
+                { nome: "Jose", visitas: 45, vendas: 28, faturamento: 125000 },
+                {
+                    nome: "Daniele",
+                    visitas: 38,
+                    vendas: 22,
+                    faturamento: 98000,
+                },
+                { nome: "Frida", visitas: 52, vendas: 35, faturamento: 156000 },
+                { nome: "Amy", visitas: 30, vendas: 18, faturamento: 78000 },
+                { nome: "Hanna", visitas: 41, vendas: 25, faturamento: 110000 },
+                { nome: "Pink", visitas: 48, vendas: 31, faturamento: 142000 },
+                { nome: "Mingau", visitas: 35, vendas: 20, faturamento: 89000 },
+                { nome: "Lola", visitas: 50, vendas: 33, faturamento: 148000 },
+            ];
+
+            setVendedores(vendedoresMock);
         }
     };
 
@@ -105,9 +124,9 @@ export default function Page() {
     const totalVisitas = vendedores.reduce((total, v) => total + v.visitas, 0);
     const totalVendas = vendedores.reduce((total, v) => total + v.vendas, 0);
     const taxaConversaoGeral =
-        totalVisitas > 0
-            ? ((totalVendas / totalVisitas) * 100).toFixed(2)
-            : "0";
+    totalVisitas > 0
+        ? ((totalVendas / totalVisitas) * 100).toFixed(2)
+        : "0";
     const totalFaturamento = vendedores.reduce(
         (total, v) => total + v.faturamento,
         0
@@ -115,102 +134,106 @@ export default function Page() {
 
     return (
         <ProtectRoute>
-        <div className={styles.container}>
-            <div className={styles.cardsContainer}>
-                <div className={styles.card}>
-                    <h2>{taxaConversaoGeral}%</h2>
-                    <p>Taxa de conversão Geral%</p>
-                </div>
-                <div className={styles.card}>
-                    <h2>{totalVisitas}</h2>
-                    <p>Visitas comerciais</p>
-                </div>
-                <div className={styles.card}>
-                    <h2>{totalVendas}</h2>
-                    <p>Vendas fechadas</p>
-                </div>
-                <div className={styles.card}>
-                    <h2>
-                        {totalFaturamento.toLocaleString("pt-BR", {
-                            style: "currency",
-                            currency: "BRL",
-                        })}
-                    </h2>
-                    <p>Faturamento</p>
-                </div>
-            </div>
-
-            <div className={styles.desempenhoVendedores}>
-                <div className={styles.desempenhoHeader}>
-                    <h1>Desempenho de vendedores</h1>
-                    <div className={styles.filtro}>
-                        <Select
-                            instanceId="filtro-mes"
-                            options={opcoesMes}
-                            styles={Styles}
-                            placeholder="Mês"
-                            value={mesSelecionado}
-                            onChange={setMesSelecionado}
-                        />
-                        <Select
-                            instanceId="filtro-ano"
-                            options={opcoesAno}
-                            styles={Styles}
-                            placeholder="Ano"
-                            value={anoSelecionado}
-                            onChange={setAnoSelecionado}
-                        />
-                        <input
-                            type="text"
-                            placeholder="Vendedor..."
-                            className={styles.inputVendedor}
-                            value={vendedorSelecionado}
-                            onChange={(e) =>
-                                setVendedorSelecionado(e.target.value)
-                            }
-                        />
+            <div className={styles.container}>
+                <div className={styles.cardsContainer}>
+                    <div className={styles.card}>
+                        <h2>{taxaConversaoGeral}%</h2>
+                        <p>Taxa de conversão Geral%</p>
+                    </div>
+                    <div className={styles.card}>
+                        <h2>{totalVisitas}</h2>
+                        <p>Visitas comerciais</p>
+                    </div>
+                    <div className={styles.card}>
+                        <h2>{totalVendas}</h2>
+                        <p>Vendas fechadas</p>
+                    </div>
+                    <div className={styles.card}>
+                        <h2>
+                            {totalFaturamento.toLocaleString("pt-BR", {
+                                style: "currency",
+                                currency: "BRL",
+                            })}
+                        </h2>
+                        <p>Faturamento</p>
                     </div>
                 </div>
 
-                <table className={styles.tabelaDesempenho}>
-                    <thead>
-                        <tr>
-                            <th>Vendedor</th>
-                            <th>Visitas</th>
-                            <th>Vendas</th>
-                            <th>Taxa de conversão</th>
-                            <th>Faturamento (R$)</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {filterVendedor.map((v, index) => {
-                            const taxa =
-                                v.visitas > 0
-                                    ? ((v.vendas / v.visitas) * 100).toFixed(
-                                          2
-                                      ) + "%"
-                                    : "0%";
-                            return (
-                                <tr key={index}>
-                                    <td className={styles.nomeVendedor}>
-                                        {v.nome}
-                                    </td>
-                                    <td>{v.visitas}</td>
-                                    <td>{v.vendas}</td>
-                                    <td>{taxa}</td>
-                                    <td>
-                                        {v.faturamento.toLocaleString("pt-BR", {
-                                            style: "currency",
-                                            currency: "BRL",
-                                        })}
-                                    </td>
-                                </tr>
-                            );
-                        })}
-                    </tbody>
-                </table>
+                <div className={styles.desempenhoVendedores}>
+                    <div className={styles.desempenhoHeader}>
+                        <h1>Desempenho de vendedores</h1>
+                        <div className={styles.filtro}>
+                            <Select
+                                instanceId="filtro-mes"
+                                options={opcoesMes}
+                                styles={Styles}
+                                placeholder="Mês"
+                                value={mesSelecionado}
+                                onChange={setMesSelecionado}
+                            />
+                            <Select
+                                instanceId="filtro-ano"
+                                options={opcoesAno}
+                                styles={Styles}
+                                placeholder="Ano"
+                                value={anoSelecionado}
+                                onChange={setAnoSelecionado}
+                            />
+                            <input
+                                type="text"
+                                placeholder="Vendedor..."
+                                className={styles.inputVendedor}
+                                value={vendedorSelecionado}
+                                onChange={(e) =>
+                                    setVendedorSelecionado(e.target.value)
+                                }
+                            />
+                        </div>
+                    </div>
+
+                    <table className={styles.tabelaDesempenho}>
+                        <thead>
+                            <tr>
+                                <th>Vendedor</th>
+                                <th>Visitas</th>
+                                <th>Vendas</th>
+                                <th>Taxa de conversão</th>
+                                <th>Faturamento (R$)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {filterVendedor.map((v, index) => {
+                                const taxa =
+                                    v.visitas > 0
+                                        ? (
+                                              (v.vendas / v.visitas) *
+                                              100
+                                          ).toFixed(2) + "%"
+                                        : "0%";
+                                return (
+                                    <tr key={index}>
+                                        <td className={styles.nomeVendedor}>
+                                            {v.nome}
+                                        </td>
+                                        <td>{v.visitas}</td>
+                                        <td>{v.vendas}</td>
+                                        <td>{taxa}</td>
+                                        <td>
+                                            {v.faturamento.toLocaleString(
+                                                "pt-BR",
+                                                {
+                                                    style: "currency",
+                                                    currency: "BRL",
+                                                }
+                                            )}
+                                        </td>
+                                    </tr>
+                                );
+                            })}
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </div>
         </ProtectRoute>
     );
 }

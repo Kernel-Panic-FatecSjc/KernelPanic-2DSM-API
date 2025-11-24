@@ -1,21 +1,16 @@
 .conteudo {
+  background-color: #ffff;
+  font-family: 'Poppins', 'Inter', sans-serif;
+  min-height: 100vh;
+  padding: 2rem;
   display: flex;
   justify-content: center;
-  align-items: center;
-  height: 100%;
-  background-color: #f5f5f5;
+  align-items: flex-start;
 }
 
 .container-gestao {
-  width: 95%;
-  max-width: 100vw;
-  min-width: 600px;
-  height: 95%;
-  background: white;
-  padding: 40px;
-  border-radius: 12px;
-  display: flex;
-  flex-direction: column;
+  max-width: 1280px;
+  width: 100%;
 }
 
 .header {
@@ -31,16 +26,11 @@
 }
 
 .titulo {
-  font-size: 32px;
+  font-size: 50px;
   font-weight: 600;
-  color: #000;
+  color: #1F4AF4;
   margin: 0;
-}
-
-.subtitulo {
-  font-size: 14px;
-  color: #999;
-  margin-top: 5px;
+  font-family: Arial, sans-serif;
 }
 
 .headerRight {
@@ -59,15 +49,15 @@
 }
 
 .statNumber.total {
-  color: #5932EA;
+  color: #2A49EB;
 }
 
 .statNumber.pendente {
-  color: #7B8CDE;
+  color: #5AA6FA;
 }
 
 .statNumber.ativo {
-  color: #7B8CDE;
+  color: #4686F5;
 }
 
 .statLabel {
@@ -99,6 +89,7 @@
   padding: 12px 15px 12px 40px;
   width: 300px;
   font-size: 14px;
+  font-family: 'Poppins', sans-serif;
   background-image: url('/images/lupa.png');
   background-repeat: no-repeat;
   background-position: 12px center;
@@ -107,11 +98,11 @@
 
 .pesquisa:focus {
   outline: none;
-  border-color: #5932EA;
+  border-color: #2A49EB;
 }
 
 .addButton {
-  background-color: #5932EA;
+  background-color: #2A49EB;
   color: white;
   border: none;
   border-radius: 10px;
@@ -121,10 +112,11 @@
   cursor: pointer;
   transition: background-color 0.3s ease;
   white-space: nowrap;
+  font-family: 'Poppins', sans-serif;
 }
 
 .addButton:hover {
-  background-color: #4527c7;
+  background-color: #3366F0;
 }
 
 .sortDropdown {
@@ -134,6 +126,7 @@
   color: #333;
   padding: 12px 35px 12px 15px;
   font-size: 14px;
+  font-family: 'Poppins', sans-serif;
   cursor: pointer;
   appearance: none;
   background-image: url('/images/seta.png');
@@ -144,7 +137,7 @@
 
 .sortDropdown:focus {
   outline: none;
-  border-color: #5932EA;
+  border-color: #2A49EB;
 }
 
 .cardsContainer {
@@ -153,20 +146,25 @@
   gap: 25px;
   overflow-y: auto;
   padding: 10px 5px;
-  max-height: calc(100% - 200px);
+  max-height: calc(100vh - 300px);
 }
 
 .cardsContainer::-webkit-scrollbar {
   width: 8px;
 }
 
-.cardsContainer::-webkit-scrollbar-thumb {
-  background-color: rgba(0, 0, 0, 0.2);
-  border-radius: 4px;
+.cardsContainer::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
 }
 
-.cardsContainer::-webkit-scrollbar-track {
-  background: transparent;
+.cardsContainer::-webkit-scrollbar-thumb {
+  background: #1f4af4;
+  border-radius: 10px;
+}
+
+.cardsContainer::-webkit-scrollbar-thumb:hover {
+  background: #5AA6FA;
 }
 
 .clientCard {
@@ -193,12 +191,14 @@
   font-weight: 600;
   color: #000;
   margin: 0 0 5px 0;
+  font-family: 'Poppins', sans-serif;
 }
 
 .clientInfo p {
   font-size: 14px;
   color: #999;
   margin: 0;
+  font-family: 'Poppins', sans-serif;
 }
 
 .statusBadge {
@@ -206,21 +206,22 @@
   border-radius: 6px;
   font-size: 12px;
   font-weight: 500;
+  font-family: 'Poppins', sans-serif;
 }
 
 .statusBadge.pendente {
-  background-color: #FFF4E6;
-  color: #FFA500;
+  background-color: #E3F2FD;
+  color: #5AA6FA;
 }
 
 .statusBadge.ativo {
   background-color: #E8F5E9;
-  color: #16C098;
+  color: #4686F5;
 }
 
 .statusBadge.concluido {
-  background-color: #E3F2FD;
-  color: #2196F3;
+  background-color: #E0F2FE;
+  color: #2A49EB;
 }
 
 .cardDetails {
@@ -241,12 +242,14 @@
   color: #999;
   text-transform: uppercase;
   margin-bottom: 5px;
+  font-family: 'Poppins', sans-serif;
 }
 
 .detailValue {
   font-size: 14px;
   color: #333;
   font-weight: 500;
+  font-family: 'Poppins', sans-serif;
 }
 
 .cardActions {
@@ -256,7 +259,7 @@
 
 .btnDetalhes {
   flex: 1;
-  background-color: #5932EA;
+  background-color: #4686F5;
   color: white;
   border: none;
   border-radius: 8px;
@@ -269,16 +272,17 @@
   align-items: center;
   justify-content: center;
   gap: 6px;
+  font-family: 'Poppins', sans-serif;
 }
 
 .btnDetalhes:hover {
-  background-color: #4527c7;
+  background-color: #5AA6FA;
 }
 
 .btnEditar {
   flex: 1;
-  background-color: #f5f5f5;
-  color: #333;
+  background-color: #6DC6FF;
+  color: white;
   border: none;
   border-radius: 8px;
   padding: 10px;
@@ -290,10 +294,11 @@
   align-items: center;
   justify-content: center;
   gap: 6px;
+  font-family: 'Poppins', sans-serif;
 }
 
 .btnEditar:hover {
-  background-color: #e8e8e8;
+  background-color: #87DBFF;
 }
 
 .btnExcluir {
@@ -305,13 +310,13 @@
   font-size: 14px;
   cursor: pointer;
   transition: all 0.3s ease;
+  font-family: 'Poppins', sans-serif;
 }
 
 .btnExcluir:hover {
   background-color: #ffebee;
   color: #f44336;
 }
-
 
 .modalAddOverlay {
   position: fixed;
@@ -358,10 +363,38 @@
   transform: scale(1.1);
 }
 
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.modalContent {
+  background: #fff;
+  padding: 40px 50px;
+  border-radius: 16px;
+  width: 600px;
+  max-width: 90%;
+  max-height: 85vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.25);
+  animation: slideUp 0.3s ease-out;
+}
+
 .modalContent h2 {
   margin-bottom: 20px;
   font-size: 1.4rem;
-  color: #5932EA;
+  color: #2A49EB;
+  font-family: 'Poppins', sans-serif;
 }
 
 .modalContent label {
@@ -369,6 +402,7 @@
   margin: 10px 0 5px;
   font-weight: 500;
   color: #333;
+  font-family: 'Poppins', sans-serif;
 }
 
 .inputText,
@@ -383,12 +417,13 @@
   outline: none;
   font-size: 14px;
   transition: border 0.2s ease;
+  font-family: 'Poppins', sans-serif;
 }
 
 .inputText:focus,
 .selectInput:focus {
-  border: 1px solid #5932EA;
-  box-shadow: 0 0 4px rgba(89, 50, 234, 0.3);
+  border: 1px solid #2A49EB;
+  box-shadow: 0 0 4px rgba(42, 73, 235, 0.3);
 }
 
 .botao {
@@ -401,12 +436,13 @@
   font-size: 14px;
   color: white;
   transition: background-color 0.3s ease;
-  background-color: #5932EA;
+  background-color: #2A49EB;
   margin-top: 10px;
+  font-family: 'Poppins', sans-serif;
 }
 
 .botao:hover {
-  background-color: #4527c7;
+  background-color: #3366F0;
 }
 
 @keyframes fadeIn {
@@ -431,34 +467,6 @@
   }
 }
 
-/* MODAL para adicionar cliente */
-.modalAddOverlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-  animation: fadeIn 0.3s ease-in-out;
-}
-
-.modalAddContent {
-  background: #fff;
-  padding: 40px 50px;
-  border-radius: 16px;
-  width: 600px;
-  max-width: 90%;
-  max-height: 90vh;
-  overflow-y: auto;
-  position: relative;
-  box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.25);
-  animation: slideUp 0.3s ease-out;
-}
-
 .modalAddContent::-webkit-scrollbar {
   width: 8px;
 }
@@ -474,6 +482,7 @@
   margin-bottom: 15px;
   text-align: center;
   color: #000;
+  font-family: 'Poppins', sans-serif;
 }
 
 .modalAddContent .subtitle {
@@ -482,6 +491,7 @@
   color: #666;
   margin-bottom: 30px;
   line-height: 1.5;
+  font-family: 'Poppins', sans-serif;
 }
 
 .formGroup {
@@ -496,6 +506,7 @@
   margin-bottom: 8px;
   font-size: 16px;
   color: #333;
+  font-family: 'Poppins', sans-serif;
 }
 
 .formInput,
@@ -509,12 +520,13 @@
   transition: all 0.3s ease;
   background-color: white;
   color: #000;
+  font-family: 'Poppins', sans-serif;
 }
 
 .formInput:focus,
 .formSelect:focus {
-  border-color: #5932EA;
-  box-shadow: 0 0 0 3px rgba(89, 50, 234, 0.15);
+  border-color: #2A49EB;
+  box-shadow: 0 0 0 3px rgba(42, 73, 235, 0.15);
 }
 
 .buttonGroup {
@@ -533,11 +545,12 @@
   font-size: 16px;
   color: white;
   transition: background-color 0.3s ease;
-  background-color: #5932EA;
+  background-color: #2A49EB;
+  font-family: 'Poppins', sans-serif;
 }
 
 .btnSubmit:hover {
-  background-color: #4527c7;
+  background-color: #3366F0;
 }
 
 .btnCancel {
@@ -551,9 +564,108 @@
   color: #666;
   background-color: white;
   transition: all 0.3s ease;
+  font-family: 'Poppins', sans-serif;
 }
 
 .btnCancel:hover {
   background-color: #f5f5f5;
   border-color: #999;
+}
+
+/*RESPONSIVIDADE*/
+@media (max-width: 768px) {
+  .conteudo {
+    padding: 1rem;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .conteudo::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .conteudo::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+  }
+
+  .conteudo::-webkit-scrollbar-thumb {
+    background: #1f4af4;
+    border-radius: 10px;
+  }
+
+  .conteudo::-webkit-scrollbar-thumb:hover {
+    background: #5AA6FA;
+  }
+
+  .container-gestao {
+    width: 100%;
+  }
+
+  .titulo {
+    font-size: 32px;
+  }
+
+  .header {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .headerRight {
+    width: 100%;
+    justify-content: space-between;
+    gap: 15px;
+  }
+
+  .statCard {
+    text-align: center;
+  }
+
+  .searchContainer {
+    flex-direction: column;
+  }
+
+  .leftControls {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .pesquisa {
+    width: 100%;
+  }
+
+  .addButton {
+    width: 100%;
+  }
+
+  .sortDropdown {
+    width: 100%;
+  }
+
+  .cardsContainer {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    max-height: none;
+    overflow-y: visible;
+  }
+
+  .cardActions {
+    flex-direction: column;
+  }
+
+  .btnDetalhes,
+  .btnEditar,
+  .btnExcluir {
+    width: 100%;
+  }
+
+  .modalAddContent,
+  .modalContent {
+    width: 95%;
+    padding: 30px 20px;
+  }
+
+  .buttonGroup {
+    flex-direction: column;
+  }
 }

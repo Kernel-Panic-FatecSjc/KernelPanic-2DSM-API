@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useState } from 'react'
-import styles from './App.module.css'; 
+import styles from './App.module.css';
 
 const CalculadoraCotacao = () => {
   const [veiculo, setVeiculo] = useState("");
@@ -9,6 +9,7 @@ const CalculadoraCotacao = () => {
   const [ajudante, setAjudante] = useState("");
   const [avValorem, setAvValorem] = useState("");
   const [gris, setGris] = useState("");
+  const [cliente, setCliente] = useState("");
   const [valorFinal, setValorFinal] = useState(null);
 
   const tabelaBase = {
@@ -90,19 +91,28 @@ const CalculadoraCotacao = () => {
       ajudante: ajudante || 0,
       avValorem: avValorem || 0,
       gris: gris || 0,
+      cliente: cliente,
       valorFinal: valorFinal
     };
 
     console.log('Dados salvos:', dados);
-    
-    // AQUI rota para salvar
-    // window.location.href = `/rota-para-salvar?valor=${valorFinal}&veiculo=${veiculo}`;
   };
-  
+
   return (
     <div className={styles.calculadoraContainer}>
       <div className={styles.calculadoraContent}>
-        
+
+        <div className={styles.formGroup}>
+          <label className={styles.formLabel}>Cliente</label>
+          <input
+            type="text"
+            value={cliente}
+            onChange={(e) => setCliente(e.target.value)}
+            placeholder="Digite o nome do Cliente"
+            className={styles.formInput}
+          />
+        </div>
+
         <div className={styles.calculadoraRow}>
           <div className={styles.formGroup}>
             <label className={styles.formLabel}>Veículo</label>

@@ -9,7 +9,7 @@
   margin-bottom: 20px;
 }
 
-.tittle{
+.tittle {
   color: #1f4af4;
   margin-bottom: 25px;
   text-align: left;
@@ -151,7 +151,8 @@
   transition: 0.3s;
 }
 
-.buttonHistorico, .buttonHistoricoOver{
+.buttonHistorico,
+.buttonHistoricoOver {
   margin: 0 4px;
   padding: 1rem 2rem;
   border: none;
@@ -215,14 +216,162 @@
 
 .tableHistorico th,
 .tableHistorico td {
-  border: none; 
+  border: none;
   padding: 8px 12px;
 }
 
 .tableHistorico tr {
-  border-bottom: 1px solid #ddd; 
+  border-bottom: 1px solid #ddd;
 }
 
 .tableHistorico thead tr {
   border-bottom: 2px solid black;
+}
+
+.funnel-bar {
+  height: 2rem;
+  border-radius: 6px;
+  color: white;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px;
+  transition: width 0.5s;
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 1.5rem;
+  }
+
+  .tittle {
+    font-size: 32px;
+    margin-bottom: 20px;
+  }
+
+  .filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .filters select,
+  .filters button {
+    margin: 0;
+    flex: 1 1 auto;
+    min-width: 120px;
+  }
+
+  .kanban {
+    flex-direction: column;
+    max-height: none;
+    gap: 20px;
+  }
+
+  .column {
+    width: 100%;
+  }
+
+  .card {
+    height: auto;
+    max-height: 300px;
+  }
+
+  .buttonHistorico,
+  .buttonHistoricoOver {
+    padding: 0.8rem 1.5rem;
+    font-size: 14px;
+  }
+
+  .modalContent {
+    width: 95%;
+    padding: 1.5rem;
+  }
+
+  .tableHistorico th,
+  .tableHistorico td {
+    padding: 6px 8px;
+    font-size: 14px;
+  }
+
+  .funnel-bar {
+    font-size: 14px;
+    padding: 0 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 1rem;
+  }
+
+  .tittle {
+    font-size: 24px;
+    margin-bottom: 15px;
+  }
+
+  .filters select,
+  .filters button {
+    width: 100%;
+    min-width: auto;
+  }
+
+  .card {
+    max-height: 250px;
+  }
+
+  .cardHeader {
+    padding: 12px 15px;
+    font-size: 14px;
+  }
+
+  .cardBody {
+    padding: 15px;
+    font-size: 13px;
+  }
+
+  .clienteCard {
+    padding: 8px;
+  }
+
+  .clienteCard strong {
+    font-size: 14px;
+  }
+
+  .clienteCard div {
+    font-size: 12px;
+  }
+
+  .buttonHistorico,
+  .buttonHistoricoOver {
+    padding: 0.7rem 1.2rem;
+    font-size: 13px;
+  }
+
+  .modalContent {
+    width: 95%;
+    height: 70%;
+    padding: 1rem;
+  }
+
+  .modalContent h2 {
+    font-size: 18px;
+  }
+
+  .tableHistorico {
+    font-size: 12px;
+  }
+
+  .tableHistorico th,
+  .tableHistorico td {
+    padding: 4px 6px;
+  }
+
+  .funnel-bar {
+    height: 1.8rem;
+    font-size: 12px;
+    padding: 0 6px;
+  }
 }

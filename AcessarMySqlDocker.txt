@@ -1,0 +1,12 @@
+1. Verificar se o container está rodando
+2. para conectar como root, coloque no terminal:
+docker exec -it newe-mysql-db mysql -u root -p
+
+3.Tem que digitar a senha, no caso, é "root"
+Mesmo se não "parecer" visualmente que você está digitando, ele digita, basta digitar root e apertar enter
+
+4.SHOW DATABASES; para ver os bancos
+
+5.use newe_database;
+
+6.Agora é só ser feliz

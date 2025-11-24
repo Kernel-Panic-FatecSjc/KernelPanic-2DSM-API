@@ -1,94 +1,118 @@
-.conteudo {
+.container {
+    background-color: #F0F2F5;
+    font-family: 'Poppins', 'Inter', sans-serif;
+    min-height: 100vh;
+    padding: 2rem;
     display: flex;
     justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background-color: #f5f5f5;
-    padding: 20px;
+    align-items: flex-start;
 }
 
-.containerCentral {
-    width: 95%;
-    max-width: 1200px;
-    background-color: white;
-    padding: 40px;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+.content {
+    max-width: 1280px;
+    width: 100%;
 }
 
 .header {
-    margin-bottom: 50px;
+    margin-bottom: 2rem;
 }
 
-.titulo {
+.title {
     font-size: 50px;
     font-weight: 600;
     color: #1F4AF4;
-    margin: 0 0 25px 0;
+    margin-bottom: 25px;
     font-family: Arial, sans-serif;
     text-align: left;
 }
 
-.subtitulo {
-    font-size: 14px;
-    color: #999;
-    margin: 0;
-}
-
-.cardsRow {
+.cardsContainer {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-    gap: 30px;
-    margin-top: 40px;
+    grid-template-columns: repeat(2, 350px);
+    justify-content: flex-start;
+    gap: 40px;
+    max-width: 900px;
+    width: 100%;
 }
 
-.toolCard {
-    background-color: #E8F0FF;
-    border-radius: 16px;
-    padding: 40px 30px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    border: 2px solid #E8F0FF;
-    display: flex;
-    align-items: center;
-    gap: 20px;
-}
-
-.toolCard:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 20px rgba(89, 50, 234, 0.15);
-    border-color: #5932EA;
-}
-
-.cardIcon {
-    width: 70px;
-    height: 70px;
-    background-color: white;
+.iconcontainer {
+    width: 80px;
+    height: 80px;
+    background-color: #e0e9ff;
     border-radius: 50%;
     display: flex;
-    align-items: center;
     justify-content: center;
-    flex-shrink: 0;
+    align-items: center;
+    margin: 0 auto 20px auto;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
 }
 
-.cardContent {
-    flex: 1;
+.iconcontainer img {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
 }
 
-.cardTitle {
-    font-size: 20px;
-    font-weight: 600;
+.card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #fff;
+    border-radius: 16px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    padding: 30px 20px;
+    text-align: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    width: 350px;
+    height: 250px;
+    margin-bottom: 15px;
+    cursor: pointer;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.card h2 {
+    font-size: 22px;
+    font-weight: 400;
     color: #000;
-    margin: 0 0 8px 0;
-}
-
-.cardDescription {
-    font-size: 14px;
-    color: #666;
     margin: 0;
-    line-height: 1.5;
 }
 
+.card button {
+    margin-top: 15px;
+    background-color: #1f4af4;
+    color: #ffffff;
+    font-weight: 600;
+    padding: 10px 22px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+.card button:hover {
+    background-color: #1838c7;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
+}
+
+.card button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.card button:focus {
+    outline: none;
+}
+
+/* ESTILOS DOS MODAIS (MANTIDOS DO ORIGINAL) */
 .modalOverlay {
     position: fixed;
     top: 0;
@@ -156,6 +180,10 @@
     font-size: 14px;
     color: #666;
     margin-bottom: 30px;
+}
+
+.responsiveForm {
+    width: 100%;
 }
 
 .formGroup {
@@ -256,5 +284,58 @@
     to {
         transform: translateY(0);
         opacity: 1;
+    }
+}
+
+/* RESPONSIVIDADE */
+@media (max-width: 1024px) {
+    .container {
+        padding: 1.5rem;
+    }
+
+    .cardsContainer {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+    }
+
+    .card {
+        width: 100%;
+        max-width: 350px;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+
+    .title {
+        font-size: 36px;
+    }
+
+    .cardsContainer {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        justify-content: center;
+    }
+
+    .card {
+        width: 100%;
+        max-width: 350px;
+    }
+
+    .modalContent {
+        width: 95%;
+        padding: 30px 20px;
+        margin: 0 10px;
+    }
+
+    .buttonGroup {
+        flex-direction: column;
+    }
+
+    .buttonGroup button {
+        width: 100%;
+        margin-bottom: 10px;
     }
 }

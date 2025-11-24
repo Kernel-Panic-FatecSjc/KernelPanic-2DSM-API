@@ -27,27 +27,35 @@ ChartJS.register(
 
 export default function Page() {
     const mockFormulariosFuncionarios = [
-        {
-            formulario: "Cadastro de Usuário",
-            data: "25/10/2025",
-            horario: "08:30",
-        },
-        {
-            formulario: "Login de Sistema",
-            data: "24/10/2025",
-            horario: "14:15",
-        },
-        {
-            formulario: "Envio de Relatório",
-            data: "23/10/2025",
-            horario: "09:45",
-        },
-        {
-            formulario: "Atualização de Perfil",
-            data: "22/10/2025",
-            horario: "16:00",
-        },
-    ];
+  { funcionario: "Mariana Costa", formulario: "Cotação", data: "25/10/2025", horario: "08:30" },
+  { funcionario: "Ricardo Mendes", formulario: "Comercial", data: "24/10/2025", horario: "09:15" },
+  { funcionario: "Carlos Silva", formulario: "Gestão da Coleta", data: "22/10/2025", horario: "11:00" },
+  { funcionario: "Ana Oliveira", formulario: "Comercial", data: "21/10/2025", horario: "11:30" },
+  { funcionario: "Mariana Costa", formulario: "Abertura da Empresa", data: "19/10/2025", horario: "08:00" },
+  { funcionario: "Ricardo Mendes", formulario: "Operacional", data: "18/10/2025", horario: "09:30" },
+  { funcionario: "Carlos Silva", formulario: "Fechamento da Empresa", data: "16/10/2025", horario: "12:00" },
+  { funcionario: "Ana Oliveira", formulario: "Manutenção Predial", data: "15/10/2025", horario: "14:30" },
+  { funcionario: "Mariana Costa", formulario: "Checklist Diário", data: "13/10/2025", horario: "08:45" },
+  { funcionario: "Ricardo Mendes", formulario: "Operacional", data: "12/10/2025", horario: "09:50" },
+  { funcionario: "Fernanda Lima", formulario: "Checklist Veículo", data: "11/10/2025", horario: "10:30" },
+  { funcionario: "Carlos Silva", formulario: "Motorista", data: "10/10/2025", horario: "11:15" },
+  { funcionario: "João Souza", formulario: "Cadastro do Motorista", data: "08/10/2025", horario: "15:45" },
+];
+
+const respostasFuncionarioBase = [
+  { funcionario: "Mariana Costa", quantidade: 1 },
+  { funcionario: "Ricardo Mendes", quantidade: 2 },
+  { funcionario: "Fernanda Lima", quantidade: 3 },
+  { funcionario: "Carlos Silva", quantidade: 4 },
+  { funcionario: "Ana Oliveira", quantidade: 5 },
+  { funcionario: "João Souza", quantidade: 6 },
+];
+
+const tiposVeiculoBase = [
+  { tipo: "Carro", quantidade: 5 },
+  { tipo: "Caminhão", quantidade: 2 },
+  { tipo: "Van", quantidade: 2 },
+];
 
     const [respostasFormulario, setRespostasFormulario] = useState(
         mockFormulariosFuncionarios
@@ -64,18 +72,6 @@ export default function Page() {
         return dataItem >= seteDiasAtras;
     }).length;
 
-    const respostasFuncionarioBase = [
-        { funcionario: "Ana Souza", quantidade: 134 },
-        { funcionario: "Carlos Oliveira", quantidade: 98 },
-        { funcionario: "Fernanda Lima", quantidade: 121 },
-        { funcionario: "João Pereira", quantidade: 76 },
-        { funcionario: "Mariana Castro", quantidade: 143 },
-        { funcionario: "Lucas Almeida", quantidade: 89 },
-        { funcionario: "Patrícia Mendes", quantidade: 102 },
-        { funcionario: "Rafael Nunes", quantidade: 110 },
-        { funcionario: "Beatriz Ramos", quantidade: 97 },
-        { funcionario: "Diego Martins", quantidade: 85 },
-    ];
 
     const totalFormularios = respostasFuncionarioBase.reduce(
         (total, item) => total + item.quantidade,
@@ -88,14 +84,7 @@ export default function Page() {
             ((item.quantidade / totalFormularios) * 100).toFixed(1) + "%",
     }));
 
-    const tiposVeiculoBase = [
-        { tipo: "Carro", quantidade: 340 },
-        { tipo: "Moto", quantidade: 210 },
-        { tipo: "Caminhão", quantidade: 85 },
-        { tipo: "Ônibus", quantidade: 42 },
-        { tipo: "Bicicleta", quantidade: 63 },
-        { tipo: "Van", quantidade: 50 },
-    ];
+   
 
     const totalVeiculos = tiposVeiculoBase.reduce(
         (total, item) => total + item.quantidade,
@@ -108,14 +97,14 @@ export default function Page() {
     }));
 
     const dadosPorDia = [
-        { dia: "Segunda", quantidade: 50 },
-        { dia: "Terça", quantidade: 75 },
-        { dia: "Quarta", quantidade: 60 },
-        { dia: "Quinta", quantidade: 90 },
-        { dia: "Sexta", quantidade: 120 },
-        { dia: "Sábado", quantidade: 80 },
-        { dia: "Domingo", quantidade: 40 },
-    ];
+    { dia: "Segunda", quantidade: 5 },
+    { dia: "Terça", quantidade: 7 },
+    { dia: "Quarta", quantidade: 6 },
+    { dia: "Quinta", quantidade: 9 },
+    { dia: "Sexta", quantidade: 8 },
+    { dia: "Sábado", quantidade: 4 },
+    { dia: "Domingo", quantidade: 3 },
+];
 
     const data = {
         labels: dadosPorDia.map((item) => item.dia),
@@ -169,7 +158,7 @@ export default function Page() {
                         </div>
                         <div className={styles.preenchidosTitle}>
                             <h3>Essa Semana</h3>
-                            <h3>{totalPreenchidosSemana}</h3>
+                            <h3>6</h3>
                         </div>
                     </aside>
 
@@ -257,7 +246,7 @@ export default function Page() {
                         </div>
                         <div className={styles.preenchidosTitle}>
                             <h3>Essa Semana</h3>
-                            <h3>{0}</h3>
+                            <h3>{9}</h3>
                         </div>
                     </aside>
 

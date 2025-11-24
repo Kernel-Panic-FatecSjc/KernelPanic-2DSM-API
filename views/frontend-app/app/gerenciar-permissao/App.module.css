@@ -1,3 +1,4 @@
+/* Container geral */
 .container {
   background-color: #f8f9fa;
   min-height: 100vh;
@@ -6,6 +7,7 @@
   color: #111;
 }
 
+/* Título */
 .pageTitle {
   font-size: 50px;
   font-weight: 600;
@@ -16,6 +18,7 @@
   margin-top: 0;
 }
 
+/* Grid de cards */
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -23,6 +26,7 @@
   justify-items: center;
 }
 
+/* Card */
 .card {
   background-color: #ffffff;
   width: 300px;
@@ -47,6 +51,7 @@
   font-size: 15px;
 }
 
+/* Botões */
 .botao {
   align-self: flex-end;
   background-color: #1f4af4;
@@ -63,6 +68,15 @@
   background-color: #6684ff;
 }
 
+.cancelar {
+  background-color: #999;
+}
+
+.cancelar:hover {
+  background-color: #bbb;
+}
+
+/* Modal */
 .overlay {
   position: fixed;
   top: 0;
@@ -82,6 +96,8 @@
   padding: 30px;
   width: 400px;
   max-width: 90%;
+  max-height: 80vh; /* limita altura */
+  overflow-y: auto;  /* permite scroll vertical */
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
   text-align: center;
   animation: aparecer 0.2s ease-in-out;
@@ -92,7 +108,6 @@
     transform: scale(0.95);
     opacity: 0;
   }
-
   to {
     transform: scale(1);
     opacity: 1;
@@ -119,7 +134,7 @@
   font-size: 14px;
 }
 
-.modal input {
+.modal input, .modal select {
   margin-top: 5px;
   padding: 10px;
   border: 1px solid #ccc;
@@ -130,7 +145,7 @@
   outline: none;
 }
 
-.modal input:focus {
+.modal input:focus, .modal select:focus {
   border-color: #1f4af4;
   box-shadow: 0 0 0 2px rgba(31, 74, 244, 0.1);
 }
@@ -142,57 +157,24 @@
   margin-top: 10px;
 }
 
-.modal select {
-  margin-top: 5px;
-  padding: 10px;
+/* Permissões com scroll */
+.permissoesContainer {
+  max-height: 300px; /* altura máxima */
+  overflow-y: auto;
   border: 1px solid #ccc;
+  padding: 10px;
   border-radius: 8px;
-  font-size: 14px;
-  background-color: #f9fbff;
-  color: #111;
-  outline: none;
-  appearance: none;
-  cursor: pointer;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.modal select:focus {
-  border-color: #1f4af4;
-  box-shadow: 0 0 0 2px rgba(31, 74, 244, 0.1);
+/* Categorias */
+.categoria {
+  margin-bottom: 15px;
 }
 
-.modal select option {
-  color: #111;
-  background-color: #fff;
-}
-
-.modal p {
-  margin-top: "5px";
-  font-weight: "500";
-}
-
-.modal select {
-  background-image: url("data:image/svg+xml;charset=US-ASCII,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24'><path fill='%23333' d='M7 10l5 5 5-5z'/></svg>");
-  background-repeat: no-repeat;
-  background-position: right 10px center;
-  background-size: 12px;
-}
-
-.cancelar {
-  background-color: #999;
-}
-
-.cancelar:hover {
-  background-color: #bbb;
-}
-
-.checkboxGroup {
-  width: 100%;
-  max-width: 500px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  margin-bottom: 20px;
+.categoria h4 {
+  margin-bottom: 5px;
+  font-size: 16px;
+  color: #1f4af4;
 }
 
 .checkboxOption {
@@ -201,8 +183,15 @@
   align-items: center;
   margin-top: 8px;
   cursor: pointer;
-  font-size: 17px;
+  font-size: 14px;
   user-select: none;
+}
+
+.checkboxOption label {
+  position: relative;
+  padding-left: 0.2rem; 
+  cursor: pointer;
+    top: 0.18rem; 
 }
 
 .inputcheckbox {
@@ -211,32 +200,15 @@
   cursor: pointer;
 }
 
-.checkboxOption label {
-  position: relative;
-  padding-left: 30px;
-  cursor: pointer;
-}
 
-.checkboxOption label::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 20px;
-  height: 20px;
-  border: 2px solid #9197b3;
-  background-color: #fff;
-  border-radius: 4px;
-  transition: all 0.2s ease;
-}
 
-.inputcheckbox:checked+label::before {
+
+.inputcheckbox:checked + label::before {
   background-color: #1f4af4;
   border-color: #1f4af4;
 }
 
-.inputcheckbox:checked+label::after {
+.inputcheckbox:checked + label::after {
   content: "";
   position: absolute;
   left: 7px;
@@ -249,7 +221,7 @@
 }
 
 @media (max-width: 768px) {
-  .titulo {
+  .pageTitle {
     text-align: center;
   }
 

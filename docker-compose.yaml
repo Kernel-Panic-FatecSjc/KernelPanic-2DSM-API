@@ -1,0 +1,58 @@
+services:
+
+  # 1. Serviço do Backend (API)
+  app:
+    build: ./ApiServer
+    container_name: newe-backend-app
+    ports:
+      - "5000:5000"
+    environment:
+      # Variáveis do Banco
+      DB_HOST: db-mysql
+      DB_USERNAME: root
+      DB_PASSWORD: root
+      DB_DB: newe_database
+      PORT: 5000
+      # Variáveis da Aplicação
+      EMAIL_USER: testenewe1@gmail.com
+      EMAIL_PASS: lqkt hkoj vgso dlxt
+      JWT_SECRET: SuaChaveSecretaSuper32Caracteres
+    depends_on:
+      db-mysql:
+        condition: service_healthy
+    # A linha 'command:' FOI REMOVIDA.
+    # Agora ele usará o CMD padrão do seu Dockerfile ('npm run start')
+
+  # 2. Serviço do Frontend (Views)
+  # (Adicionei este serviço de volta, com base no nosso histórico)
+  frontend:
+    build: ./views
+    container_name: newe-frontend-app
+    ports:
+      - "80:3000"
+    depends_on:
+      - app
+
+  # 3. Serviço do Banco de Dados
+  db-mysql:
+    image: mysql:8.0
+    container_name: newe-mysql-db
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: newe_database
+    ports:
+      - "3307:3306" # <-- CORRIGIDO de 3006 para 3306 (padrão MySQL)
+    volumes:
+      # Volume para persistir os dados (continua o mesmo)
+      - mysql_data:/var/lib/mysql
+      # NOVO: Monta o seu backup .sql no diretório de init do MySQL
+      - ./ApiServer/src/DAL/backupBancoNewe.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost -uroot -proot"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  mysql_data:

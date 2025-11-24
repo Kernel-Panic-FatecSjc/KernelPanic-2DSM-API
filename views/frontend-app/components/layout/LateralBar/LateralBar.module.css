@@ -1,6 +1,33 @@
+:global(*) {
+  transition: none !important;
+}
+
+:global(img) {
+  transition: none !important;
+}
+
+.menuItem,
+.submenuItem,
+.menuItemAtivo,
+.submenuItemAtivo {
+  transition: none !important;
+}
+
+.boxglobal {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-areas: "aside content";
+  height: 100vh;
+}
+
+.conteudo {
+  grid-area: content;
+  background-color: #f4f4f4;
+}
 
 .barralateral {
   grid-area: aside;
+  width: 300px;
   background-color: #ffffff;
   color: #9197B3;
   font-size: 14px;
@@ -8,10 +35,34 @@
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-  gap: 20px;
-  width: 300px;        
-  height: 100vh;  
+  gap: 0px;
+  height: 100vh;
   box-sizing: border-box;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 0px;
+  border-right: 1px solid #eaeaea;
+}
+
+.barralateral::after {
+  content: "";
+  display: block;
+  height: 56px;
+  width: 100%;
+  pointer-events: none;
+}
+
+.topArea {
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+  width: 100%;
+}
+
+.logoImage {
+  width: 100%;
+  height: auto;
+  margin-bottom: 20px;
 }
 
 .tabButtons {
@@ -19,7 +70,14 @@
   display: flex;
   flex-direction: column;
   gap: 2px;
-  min-height: auto; 
+  min-height: auto;
+}
+
+.menuBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
 }
 
 .menuItem {
@@ -37,8 +95,15 @@
   font-size: 14px;
   font-weight: 500;
   text-align: left;
+  min-height: 50px;
+  box-sizing: border-box;
+  transition: none !important;
 }
 
+.menuItem:hover {
+  background-color: #e6f0ff;
+  color: #1f4af4;
+}
 
 .menuItemAtivo {
   background-color: #1f4af4;
@@ -46,76 +111,297 @@
   border-radius: 6px;
   margin-left: 10px;
   width: calc(100% - 20px);
+  min-height: 50px;
+  transition: none !important;
 }
 
-
-.menuItem:hover {
-  background-color: #e6f0ff;
-  color: #1f4af4;
-}
-
-.boxglobal {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  grid-template-areas: "aside content";
-  height: 100vh;
-}
-
-.conteudo {
-  grid-area: content;
-  background-color: #f4f4f4;
-}
-
-.menuItem, .menuItemAtivo {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  padding: 10px 15px;
-  min-height: 50px;       
-  font-size: 14px;         
-  box-sizing: border-box;
-}
-
-.menuItemAtivo:hover{
+.menuItemAtivo:hover {
   background-color: #1f4af4;
   color: #fff;
 }
 
-/* RESPONSIVIDADE para mobile */
+.menuIcon {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
 
+.menuLabel {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.arrow {
+  margin-left: auto;
+  font-size: 12px;
+}
+
+.submenu {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 4px;
+  margin-left: 60px;
+}
+
+.submenuItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  cursor: pointer;
+  border-radius: 6px;
+  color: #9197B3;
+  background: transparent;
+  font-size: 14px;
+  min-height: 40px;
+  transition: none !important;
+  box-sizing: border-box;
+}
+
+.submenuItem:hover {
+  background-color: #e6f0ff;
+  color: #1f4af4;
+}
+
+.submenuItemAtivo {
+  background-color: #73B5FF;
+  color: #ffffff;
+  transition: none !important;
+  margin-right: 14px;
+}
+
+.submenuIcon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  transition: none !important;
+}
+
+.submenuLabel {
+  font-size: 14px;
+}
+
+.bottomArea {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid #f0f0f0;
+  width: 100%;
+}
+
+.barralateral::-webkit-scrollbar {
+  width: 8px;
+}
+
+:global(svg) {
+  transition: none !important;
+}
+
+.barralateral::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.barralateral::-webkit-scrollbar-thumb {
+  background: #1f4af4;
+  border-radius: 10px;
+}
+
+.barralateral::-webkit-scrollbar-thumb:hover {
+  background: #0d3dd9;
+}
+
+.hamburgerIcon {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.hamburgerButton {
+  display: none;
+}
+
+.hamburgerLine {
+  display: none;
+}
+
+/* RESPONSIVIDADE */
 @media (max-width: 768px) {
-  .boxglobal {
+  .hamburgerButton {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    gap: 10px;
     position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: 1000;
+    top: 15px;
+    right: 15px;
+    z-index: 1001;
+    background: linear-gradient(135deg, #1f4af4 0%, #2A49EB 100%);
+    border: none;
+    border-radius: 10px;
+    padding: 10px 18px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(31, 74, 244, 0.4);
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: white;
+    transition: all 0.3s ease;
+  }
+
+  .hamburgerButtonExpandido {
+    position: static;
+    width: calc(100% - 20px);
+    margin: 0 10px 15px 10px;
+    justify-content: space-between;
+  }
+
+  .hamburgerButton::before {
+    content: "Menu";
+  }
+
+  .hamburgerButton:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(31, 74, 244, 0.5);
+  }
+
+  .hamburgerButtonExpandido:hover {
+    transform: none;
+  }
+
+  .hamburgerLine {
+    display: block;
+    width: 20px;
+    height: 2px;
+    background-color: white;
+    margin: 3px 0;
+    border-radius: 2px;
+  }
+
+  .hamburgerIcon {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .boxglobal {
+    display: block;
+    height: 100vh;
+  }
+
+  .conteudo {
+    width: 100%;
+    height: 100vh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-top: 85px;
+  }
+
+  .conteudo::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .conteudo::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+  }
+
+  .conteudo::-webkit-scrollbar-thumb {
+    background: #1f4af4;
+    border-radius: 10px;
+  }
+
+  .conteudo::-webkit-scrollbar-thumb:hover {
+    background: #5AA6FA;
   }
 
   .barralateral {
-    flex-direction: row;
-    height: 60px;
-    width: 100%;
-    padding: 0;
-    overflow-x: auto;
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 280px;
+    height: 100vh;
+    background-color: #ffffff;
+    z-index: 1000;
+    transition: right 0.3s ease;
+    overflow-y: auto;
+    padding: 20px 0;
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
   }
 
-  .barralateral img {
+  .barralateral::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .barralateral::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+  }
+
+  .barralateral::-webkit-scrollbar-thumb {
+    background: #1f4af4;
+    border-radius: 10px;
+  }
+
+  .barralateral::-webkit-scrollbar-thumb:hover {
+    background: #0d3dd9;
+  }
+
+  .barralateralAberta {
+    right: 0;
+  }
+
+  .topArea {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0px;
+    padding: 0 10px;
+  }
+
+  .logoImage {
     display: none;
   }
 
   .tabButtons {
-    flex-direction: row;
-    gap: 10px;
+    width: 100%;
+  }
+
+  .menuItem {
+    width: calc(100% - 20px);
+    margin-left: 10px;
+  }
+
+  .menuItemAtivo {
+    width: calc(100% - 20px);
+    margin-left: 10px;
+  }
+
+  .menuLabel {
+    font-size: 13px;
+  }
+
+  .menuIcon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .submenu {
+    flex-direction: column;
+    gap: 4px;
+    margin-top: 4px;
+    margin-left: 60px;
+  }
+
+  .submenuItem {
+    min-width: auto;
+    width: 100%;
+  }
+
+  .submenuLabel {
+    font-size: 12px;
+  }
+
+  .bottomArea {
     padding: 0 10px;
-  }
-
-  .icone {
-    width: 20px !important;
-    height: 20px !important;
-  }
-
-  .tabButtons h3 {
-    font-size: 10px;
   }
 }

@@ -13,6 +13,7 @@ export default function Page() {
   const [senha, setSenha] = useState("");
   const [erro, setErro] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [mostrarSenha, setMostrarSenha] = useState(false);
 
   console.log("Bem Vindo Funcionario");
 
@@ -45,7 +46,7 @@ export default function Page() {
 
       login(data.accessToken);
 
-      router.push("/checklists"); 
+      router.push("/login-localizacao"); 
 
     } catch (error) {
       setErro(error.message);
@@ -99,7 +100,7 @@ export default function Page() {
               className={styles.iconeInput}
             />
             <input
-              type="password"
+              type={mostrarSenha ? "text" : "password"}
               placeholder="Digite sua senha..."
               value={senha}
               onChange={(e) => setSenha(e.target.value)}
@@ -109,6 +110,8 @@ export default function Page() {
               src="/images/olhinhosenha.svg"
               alt="Mostrar senha"
               className={styles.mostrarSenha}
+              onClick={() => setMostrarSenha(!mostrarSenha)}
+              style={{ cursor: "pointer" }}
             />
           </div>
 

@@ -1,4 +1,4 @@
-// context/AuthContext.jsx
+//context/AuthContext.jsx
 
 "use client";
 

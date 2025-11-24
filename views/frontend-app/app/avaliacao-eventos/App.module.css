@@ -1,0 +1,218 @@
+.containerCards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.cards {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+}
+
+.tituloEvento {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.funcionarioWrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto auto;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.funcionario {
+  display: flex;
+  align-items: center;
+}
+
+.funcionarioCargo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: #000 solid 1px;
+  border-radius: 30px;
+  width: 170px;
+  height: 50px;
+  margin-left: 38%;
+}
+
+.iconCargo {
+  margin-right: 10px;
+  width: 30px;
+  height: 30px;
+  filter: brightness(0);
+}
+
+.avaliacaoIndividual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btnAvaliacao {
+  padding: 6px 12px;
+  border: none;
+  background: #1d4ed8;
+  color: white;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 170px;
+  height: 50px;
+}
+
+.btnAvaliacao:hover {
+  background: #163ea6;
+}
+
+.iconLer {
+  margin-right: 10px;
+  width: 30px;
+  height: 30px;
+}
+
+.mediaEvento {
+  display: flex;
+  margin: 15px 0;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.modal {
+  background: #fff;
+  padding: 25px;
+  border-radius: 12px;
+  width: 400px;
+  text-align: center;
+}
+
+.avaliacaoTexto {
+  margin-top: 10px;
+  background: #f8f9fa;
+  padding: 15px;
+  border-radius: 8px;
+  border-left: 4px solid #1d4ed8;
+  font-style: italic;
+  line-height: 1.5;
+  text-align: left;
+}
+
+.btnFechar {
+  margin-top: 15px;
+  padding: 8px 16px;
+  background: #e11d48;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.btnFechar:hover {
+  background: #b81439;
+}
+
+@media (max-width: 1000px) {
+  .titulo {
+    margin-top: 40px;
+  }
+
+  .containerCards {
+    grid-template-columns: 1fr;
+  }
+
+  .funcionarioWrapper {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .funcionarioCargo {
+    margin-left: 0;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .btnAvaliacao {
+    width: 100%;
+  }
+
+  .cards {
+    padding: 15px;
+  }
+
+  .modal {
+    width: 80%;
+  }
+}
+
+@media (max-width: 600px) {
+  .tituloEvento {
+    font-size: 18px;
+  }
+
+  .funcionarioCargo {
+    height: 45px;
+  }
+
+  .btnAvaliacao {
+    height: 45px;
+    font-size: 13px;
+  }
+
+  .iconCargo,
+  .iconLer {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+@media (max-width: 430px) {
+  .container {
+    padding: 10px;
+  }
+
+  .cards {
+    padding: 12px;
+  }
+
+  .funcionarioWrapper {
+    gap: 6px;
+  }
+
+  .funcionarioCargo,
+  .btnAvaliacao {
+    height: 42px;
+    font-size: 12px;
+  }
+
+  .modal {
+    width: 90%;
+    padding: 18px;
+  }
+
+  .avaliacaoTexto {
+    font-size: 14px;
+    padding: 12px;
+  }
+}

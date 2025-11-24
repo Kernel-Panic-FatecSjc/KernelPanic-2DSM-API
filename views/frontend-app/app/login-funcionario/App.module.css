@@ -1,9 +1,5 @@
-:global(main.conteudo) {
+main.conteudo {
   padding: 0 !important;
-}
-
-.empty-lateral {
-  width: 0; 
 }
 
 .layout {
@@ -18,38 +14,63 @@
 
 .container {
   display: flex;
+  flex-direction: column;
   height: 100%;
   width: 100%;
   background-color: #fff;
 }
 
+@media (min-width: 768px) {
+  .container {
+    flex-direction: row;
+  }
+}
+
+/* Made sidebar responsive - stack on mobile, fixed width on desktop */
 .lateral {
   background-color: #1f4af4;
-  width: 500px;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
+  min-height: 200px;
 }
 
+@media (min-width: 768px) {
+  .lateral {
+    width: 500px;
+    min-height: 100vh;
+  }
 
+  .container {
+    flex-direction: row;
+  }
+}
 
-
+/* Made login area responsive with flexible padding and centering */
 .campoLogin {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  min-height: 100vh;
   font-family: "Poppins", sans-serif;
   color: #000;
-  padding: 0 80px;
+  padding: 40px 20px;
   background-color: #fff;
   position: relative;
-  text-align: center; 
+  text-align: center;
   margin: 0 auto;
+  width: 100%;
 }
 
+@media (min-width: 768px) {
+  .campoLogin {
+    padding: 0 80px;
+  }
+}
 
+/* Made back link responsive - adjusted positioning for mobile */
 .linkVoltar {
   display: inline-flex;
   align-self: flex-start;
@@ -58,29 +79,40 @@
   color: #7a7a7a;
   cursor: pointer;
   position: absolute;
-  top: 40px;
-  left: 80px;
+  top: 20px;
+  left: 20px;
   display: flex;
   align-items: center;
   gap: 6px;
   transition: opacity 0.2s;
   font-family: "Poppins", sans-serif;
-  margin-left: 500px;
+  z-index: 10;
+}
+
+@media (min-width: 768px) {
+  .linkVoltar {
+    top: 40px;
+    left: 580px; 
+  }
 }
 
 .linkVoltar:hover {
   opacity: 0.8;
 }
 
-
 .titulo {
   color: #0051ff;
-  font-size: 2.5rem;
+  font-size: 1.8rem;
   font-weight: 700;
   margin: 10px 0 25px 0;
   text-align: center;
 }
 
+@media (min-width: 768px) {
+  .titulo {
+    font-size: 2.5rem;
+  }
+}
 
 .painelAcesso {
   display: flex;
@@ -89,12 +121,21 @@
   gap: 10px;
   background: #e5edff;
   color: #0051ff;
-  padding: 10px 35px;
+  padding: 10px 25px;
   border-radius: 20px;
   box-shadow: 0 4px 10px rgba(0, 81, 255, 0.3);
   font-weight: 500;
-  margin-bottom: 45px;
+  margin-bottom: 35px;
   width: fit-content;
+  font-size: 0.9rem;
+}
+
+@media (min-width: 768px) {
+  .painelAcesso {
+    padding: 10px 35px;
+    margin-bottom: 45px;
+    font-size: 1rem;
+  }
 }
 
 .iconePainel {
@@ -102,15 +143,14 @@
   height: 18px;
 }
 
-
 .form {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 480px;
+  width: 100%;
+  max-width: 480px;
   gap: 22px;
 }
-
 
 .form label {
   font-weight: 600;
@@ -119,7 +159,6 @@
   align-self: flex-start;
 }
 
-
 .inputWrapper {
   display: flex;
   align-items: center;
@@ -127,7 +166,7 @@
   border-radius: 25px;
   padding: 12px 18px;
   transition: box-shadow 0.2s, border-color 0.2s;
-  width: 110%;
+  width: 100%;
 }
 
 .inputWrapper:focus-within {
@@ -149,7 +188,6 @@
   color: #b3b3b3;
 }
 
-
 .iconeInput {
   width: 20px;
   height: 20px;
@@ -168,22 +206,40 @@
   opacity: 1;
 }
 
-
 .botaoLogar {
   background: #0051ff;
   color: white;
   border: none;
   border-radius: 25px;
   padding: 14px;
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 600;
   margin-top: 25px;
   cursor: pointer;
   transition: all 0.2s;
-  width: 60%;
+  width: 80%;
+}
+
+@media (min-width: 768px) {
+  .botaoLogar {
+    width: 60%;
+    font-size: 1.1rem;
+  }
 }
 
 .botaoLogar:hover {
   background: #003ed1;
   transform: scale(1.03);
+}
+
+.botaoLogar:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.mensagemErro {
+  color: #ff0000;
+  font-size: 0.9rem;
+  margin-top: -10px;
+  text-align: center;
 }

@@ -19,12 +19,6 @@ export default function page() {
       <div className={styles["painel-container"]}>
         <div className={styles["painel-conteudo"]}>
           <div className={styles["titulo-wrapper"]}>
-            <button
-              className={styles["btn-teste"]}
-              onClick={() => router.push("/home-menu")}
-            >
-              MENU
-            </button>
             <h1 className={styles["titulo-bemvindo"]}>Bem vindo!</h1>
           </div>
           <p className={styles["texto-selecao"]}>
@@ -75,15 +69,6 @@ export default function page() {
         </div>
       </div>
     </div>
-
-
-
-
-
   )
-
-
-
-
 
 }

@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import styles from "./App.module.css";
-import ProtectRoute from "../../components/ProtectRoute"; 
+import ProtectRoute from "../../components/ProtectRoute";
 
 function App() {
     const [searchTerm, setSearchTerm] = useState("");
@@ -13,40 +13,39 @@ function App() {
     const [selectedClient, setSelectedClient] = useState(null);
 
     const funcionariosMocados = [
-      { id: 1, nome: "Carlos Silva", email: "carlos@empresa.com" },
-      { id: 2, nome: "Ana Oliveira", email: "ana@empresa.com" },
-      { id: 3, nome: "João Souza", email: "joao@empresa.com" },
+        { id: 1, nome: "Carlos Silva", email: "carlos@empresa.com" },
+        { id: 2, nome: "Ana Oliveira", email: "ana@empresa.com" },
+        { id: 3, nome: "João Souza", email: "joao@empresa.com" },
     ];
 
-    const dadosMockados = []; 
+    const dadosMockados = [];
 
     const [showModalAdd, setShowModalAdd] = useState(false);
-    
-    
+
     const [newClient, setNewClient] = useState({
         nome: "",
         endereco: "",
         segmento: "",
-        funcionario_ID: "", 
-        funil_ID: "",       
+        funcionario_ID: "",
+        funil_ID: "",
         tipo_contato: "telefone",
         valor_contato: "",
     });
 
     const fetchClientes = async () => {
         try {
-            const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
-            
+            const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+
             const response = await axios.get(`${apiUrl}/clientes`);
-            
-            const clientesData = response.data.message || response.data; 
+            console.log(response);
+
+            const clientesData = response.data.message || response.data;
 
             const mapaClientes = clientesData.map((cliente) => {
                 const contatos =
                     cliente.contatos
                         ?.map((c) => `${c.tipo_contato}: ${c.valor_contato}`)
                         .join(" | ") || "";
-                const primeiroContato = cliente.contatos?.[0] || {};
 
                 const ultimaVenda = cliente.vendas?.[cliente.vendas.length - 1];
                 const ultimaInteracao =
@@ -59,22 +58,27 @@ function App() {
                     segmento: cliente.segmentoAtuacao || "",
                     status: ultimaVenda?.status || "Sem venda",
                     contatos,
-                    tipoContato: primeiroContato.tipo_contato || "telefone",
-                    contatoValor: primeiroContato.valor_contato || "",
+                    tipoContato:
+                        cliente.contatos?.[0]?.tipo_contato || "telefone",
+                    contatoValor: cliente.contatos?.[0]?.valor_contato || "",
                     departamento: cliente.funcionario?.cargo || "",
-                    departmentoId: cliente.funcionario?.funcionario_ID || null, // Corrigido
+                    departmentoId: cliente.funcionario?.funcionario_ID || null,
                     ultimaInteracao:
                         ultimaInteracao?.data_interacao ||
                         ultimaVenda?.data_venda ||
                         "Sem interação",
-                    vendas: ultimaVenda?.valor || 0,
+                    vendas:
+                        cliente.vendas?.map((v) => ({
+                            valor: v.valor_total,
+                            data: v.data_venda,
+                            status: v.status,
+                        })) || [],
                 };
             });
 
             setClients(mapaClientes);
         } catch (error) {
             console.error("Erro ao buscar clientes:", error);
-        
         }
     };
 
@@ -127,7 +131,7 @@ function App() {
 
     const formatCurrency = (value) => {
         return `R$ ${value.toLocaleString("pt-BR", {
-            minimumFractionDigits: 2, 
+            minimumFractionDigits: 2,
         })}`;
     };
 
@@ -154,8 +158,9 @@ function App() {
         };
 
         try {
-            const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
-           await axios.post(`${apiUrl}/clientes`, formData);
+            const apiUrl =
+                process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+            await axios.post(`${apiUrl}/clientes`, formData);
 
             console.log("Cliente adicionado com sucesso!");
             await fetchClientes();
@@ -164,8 +169,8 @@ function App() {
                 nome: "",
                 endereco: "",
                 segmento: "",
-                funcionario_ID: "", 
-                funil_ID: "",       
+                funcionario_ID: "",
+                funil_ID: "",
                 tipo_contato: "telefone",
                 valor_contato: "",
             });
@@ -207,18 +212,19 @@ function App() {
         };
 
         try {
-            const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+            const apiUrl =
+                process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
             const response = await axios.put(
-                `${apiUrl}/clientes/${selectedClient.id}`, 
+                `${apiUrl}/clientes/${selectedClient.id}`,
                 dadosEnvio
             );
-            
-            const updated = response.data; 
+
+            const updated = response.data;
             const updatedClients = clientes.map((c) =>
-                c.id === selectedClient.id ? { ...c, ...selectedClient } : c 
+                c.id === selectedClient.id ? { ...c, ...selectedClient } : c
             );
             setClients(updatedClients);
-            await fetchClientes(); 
+            await fetchClientes();
 
             setShowModalUpdate(false);
             console.log("Atualizado com sucesso!");
@@ -239,18 +245,17 @@ function App() {
         }
 
         try {
-            const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+            const apiUrl =
+                process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
             await axios.delete(`${apiUrl}/clientes/${clientId}`);
 
             setClients(clientes.filter((c) => c.id !== clientId));
             console.log("Cliente excluído com sucesso!");
-
         } catch (error) {
             console.error("Erro ao excluir cliente:", error);
             alert("Erro ao excluir cliente. Tente novamente.");
         }
     };
-
 
     return (
         <ProtectRoute>
@@ -258,26 +263,33 @@ function App() {
                 <div className={styles["container-gestao"]}>
                     <div className={styles.header}>
                         <div className={styles.headerLeft}>
-                            <h1 className={styles.titulo}>Gestão de clientes</h1>
-                            <p className={styles.subtitulo}>
-                                Gerencie seus clientes e acompanhe vendas
-                            </p>
+                            <h1 className={styles.titulo}>
+                                Gestão de clientes
+                            </h1>
                         </div>
                         <div className={styles.headerRight}>
                             <div className={styles.statCard}>
-                                <p className={`${styles.statNumber} ${styles.total}`}>
+                                <p
+                                    className={`${styles.statNumber} ${styles.total}`}
+                                >
                                     {totalClientes}
                                 </p>
-                                <p className={styles.statLabel}>Total Clientes</p>
+                                <p className={styles.statLabel}>
+                                    Total Clientes
+                                </p>
                             </div>
                             <div className={styles.statCard}>
-                                <p className={`${styles.statNumber} ${styles.pendente}`}>
+                                <p
+                                    className={`${styles.statNumber} ${styles.pendente}`}
+                                >
                                     {clientesPendentes}
                                 </p>
                                 <p className={styles.statLabel}>Pendentes</p>
                             </div>
                             <div className={styles.statCard}>
-                                <p className={`${styles.statNumber} ${styles.ativo}`}>
+                                <p
+                                    className={`${styles.statNumber} ${styles.ativo}`}
+                                >
                                     {clientesAtivos}
                                 </p>
                                 <p className={styles.statLabel}>Ativos</p>
@@ -306,11 +318,14 @@ function App() {
                             value={sortKey}
                             onChange={(e) => setSortKey(e.target.value)}
                         >
-                            <option value="newest">Ordenar: Mais recentes</option>
-                            <option value="oldest">Ordenar: Mais antigas</option>
+                            <option value="newest">
+                                Ordenar: Mais recentes
+                            </option>
+                            <option value="oldest">
+                                Ordenar: Mais antigas
+                            </option>
                         </select>
                     </div>
-
 
                     <div className={styles.cardsContainer}>
                         {sortedClients.map((client) => (
@@ -318,11 +333,15 @@ function App() {
                                 <div className={styles.cardHeader}>
                                     <div className={styles.clientInfo}>
                                         <h3>{client.cliente}</h3>
-                                        <p>{client.segmento || "Sem segmento"}</p>
+                                        <p>
+                                            {client.segmento || "Sem segmento"}
+                                        </p>
                                     </div>
                                     <span
                                         className={`${styles.statusBadge} ${
-                                            styles[getStatusClass(client.status)]
+                                            styles[
+                                                getStatusClass(client.status)
+                                            ]
                                         }`}
                                     >
                                         {client.status}
@@ -337,7 +356,9 @@ function App() {
                                         <span className={styles.detailValue}>
                                             {new Date(
                                                 client.ultimaInteracao
-                                            ).toLocaleDateString("pt-BR", {timeZone: 'UTC'})}
+                                            ).toLocaleDateString("pt-BR", {
+                                                timeZone: "UTC",
+                                            })}
                                         </span>
                                     </div>
                                     <div className={styles.detailItem}>
@@ -345,7 +366,18 @@ function App() {
                                             Vendas
                                         </span>
                                         <span className={styles.detailValue}>
-                                            {formatCurrency(client.vendas)}
+                                            {client.vendas.length > 0
+                                                ? formatCurrency(
+                                                      client.vendas.reduce(
+                                                          (total, venda) =>
+                                                              total +
+                                                              Number(
+                                                                  venda.valor
+                                                              ),
+                                                          0
+                                                      )
+                                                  )
+                                                : "Sem vendas"}
                                         </span>
                                     </div>
                                 </div>
@@ -363,7 +395,7 @@ function App() {
                                     >
                                         Editar
                                     </button>
-                                    <button 
+                                    <button
                                         className={styles.btnExcluir}
                                         onClick={() => handleDelete(client.id)}
                                     >
@@ -451,7 +483,9 @@ function App() {
                                 <select
                                     id="contato"
                                     className={styles.selectInput}
-                                    value={selectedClient.tipoContato || "telefone"}
+                                    value={
+                                        selectedClient.tipoContato || "telefone"
+                                    }
                                     onChange={(e) =>
                                         setSelectedClient({
                                             ...selectedClient,
@@ -591,7 +625,9 @@ function App() {
                                         }
                                         required
                                     >
-                                        <option value="">Selecione um funil</option>
+                                        <option value="">
+                                            Selecione um funil
+                                        </option>
                                         <option value={1}>Prospecção</option>
                                         <option value={2}>Followup</option>
                                         <option value={3}>Negociação</option>
@@ -617,7 +653,9 @@ function App() {
                                             })
                                         }
                                     >
-                                        <option value="telefone">Telefone</option>
+                                        <option value="telefone">
+                                            Telefone
+                                        </option>
                                         <option value="celular">Celular</option>
                                         <option value="email">E-mail</option>
                                     </select>

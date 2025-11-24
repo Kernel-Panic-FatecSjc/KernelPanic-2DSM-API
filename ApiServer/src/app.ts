@@ -20,6 +20,14 @@ const cadastroAgregado = require("./API/Routes/cadastroAgregadoRoutes")
 const emailCadastroRoutes = require("./API/Routes/emailAgregadoRoute");
 const funcionarioPerfilRoutes = require("./API/Routes/FuncionarioPerfilRoutes")
 const funcionarioRoutes = require("./API/Routes/FuncionarioRoutes")
+const funcionarioLocalizacaoRoute = require("./API/Routes/funcionarioLocalizacaoRoute")
+const relatoriosRoutes = require("./API/Routes/RelatoriosRoutes")
+const eventoFuncionario = require("./API/Routes/EventoFuncionarioRoutes")
+const formularioRoutes = require("./API/Routes/formulariosRoutes")
+const eventoGestor = require("./API/Routes/eventoGestorRoute")
+const eventoAval = require("./API/Routes/avaliacaoRoutes")
+const eventoRecusa = require("./API/Routes/recusaRoutes")
+const eventoResp = require("./API/Routes/RespostaRoutes")
 
 const app = express(); 
 
@@ -52,6 +60,14 @@ app.use("/cadastro_agregado", cadastroAgregado)
 app.use("/api/email", emailCadastroRoutes);
 app.use("/api/funcionarios", funcionarioPerfilRoutes);
 app.use("/funcionario", funcionarioRoutes)
+app.use("/funcionario-localizacao", funcionarioLocalizacaoRoute)
+app.use("/relatorios", relatoriosRoutes);
+app.use("/eventoFunc", eventoFuncionario)
+app.use("/formulario", formularioRoutes)
+app.use("/eventoGestor",eventoGestor)
+app.use("/eventoAval", eventoAval)
+app.use("/eventoRecusa", eventoRecusa)
+app.use("/eventoResp", eventoResp)
 
 iniciarCron();
 
@@ -109,3 +125,6 @@ app.get('/hash', async (req, res) => {
 
 
 export default app; 
+
+
+console.log(funcionarioLocalizacaoRoute)
