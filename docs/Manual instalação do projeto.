@@ -1,0 +1,21 @@
+instalar docker desktop
+Caso esteja no windows, instalar o WSL. (Windows Subsystem for Linux, (Provavelmente virá junto com a instalaçãoa do Docker Desktop))
+
+
+Após instalar, no diretório raiz do projeto, digite no terminal
+
+docker compose up --build
+
+
+ele buildará o container e rodará o projeto.
+O container ficará disponível para visualização dentro do aplicativo Docker Destop.
+Dentro do aplicativo, caso queira rodar novamente, é mais intuitito, devendo apenas apertar o botão de 'play'.
+
+aí basta apenas acessar a url: 'http:/localhost'
+
+
+
+Caso queira rodar novamente pelo terminal, basta digitar:
+
+docker compose up
+
