@@ -4,7 +4,7 @@ import styles from "./App.module.css";
 import ProtectRoute from "../../components/ProtectRoute";
 import axios from "axios";
 
-const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+const apiUrl = 'http://52.72.66.96:8:5000/api';
 
 const PERMISSOES = {
     Administrativo: [

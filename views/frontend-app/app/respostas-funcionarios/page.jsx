@@ -20,7 +20,7 @@ export default function Page() {
     const [justificativaSelecionada, setJustificativaSelecionada] = useState("");
     const [filtroNome, setFiltroNome] = useState("");
     
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+    const apiUrl = 'http://52.72.66.96:8:5000/api';
     const api = axios.create({
         baseURL: `${apiUrl}/eventoResp`,
     });

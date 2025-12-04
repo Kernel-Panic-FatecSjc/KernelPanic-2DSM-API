@@ -61,7 +61,7 @@ export default function Page() {
       };
 
       console.log("📤 Enviando dados para cadastro...", payload);
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+      const apiUrl = 'http://52.72.66.96:8:5000/api';
       const response = await fetch(`${apiUrl}/cadastro_agregado`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },

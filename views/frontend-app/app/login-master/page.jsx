@@ -16,7 +16,7 @@ export default function Page() {
   const [mostrarSenha, setMostrarSenha] = useState(false);
 
   console.log("Bem Vindo Master");
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+  const apiUrl = 'http://52.72.66.96:8:5000/api';
   const handleSubmit = async (event) => {
     event.preventDefault(); 
     setIsLoading(true); 

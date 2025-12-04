@@ -27,7 +27,7 @@ export default function Page() {
     useEffect(() => {
         const fetchClientes = async () => {
             try {
-                const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+                const apiUrl = 'http://52.72.66.96:8:5000/api';
                 const response = await axios.get(
                     `${apiUrl}/clientes/getClientes`
                 );
@@ -59,7 +59,7 @@ export default function Page() {
         console.log("Enviando os seguintes dados:", formData);
 
         try {
-            const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+            const apiUrl = 'http://52.72.66.96:8:5000/api';
 
             const response = await axios.post(`${apiUrl}/clientes`, formData, {
                 headers: {
@@ -100,7 +100,7 @@ export default function Page() {
         console.log("Enviando os seeguintes dados:", formDataAdd);
 
         try {
-            const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+            const apiUrl = 'http://52.72.66.96:8:5000/api';
 
             const response = await axios.post(
                 `${apiUrl}/clientes/contato`,

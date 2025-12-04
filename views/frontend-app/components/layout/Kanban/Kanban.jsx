@@ -29,7 +29,7 @@ export default function CicloDeVendas() {
 
     const fetchHistorico = async () => {
         try {
-            const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+            const apiUrl = 'http://52.72.66.96:8:5000/api';
 
             const response = await axios.get(
                 `${apiUrl}/historico/movimentacoes`
@@ -51,7 +51,7 @@ export default function CicloDeVendas() {
 
     const fetchGetClientes = async () => {
         try {
-            const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+            const apiUrl = 'http://52.72.66.96:8:5000/api';
             const response = await axios.get(
                 `${apiUrl}/funilVendas`
             );

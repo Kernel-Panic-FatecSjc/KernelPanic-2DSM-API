@@ -7,7 +7,7 @@ import { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 
 
-const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+const apiUrl = 'http://52.72.66.96:8:5000/api';
 export default function Page() {
   const router = useRouter();
   const { login } = useAuth();
@@ -30,7 +30,7 @@ export default function Page() {
       setIsLoading(false);
       return;
     }
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+    const apiUrl = 'http://52.72.66.96:8:5000/api';
     try {
       const response = await fetch(`${apiUrl}/login`, {
         method: "POST",

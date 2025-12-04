@@ -52,7 +52,7 @@ export default function Page() {
         console.log("Enviando dados:", dadosParaEnviar);
 
         try {
-            const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+            const apiUrl = 'http://52.72.66.96:8:5000/api';
 
             const response = await fetch(`${apiUrl}/funcionario`, {
                 method: "POST",

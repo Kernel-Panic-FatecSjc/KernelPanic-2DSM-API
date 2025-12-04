@@ -66,7 +66,7 @@ function Page() {
       respostas: { ...form },
       path_img: null,
     };
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+    const apiUrl = 'http://52.72.66.96:8:5000/api';
     try {
       // --- CORREÇÃO ---
       // A rota POST no seu backend é "/checklist" (ou "/checklist/").

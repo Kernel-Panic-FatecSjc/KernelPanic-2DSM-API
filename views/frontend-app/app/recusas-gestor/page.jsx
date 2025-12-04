@@ -28,7 +28,7 @@ function Page() {
     const [eventos, setEventos] = useState([]);
     const [carregando, setCarregando] = useState(true);
     
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+    const apiUrl = 'http://52.72.66.96:8:5000/api';
     const api = axios.create({
         baseURL: `${apiUrl}/eventoRecusa`,
     });

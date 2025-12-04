@@ -9,7 +9,7 @@ export default function Page() {
   const router = useRouter();
 
   const go = (rota) => router.push(rota);
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+  const apiUrl = 'http://52.72.66.96:8:5000/api';
 
   return (
     <ProtectRoute perfisPermitidos={["Administrativo"]}>
