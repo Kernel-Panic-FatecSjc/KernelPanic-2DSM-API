@@ -45,4 +45,4 @@ COPY --from=builder /app/.next/static ./.next/static
 EXPOSE 3000
 
 # Inicia o servidor Node.js
-CMD ["node", "server.js"]
+CMD ["npm", "run", "dev"]
