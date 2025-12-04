@@ -133,7 +133,7 @@ const tiposVeiculoBase = [
         },
     };
     return (
-        <ProtectRoute perfisPermitidos={["gestor","master"]}>
+        <ProtectRoute perfisPermitidos={["Dashboards"]}>
         
         <div className={styles.main}>
             <h1 className={styles.tittle}>

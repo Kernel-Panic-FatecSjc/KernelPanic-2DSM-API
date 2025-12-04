@@ -4,8 +4,9 @@
   z-index: 1 !important;
 }
 
-/* LAYOUT BASE */
 .layout {
+  background-color: #F0F2F5;
+  font-family: 'Poppins', 'Inter', sans-serif;
   display: flex;
   height: 100vh;
   width: 100%;
@@ -28,13 +29,13 @@
 
 .title {
   text-align: center;
-  font-size: 32px;
+  font-size: 50px;
   font-weight: 600;
-  color: #1f4af4;
+  color: #1F4AF4;
+  font-family: Arial, sans-serif;
   margin-bottom: 50px;
 }
 
-/* GRID */
 .cardsGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -42,7 +43,6 @@
   justify-items: center;
 }
 
-/* CARD */
 .card {
   width: 280px;
   height: 180px;
@@ -63,7 +63,6 @@
   box-shadow: 0 6px 16px rgba(0,0,0,0.1);
 }
 
-/* ICON */
 .icon {
   width: 48px;
   height: 48px;
@@ -72,7 +71,6 @@
   filter: brightness(0) saturate(100%);
 }
 
-/* CARD TITLE */
 .cardTitle {
   font-size: 16px;
   color: #333;
@@ -80,7 +78,6 @@
   text-align: center;
 }
 
-/* BUTTON */
 .btn {
   background: #1f4af4;
   color: #fff;
@@ -96,11 +93,6 @@
   background: #2947d3;
 }
 
-/* ============================= */
-/*         RESPONSIVIDADE        */
-/* ============================= */
-
-/* 📺 Tablets (1024px para baixo) */
 @media (max-width: 1024px) {
   .lateral {
     width: 320px;
@@ -117,7 +109,6 @@
   }
 }
 
-/* 📱 Celulares grandes (768px para baixo) */
 @media (max-width: 768px) {
   .layout {
     flex-direction: column;
@@ -149,11 +140,10 @@
   }
 }
 
-/* 📱 Celulares pequenos (480px para baixo) */
 @media (max-width: 480px) {
   .title {
     font-size: 22px;
-     margin-top: 40px;
+    margin-top: 40px;
   }
 
   .cardsGrid {

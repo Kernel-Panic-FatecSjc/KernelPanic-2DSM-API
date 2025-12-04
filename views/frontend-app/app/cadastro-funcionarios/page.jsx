@@ -95,7 +95,7 @@ export default function Page() {
     };
 
     return (
-        <ProtectRoute perfisPermitidos={["master", "gestor", "vendedor"]}>
+        <ProtectRoute perfisPermitidos={["Cadastro de Funcionario"]}>
             <div className={styles.mainDiv}>
                 <h1>Cadastro de funcionários</h1>
                 <div className={styles.mainContainer}>

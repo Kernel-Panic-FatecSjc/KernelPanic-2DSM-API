@@ -114,7 +114,7 @@ export default function Page() {
         }
       });
 
-      const response = await fetch("http://localhost:5000/agregado", {
+      const response = await fetch(`${apiUrl}/agregado`, {
         method: "POST",
         body: formData,
       });

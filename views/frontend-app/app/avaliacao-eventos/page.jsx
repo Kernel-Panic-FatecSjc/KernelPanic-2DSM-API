@@ -3,7 +3,9 @@ import React, { useState, useEffect } from 'react';
 import styles from './App.module.css';
 import { StarRating } from '../../components/layout/Estrelas/Estrelas';
 import axios from 'axios';
+import ProtectRoute from '../../components/ProtectRoute';
 
+const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 function Page() {
 
     const cargoImagens = {
@@ -29,7 +31,7 @@ function Page() {
     const [carregando, setCarregando] = useState(true);
 
     const api = axios.create({
-        baseURL: 'http://localhost:5000/eventoAval',
+        baseURL: `${apiUrl}/eventoAval`,
     });
 
     const carregarAvaliacoes = async () => {
@@ -112,6 +114,7 @@ function Page() {
     }
 
     return (
+        <ProtectRoute perfisPermitidos={["Avaliação dos Eventos"]}>
         <div className={styles.container}>
             <h1 className={styles.titulo}>Avaliação dos eventos</h1>
 
@@ -172,6 +175,7 @@ function Page() {
                 </div>
             )}
         </div>
+        </ProtectRoute>
     );
 }
 

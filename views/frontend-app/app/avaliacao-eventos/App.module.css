@@ -1,7 +1,23 @@
+.container {
+  background-color: #F0F2F5;
+  font-family: 'Poppins', 'Inter', sans-serif;
+  min-height: 100vh;
+  padding: 2rem;
+}
+
+.titulo {
+  font-size: 50px;
+  font-weight: 600;
+  color: #1F4AF4;
+  margin-bottom: 25px;
+  font-family: Arial, sans-serif;
+  text-align: left;
+}
+
 .containerCards {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
+  gap: 40px;
   margin-top: 20px;
 }
 
@@ -22,7 +38,8 @@
   display: grid;
   grid-template-columns: 1fr 1fr auto auto;
   align-items: center;
-  gap: 10px;
+  column-gap: 10px;
+  row-gap: 10px;
   margin-bottom: 10px;
 }
 
@@ -39,7 +56,7 @@
   border-radius: 30px;
   width: 170px;
   height: 50px;
-  margin-left: 38%;
+  margin-right: 20px;
 }
 
 .iconCargo {
@@ -70,6 +87,7 @@
   gap: 6px;
   width: 170px;
   height: 50px;
+  margin-left: 15px;
 }
 
 .btnAvaliacao:hover {
@@ -92,7 +110,7 @@
 .modalOverlay {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.6);
+  background: rgba(0, 0, 0, 0.6);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -148,13 +166,14 @@
   }
 
   .funcionarioCargo {
-    margin-left: 0;
     width: 100%;
     justify-content: center;
+    margin-right: 0;
   }
 
   .btnAvaliacao {
     width: 100%;
+    margin-left: 0;
   }
 
   .cards {
@@ -178,6 +197,7 @@
   .btnAvaliacao {
     height: 45px;
     font-size: 13px;
+    margin-left: 0;
   }
 
   .iconCargo,
@@ -204,6 +224,10 @@
   .btnAvaliacao {
     height: 42px;
     font-size: 12px;
+  }
+
+  .btnAvaliacao {
+    margin-left: 0;
   }
 
   .modal {

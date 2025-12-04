@@ -4,6 +4,7 @@ import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
 import styles from './App.module.css';
 import axios from 'axios';
+import ProtectRoute from '../../components/ProtectRoute';
 
 function Page() {
     const [selected, setSelected] = useState([]);
@@ -92,8 +93,9 @@ function Page() {
 
     const weekdays = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
 
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL;
     const api = axios.create({
-        baseURL: 'http://localhost:5000/eventoFunc',
+        baseURL: `${apiUrl}/eventoFunc`,
     });
 
     const carregarEventos = async () => {
@@ -360,6 +362,7 @@ function Page() {
     );
 
     return (
+        <ProtectRoute perfisPermitidos={["Calendario"]}>
         <div className={styles.conteudo}>
             {modalConfirmar}
             {modalRecusar}
@@ -444,7 +447,6 @@ function Page() {
                                             <div className={styles.eventInfo}>
                                                 <span>{evento.data}</span>
                                                 <span>{evento.hora}</span>
-                                                <span>{evento.local}</span>
                                             </div>
 
                                             <div className={styles.buttons}>
@@ -482,7 +484,6 @@ function Page() {
                                             <div className={styles.eventInfo}>
                                                 <span>{evento.data}</span>
                                                 <span>{evento.hora}</span>
-                                                <span>{evento.local}</span>
                                             </div>
 
                                             <div className={styles.buttons}>
@@ -519,7 +520,6 @@ function Page() {
                                             <div className={styles.eventInfo}>
                                                 <span>{evento.data}</span>
                                                 <span>{evento.hora}</span>
-                                                <span>{evento.local}</span>
                                             </div>
 
                                             <div className={styles.buttons}>
@@ -556,7 +556,6 @@ function Page() {
                                             <div className={styles.eventInfo}>
                                                 <span>{evento.data}</span>
                                                 <span>{evento.hora}</span>
-                                                <span>{evento.local}</span>
                                             </div>
 
                                             <div className={styles.buttons}>
@@ -578,6 +577,7 @@ function Page() {
 
             </div>
         </div>
+        </ProtectRoute>
     );
 }
 

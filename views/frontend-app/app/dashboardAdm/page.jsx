@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "./App.module.css";
 import axios from "axios";
+import ProtectRoute from "../../components/ProtectRoute";
 
 export default function Dashboard() {
     const [funcionarios, setFuncionarios] = useState([]);
@@ -558,6 +559,7 @@ export default function Dashboard() {
     }
 
     return (
+        <ProtectRoute perfisPermitidos={["Dashboards"]}>
         <div className={styles.container}>
             <h1 className={styles.tittle}>Dashboard - Comparativos</h1>
 
@@ -679,5 +681,6 @@ export default function Dashboard() {
                 </div>
             </div>
         </div>
+        </ProtectRoute>
     );
 }

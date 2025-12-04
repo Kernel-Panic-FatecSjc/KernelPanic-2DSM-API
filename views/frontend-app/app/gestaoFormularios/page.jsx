@@ -6,7 +6,7 @@ import styles from "./App.module.css";
 import axios from "axios";
 
 export default function GestaoFormularios() {
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL
 
     const [formularios, setFormularios] = useState([
         { id: 1, nome: 'Cotação', area: 'Comercial', destaque: true, icone: 'document', respostas: [], tipo: "cotacao" },
@@ -103,7 +103,7 @@ export default function GestaoFormularios() {
     };
 
     return (
-        <ProtectRoute perfisPermitidos={["master","gestor"]}>
+        <ProtectRoute perfisPermitidos={["Gestao de Formularios"]}>
         <div className={styles.container}>
             <div className={styles.header}>
                 <h1 className={styles.tittle}>Respostas</h1>

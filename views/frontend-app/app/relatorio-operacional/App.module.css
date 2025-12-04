@@ -6,6 +6,8 @@
 
 /* LAYOUT BASE */
 .layout {
+  background-color: #F0F2F5;
+  font-family: 'Poppins', 'Inter', sans-serif;
   display: flex;
   height: 100vh;
   width: 100%;
@@ -28,9 +30,10 @@
 
 .title {
   text-align: center;
-  font-size: 32px;
+  font-size: 50px;
   font-weight: 600;
-  color: #1f4af4;
+  color: #1F4AF4;
+  font-family: Arial, sans-serif;
   margin-bottom: 50px;
 }
 

@@ -25,7 +25,7 @@ export default function page() {
         { id: "reuniao", label: "Reunião", icon: "/images/reuniao.png" },
         { id: "outro", label: "Outro", icon: "/images/reticencias.png" },
     ];
-
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL;
     return (
         <div className={styles.container}>
             <div className={styles.lateral}>
@@ -69,7 +69,7 @@ export default function page() {
                         onClick={async () => {
                             try {
                                 await axios.put(
-                                    "http://localhost:5000/funcionario-localizacao",
+                                    `${apiUrl}/funcionario-localizacao`,
                                     {
                                         funcionarioId: 1,
                                         localizacao: selected,

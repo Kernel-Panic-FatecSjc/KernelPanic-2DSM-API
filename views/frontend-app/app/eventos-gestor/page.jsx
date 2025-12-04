@@ -6,6 +6,7 @@ import "react-day-picker/dist/style.css";
 import styles from "./App.module.css";
 import { useRouter } from "next/navigation";
 import axios from 'axios';
+import ProtectRoute from '../../components/ProtectRoute';
 
 export default function Page() {
     const router = useRouter();
@@ -24,7 +25,6 @@ export default function Page() {
     const [editarTitulo, setEditarTitulo] = useState("");
     const [editarData, setEditarData] = useState("");
     const [editarHora, setEditarHora] = useState("");
-    const [editarLocal, setEditarLocal] = useState("");
 
     const [novoTitulo, setNovoTitulo] = useState("");
     const [novaData, setNovaData] = useState("");
@@ -35,9 +35,10 @@ export default function Page() {
     const [cargosSelecionados, setCargosSelecionados] = useState([]); 
     const [filtroNome, setFiltroNome] = useState("");
     const [filtroData, setFiltroData] = useState("");
-
+    
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL;
     const api = axios.create({
-        baseURL: 'http://localhost:5000/eventoGestor',
+        baseURL: `${apiUrl}/eventoGestor`,
     });
 
     const carregarEventos = async () => {
@@ -50,7 +51,6 @@ export default function Page() {
                 titulo: evento.titulo,
                 data: formatarDataParaFrontend(evento.dataHora),
                 hora: formatarHoraParaFrontend(evento.dataHora),
-                local: evento.localizacao || "Local não informado",
                 descricao: evento.descricao || "",
                 link: evento.evento_link || ""
             }));
@@ -95,7 +95,7 @@ export default function Page() {
     };
 
     const adicionarEventoAPI = async () => {
-        if (!novoTitulo.trim() || !novaData.trim() || !novaHora.trim() || !novoLocal.trim() || !novaDescricao.trim() || cargosSelecionados.length === 0) {
+        if (!novoTitulo.trim() || !novaData.trim() || !novaHora.trim() || !novaDescricao.trim() || cargosSelecionados.length === 0) {
             alert("Por favor, preencha os campos obrigatórios: Título, Data, Hora, Local, Descrição e selecione pelo menos um cargo");
             return;
         }
@@ -116,7 +116,6 @@ export default function Page() {
                 dataHora: dataHoraAPI,
                 duracao_horas: 1,
                 evento_link: novoLink,
-                localizacao: novoLocal,
                 organizador_ID: 1,
                 funcionariosConvidados: funcionariosConvidados
             };
@@ -128,7 +127,6 @@ export default function Page() {
             setNovoTitulo("");
             setNovaData("");
             setNovaHora("");
-            setNovoLocal("");
             setNovaDescricao("");
             setNovoLink("");
             setCargosSelecionados([]);
@@ -148,7 +146,6 @@ export default function Page() {
                 titulo: editarTitulo,
                 descricao: eventoSelecionado.descricao,
                 dataHora: dataHoraAPI,
-                localizacao: editarLocal
             };
 
             await api.put(`/eventos/${eventoSelecionado.id}`, dadosAtualizacao);
@@ -191,7 +188,7 @@ export default function Page() {
 
     function formatarDataParaFrontend(dataHora) {
         const date = new Date(dataHora);
-        const dia = String(date.getDate()).padStart(2, "0");
+        const dia = String(date.getDate()+3).padStart(2, "0");
         const mes = String(date.getMonth() + 1).padStart(2, "0");
         const ano = date.getFullYear();
         return `${dia}/${mes}/${ano}`;
@@ -199,7 +196,7 @@ export default function Page() {
 
     function formatarHoraParaFrontend(dataHora) {
         const date = new Date(dataHora);
-        const horas = String(date.getHours()).padStart(2, "0");
+        const horas = String(date.getHours()+3).padStart(2, "0");
         const minutos = String(date.getMinutes()).padStart(2, "0");
         return `${horas}:${minutos}h`;
     }
@@ -269,7 +266,6 @@ export default function Page() {
         setEditarTitulo(evento.titulo);
         setEditarData(evento.data);
         setEditarHora(evento.hora);
-        setEditarLocal(evento.local);
         setModalEditarAberto(true);
     }
 
@@ -315,16 +311,6 @@ export default function Page() {
                     onChange={e => setNovaHora(e.target.value)}
                     required
                 />
-
-                <input
-                    className={styles.input}
-                    type="text"
-                    placeholder="Localização do evento *"
-                    value={novoLocal}
-                    onChange={e => setNovoLocal(e.target.value)}
-                    required
-                />
-
                 <input
                     className={styles.input}
                     type="text"
@@ -395,8 +381,7 @@ export default function Page() {
                 <input className={styles.input} type="text" value={editarTitulo} onChange={e => setEditarTitulo(e.target.value)} placeholder="Título" />
                 <input className={styles.input} type="text" value={editarData} onChange={e => setEditarData(e.target.value)} placeholder="Data" />
                 <input className={styles.input} type="text" value={editarHora} onChange={e => setEditarHora(e.target.value)} placeholder="Hora" />
-                <input className={styles.input} type="text" value={editarLocal} onChange={e => setEditarLocal(e.target.value)} placeholder="Local" />
-
+                
                 <div className={styles.modalButtons}>
                     <button className={styles.botaoPrincipal} onClick={editarEventoAPI}>Salvar</button>
                     <button className={styles.cancelar} onClick={() => setModalEditarAberto(false)}>Cancelar</button>
@@ -418,6 +403,7 @@ export default function Page() {
     );
     
     return (
+        <ProtectRoute perfisPermitidos={["Eventos"]}>
         <div className={styles.conteudo}>
             {modalAdicionar}
             {modalEditar}
@@ -513,7 +499,6 @@ export default function Page() {
                                     <div className={styles.eventInfo}>
                                         <span>{evento.data}</span>
                                         <span>{evento.hora}</span>
-                                        <span>{evento.local}</span>
                                     </div>
 
                                     <div className={styles.buttons}>
@@ -539,5 +524,6 @@ export default function Page() {
                 </div>
             </div>
         </div>
+        </ProtectRoute>
     );
 }

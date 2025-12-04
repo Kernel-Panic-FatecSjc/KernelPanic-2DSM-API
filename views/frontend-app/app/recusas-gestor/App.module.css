@@ -1,8 +1,26 @@
+.container {
+  background-color: #f8f9fa;
+  min-height: 100vh;
+  padding: 40px 60px;
+  font-family: 'Outfit', sans-serif;
+  color: #111;
+}
+
+.titulo {
+  font-size: 50px;
+  font-weight: 600;
+  color: #1F4AF4;
+  margin-bottom: 25px;
+  font-family: Arial, sans-serif;
+  text-align: left;
+  margin-top: 0;
+}
+
 .containerCards {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 20px;
-  margin-top: 20px;
+  margin-top: 40px;
 }
 
 .cards {
@@ -20,9 +38,10 @@
 
 .funcionarioWrapper {
   display: grid;
-  grid-template-columns: 1fr 1fr auto;
+  grid-template-columns: 1fr 1fr auto auto;
   align-items: center;
-  gap: 10px;
+  column-gap: 10px;
+  row-gap: 10px;
   margin-bottom: 10px;
 }
 
@@ -39,6 +58,7 @@
   border-radius: 30px;
   width: 170px;
   height: 50px;
+  margin-right: 20px;
 }
 
 .iconCargo {
@@ -48,7 +68,7 @@
   filter: brightness(0);
 }
 
-.iconLer{
+.iconLer {
   margin-right: 10px;
   width: 30px;
   height: 30px;
@@ -69,8 +89,8 @@
   gap: 6px;
   width: 170px;
   height: 50px;
+  margin-left: 15px;
 }
-
 
 .btnJustificativa:hover {
   background: #163ea6;
@@ -79,7 +99,7 @@
 .modalOverlay {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.6);
+  background: rgba(0, 0, 0, 0.6);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -116,7 +136,7 @@
   .container {
     margin-top: 40px;
   }
-  
+
   .containerCards {
     grid-template-columns: 1fr;
   }
@@ -129,10 +149,12 @@
   .funcionarioCargo {
     width: 100%;
     justify-content: center;
+    margin-right: 0;
   }
 
   .btnJustificativa {
     width: 100%;
+    margin-left: 0;
   }
 
   .cards {
@@ -152,6 +174,7 @@
   .btnJustificativa {
     height: 45px;
     font-size: 13px;
+    margin-left: 0;
   }
 
   .iconCargo,

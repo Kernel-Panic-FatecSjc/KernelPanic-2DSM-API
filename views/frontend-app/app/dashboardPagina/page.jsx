@@ -12,7 +12,7 @@ function page() {
     };
 
     return (
-        <ProtectRoute>
+        <ProtectRoute perfisPermitidos={"Dashboards"}>
             <div className={styles.container}>
                 <div className={styles.content}>
                     <h1 className={styles.pageTitle}>Dashboards</h1>

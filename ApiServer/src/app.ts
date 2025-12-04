@@ -58,7 +58,9 @@ app.use("/eventos", eventoRoute);
 app.use("/agregado", agregadoRoute)
 app.use("/cadastro_agregado", cadastroAgregado)
 app.use("/api/email", emailCadastroRoutes);
+
 app.use("/api/funcionarios", funcionarioPerfilRoutes);
+
 app.use("/funcionario", funcionarioRoutes)
 app.use("/funcionario-localizacao", funcionarioLocalizacaoRoute)
 app.use("/relatorios", relatoriosRoutes);

@@ -16,7 +16,7 @@ export default function Page() {
   const [mostrarSenha, setMostrarSenha] = useState(false);
 
   console.log("Bem Vindo Master");
-
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
   const handleSubmit = async (event) => {
     event.preventDefault(); 
     setIsLoading(true); 
@@ -29,7 +29,7 @@ export default function Page() {
     }
 
     try {
-      const response = await fetch("http://localhost:5000/login", {
+      const response = await fetch(`${apiUrl}/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json", 

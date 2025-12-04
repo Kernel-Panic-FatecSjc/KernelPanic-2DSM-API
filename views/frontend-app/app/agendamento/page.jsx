@@ -4,7 +4,7 @@ import ProtectRoute from '../../components/ProtectRoute'
 
 export default function page() {
   return (
-    <ProtectRoute>
+    <ProtectRoute perfisPermitidos={["Agendamento"]}>
     <div style={{ paddingTop: "15px" }}>
       <h1 style={{
         fontSize: "50px",

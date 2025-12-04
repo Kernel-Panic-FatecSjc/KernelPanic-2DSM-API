@@ -159,7 +159,7 @@ function App() {
 
         try {
             const apiUrl =
-                process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+                process.env.NEXT_PUBLIC_API_URL;
             await axios.post(`${apiUrl}/clientes`, formData);
 
             console.log("Cliente adicionado com sucesso!");
@@ -213,7 +213,7 @@ function App() {
 
         try {
             const apiUrl =
-                process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+                process.env.NEXT_PUBLIC_API_URL;
             const response = await axios.put(
                 `${apiUrl}/clientes/${selectedClient.id}`,
                 dadosEnvio
@@ -246,7 +246,7 @@ function App() {
 
         try {
             const apiUrl =
-                process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+                process.env.NEXT_PUBLIC_API_URL;
             await axios.delete(`${apiUrl}/clientes/${clientId}`);
 
             setClients(clientes.filter((c) => c.id !== clientId));

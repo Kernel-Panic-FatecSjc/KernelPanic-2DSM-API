@@ -66,13 +66,13 @@ function Page() {
       respostas: { ...form },
       path_img: null,
     };
-
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL;
     try {
       // --- CORREÇÃO ---
       // A rota POST no seu backend é "/checklist" (ou "/checklist/").
       // O tipo ("manutencao_predial") é enviado no corpo da requisição (acima),
       // e não como um parâmetro na URL.
-      const response = await fetch('http://localhost:5000/checklist', {
+      const response = await fetch(`${apiUrl}/checklist`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

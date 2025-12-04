@@ -50,7 +50,7 @@ function LateralBar() {
       id: "gerenciar-permissoes",
       title: "Gerenciar Permissões",
       route: "/gerenciar-permissao",
-      perfisPermitidos: ["master"],
+      perfisPermitidos: ["Gerenciar Permissoes"],
       iconInactive: "/images/iconepermissoesbranco.svg", //salvei com o nome errado
       iconActive: "/images/iconepermissoes.svg",
     },
@@ -58,32 +58,31 @@ function LateralBar() {
     {
       id: "administrativo",
       title: "Administrativo",
-      perfisPermitidos: ["master", "gestor"],
+      perfisPermitidos: ["Avaliação dos Eventos", "Justificativas", "Cadastro do Funcionario","Calendario","Gestão de Localização","Eventos"],
       iconInactive: "/images/iconAdm.svg",
       iconActive: "/images/iconAdmbranco.svg",
       submenus: [
-        { id: "avaliacao-eventos", title: "Avaliação de Eventos", route: "", perfisPermitidos: ["master", "gestor"], iconInactive: "/images/iconeavaliacao.svg", iconActive: "/images/iconeavaliacaobranco.svg" }, //EVENTOS - avaliação do evento
-        { id: "justificativa-eventos", title: "Justificativas", route: "", perfisPermitidos: ["master", "gestor"], iconInactive: "/images/iconrecusa.svg", iconActive: "/images/iconrecusabranco.svg" }, //EVENTOS - justifica da recusa do evento
-        { id: "cadastro-funcionarios", title: "Cadastro de Funcionários", route: "/cadastro-funcionarios", perfisPermitidos: ["master", "gestor"], iconInactive: "/images/iconefuncionario.svg", iconActive: "/images/iconefuncionariobranco.svg" }, //FUNCIONARIO - cadastro
-        { id: "calendario", title: "Calendário", route: "", perfisPermitidos: ["master", "gestor"], iconInactive: "/images/iconcalendatio.svg", iconActive: "/images/iconecalendariobranco.svg" }, //FUNCIONARIO - eventos
-        { id: "eventos", title: "Eventos", route: "", perfisPermitidos: ["master", "gestor"], iconInactive: "/images/iconinteracoes.svg", iconActive: "/images/iconinteracoesbranco.svg" }, //GESTOR - eventos
-        { id: "gestao-localizacao", title: "Gestão de Localização", route: "/localizacao-funcionarios", perfisPermitidos: ["master", "gestor"], iconInactive: "/images/iconelocalizacao.svg", iconActive: "/images/iconelocazalicaobranco.svg" }, //LOCALIZAÇÃO - dashboard
-        //BONUS{ id: "certificados", title: "Certificados", route: "", perfisPermitidos: ["master", "gestor"], iconInactive: "/images/iconecertificado.svg", iconActive: "/images/iconecertificadosbranco.svg" }, CERTIFICADOS
+        { id: "avaliacao-eventos", title: "Avaliação de Eventos", route: "/avaliacao-eventos", perfisPermitidos: ["Avaliação dos Eventos"], iconInactive: "/images/iconeavaliacao.svg", iconActive: "/images/iconeavaliacaobranco.svg" },
+        { id: "justificativa-eventos", title: "Justificativas", route: "/recusas-gestor", perfisPermitidos: ["Justificativas"], iconInactive: "/images/iconrecusa.svg", iconActive: "/images/iconrecusabranco.svg" },
+        { id: "cadastro-funcionarios", title: "Cadastro de Funcionários", route: "/cadastro-funcionarios", perfisPermitidos: ["Cadastro de Funcionario"], iconInactive: "/images/iconefuncionario.svg", iconActive: "/images/iconefuncionariobranco.svg" },
+        { id: "calendario", title: "Calendário", route: "/eventos-funcionario", perfisPermitidos: ["Calendario"], iconInactive: "/images/iconcalendatio.svg", iconActive: "/images/iconecalendariobranco.svg" },
+        { id: "eventos", title: "Eventos", route: "/eventos-gestor", perfisPermitidos: ["Eventos"], iconInactive: "/images/iconinteracoes.svg", iconActive: "/images/iconinteracoesbranco.svg" },
+        { id: "gestao-localizacao", title: "Gestão de Localização", route: "/localizacao-funcionarios", perfisPermitidos: ["Gestão de Localização"], iconInactive: "/images/iconelocalizacao.svg", iconActive: "/images/iconelocazalicaobranco.svg" },
       ],
     },
 
     {
       id: "comercial",
       title: "Comercial",
-      perfisPermitidos: ["master", "gestor", "vendedor"],
+      perfisPermitidos: ["Agendamento", "Desempenho dos Vendedores", "Gestão de Clientes","Cotação e Coleta","Funil de Vendas"],
       iconInactive: "/images/iconComercial.svg",
       iconActive: "/images/iconComercialbranco.svg",
       submenus: [
-        { id: "agendamento", title: "Agendamento", route: "/agendamento", perfisPermitidos: ["master", "gestor", "vendedor"], iconInactive: "/images/iconagendamento.svg", iconActive: "/images/iconagendamentobranco.svg" },
-        { id: "desempenho-vendedores", title: "Desempenho dos Vendedores", route: "/vendas", perfisPermitidos: ["master", "gestor"], iconInactive: "/images/iconedesempenho.svg", iconActive: "/images/iconedesempenhobranco.svg" },
-        { id: "gestao-clientes", title: "Gestão de Clientes", route: "/gestao", perfisPermitidos: ["master", "gestor"], iconInactive: "/images/iconcliente.svg", iconActive: "/images/iconclientebranco.svg" },
-        { id: "gestao-vendas", title: "Cotação e Coleta", route: "/gestaoComercial", perfisPermitidos: ["master", "gestor", "vendedor"], iconInactive: "/images/icongestaoVendas.svg", iconActive: "/images/icongestaoVendasbranco.svg" },
-        { id: "funil-vendas", title: "Funil de Vendas", route: "/funil-vendas", perfisPermitidos: ["master", "gestor", "vendedor"], iconInactive: "/images/iconfunil.svg", iconActive: "/images/iconfunilbranco.svg" },
+        { id: "agendamento", title: "Agendamento", route: "/agendamento", perfisPermitidos: ["Agendamento"], iconInactive: "/images/iconagendamento.svg", iconActive: "/images/iconagendamentobranco.svg" },
+        { id: "desempenho-vendedores", title: "Desempenho dos Vendedores", route: "/vendas", perfisPermitidos: ["Desempenho dos Vendedores"], iconInactive: "/images/iconedesempenho.svg", iconActive: "/images/iconedesempenhobranco.svg" },
+        { id: "gestao-clientes", title: "Gestão de Clientes", route: "/gestao", perfisPermitidos: ["Gestão de Clientes"], iconInactive: "/images/iconcliente.svg", iconActive: "/images/iconclientebranco.svg" },
+        { id: "gestao-vendas", title: "Cotação e Coleta", route: "/gestaoComercial", perfisPermitidos: ["Cotação e Coleta"], iconInactive: "/images/icongestaoVendas.svg", iconActive: "/images/icongestaoVendasbranco.svg" },
+        { id: "funil-vendas", title: "Funil de Vendas", route: "/funil-vendas", perfisPermitidos: ["Funil de Vendas"], iconInactive: "/images/iconfunil.svg", iconActive: "/images/iconfunilbranco.svg" },
 
       ],
     },
@@ -96,7 +95,7 @@ function LateralBar() {
       iconActive: "/images/iconOperacionalbranco.svg",
       submenus: [
         { id: "area-agregado", title: "Área do Agregado", route: "/pagina-agregado", perfisPermitidos: [], iconInactive: "/images/iconeagregado.svg", iconActive: "/images/iconeagregadobranco.svg" },
-        { id: "gestao-formularios", title: "Gestão de Formulários", route: "/gestaoFormularios", perfisPermitidos: ["master", "gestor"], iconInactive: "/images/iconechecklist.svg", iconActive: "/images/iconechecklistbranco.svg" },
+        { id: "gestao-formularios", title: "Gestão de Formulários", route: "/gestaoFormularios", perfisPermitidos: ["Gestao de Formularios"], iconInactive: "/images/iconechecklist.svg", iconActive: "/images/iconechecklistbranco.svg" },
         { id: "checklists-formularios", title: "Checklists e Formulários", route: "/checklists", perfisPermitidos: [], iconActive: "/images/iconechecklistbranco (2).svg", iconInactive: "/images/iconechecklist (2).svg" },
         // BONUS { id: "gestao-motoristas", title: "Gestão dos Motoristas", route: "", perfisPermitidos: ["master", "gestor"], iconInactive: "/images/iconOperacional.svg", iconActive: "/images/iconOperacionalbranco.svg"}, OPERACIONAL - motoristas
       ],
@@ -105,7 +104,7 @@ function LateralBar() {
     {
       id: "dashboards",
       title: "Dashboards",
-      perfisPermitidos: ["master", "gestor"],
+      perfisPermitidos: ["Dashboards"],
       iconInactive: "/images/iconedashboard.svg",
       iconActive: "/images/iconedashboardbranco.svg",
       route: "/dashboardPagina",
@@ -114,13 +113,13 @@ function LateralBar() {
     {
       id: "relatorios",
       title: "Relatórios",
-      perfisPermitidos: ["master", "gestor"],
+      perfisPermitidos: [],
       iconInactive: "/images/iconechecklist.svg",
       iconActive: "/images/iconechecklistbranco.svg",
       submenus: [
-        { id: "relatorio-adm", title: "Administrativo", route: "/relatorio-administrativo", perfisPermitidos: ["master", "gestor"], iconInactive: "/images/iconAdm.svg", iconActive: "/images/iconAdmbranco.svg" }, //ADMINISTRATIVO - relatorios
-        { id: "relatorio-comercial", title: "Comercial", route: "/relatorio-comercial", perfisPermitidos: ["master", "gestor"], iconInactive: "/images/iconComercial.svg", iconActive: "/images/iconComercialbranco.svg" }, //COMERCIAL - relatorios
-        { id: "relatorio-operacional", title: "Operacional", route: "/relatorio-operacional", perfisPermitidos: ["master", "gestor"], iconInactive: "/images/iconOperacional.svg", iconActive: "/images/iconOperacionalbranco.svg" }, //OPERACIONAL - relatorios
+        { id: "relatorio-adm", title: "Administrativo", route: "/relatorio-administrativo", perfisPermitidos: ["Administrativo"], iconInactive: "/images/iconAdm.svg", iconActive: "/images/iconAdmbranco.svg" }, //ADMINISTRATIVO - relatorios
+        { id: "relatorio-comercial", title: "Comercial", route: "/relatorio-comercial", perfisPermitidos: ["Comercial"], iconInactive: "/images/iconComercial.svg", iconActive: "/images/iconComercialbranco.svg" }, //COMERCIAL - relatorios
+        { id: "relatorio-operacional", title: "Operacional", route: "/relatorio-operacional", perfisPermitidos: ["Operacional"], iconInactive: "/images/iconOperacional.svg", iconActive: "/images/iconOperacionalbranco.svg" }, //OPERACIONAL - relatorios
       ],
     },
   ];

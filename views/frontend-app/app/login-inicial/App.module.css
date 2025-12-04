@@ -24,7 +24,8 @@ body,
   min-width: 350px;
   display: flex;
   align-items: center;
-  justify-content: center; /* 🔵 CENTRALIZA A LOGO SEMPRE */
+  justify-content: center;
+  /* 🔵 CENTRALIZA A LOGO SEMPRE */
   flex-shrink: 0;
 }
 
@@ -137,7 +138,6 @@ body,
 /* ========================= */
 /*        RESPONSIVIDADE     */
 /* ========================= */
-
 /* Tablets (1024px ↓) */
 @media (max-width: 1024px) {
   .lateral {
@@ -171,12 +171,43 @@ body,
 @media (max-width: 768px) {
   .container {
     flex-direction: column;
+    overflow: hidden;
   }
 
   .lateral {
     width: 100%;
     min-width: 100%;
-    height: 220px; /* logo centralizada */
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .lateral img {
+    max-height: 100px;
+    width: auto;
+  }
+
+  .painel-container {
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  .painel-container::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .painel-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  .painel-container::-webkit-scrollbar-thumb {
+    background: #1F4AF4;
+    border-radius: 4px;
+  }
+
+  .painel-container::-webkit-scrollbar-thumb:hover {
+    background: #1838c7;
   }
 
   .titulo-bemvindo {
@@ -193,6 +224,17 @@ body,
 
 /* Celulares pequenos (480px ↓) */
 @media (max-width: 480px) {
+  .lateral {
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .lateral img {
+    max-height: 80px;
+  }
+
   .titulo-bemvindo {
     font-size: 1.8rem;
   }

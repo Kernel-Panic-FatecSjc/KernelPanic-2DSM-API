@@ -189,7 +189,7 @@ export default function CicloDeVendas() {
             };
         });
         try {
-            await axios.post("http://localhost:5000/funilVendas/moverCliente", {
+            await axios.post( `${apiUrl}/funilVendas/moverCliente`, {
                 cliente_id: cliente.id,
                 novo_estagio: cardToFaseID[destinoCard],
             });

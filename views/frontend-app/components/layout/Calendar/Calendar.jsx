@@ -18,9 +18,12 @@ const CalendarComponent = () => {
 
     const [arrayLembretes, setArrayLembretes] = useState([]);
 
+
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+    
     const getLembretes = async () => {
         try {
-            const response = await axios.get("http://localhost:5000/eventos");
+            const response = await axios.get( `${apiUrl}/eventos`);
 
             const eventosConvertidos = response.data.evento.map((item) => {
                 const startDate = new Date(item.dataHora);
@@ -48,7 +51,7 @@ const CalendarComponent = () => {
     const handleSalvar = async () => {
         try {
             const response = await axios.post(
-                "http://localhost:5000/eventos/lembrete",
+                 `${apiUrl}/eventos/lembrete`,
                 {
                     email: "usuario@exemplo.com",
                     titulo,

@@ -45,9 +45,9 @@ function Page() {
       respostas: { ...form },
       path_img: null,
     };
-
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL;
     try {
-      const response = await fetch('http://localhost:5000/checklist/', {
+      const response = await fetch(`${apiUrl}/checklist/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

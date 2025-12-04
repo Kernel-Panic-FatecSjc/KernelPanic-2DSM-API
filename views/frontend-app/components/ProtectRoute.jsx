@@ -57,6 +57,7 @@ export default function ProtectRoute({ children, perfisPermitidos }) {
         setIsAuthorized(true);
       } else {
         // Não tem permissão! Redireciona.
+//        setIsAuthorized(true);
         alert("Acesso negado. Você não tem permissão para acessar esta página.");
         router.push("/login-inicial"); // Mude para sua home page (ex: /dashboard)
       }

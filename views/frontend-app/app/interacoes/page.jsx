@@ -80,7 +80,7 @@ function App() {
     });
 
     return (
-        <ProtectRoute perfisPermitidos={["master"]}>
+        <ProtectRoute perfisPermitidos={["Gestão de Clientes"]}>
         <div className={styles["conteudo"]}>
             <div className={styles["container-historico"]}>
                 <div className={styles.tableContainer}>

@@ -1,6 +1,3 @@
-create database newe_database;
-use newe_database;
-
 -- MySQL dump 10.13  Distrib 8.0.44, for Linux (x86_64)
 --
 -- Host: localhost    Database: newe_database
@@ -496,9 +493,29 @@ CREATE TABLE `Perfil` (
 --
 
 LOCK TABLES `Perfil` WRITE;
-/*!40000 ALTER TABLE `Perfil` DISABLE KEYS */;
-INSERT INTO `Perfil` VALUES (1,'master','Acesso total ao sistema'),(2,'vendedor','Pode cadastrar e gerenciar clientes'),(3,'gestor','Acesso intermediario entre master e vendedor');
-/*!40000 ALTER TABLE `Perfil` ENABLE KEYS */;
+
+INSERT INTO `Perfil` (`perfil_ID`, `nome`, `descricao`) VALUES
+(1, 'Gerenciar Permissoes', ''),
+(2, 'Avaliação dos Eventos', ''),
+(3, 'Cadastro de Funcionario', ''),
+(4, 'Eventos', ''),
+(5, 'Gestão de Localização', ''),
+(6, 'Justificativas', ''),
+(7, 'Agendamento', ''),
+(8, 'Cotação e Coleta', ''),
+(9, 'Desempenho dos Vendedores', ''),
+(10, 'Funil de Vendas', ''),
+(11, 'Gestão de Clientes', ''),
+(12, 'Area do Agregado', ''),
+(13, 'Checklists e Formularios', ''),
+(14, 'Gestao de Formularios', ''),
+(15, 'Dashboards', ''),
+(16, 'Relatorios', ''),
+(17, 'Calendario', ''),
+(18, 'Administrativo', ''),
+(19, 'Comercial', ''),
+(20, 'Operacional', '');
+
 UNLOCK TABLES;
 
 --
@@ -588,7 +605,32 @@ CREATE TABLE `funcionario_perfis` (
 
 LOCK TABLES `funcionario_perfis` WRITE;
 /*!40000 ALTER TABLE `funcionario_perfis` DISABLE KEYS */;
-INSERT INTO `funcionario_perfis` VALUES (1,1),(2,3),(3,3);
+
+INSERT INTO `funcionario_perfis` (`funcionario_ID`, `perfil_ID`) VALUES
+(1, 1),
+(1, 2),
+(1, 3),
+(1, 4),
+(1, 5),
+(1, 6),
+(1, 7),
+(1, 8),
+(1, 9),
+(1, 10),
+(1, 11),
+(1, 12),
+(1, 13),
+(1, 14),
+(1, 15),
+(1, 16),
+(1, 17),
+(1, 18),
+(1, 19),
+
+-- registros originais
+(2, 3),
+(3, 3);
+
 /*!40000 ALTER TABLE `funcionario_perfis` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -664,5 +706,7 @@ INSERT INTO Vendas (data_venda, valor_total, status, cliente_ID, funcionario_ID)
 
 ('2025-10-22 11:25:00', 900.00, 'Potencial', 7,
  (SELECT funcionario_ID FROM Funcionario WHERE email='joao@empresa.com'));
+ 
+
  
 

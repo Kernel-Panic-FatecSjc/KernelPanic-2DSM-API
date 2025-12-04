@@ -20,5 +20,7 @@ export function iniciarCron() {
 
     // ===== Envia email para cada evento encontrado =====
     eventos.forEach(ev => enviarEmail(ev.email, ev.titulo));
+
+    console.clear();
   });
 }

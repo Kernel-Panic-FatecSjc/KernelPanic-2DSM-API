@@ -52,6 +52,7 @@ export function AuthProvider({ children }) {
     try {
       localStorage.setItem("token", token); // Salva o token
       const decodedToken = jwtDecode(token); // Decodifica
+      console.log(decodedToken)
       setUser(decodedToken); // Salva o usuário no estado
     } catch (error) {
       console.error("Erro ao fazer login (token inválido):", error);

@@ -61,8 +61,8 @@ export default function Page() {
       };
 
       console.log("📤 Enviando dados para cadastro...", payload);
-
-      const response = await fetch("http://localhost:5000/cadastro_agregado", {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+      const response = await fetch(`${apiUrl}/cadastro_agregado`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)

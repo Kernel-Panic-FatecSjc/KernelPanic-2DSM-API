@@ -6,6 +6,7 @@ import "react-day-picker/dist/style.css";
 import styles from "./App.module.css";
 import { useRouter } from "next/navigation";
 import axios from 'axios';
+import ProtectRoute from '../../components/ProtectRoute';
 
 export default function Page() {
     const router = useRouter();
@@ -18,9 +19,10 @@ export default function Page() {
     const [modalOpen, setModalOpen] = useState(false);
     const [justificativaSelecionada, setJustificativaSelecionada] = useState("");
     const [filtroNome, setFiltroNome] = useState("");
-
+    
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL;
     const api = axios.create({
-        baseURL: 'http://localhost:5000/eventoResp',
+        baseURL: `${apiUrl}/eventoResp`,
     });
 
     const cargoImagens = {
@@ -207,6 +209,8 @@ export default function Page() {
     );
     
     return (
+        <ProtectRoute perfisPermitidos={["Relatorios"]}>
+
         <div className={styles.conteudo}>
             {modalJustificativa}
 
@@ -373,5 +377,6 @@ export default function Page() {
                 </div>
             </div>
         </div>
+        </ProtectRoute>
     );
 }
