@@ -3,22 +3,30 @@
 # --- Estágio 1: "Builder" ---
 FROM node:18-alpine AS builder
 
-# O WORKDIR continua sendo /app
 WORKDIR /app
 
-# Copia os arquivos de pacote DE DENTRO da subpasta
+# Copia os arquivos de pacote DE DENTRO da subpasta frontend-app
 COPY frontend-app/package*.json ./
 
-# Roda o npm install
+# Instala as dependências
 RUN npm install
 
-# Copia todo o resto do código-fonte DE DENTRO da subpasta
+# Copia todo o resto do código-fonte
 COPY frontend-app/. .
 
-# Desativa a telemetria
+# --- CORREÇÃO CRÍTICA AQUI ---
+# 1. Aceita o argumento enviado pelo docker-compose.yml
+ARG NEXT_PUBLIC_API_URL
+
+# 2. Transforma o argumento em variável de ambiente antes do build
+#    Sem isso, o Next.js vai "assar" o código com a URL undefined
+ENV NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL
+# -----------------------------
+
+# Desativa a telemetria do Next.js (opcional, mas recomendado)
 ENV NEXT_TELEMETRY_DISABLED 1
 
-# Roda o build
+# Roda o build (Agora ele vai ler a variável acima corretamente)
 RUN npm run build
 
 # --- Estágio 2: "Runner" ---
@@ -28,13 +36,13 @@ WORKDIR /app
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED 1
 
-# Estas linhas não mudam, pois copiam do estágio 'builder'
+# Copia apenas os arquivos necessários do estágio 'builder' para deixar a imagem leve
 COPY --from=builder /app/.next/standalone ./
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/.next/static ./.next/static
 
-# Expõe a porta 3000 (padrão do Next.js)
+# Expõe a porta 3000
 EXPOSE 3000
 
-# Roda o servidor otimizado
+# Inicia o servidor Node.js
 CMD ["node", "server.js"]
