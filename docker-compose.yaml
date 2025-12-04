@@ -28,6 +28,8 @@ services:
   frontend:
     build: ./views
     container_name: newe-frontend-app
+    args:
+      - NEXT_PUBLIC_API_URL_URL=http://52.72.66.96:5000
     ports:
       - "80:3000"
     depends_on:
