@@ -93,7 +93,7 @@ function Page() {
 
     const weekdays = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
 
-    const apiUrl = 'http://52.72.66.96:8:5000/api';
+    const apiUrl = 'http://52.72.66.96:5000/';
     const api = axios.create({
         baseURL: `${apiUrl}/eventoFunc`,
     });

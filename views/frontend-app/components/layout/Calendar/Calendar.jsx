@@ -19,7 +19,7 @@ const CalendarComponent = () => {
     const [arrayLembretes, setArrayLembretes] = useState([]);
 
 
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+    const apiUrl = 'http://52.72.66.96:5000/';
     
     const getLembretes = async () => {
         try {

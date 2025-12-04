@@ -5,7 +5,7 @@ import { StarRating } from '../../components/layout/Estrelas/Estrelas';
 import axios from 'axios';
 import ProtectRoute from '../../components/ProtectRoute';
 
-const apiUrl = 'http://52.72.66.96:8:5000/api';
+const apiUrl = 'http://52.72.66.96:5000/';
 function Page() {
 
     const cargoImagens = {

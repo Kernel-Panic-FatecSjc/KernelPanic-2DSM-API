@@ -16,7 +16,7 @@ export default function Page() {
   const [mostrarSenha, setMostrarSenha] = useState(false);
 
   console.log("Bem Vindo Master");
-  const apiUrl = 'http://52.72.66.96:8:5000/api';
+  const apiUrl = 'http://52.72.66.96:5000/';
   const handleSubmit = async (event) => {
     event.preventDefault(); 
     setIsLoading(true); 

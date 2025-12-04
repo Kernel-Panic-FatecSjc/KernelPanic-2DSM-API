@@ -27,7 +27,7 @@ export default function Dashboard() {
 
     const fetchData = async () => {
         try {
-            const apiUrl = 'http://52.72.66.96:8:5000/api';
+            const apiUrl = 'http://52.72.66.96:5000/';
 
             // ROTA PARA BACKEND - FUNCIONÁRIOS
             // GET: ${apiUrl}/funcionarios

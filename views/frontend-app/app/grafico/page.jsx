@@ -64,7 +64,7 @@ export default function GraficoPage() {
     useEffect(() => {
     const gerarDados = async (filtro) => {
         try {
-            const apiUrl = 'http://52.72.66.96:8:5000/api';
+            const apiUrl = 'http://52.72.66.96:5000/';
             const response = await axios.get(`${apiUrl}/vendedor`);
             const vendas = response.data;
 

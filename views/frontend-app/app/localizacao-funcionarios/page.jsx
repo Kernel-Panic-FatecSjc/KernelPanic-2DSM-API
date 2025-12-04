@@ -6,7 +6,7 @@ import ProtectRoute from "../../components/ProtectRoute";
 import axios from "axios";
 
 export default function page() {
-    const apiUrl = 'http://52.72.66.96:8:5000/api';
+    const apiUrl = 'http://52.72.66.96:5000/';
     const [quantidadeFuncionarios, setQuantidadeFuncionarios] = useState(0);
     const [quantidadeAtivadade, setQuantidadeAtividade] = useState(0);
     const [quantidadeAusente, setQuantidadeAusente] = useState(0);

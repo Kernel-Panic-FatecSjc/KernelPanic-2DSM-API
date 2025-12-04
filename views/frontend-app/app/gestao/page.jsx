@@ -244,8 +244,7 @@ function App() {
         }
 
         try {
-            const apiUrl =
-                'http://52.72.66.96:8:5000/api';
+            const apiUrl = 'http://52.72.66.96:5000/';
             await axios.delete(`${apiUrl}/clientes/${clientId}`);
 
             setClients(clientes.filter((c) => c.id !== clientId));

@@ -36,7 +36,7 @@ export default function Page() {
     const [filtroNome, setFiltroNome] = useState("");
     const [filtroData, setFiltroData] = useState("");
     
-    const apiUrl = 'http://52.72.66.96:8:5000/api';
+    const apiUrl = 'http://52.72.66.96:5000/';
     const api = axios.create({
         baseURL: `${apiUrl}/eventoGestor`,
     });

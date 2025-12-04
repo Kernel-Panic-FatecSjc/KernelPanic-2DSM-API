@@ -47,7 +47,7 @@ function Page() {
       respostas: { ...form },
       path_img: null,
       };
-      const apiUrl = 'http://52.72.66.96:8:5000/api';
+      const apiUrl = 'http://52.72.66.96:5000/';
       try {
       const response = await fetch(`${apiUrl}/checklist/`, {
         method: 'POST',

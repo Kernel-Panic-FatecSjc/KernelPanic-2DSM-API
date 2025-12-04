@@ -52,7 +52,7 @@ export default function Page() {
         console.log("Enviando dados:", dadosParaEnviar);
 
         try {
-            const apiUrl = 'http://52.72.66.96:8:5000/api';
+            const apiUrl = 'http://52.72.66.96:5000/';
 
             const response = await fetch(`${apiUrl}/funcionario`, {
                 method: "POST",

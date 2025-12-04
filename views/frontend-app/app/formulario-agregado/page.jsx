@@ -61,7 +61,7 @@ export default function Page() {
       };
 
       console.log("📤 Enviando dados para cadastro...", payload);
-      const apiUrl = 'http://52.72.66.96:8:5000/api';
+      const apiUrl = 'http://52.72.66.96:5000/';
       const response = await fetch(`${apiUrl}/cadastro_agregado`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
