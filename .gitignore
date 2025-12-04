@@ -8,8 +8,6 @@ node_modules
 /ApiServer/out
 
 # Deal with environment files
-.env
-.env.*
 
 # We'll allow an example .env file which can be copied
 !.env.example
@@ -47,8 +45,6 @@ vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 =======
 # Variáveis de ambiente
-.env
-.env.*
 
 # Logs de testes
 /coverage/
